@@ -3,9 +3,72 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{61C2E8DE-8A44-4E42-AC67-1C4CF206EC56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{63AA151F-5896-45CE-8AA0-4F082D964E4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{5D2390A6-AFE7-459F-A3F5-349F45506532}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{0305AF9B-2758-4776-AF44-CB0450EA6A0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{AE08753A-F71E-4C08-9C3B-5033D2ADB52C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{D5F5A113-9E05-41B0-84FB-F077EADA052E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1F879C94-4A39-4515-8608-432BF9EB30FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.Domain", "MasaTour.TouristJourenysManagement.Domain\MasaTour.TouristJourenysManagement.Domain.csproj", "{F7EA222F-523E-4898-9095-DD247BC78756}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.Infrastructure", "MasaTour.TouristJourenysManagement.Infrastructure\MasaTour.TouristJourenysManagement.Infrastructure.csproj", "{4D9214B7-2345-458F-AFA0-D30EFD9FCA21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.Application", "MasaTour.TouristJourenysManagement.Application\MasaTour.TouristJourenysManagement.Application.csproj", "{F0468FFD-20F9-4ED8-B5BB-8D9805DB98C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.Services", "MasaTour.TouristJourenysManagement.Services\MasaTour.TouristJourenysManagement.Services.csproj", "{D9AA96E4-D3A3-4725-BD74-3108D55B45A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.API", "MasaTour.TouristJourenysManagement.API\MasaTour.TouristJourenysManagement.API.csproj", "{94AB61ED-8915-4EDD-B757-4EE34D36E0D2}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7EA222F-523E-4898-9095-DD247BC78756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7EA222F-523E-4898-9095-DD247BC78756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7EA222F-523E-4898-9095-DD247BC78756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7EA222F-523E-4898-9095-DD247BC78756}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D9214B7-2345-458F-AFA0-D30EFD9FCA21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D9214B7-2345-458F-AFA0-D30EFD9FCA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D9214B7-2345-458F-AFA0-D30EFD9FCA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D9214B7-2345-458F-AFA0-D30EFD9FCA21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0468FFD-20F9-4ED8-B5BB-8D9805DB98C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0468FFD-20F9-4ED8-B5BB-8D9805DB98C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0468FFD-20F9-4ED8-B5BB-8D9805DB98C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0468FFD-20F9-4ED8-B5BB-8D9805DB98C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9AA96E4-D3A3-4725-BD74-3108D55B45A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9AA96E4-D3A3-4725-BD74-3108D55B45A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9AA96E4-D3A3-4725-BD74-3108D55B45A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9AA96E4-D3A3-4725-BD74-3108D55B45A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94AB61ED-8915-4EDD-B757-4EE34D36E0D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94AB61ED-8915-4EDD-B757-4EE34D36E0D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94AB61ED-8915-4EDD-B757-4EE34D36E0D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94AB61ED-8915-4EDD-B757-4EE34D36E0D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{63AA151F-5896-45CE-8AA0-4F082D964E4F} = {61C2E8DE-8A44-4E42-AC67-1C4CF206EC56}
+		{5D2390A6-AFE7-459F-A3F5-349F45506532} = {63AA151F-5896-45CE-8AA0-4F082D964E4F}
+		{0305AF9B-2758-4776-AF44-CB0450EA6A0C} = {63AA151F-5896-45CE-8AA0-4F082D964E4F}
+		{AE08753A-F71E-4C08-9C3B-5033D2ADB52C} = {61C2E8DE-8A44-4E42-AC67-1C4CF206EC56}
+		{D5F5A113-9E05-41B0-84FB-F077EADA052E} = {61C2E8DE-8A44-4E42-AC67-1C4CF206EC56}
+		{1F879C94-4A39-4515-8608-432BF9EB30FB} = {61C2E8DE-8A44-4E42-AC67-1C4CF206EC56}
+		{F7EA222F-523E-4898-9095-DD247BC78756} = {5D2390A6-AFE7-459F-A3F5-349F45506532}
+		{4D9214B7-2345-458F-AFA0-D30EFD9FCA21} = {0305AF9B-2758-4776-AF44-CB0450EA6A0C}
+		{F0468FFD-20F9-4ED8-B5BB-8D9805DB98C4} = {AE08753A-F71E-4C08-9C3B-5033D2ADB52C}
+		{D9AA96E4-D3A3-4725-BD74-3108D55B45A7} = {1F879C94-4A39-4515-8608-432BF9EB30FB}
+		{94AB61ED-8915-4EDD-B757-4EE34D36E0D2} = {D5F5A113-9E05-41B0-84FB-F077EADA052E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8EE585C-3F45-496F-A75A-61D6C87DEB39}
