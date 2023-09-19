@@ -17,15 +17,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{D5F5A113-9E0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1F879C94-4A39-4515-8608-432BF9EB30FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.Domain", "MasaTour.TouristJourenysManagement.Domain\MasaTour.TouristJourenysManagement.Domain.csproj", "{F7EA222F-523E-4898-9095-DD247BC78756}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasaTour.TouristJourenysManagement.Domain", "MasaTour.TouristJourenysManagement.Domain\MasaTour.TouristJourenysManagement.Domain.csproj", "{F7EA222F-523E-4898-9095-DD247BC78756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.Infrastructure", "MasaTour.TouristJourenysManagement.Infrastructure\MasaTour.TouristJourenysManagement.Infrastructure.csproj", "{4D9214B7-2345-458F-AFA0-D30EFD9FCA21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasaTour.TouristJourenysManagement.Infrastructure", "MasaTour.TouristJourenysManagement.Infrastructure\MasaTour.TouristJourenysManagement.Infrastructure.csproj", "{4D9214B7-2345-458F-AFA0-D30EFD9FCA21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.Application", "MasaTour.TouristJourenysManagement.Application\MasaTour.TouristJourenysManagement.Application.csproj", "{F0468FFD-20F9-4ED8-B5BB-8D9805DB98C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasaTour.TouristJourenysManagement.Application", "MasaTour.TouristJourenysManagement.Application\MasaTour.TouristJourenysManagement.Application.csproj", "{F0468FFD-20F9-4ED8-B5BB-8D9805DB98C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.Services", "MasaTour.TouristJourenysManagement.Services\MasaTour.TouristJourenysManagement.Services.csproj", "{D9AA96E4-D3A3-4725-BD74-3108D55B45A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasaTour.TouristJourenysManagement.Services", "MasaTour.TouristJourenysManagement.Services\MasaTour.TouristJourenysManagement.Services.csproj", "{D9AA96E4-D3A3-4725-BD74-3108D55B45A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaTour.TouristJourenysManagement.API", "MasaTour.TouristJourenysManagement.API\MasaTour.TouristJourenysManagement.API.csproj", "{94AB61ED-8915-4EDD-B757-4EE34D36E0D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasaTour.TouristJourenysManagement.API", "MasaTour.TouristJourenysManagement.API\MasaTour.TouristJourenysManagement.API.csproj", "{94AB61ED-8915-4EDD-B757-4EE34D36E0D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseSchema", "DataBaseSchema", "{36804E05-19FF-4055-95E6-D405662F1583}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\DbModels\MasaTour.drawio = ..\..\DbModels\MasaTour.drawio
+		..\..\DbModels\MasaTourV1.jpg = ..\..\DbModels\MasaTourV1.jpg
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{4CF42E4A-F20E-47BF-BC46-2DECB0E6B76C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
