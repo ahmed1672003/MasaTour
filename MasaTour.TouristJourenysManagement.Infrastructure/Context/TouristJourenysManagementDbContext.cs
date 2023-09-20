@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 
-using MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
-
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Context;
-public class TouristJourenysManagementDbContext : DbContext, ITouristJourenysManagementDbContext
+public class TouristJourenysManagementDbContext
+    : IdentityDbContext<User, Role, string, UserClaim, UserRoleMapper, UserLogin, RoleClaim, UserToken>,
+    ITouristJourenysManagementDbContext
 {
     public TouristJourenysManagementDbContext(DbContextOptions<TouristJourenysManagementDbContext> options) : base(options) { }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -13,12 +13,13 @@ public class TouristJourenysManagementDbContext : DbContext, ITouristJourenysMan
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
-    public DbSet<User> Users { get; }
-    public DbSet<Role> Roles { get; }
-    public DbSet<RoleClaim> RoleClaims { get; }
-    public DbSet<UserClaim> UserClaims { get; }
-    public DbSet<UserLogin> UserLogins { get; }
-    public DbSet<UserRole> UserRoles { get; }
-    public DbSet<UserToken> UserTokens { get; }
-    public DbSet<UserJWT> UserJWTs { get; }
+
+    public DbSet<User> Users => Set<User>();
+    public DbSet<Role> Roles => Set<Role>();
+    public DbSet<RoleClaim> RoleClaims => Set<RoleClaim>();
+    public DbSet<UserClaim> UserClaims => Set<UserClaim>();
+    public DbSet<UserLogin> UserLogins => Set<UserLogin>();
+    public DbSet<UserRoleMapper> UserRoles => Set<UserRoleMapper>();
+    public DbSet<UserToken> UserTokens => Set<UserToken>();
+    public DbSet<UserJWT> UserJWTs => Set<UserJWT>();
 }

@@ -9,8 +9,7 @@ public static class Tables
         public const string UserClaims = "UserClaims";
         public const string UserJWTs = "UserJWTs";
         public const string UserLogins = "UserLogins";
-        public const string UserRoles = "UserRoles";
+        public const string UserRolesMappers = "UsersRolesMappers";
         public const string UserTokens = "UserTokens";
     }
-
 }

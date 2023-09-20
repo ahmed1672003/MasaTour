@@ -6,29 +6,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 
-[PrimaryKey(nameof(Id))]
-public class RoleClaim : IdentityRoleClaim<string>
+[PrimaryKey(nameof(UserId), nameof(RoleId))]
+public class UserRoleMapper : IdentityUserRole<string>
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public override int Id { get; set; }
+    [Required]
+    [MaxLength(36)]
+    public override string UserId { get; set; }
 
     [Required]
     [MaxLength(36)]
     public override string RoleId { get; set; }
 
-    [Required]
-    [MaxLength(255)]
-    public override string ClaimType { get; set; }
-
-    [Required]
-    [MaxLength(255)]
-    public override string ClaimValue { get; set; }
+    [AllowNull]
+    [ForeignKey(nameof(UserId))]
+    public User User { get; set; }
 
     [AllowNull]
     [ForeignKey(nameof(RoleId))]
     public Role Role { get; set; }
-    public RoleClaim()
+
+    public UserRoleMapper()
     {
+        User = new();
         Role = new();
     }
 }

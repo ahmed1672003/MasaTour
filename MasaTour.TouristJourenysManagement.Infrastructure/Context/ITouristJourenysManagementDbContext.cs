@@ -1,7 +1,4 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Context;
 public interface ITouristJourenysManagementDbContext
@@ -12,7 +9,7 @@ public interface ITouristJourenysManagementDbContext
     DbSet<RoleClaim> RoleClaims { get; }
     DbSet<UserClaim> UserClaims { get; }
     DbSet<UserLogin> UserLogins { get; }
-    DbSet<UserRole> UserRoles { get; }
+    DbSet<UserRoleMapper> UserRoles { get; }
     DbSet<UserToken> UserTokens { get; }
     DbSet<UserJWT> UserJWTs { get; }
     ValueTask DisposeAsync();

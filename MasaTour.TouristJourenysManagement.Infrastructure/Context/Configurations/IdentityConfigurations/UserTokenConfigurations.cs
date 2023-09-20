@@ -3,6 +3,6 @@ public class UserTokenConfigurations : IEntityTypeConfiguration<UserToken>
 {
     public void Configure(EntityTypeBuilder<UserToken> builder)
     {
-        builder.ToTable(Tables.UserTokens);
+        builder.ToTable(Tables.Identity.UserTokens);
     }
 }

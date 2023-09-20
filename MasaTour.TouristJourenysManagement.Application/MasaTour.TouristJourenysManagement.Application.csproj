@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MasaTour.TouristJourenysManagement.Services\MasaTour.TouristJourenysManagement.Services.csproj" />
+  </ItemGroup>
+
 </Project>
