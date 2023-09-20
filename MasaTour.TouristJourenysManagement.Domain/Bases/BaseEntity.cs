@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace MasaTour.TouristJourenysManagement.Domain.Base;
 public class BaseEntity
 {

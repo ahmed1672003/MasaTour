@@ -1,10 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
-
-using MasaTour.TouristJourenysManagement.Domain.Base;
-
-using Microsoft.EntityFrameworkCore;
+﻿
 
 namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 

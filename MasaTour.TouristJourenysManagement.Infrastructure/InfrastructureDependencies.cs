@@ -1,10 +1,4 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Context;
-
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace MasaTour.TouristJourenysManagement.Infrastructure;
+﻿namespace MasaTour.TouristJourenysManagement.Infrastructure;
 public static class InfrastructureDependencies
 {
     public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
@@ -49,6 +43,17 @@ public static class InfrastructureDependencies
 
         }).AddEntityFrameworkStores<TouristJourenysManagementDbContext>().AddDefaultTokenProviders().AddDefaultUI();
         #endregion
+
+        #region Register Contracts Liftimes
+        services
+            .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<ITransientLifetime>()).AsImplementedInterfaces().WithTransientLifetime())
+            .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<IScopeLifetime>()).AsImplementedInterfaces().WithScopedLifetime())
+            .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<ISingletonLifetime>()).AsImplementedInterfaces().WithSingletonLifetime());
+        services.AddTransient<UserManager<User>>();
+        services.AddTransient<SignInManager<User>>();
+        services.AddTransient<RoleManager<Role>>();
+        #endregion
+
         return services;
     }
 }

@@ -1,10 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Net.Mail;
-
-using MasaTour.TouristJourenysManagement.Domain.Enums;
-
-using Microsoft.EntityFrameworkCore;
+﻿
 
 namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 
