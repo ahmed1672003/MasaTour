@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Identity\" />
-    <Folder Include="Seeds\" />
+    <Folder Include="Enums\" />
     <Folder Include="Settings\" />
+    <Folder Include="Specifications\Contracts\User\" />
   </ItemGroup>
 
 </Project>

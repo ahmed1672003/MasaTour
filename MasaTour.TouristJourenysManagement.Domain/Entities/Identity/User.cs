@@ -49,10 +49,10 @@ public class User : IdentityUser<string>
     public DateTime? DeletedAt { get; set; }
 
     [AllowNull]
-    public IEnumerable<UserJWT> UserJWTs { get; set; }
+    public ICollection<UserJWT> UserJWTs { get; set; }
 
     [AllowNull]
-    public IEnumerable<UserRoleMapper> UserRoles { get; set; }
+    public ICollection<UserRoleMapper> UserRoles { get; set; }
 
     public User()
     {
@@ -61,7 +61,6 @@ public class User : IdentityUser<string>
         Nationality = Nationality.Egyptian;
         CreatedAt = DateTime.Now;
         UpdatedAt = DateTime.Now;
-        UserName = new MailAddress(Email).User;
         UserJWTs = new HashSet<UserJWT>();
         UserRoles = new HashSet<UserRoleMapper>();
     }

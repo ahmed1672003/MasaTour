@@ -1,6 +1,4 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Liftimes;
-
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
+﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
 public interface ISpecification<TEntity> : ITransientLifetime where TEntity : class
 {
     Expression<Func<TEntity, bool>> Criteria { get; }

@@ -1,4 +1,6 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure;
+﻿
+
+namespace MasaTour.TouristJourenysManagement.Infrastructure;
 public static class InfrastructureDependencies
 {
     public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
@@ -44,16 +46,28 @@ public static class InfrastructureDependencies
         }).AddEntityFrameworkStores<TouristJourenysManagementDbContext>().AddDefaultTokenProviders().AddDefaultUI();
         #endregion
 
-        #region Register Contracts Liftimes
+        #region Register Contracts
         services
             .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<ITransientLifetime>()).AsImplementedInterfaces().WithTransientLifetime())
             .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<IScopeLifetime>()).AsImplementedInterfaces().WithScopedLifetime())
             .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<ISingletonLifetime>()).AsImplementedInterfaces().WithSingletonLifetime());
-        services.AddTransient<UserManager<User>>();
-        services.AddTransient<SignInManager<User>>();
-        services.AddTransient<RoleManager<Role>>();
+        services
+                .AddTransient<UserManager<User>>()
+                .AddTransient<SignInManager<User>>()
+                .AddTransient<RoleManager<Role>>()
+                .AddTransient<IUnitOfWork, UnitOfWork>()
+                .AddTransient<IIdentityRepository, IdentityRepository>()
+                .AddTransient<IRoleRepository, RoleRepository>()
+                .AddTransient<IRoleClaimRepository, RoleClaimRepository>()
+                .AddTransient<IUserClaimRepository, UserClaimRepository>()
+                .AddTransient<IUserJWTRepository, UserJWTRepository>()
+                .AddTransient<IUserLoginRepository, UserLoginRepository>()
+                .AddTransient<IUserRepository, UserRepository>()
+                .AddTransient<IUserRoleMapperRepository, UserRoleMapperRepository>()
+                .AddTransient<IUserTokenRepository, UserTokenRepository>()
+                .AddTransient(typeof(IRepository<>), typeof(Repository<>))
+                .AddTransient(typeof(ISpecification<>), typeof(Specification<>));
         #endregion
-
         return services;
     }
 }

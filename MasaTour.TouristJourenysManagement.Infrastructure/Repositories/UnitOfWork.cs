@@ -1,4 +1,5 @@
 ﻿using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts.Identity;
+
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories;
@@ -14,7 +15,8 @@ public class UnitOfWork : IUnitOfWork
         IUserJWTRepository userJWTs,
         IUserLoginRepository userLogins,
         IUserRoleMapperRepository userRoleMappers,
-        IUserTokenRepository userTokens)
+        IUserTokenRepository userTokens,
+        IUserRepository users)
     {
         _context = context;
         Identity = identity;
@@ -25,6 +27,7 @@ public class UnitOfWork : IUnitOfWork
         UserLogins = userLogins;
         UserRoleMappers = userRoleMappers;
         UserTokens = userTokens;
+        Users = users;
     }
 
     public IIdentityRepository Identity { get; }
@@ -35,6 +38,7 @@ public class UnitOfWork : IUnitOfWork
     public IUserLoginRepository UserLogins { get; }
     public IUserRoleMapperRepository UserRoleMappers { get; }
     public IUserTokenRepository UserTokens { get; }
+    public IUserRepository Users { get; }
 
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default) =>
          await _context.Database.BeginTransactionAsync(cancellationToken);

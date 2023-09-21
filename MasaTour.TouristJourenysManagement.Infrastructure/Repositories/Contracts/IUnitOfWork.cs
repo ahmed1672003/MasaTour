@@ -1,10 +1,12 @@
 ﻿using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts.Identity;
+
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
 public interface IUnitOfWork : IAsyncDisposable, ITransientLifetime
 {
     IIdentityRepository Identity { get; }
+    IUserRepository Users { get; }
     IRoleClaimRepository RoleClaims { get; }
     IRoleRepository Roles { get; }
     IUserClaimRepository UserClaims { get; }

@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
-public interface IRepository<TEntity> where TEntity : class
+public interface IRepository<TEntity> : ITransientLifetime where TEntity : class
 {
     #region Commands
     Task CreateAsync(TEntity entity, CancellationToken cancellation = default);

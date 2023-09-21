@@ -1,7 +1,7 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories;
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {
-    private ITouristJourenysManagementDbContext _context;
+    private readonly ITouristJourenysManagementDbContext _context;
     protected readonly DbSet<TEntity> _entities;
 
     public Repository(ITouristJourenysManagementDbContext context)
@@ -26,7 +26,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     }
     public virtual async Task<int> ExecuteUpdateAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
     {
-        if (specification.Criteria is null)
+        if (specification?.Criteria is null)
             return await _entities
                     .ExecuteUpdateAsync(entity =>
                         entity.SetProperty(
@@ -49,7 +49,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
     public virtual async Task<int> ExecuteDeleteAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default)
     {
-        if (specification.Criteria is null)
+        if (specification?.Criteria is null)
             return await _entities.ExecuteDeleteAsync(cancellationToken);
         else
             return await _entities.Where(specification.Criteria).ExecuteDeleteAsync(cancellationToken);
@@ -58,7 +58,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     #region Queries
     public virtual async Task<bool> AnyAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default)
     {
-        if (specification.Criteria is null)
+        if (specification?.Criteria is null)
             return await _entities.AnyAsync(cancellationToken);
         else
             return await _entities.AnyAsync(specification.Criteria, cancellationToken);
@@ -66,7 +66,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
     public virtual async Task<int> CountAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default)
     {
-        if (specification.Criteria is null)
+        if (specification?.Criteria is null)
             return await _entities.CountAsync(cancellationToken);
         else
             return await _entities.CountAsync(specification.Criteria, cancellationToken);
