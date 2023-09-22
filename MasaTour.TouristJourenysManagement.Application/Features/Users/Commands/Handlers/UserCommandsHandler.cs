@@ -51,7 +51,7 @@ public sealed class UserCommandsHandler :
             if (authModel is null)
                 return ResponseResult.Conflict<AuthModel>();
 
-            return ResponseResult.Success(authModel);
+            return ResponseResult.Created(authModel);
         }
         catch
         {
@@ -59,8 +59,6 @@ public sealed class UserCommandsHandler :
         }
     }
     #endregion
-
-
 
     #region Delete All Users Command
     public async Task<ResponseModel<GetUserDto>> Handle(DeleteAllUsersCommand request, CancellationToken cancellationToken)
