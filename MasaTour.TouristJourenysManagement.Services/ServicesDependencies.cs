@@ -11,29 +11,31 @@ public static class ServicesDependencies
 
         #region JWT Services
         services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
 
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = false;
-                options.TokenValidationParameters = new()
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero,
-                    ValidIssuer = configuration.GetValue<string>($"{nameof(JwtSettings)}:{nameof(JwtSettings.Issuer)}"),
-                    ValidAudience = configuration.GetValue<string>($"{nameof(JwtSettings)}:{nameof(JwtSettings.Audience)}"),
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>($"{nameof(JwtSettings)}:{nameof(JwtSettings.Secret)}"))),
-                };
-            });
+            options.RequireHttpsMetadata = false;
+            options.SaveToken = false;
+            options.TokenValidationParameters = new()
+            {
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
+                ValidIssuer = configuration.GetValue<string>($"{nameof(JwtSettings)}:{nameof(JwtSettings.Issuer)}"),
+                ValidAudience = configuration.GetValue<string>($"{nameof(JwtSettings)}:{nameof(JwtSettings.Audience)}"),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>($"{nameof(JwtSettings)}:{nameof(JwtSettings.Secret)}"))),
+            };
+        });
+
         services.AddSwaggerGen(options =>
         {
-            options.SwaggerDoc("v1", new() { Title = "MasaTourApi", Version = "v1", Description = "AuthSchema: bearer", Contact = new OpenApiContact() { Email = "ahmedadel1672003@gmail.com", Name = "Ahmed Adel Elsayed Ali Basha" } });
+            options.SwaggerDoc("v1", new() { Title = "MasaTourApi", Version = "1.0.0", Contact = new OpenApiContact() { Email = "ahmedadel1672003@gmail.com", Name = "ahmed adel" } });
+            options.EnableAnnotations();
             options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new()
             {
                 Description = "JWT Authorization",
@@ -42,7 +44,6 @@ public static class ServicesDependencies
                 Type = SecuritySchemeType.ApiKey,
                 Scheme = JwtBearerDefaults.AuthenticationScheme
             });
-
             options.AddSecurityRequirement(new OpenApiSecurityRequirement()
             {
                 {
