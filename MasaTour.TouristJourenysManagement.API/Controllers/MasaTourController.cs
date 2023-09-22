@@ -34,7 +34,7 @@ public class MasaTourController : ControllerBase
                 return new ConflictObjectResult(response);
 
             case HttpStatusCode.Created:
-                return new CreatedResult("", response);
+                return new CreatedResult("data base", response);
 
             default:
                 return new ObjectResult(response)

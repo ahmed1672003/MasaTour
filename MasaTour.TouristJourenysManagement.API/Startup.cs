@@ -17,8 +17,8 @@ public static class Startup
            .UseCors("MasaTour")
            .UseMiddleware<ErrorHandlerMiddleWare>()
            .UseHttpsRedirection()
-           .UseAuthentication()
            .UseAuthorization()
+           .UseAuthentication()
            .UseRequestLocalization(new RequestLocalizationOptions
            {
                ApplyCurrentCultureToResponseHeaders = true,

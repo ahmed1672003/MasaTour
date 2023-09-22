@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MasaTour.TouristJourenysManagement.Infrastructure.Enums;
+
+using Microsoft.AspNetCore.Http;
 
 namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Commands.Handlers;
 public sealed class UserCommandsHandler :
@@ -44,12 +46,16 @@ public sealed class UserCommandsHandler :
                 return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.User.EmailIsExist]);
 
             var user = _mapper.Map<User>(request.dto);
-            var identityResult = await _context.Identity.UserManager.CreateAsync(user, request.dto.Password);
+            var createUserResult = await _context.Identity.UserManager.CreateAsync(user, request.dto.Password);
 
             // TODo: Confirm Email
 
-            if (!identityResult.Succeeded)
+            if (!createUserResult.Succeeded)
                 return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+
+            var assignUserToRoleResult = await _context.Identity.UserManager.AddToRoleAsync(user, Roles.Basic.ToString());
+
+
 
             var authModel = await _services.AuthService.GetJWTAsync(user);
 
