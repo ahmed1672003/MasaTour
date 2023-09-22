@@ -31,12 +31,13 @@ public static class Startup
         app.Run();
     }
 
-    public static IServiceCollection AddAPIDependencies(this IServiceCollection services, IConfiguration configuration)
+    public static async Task<IServiceCollection> AddAPIDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddApplicationDependencies()
                 .AddServicesDependencies(configuration)
-                .AddInfrastructureDependencies(configuration)
                 .AddDomainDependencies();
+
+        await services.AddInfrastructureDependencies(configuration);
 
         services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

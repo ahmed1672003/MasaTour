@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristJourenysManagementDbContext))]
-    [Migration("20230921154540_AddIdentity")]
+    [Migration("20230922112724_AddIdentity")]
     partial class AddIdentity
     {
         /// <inheritdoc />

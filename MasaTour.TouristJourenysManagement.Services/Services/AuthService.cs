@@ -68,14 +68,8 @@ public class AuthService : IAuthService
             try
             {
                 user.UserJWTs.Add(userJWT);
-                //await _context.UserJWTs.CreateAsync(userJWT);
                 await _context.Users.UpdateAsync(user);
-                var identityResult = await _context.Identity.UserManager.UpdateAsync(user);
-
-                //var count = await _context.SaveChangesAsync();
-
-                if (!identityResult.Succeeded)
-                    return null;
+                var result = await _context.SaveChangesAsync();
             }
             catch
             {
@@ -105,7 +99,7 @@ public class AuthService : IAuthService
     {
         var refreshToken = new RefreshJWTModel
         {
-            RefreshJWTExpirationDate = DateTime.UtcNow.AddDays(_jWTSettings.RefreshTokenExpireDate),
+            RefreshJWTExpirationDate = DateTime.Now.AddDays(_jWTSettings.RefreshTokenExpireDate),
             RefreshJWT = GenerateRefreshToken()
         };
         return refreshToken;
@@ -251,7 +245,7 @@ public class AuthService : IAuthService
             return null;
 
         // revoke refresh JWT
-        userJWT.RefreshJWTRevokedDate = DateTime.UtcNow;
+        userJWT.RefreshJWTRevokedDate = DateTime.Now;
 
         var jwt = await GenerateJWTAsync(user, GetClaimsAsync);
         var refreshJWT = GenerateRefreshToken();
@@ -261,9 +255,9 @@ public class AuthService : IAuthService
         {
             UserId = user.Id,
             JWT = jwt,
-            JWTExpirationDate = DateTime.UtcNow.AddDays(_jWTSettings.AccessTokenExpireDate),
+            JWTExpirationDate = DateTime.Now.AddDays(_jWTSettings.AccessTokenExpireDate),
             RefreshJWT = refreshJWT,
-            RefreshJWTExpirtionDate = DateTime.UtcNow.AddDays(_jWTSettings.RefreshTokenExpireDate),
+            RefreshJWTExpirtionDate = DateTime.Now.AddDays(_jWTSettings.RefreshTokenExpireDate),
             IsRefreshJWTUsed = true,
         };
         user.UserJWTs.Add(newUserJWT);

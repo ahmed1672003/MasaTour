@@ -11,5 +11,6 @@ public static class Router
         public const string GetAllUsers = UserPrefix + "get-all-users";
         public const string DeleteAllUsers = UserPrefix + "delete-all-users";
         public const string LoginUser = UserPrefix + "login";
+        public const string RegreshToken = UserPrefix + "refresh-token";
     }
 }

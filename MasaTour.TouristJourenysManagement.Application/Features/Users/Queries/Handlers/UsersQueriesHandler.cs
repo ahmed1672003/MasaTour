@@ -40,9 +40,10 @@ public sealed class UsersQueriesHandler :
         {
             var user = await _context.Users.RetrieveAsync(_specificationsFactory.CreateUserSpecifications(typeof(GetUserByUserNameOrEmailIncludedJwtSpecification), request.dto.EmailOrUserName), cancellationToken);
 
-            // ToDo: chneck if email confirm
+            // ToDo: check if email confirm
 
             var signInResult = await _context.Identity.SignInManager.CheckPasswordSignInAsync(user, request.dto.Password, true);
+
             if (!signInResult.Succeeded)
                 return ResponseResult.UnAuthorized<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.UnAuthorized]);
 

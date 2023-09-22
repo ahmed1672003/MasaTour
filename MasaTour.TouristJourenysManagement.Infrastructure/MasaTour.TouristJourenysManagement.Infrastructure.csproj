@@ -16,8 +16,4 @@
     <ProjectReference Include="..\MasaTour.TouristJourenysManagement.Domain\MasaTour.TouristJourenysManagement.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
-
 </Project>

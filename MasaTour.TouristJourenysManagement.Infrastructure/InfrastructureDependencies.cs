@@ -1,17 +1,16 @@
-﻿
-
+﻿using MasaTour.TouristJourenysManagement.Infrastructure.Seeds;
 using MasaTour.TouristJourenysManagement.Infrastructure.Settings;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure;
 public static class InfrastructureDependencies
 {
-    public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
+    public static async Task<IServiceCollection> AddInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         #region Register DbContext Options
         services.AddDbContext<ITouristJourenysManagementDbContext, TouristJourenysManagementDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("MasaTour_TouristJourenysManagement"));
-        }, ServiceLifetime.Transient);
+        }, ServiceLifetime.Scoped);
         #endregion
 
         #region Register Identity 
@@ -68,9 +67,26 @@ public static class InfrastructureDependencies
                 .AddScoped(typeof(ISpecification<>), typeof(Specification<>));
         #endregion
 
+        #region Seed Data
+        var context = services.BuildServiceProvider().GetRequiredService<IUnitOfWork>();
+        var specificationsFactory = services.BuildServiceProvider().GetRequiredService<ISpecificationsFactory>();
+        try
+        {
+            await RolesSedeer.SeedRolesAsync(context);
+            await UsersSedeer.SeedSuperAdminAsync(context, specificationsFactory);
+            await UsersSedeer.SeedAdminAsync(context, specificationsFactory);
+            await UsersSedeer.SeedBasicAsync(context, specificationsFactory);
+        }
+        catch
+        {
+
+        }
+        #endregion
+
         #region Configurations
         services.Configure<JwtSettings>(configuration.GetSection(nameof(JwtSettings)));
         #endregion
+
         return services;
     }
 }
