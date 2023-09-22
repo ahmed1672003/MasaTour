@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristJourenysManagementDbContext))]
-    [Migration("20230920143408_AddIdentityTables")]
-    partial class AddIdentityTables
+    [Migration("20230921154540_AddIdentity")]
+    partial class AddIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

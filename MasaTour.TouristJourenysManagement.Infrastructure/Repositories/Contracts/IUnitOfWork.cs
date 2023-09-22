@@ -1,9 +1,7 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts.Identity;
-
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
-public interface IUnitOfWork : IAsyncDisposable, ITransientLifetime
+public interface IUnitOfWork : IAsyncDisposable
 {
     IIdentityRepository Identity { get; }
     IUserRepository Users { get; }

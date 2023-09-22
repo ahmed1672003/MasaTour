@@ -1,5 +1,7 @@
 ﻿
 
+using MasaTour.TouristJourenysManagement.Infrastructure.Settings;
+
 namespace MasaTour.TouristJourenysManagement.Infrastructure;
 public static class InfrastructureDependencies
 {
@@ -48,25 +50,26 @@ public static class InfrastructureDependencies
 
         #region Register Contracts
         services
-            .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<ITransientLifetime>()).AsImplementedInterfaces().WithTransientLifetime())
-            .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<IScopeLifetime>()).AsImplementedInterfaces().WithScopedLifetime())
-            .Scan(s => s.FromAssemblies(Assembly.GetExecutingAssembly()).AddClasses(c => c.AssignableTo<ISingletonLifetime>()).AsImplementedInterfaces().WithSingletonLifetime());
-        services
-                .AddTransient<UserManager<User>>()
-                .AddTransient<SignInManager<User>>()
-                .AddTransient<RoleManager<Role>>()
-                .AddTransient<IUnitOfWork, UnitOfWork>()
-                .AddTransient<IIdentityRepository, IdentityRepository>()
-                .AddTransient<IRoleRepository, RoleRepository>()
-                .AddTransient<IRoleClaimRepository, RoleClaimRepository>()
-                .AddTransient<IUserClaimRepository, UserClaimRepository>()
-                .AddTransient<IUserJWTRepository, UserJWTRepository>()
-                .AddTransient<IUserLoginRepository, UserLoginRepository>()
-                .AddTransient<IUserRepository, UserRepository>()
-                .AddTransient<IUserRoleMapperRepository, UserRoleMapperRepository>()
-                .AddTransient<IUserTokenRepository, UserTokenRepository>()
-                .AddTransient(typeof(IRepository<>), typeof(Repository<>))
-                .AddTransient(typeof(ISpecification<>), typeof(Specification<>));
+                .AddScoped<UserManager<User>>()
+                .AddScoped<SignInManager<User>>()
+                .AddScoped<RoleManager<Role>>()
+                .AddScoped<ISpecificationsFactory, SpecificationsFactory>()
+                .AddScoped<IUnitOfWork, UnitOfWork>()
+                .AddScoped<IIdentityRepository, IdentityRepository>()
+                .AddScoped<IRoleRepository, RoleRepository>()
+                .AddScoped<IRoleClaimRepository, RoleClaimRepository>()
+                .AddScoped<IUserClaimRepository, UserClaimRepository>()
+                .AddScoped<IUserJWTRepository, UserJWTRepository>()
+                .AddScoped<IUserLoginRepository, UserLoginRepository>()
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IUserRoleMapperRepository, UserRoleMapperRepository>()
+                .AddScoped<IUserTokenRepository, UserTokenRepository>()
+                .AddScoped(typeof(IRepository<>), typeof(Repository<>))
+                .AddScoped(typeof(ISpecification<>), typeof(Specification<>));
+        #endregion
+
+        #region Configurations
+        services.Configure<JwtSettings>(configuration.GetSection(nameof(JwtSettings)));
         #endregion
         return services;
     }

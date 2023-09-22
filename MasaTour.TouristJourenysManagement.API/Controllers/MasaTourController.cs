@@ -1,8 +1,4 @@
-﻿using System.Net;
-
-using MasaTour.TouristJourenysManagement.Application.Response;
-
-using MediatR;
+﻿using MasaTour.TouristJourenysManagement.Application.Response;
 
 using Microsoft.AspNetCore.Mvc;
 

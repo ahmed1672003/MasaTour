@@ -9,5 +9,7 @@ public static class Router
         private const string UserPrefix = ApiPrefix + "users/";
         public const string AddUser = UserPrefix + "register-user";
         public const string GetAllUsers = UserPrefix + "get-all-users";
+        public const string DeleteAllUsers = UserPrefix + "delete-all-users";
+
     }
 }

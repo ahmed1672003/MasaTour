@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
-public interface ISpecification<TEntity> : ITransientLifetime where TEntity : class
+public interface ISpecification<TEntity> where TEntity : class
 {
     Expression<Func<TEntity, bool>> Criteria { get; }
     List<Expression<Func<TEntity, object>>> Includes { get; }

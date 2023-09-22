@@ -1,15 +1,19 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Roles;
+﻿using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
+using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Roles;
+using MasaTour.TouristJourenysManagement.Services.Dtos.Auth;
 
 namespace MasaTour.TouristJourenysManagement.Services.Services;
 public class AuthService : IAuthService
 {
     private readonly IUnitOfWork _context;
+    private readonly ISpecificationsFactory _specificationsFactory;
     private readonly JwtSettings _jWTSettings;
 
-    public AuthService(IUnitOfWork context, IOptions<JwtSettings> options)
+    public AuthService(IUnitOfWork context, IOptions<JwtSettings> options, ISpecificationsFactory specificationsFactory)
     {
         _context = context;
         _jWTSettings = options.Value;
+        _specificationsFactory = specificationsFactory;
     }
 
     /// <summary>
@@ -61,22 +65,21 @@ public class AuthService : IAuthService
                 RefreshJWTExpirtionDate = DateTime.Now.AddDays(_jWTSettings.RefreshTokenExpireDate),
             };
 
-            using var trasaction = await _context.BeginTransactionAsync();
             try
             {
-                await _context.UserJWTs.CreateAsync(userJWT);
-                //await _context.Users.UpdateAsync(user);
-                //var identityResult = await _context.Users.Manager.UpdateAsync(user);
+                user.UserJWTs.Add(userJWT);
+                //await _context.UserJWTs.CreateAsync(userJWT);
+                await _context.Users.UpdateAsync(user);
+                var identityResult = await _context.Identity.UserManager.UpdateAsync(user);
 
-                await _context.SaveChangesAsync();
-                await trasaction.CommitAsync();
+                //var count = await _context.SaveChangesAsync();
 
-                //if (!identityResult.Succeeded)
-                //    return new AuthModel();
+                if (!identityResult.Succeeded)
+                    return null;
             }
             catch
             {
-                await trasaction.RollbackAsync();
+                return null;
             }
 
             AuthModel.JWTModel = new()
@@ -144,9 +147,10 @@ public class AuthService : IAuthService
         #region Get Permissions
 
         // get user roles
-        GetRolesByNameSpecification getRolesByNameSpec = new(userRolesNames);
+        //GetRolesByNameSpecification getRolesByNameSpec = new(userRolesNames);
+        var getRolesByNameSpec = _specificationsFactory.CreateRoleSpecifications(typeof(GetRolesByNameSpecification), userRolesNames);
 
-        var userRoles = (await _context.Roles.RetrieveAllAsync(getRolesByNameSpec));
+        var userRoles = (await _context.Roles.RetrieveAllAsync(getRolesByNameSpec)).ToList();
         // get role claims
         var permissions = new List<Claim>();
         foreach (var role in userRoles)

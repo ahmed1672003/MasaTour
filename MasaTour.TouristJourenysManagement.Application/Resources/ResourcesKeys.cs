@@ -13,7 +13,20 @@ public static class ResourcesKeys
 
     public static class User
     {
-        public const string EmailIsExist = "EmailIsExist";
+        //public const string FirstNameCanNotBeNull = "FirstNameCanNotBeNull";
+        //public const string LastNameNameCanNotBeNull = "LastNameNameCanNotBeNull";
+        //public const string PhoneNumberCanNotBeNull = "PhoneNumberCanNotBeNull";
+        //public const string EmailCanNotBeNull = "EmailCanNotBeNull";
+        //public const string PasswordCanNotNull = "PasswordCanNotNull";
+        //public const string ConfirmedPasswordCanNotBeNull = "ConfirmedPasswordCanNotBeNull";
+        //public const string NationalityCanNotBeNull = "NationalityCanNotBeNull";
+        public const string PasswordDoesNotMatchedWithConfilremdPassword = "PasswordDoesNotMatchedWithConfilremdPassword";
+        public const string FiledLengthIsBiggerThanMaxLength = "FiledLengthIsBiggerThanMaxLength";
+        public const string FiledLengthIsSmallerThanMinLength = "FiledLengthIsSmallerThanMinLength";
+        public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
+        public const string FiledCanNotBeNull = "FiledCanNotBeNull";
+        public const string EmailNotValid = "EmailNotValid";
 
+        public const string EmailIsExist = "EmailIsExist";
     }
 }

@@ -15,15 +15,13 @@ public class UserRoleMapper : IdentityUserRole<string>
 
     [AllowNull]
     [ForeignKey(nameof(UserId))]
-    public User User { get; set; }
+    public User? User { get; set; }
 
     [AllowNull]
     [ForeignKey(nameof(RoleId))]
-    public Role Role { get; set; }
+    public Role? Role { get; set; }
 
     public UserRoleMapper()
     {
-        User = new();
-        Role = new();
     }
 }

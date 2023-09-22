@@ -4,13 +4,14 @@ global using System.Reflection;
 global using MasaTour.TouristJourenysManagement.Domain.Constants;
 global using MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Context;
-global using MasaTour.TouristJourenysManagement.Infrastructure.Liftimes;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Repositories;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts.Identity;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Identity;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
+global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Roles;
+global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Users;
 
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;

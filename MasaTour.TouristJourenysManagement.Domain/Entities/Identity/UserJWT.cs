@@ -40,12 +40,11 @@ public class UserJWT : BaseEntity
 
     [AllowNull]
     [ForeignKey(nameof(UserId))]
-    public User User { get; set; }
+    public User? User { get; set; }
     public UserJWT()
     {
         Id = Guid.NewGuid().ToString();
         CreatedAt = DateTime.Now;
         IsRefreshJWTUsed = true;
-        User = new();
     }
 }

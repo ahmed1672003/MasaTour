@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts.Identity;
-public interface IIdentityRepository : ITransientLifetime
+public interface IIdentityRepository
 {
     //IUserStore<User> UserStore { get; }
     //IUserEmailStore<User> UserEmailStore { get; }

@@ -34,7 +34,7 @@ public static class Startup
     public static IServiceCollection AddAPIDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddApplicationDependencies()
-                .AddServicesDependencies()
+                .AddServicesDependencies(configuration)
                 .AddInfrastructureDependencies(configuration)
                 .AddDomainDependencies();
 

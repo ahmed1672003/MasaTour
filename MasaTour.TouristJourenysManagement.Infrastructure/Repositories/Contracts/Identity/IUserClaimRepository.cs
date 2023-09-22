@@ -1,4 +1,4 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts.Identity;
-public interface IUserClaimRepository : IRepository<UserClaim>, ITransientLifetime
+public interface IUserClaimRepository : IRepository<UserClaim>
 {
 }

@@ -22,9 +22,8 @@ public class RoleClaim : IdentityRoleClaim<string>
 
     [AllowNull]
     [ForeignKey(nameof(RoleId))]
-    public Role Role { get; set; }
+    public Role? Role { get; set; }
     public RoleClaim()
     {
-        Role = new();
     }
 }
