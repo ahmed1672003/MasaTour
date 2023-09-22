@@ -10,6 +10,6 @@ public static class Router
         public const string AddUser = UserPrefix + "register-user";
         public const string GetAllUsers = UserPrefix + "get-all-users";
         public const string DeleteAllUsers = UserPrefix + "delete-all-users";
-
+        public const string LoginUser = UserPrefix + "login";
     }
 }
