@@ -7,4 +7,5 @@ public interface IAuthService
     Task<AuthModel> GetJWTAsync(User user);
     Task<JwtSecurityToken> ReadJWTAsync(string jwt);
     Task<AuthModel> RefreshJWTAsync(User user);
+    Task<bool> RevokeJWTAsync(UserJWT user);
 }

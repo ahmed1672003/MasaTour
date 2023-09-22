@@ -91,6 +91,134 @@ public class AuthService : IAuthService
         return AuthModel;
     }
 
+
+    /// <summary>
+    /// Read given JWT
+    /// </summary>
+    /// <param name="jwt">Specific JWT for reading</param>
+    /// <returns>Task of JwtSecurityToken</returns>
+    public Task<JwtSecurityToken> ReadJWTAsync(string jwt)
+    {
+        if (string.IsNullOrEmpty(jwt) || string.IsNullOrWhiteSpace(jwt))
+            return null;
+
+        return Task.FromResult(new JwtSecurityTokenHandler().ReadJwtToken(jwt));
+    }
+
+    /// <summary>
+    /// [ Refresh For given user ] 
+    /// [1] step one: Get user jwt
+    /// [2] step two: If user jwt is null <see cref="null"/>
+    /// [3] step three: Revoke Old refreshJWT
+    /// [4 , 5] step four: Generate new JWT & Generate new RefreshJWT 
+    /// [6] step five: Create new UserJWT instance and add save it in data base & if saving in data base is fail , will return <see cref="null"/> 
+    /// [7] step seven: Create AuthModel instance and return it after fill his Props
+    /// </summary>
+    /// <param name="user">specific user need to refresh token</param>
+    /// <returns>Task of AuthModel</returns>
+    public async Task<AuthModel> RefreshJWTAsync(User user)
+    {
+        var userJWT = user.UserJWTs.FirstOrDefault(u => u.IsRefreshJWTActive);
+
+        if (userJWT is null)
+            return null;
+
+        // revoke refresh JWT
+        userJWT.RefreshJWTRevokedDate = DateTime.Now;
+        userJWT.IsRefreshJWTUsed = false;
+
+        var jwt = await GenerateJWTAsync(user, GetClaimsAsync);
+        var refreshJWT = GenerateRefreshToken();
+
+        // add new refresh token to user
+        var newUserJWT = new UserJWT()
+        {
+            UserId = user.Id,
+            JWT = jwt,
+            JWTExpirationDate = DateTime.Now.AddDays(_jWTSettings.AccessTokenExpireDate),
+            RefreshJWT = refreshJWT,
+            RefreshJWTExpirtionDate = DateTime.Now.AddDays(_jWTSettings.RefreshTokenExpireDate),
+            IsRefreshJWTUsed = true,
+        };
+        user.UserJWTs.Add(newUserJWT);
+
+        var identityResult = await _context.Identity.UserManager.UpdateAsync(user);
+
+        if (!identityResult.Succeeded)
+            return null;
+
+        return new AuthModel()
+        {
+            JWTModel = new()
+            {
+                JWT = newUserJWT.JWT,
+                JWTExpirationDate = newUserJWT.JWTExpirationDate
+            },
+            RefreshJWTModel = new()
+            {
+                RefreshJWT = newUserJWT.RefreshJWT,
+                RefreshJWTExpirationDate = newUserJWT.RefreshJWTExpirtionDate
+            }
+        };
+    }
+
+    public async Task<bool> RevokeJWTAsync(UserJWT userJWT)
+    {
+        try
+        {
+            userJWT.IsRefreshJWTUsed = false;
+            userJWT.RefreshJWTRevokedDate = DateTime.Now;
+            await _context.UserJWTs.UpdateAsync(userJWT);
+            int result = await _context.SaveChangesAsync();
+            return result != 0 ? true : false;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+
+    /// <summary>
+    /// Check validation at given jwt parameters 
+    /// </summary>
+    /// <param name="jwt">Specific JWT</param>
+    /// <returns>Task of boolean (<see langword="true"/> or <see langword="false"/>)</returns>
+    private Task<bool> IsJWTParametersValidAsync(string jwt)
+    {
+        var handler = new JwtSecurityTokenHandler();
+        var parameters = new TokenValidationParameters
+        {
+            ValidateIssuer = _jWTSettings.ValidateIssuer,
+            ValidIssuers = new[] { _jWTSettings.Issuer },
+            ValidateIssuerSigningKey = _jWTSettings.ValidateIssuerSigningKey,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jWTSettings.Secret)),
+            ValidAudience = _jWTSettings.Audience,
+            ValidateAudience = _jWTSettings.ValidateAudience,
+            ValidateLifetime = _jWTSettings.ValidateLifeTime,
+        };
+        try
+        {
+            var validator = handler.ValidateToken(jwt, parameters, out SecurityToken validatedToken);
+
+            if (validatedToken == null)
+                return Task.FromResult(false);
+        }
+        catch
+        {
+            return Task.FromResult(false);
+        }
+        return Task.FromResult(true);
+    }
+
+    /// <summary>
+    /// Check validation at given jwt algorithm 
+    /// </summary>
+    /// <param name="jwtSecurityToken">Specific jwtSecurityToken</param>
+    /// <returns>Task of boolean (<see langword="true"/> or <see langword="false"/>)</returns>
+    private async Task<bool> IsJWTAlgorithmValidAsync(JwtSecurityToken jwtSecurityToken) =>
+         await Task.FromResult(jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature));
+
     /// <summary>
     /// Get refresh token
     /// </summary>
@@ -173,112 +301,4 @@ public class AuthService : IAuthService
         return claims;
     }
 
-    /// <summary>
-    /// Read given JWT
-    /// </summary>
-    /// <param name="jwt">Specific JWT for reading</param>
-    /// <returns>Task of JwtSecurityToken</returns>
-    public Task<JwtSecurityToken> ReadJWTAsync(string jwt)
-    {
-        if (string.IsNullOrEmpty(jwt) || string.IsNullOrWhiteSpace(jwt))
-            return null;
-
-        return Task.FromResult(new JwtSecurityTokenHandler().ReadJwtToken(jwt));
-    }
-
-    /// <summary>
-    /// Check validation at given jwt parameters 
-    /// </summary>
-    /// <param name="jwt">Specific JWT</param>
-    /// <returns>Task of boolean (<see langword="true"/> or <see langword="false"/>)</returns>
-    Task<bool> IsJWTParametersValidAsync(string jwt)
-    {
-        var handler = new JwtSecurityTokenHandler();
-        var parameters = new TokenValidationParameters
-        {
-            ValidateIssuer = _jWTSettings.ValidateIssuer,
-            ValidIssuers = new[] { _jWTSettings.Issuer },
-            ValidateIssuerSigningKey = _jWTSettings.ValidateIssuerSigningKey,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jWTSettings.Secret)),
-            ValidAudience = _jWTSettings.Audience,
-            ValidateAudience = _jWTSettings.ValidateAudience,
-            ValidateLifetime = _jWTSettings.ValidateLifeTime,
-        };
-        try
-        {
-            var validator = handler.ValidateToken(jwt, parameters, out SecurityToken validatedToken);
-
-            if (validatedToken == null)
-                return Task.FromResult(false);
-        }
-        catch
-        {
-            return Task.FromResult(false);
-        }
-        return Task.FromResult(true);
-    }
-
-    /// <summary>
-    /// Check validation at given jwt algorithm 
-    /// </summary>
-    /// <param name="jwtSecurityToken">Specific jwtSecurityToken</param>
-    /// <returns>Task of boolean (<see langword="true"/> or <see langword="false"/>)</returns>
-    async Task<bool> IsJWTAlgorithmValidAsync(JwtSecurityToken jwtSecurityToken) =>
-        await Task.FromResult(jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature));
-
-    /// <summary>
-    /// [ Refresh For given user ] 
-    /// [1] step one: Get user jwt
-    /// [2] step two: If user jwt is null <see cref="null"/>
-    /// [3] step three: Revoke Old refreshJWT
-    /// [4 , 5] step four: Generate new JWT & Generate new RefreshJWT 
-    /// [6] step five: Create new UserJWT instance and add save it in data base & if saving in data base is fail , will return <see cref="null"/> 
-    /// [7] step seven: Create AuthModel instance and return it after fill his Props
-    /// </summary>
-    /// <param name="user">specific user need to refresh token</param>
-    /// <returns>Task of AuthModel</returns>
-    public async Task<AuthModel> RefreshJWTAsync(User user)
-    {
-        var userJWT = user.UserJWTs.FirstOrDefault(u => u.IsRefreshJWTActive);
-
-        if (userJWT is null)
-            return null;
-
-        // revoke refresh JWT
-        userJWT.RefreshJWTRevokedDate = DateTime.Now;
-
-        var jwt = await GenerateJWTAsync(user, GetClaimsAsync);
-        var refreshJWT = GenerateRefreshToken();
-
-        // add new refresh token to user
-        var newUserJWT = new UserJWT()
-        {
-            UserId = user.Id,
-            JWT = jwt,
-            JWTExpirationDate = DateTime.Now.AddDays(_jWTSettings.AccessTokenExpireDate),
-            RefreshJWT = refreshJWT,
-            RefreshJWTExpirtionDate = DateTime.Now.AddDays(_jWTSettings.RefreshTokenExpireDate),
-            IsRefreshJWTUsed = true,
-        };
-        user.UserJWTs.Add(newUserJWT);
-
-        var identityResult = await _context.Identity.UserManager.UpdateAsync(user);
-
-        if (!identityResult.Succeeded)
-            return null;
-
-        return new AuthModel()
-        {
-            JWTModel = new()
-            {
-                JWT = newUserJWT.JWT,
-                JWTExpirationDate = newUserJWT.JWTExpirationDate
-            },
-            RefreshJWTModel = new()
-            {
-                RefreshJWT = newUserJWT.RefreshJWT,
-                RefreshJWTExpirationDate = newUserJWT.RefreshJWTExpirtionDate
-            }
-        };
-    }
 }

@@ -2,4 +2,5 @@
 public interface IUnitOfServices
 {
     IAuthService AuthService { get; }
+    ICookiesService CookiesService { get; }
 }

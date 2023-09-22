@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
-
 namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Queries.Handlers;
 public sealed class UsersQueriesHandler :
     IRequestHandler<LoginUserQuery, ResponseModel<AuthModel>>,
@@ -51,6 +49,8 @@ public sealed class UsersQueriesHandler :
 
             if (authModel is null)
                 return ResponseResult.UnAuthorized<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.UnAuthorized]);
+
+            await _services.CookiesService.SaveAuthInformationsAsync(authModel);
 
             return ResponseResult.Success(authModel, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }

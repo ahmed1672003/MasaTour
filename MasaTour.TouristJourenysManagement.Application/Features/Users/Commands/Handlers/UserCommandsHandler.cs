@@ -1,18 +1,19 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
-using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.JWTs;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Commands.Handlers;
 public sealed class UserCommandsHandler :
     IRequestHandler<AddUserCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RefreshTokenCommand, ResponseModel<AuthModel>>,
+    IRequestHandler<RevokeTokenCommand, ResponseModel<AuthModel>>,
     IRequestHandler<DeleteAllUsersCommand, ResponseModel<GetUserDto>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
     private readonly IUnitOfServices _services;
+    private readonly ISpecificationsFactory _specificationsFactory;
+    private readonly IHttpContextAccessor _contextAccessor;
     private readonly IMapper _mapper;
     private readonly IStringLocalizer<SharedResources> _stringLocalizer;
-    private readonly ISpecificationsFactory _specificationsFactory;
     #endregion
 
     #region Ctor
@@ -21,13 +22,15 @@ public sealed class UserCommandsHandler :
         IStringLocalizer<SharedResources> stringLocalizer,
         IMapper mapper,
         IUnitOfServices services,
-        ISpecificationsFactory specificationsFactory)
+        ISpecificationsFactory specificationsFactory,
+        IHttpContextAccessor contextAccessor)
     {
         _context = context;
         _stringLocalizer = stringLocalizer;
         _mapper = mapper;
         _services = services;
         _specificationsFactory = specificationsFactory;
+        _contextAccessor = contextAccessor;
     }
     #endregion
 
@@ -53,6 +56,8 @@ public sealed class UserCommandsHandler :
             if (authModel is null)
                 return ResponseResult.Conflict<AuthModel>();
 
+            await _services.CookiesService.SaveAuthInformationsAsync(authModel);
+
             return ResponseResult.Created(authModel);
         }
         catch
@@ -67,17 +72,19 @@ public sealed class UserCommandsHandler :
     {
         try
         {
-            ISpecification<UserJWT> jwtIsExistSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(JwtIsExistSpecification), request.dto.JWT, request.dto.RefreshToken);
+            (string jwt, string refreshToken) = string.IsNullOrEmpty(request.dto.JWT) || string.IsNullOrEmpty(request.dto.RefreshToken) ? await _services.CookiesService.GetAuthInformationsAsync() : (request.dto.JWT, request.dto.RefreshToken);
+
+            ISpecification<UserJWT> jwtIsExistSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(JwtIsExistSpecification), jwt, refreshToken);
 
             if (!await _context.UserJWTs.AnyAsync(jwtIsExistSpec, cancellationToken))
                 return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            var jwtSecurityToken = await _services.AuthService.ReadJWTAsync(request.dto.JWT);
+            var jwtSecurityToken = await _services.AuthService.ReadJWTAsync(jwt);
 
-            if (!await _services.AuthService.IsJWTValid.Invoke(request.dto.JWT, jwtSecurityToken))
-                return ResponseResult.UnAuthorized<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.UnAuthorized]);
+            if (!await _services.AuthService.IsJWTValid.Invoke(jwt, jwtSecurityToken))
+                return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            var getUserJWTByJwtAndRefreshJwtIncludedSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(GetUserJWTByJwtAndRefreshJwtIncludedSpecification), request.dto.JWT, request.dto.RefreshToken);
+            var getUserJWTByJwtAndRefreshJwtIncludedSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(GetUserJWTByJwtAndRefreshJwtIncludedSpecification), jwt, refreshToken);
 
             var userJwt = await _context.UserJWTs.RetrieveAsync(getUserJWTByJwtAndRefreshJwtIncludedSpec, cancellationToken);
 
@@ -87,9 +94,44 @@ public sealed class UserCommandsHandler :
             var authModel = await _services.AuthService.RefreshJWTAsync(userJwt.User);
 
             if (authModel is null)
-                return ResponseResult.UnAuthorized<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.UnAuthorized]);
+                return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
+
+            await _services.CookiesService.SaveAuthInformationsAsync(authModel);
 
             return ResponseResult.Success(authModel, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch
+        {
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+        }
+    }
+    #endregion
+
+    #region Revoke Token
+    public async Task<ResponseModel<AuthModel>> Handle(RevokeTokenCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            (string jwt, string refreshToken) = string.IsNullOrEmpty(request.dto.JWT) || string.IsNullOrEmpty(request.dto.RefreshToken) ? await _services.CookiesService.GetAuthInformationsAsync() : (request.dto.JWT, request.dto.RefreshToken);
+
+            ISpecification<UserJWT> jwtIsExistSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(JwtIsExistSpecification), jwt, refreshToken);
+
+            if (!await _context.UserJWTs.AnyAsync(jwtIsExistSpec, cancellationToken))
+                return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            ISpecification<UserJWT> getUserJWTByJwtAndRefreshJwtIncludedSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(GetUserJWTByJwtAndRefreshJwtIncludedSpecification), jwt, refreshToken);
+
+            var userJwt = await _context.UserJWTs.RetrieveAsync(getUserJWTByJwtAndRefreshJwtIncludedSpec, cancellationToken);
+
+            if (userJwt.User is null)
+                return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            if (!await _services.AuthService.RevokeJWTAsync(userJwt))
+                return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
+
+            await _services.CookiesService.DeleteAuthInformationsAsync();
+
+            return ResponseResult.Success<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch
         {

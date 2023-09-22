@@ -6,6 +6,7 @@ public static class ServicesDependencies
         #region Register Services
         services.AddScoped<IUnitOfServices, UnitOfSevices>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ICookiesService, CookiesService>();
         #endregion
 
         #region JWT Services
