@@ -42,7 +42,8 @@ public static class ServicesDependencies
                 Name = "Authorization",
                 In = ParameterLocation.Header,
                 Type = SecuritySchemeType.ApiKey,
-                Scheme = JwtBearerDefaults.AuthenticationScheme
+                Scheme = JwtBearerDefaults.AuthenticationScheme,
+                BearerFormat = JwtBearerDefaults.AuthenticationScheme,
             });
             options.AddSecurityRequirement(new OpenApiSecurityRequirement()
             {
@@ -52,7 +53,7 @@ public static class ServicesDependencies
                             Reference = new()
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = JwtBearerDefaults.AuthenticationScheme
+                                Id = JwtBearerDefaults.AuthenticationScheme,
                             }
                         },
                     Array.Empty<string>()

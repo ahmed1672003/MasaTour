@@ -55,7 +55,8 @@ public sealed class UserCommandsHandler :
 
             var assignUserToRoleResult = await _context.Identity.UserManager.AddToRoleAsync(user, Roles.Basic.ToString());
 
-
+            if (!assignUserToRoleResult.Succeeded)
+                return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
 
             var authModel = await _services.AuthService.GetJWTAsync(user);
 
