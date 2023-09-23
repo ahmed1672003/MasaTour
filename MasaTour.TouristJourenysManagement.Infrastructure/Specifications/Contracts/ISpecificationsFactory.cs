@@ -5,4 +5,3 @@ public interface ISpecificationsFactory
     ISpecification<Role> CreateRoleSpecifications(Type type, params dynamic[] parameters);
     ISpecification<UserJWT> CreateUserJWTSpecifications(Type type, params dynamic[] parameters);
 }
-

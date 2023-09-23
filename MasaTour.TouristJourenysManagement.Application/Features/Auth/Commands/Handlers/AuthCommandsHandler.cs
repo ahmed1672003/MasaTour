@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Commands.Handlers;
-public sealed class UserCommandsHandler :
+public sealed class AuthCommandsHandler :
     IRequestHandler<AddUserCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RefreshTokenCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RevokeTokenCommand, ResponseModel<AuthModel>>,
@@ -21,7 +21,7 @@ public sealed class UserCommandsHandler :
     #endregion
 
     #region Ctor
-    public UserCommandsHandler(
+    public AuthCommandsHandler(
         IUnitOfWork context,
         IStringLocalizer<SharedResources> stringLocalizer,
         IMapper mapper,
@@ -41,9 +41,9 @@ public sealed class UserCommandsHandler :
     #region Add User 
     public async Task<ResponseModel<AuthModel>> Handle(AddUserCommand request, CancellationToken cancellationToken)
     {
-        ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), request.dto.Email);
         try
         {
+            ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), request.dto.Email);
             if (await _context.Users.AnyAsync(userEmailSpec, cancellationToken))
                 return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.User.EmailIsExist]);
 
@@ -69,9 +69,9 @@ public sealed class UserCommandsHandler :
 
             return ResponseResult.Created(authModel);
         }
-        catch
+        catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
         }
     }
     #endregion
@@ -109,9 +109,9 @@ public sealed class UserCommandsHandler :
 
             return ResponseResult.Success(authModel, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
-        catch
+        catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
         }
     }
     #endregion
@@ -142,9 +142,9 @@ public sealed class UserCommandsHandler :
 
             return ResponseResult.Success<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
-        catch
+        catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
         }
     }
     #endregion
@@ -172,9 +172,9 @@ public sealed class UserCommandsHandler :
 
             return ResponseResult.Success<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
         }
     }
     #endregion

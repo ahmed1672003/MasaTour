@@ -8,7 +8,8 @@ public static class EndPoints
             public const string OperationId = "664C7BF0-427E-4EA2-A1D4-151E236FBC1F";
             public const string Summary = "Register New User | (email, userName and phoneNumber) Are Unique | Allowed For Anonymous";
             public const string Description = "On Success: ( jwt, refreshToken, jwtExpirationDate, refreshJwtExpirationDate ) Will Be Sent With Response In Cookies | User Will Be Assigned To Basic Role" +
-                                   "</br></br> Nationality: Egyptian[0] & Other[1]";
+                                   "</br></br> nationality  Egyptian[0] Other[1] </hr>" +
+                                   "</br></br> gender  Male[0] Female[1] Other[2] UnKnown[3]";
         }
 
         public static class LoginUser
@@ -54,6 +55,16 @@ public static class EndPoints
             public const string OperationId = "732A3F62-B9CD-4A2D-AE8E-CE8CD468168A";
             public const string Summary = "Delete All Users From Server | This Endpoint Used For BackEnd Developer Only | Allowed For SuperAdmin Only";
             public const string Description = "This Endpoint Created To Help BackEnd Developer At Development Phase Only";
+        }
+    }
+    public static class User
+    {
+        public static class UpdateUser
+        {
+            public const string OperationId = "98962269-94EE-42D7-AC6F-48483D1FA289";
+            public const string Summary = "Update User | (UserName) Is Unique | User Name Can Not Be Duplicated With Another User |Allowed For Basic, Admin, SuperAdmin";
+            public const string Description = "OnSuccess (New Data Will Be Rerieved)" +
+                                   "</br></br> nationality  Egyptian[0] Other[1] </hr>";
         }
     }
 }

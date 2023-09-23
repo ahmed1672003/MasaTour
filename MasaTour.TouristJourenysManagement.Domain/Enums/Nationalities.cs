@@ -4,3 +4,4 @@ public enum Nationality
     Egyptian,
     Other
 }
+

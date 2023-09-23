@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Queries.Handlers;
-public sealed class UsersQueriesHandler :
+public sealed class AuthQueriesHandler :
     IRequestHandler<LoginUserQuery, ResponseModel<AuthModel>>,
     IRequestHandler<GetAllUsersQuery, ResponseModel<IEnumerable<GetUserDto>>>
 {
@@ -15,7 +15,7 @@ public sealed class UsersQueriesHandler :
     #endregion
 
     #region Ctor
-    public UsersQueriesHandler(IUnitOfWork context, IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper, ISpecificationsFactory specificationsFactory, IUnitOfServices services)
+    public AuthQueriesHandler(IUnitOfWork context, IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper, ISpecificationsFactory specificationsFactory, IUnitOfServices services)
     {
         _context = context;
         _stringLocalizer = stringLocalizer;
@@ -55,9 +55,9 @@ public sealed class UsersQueriesHandler :
 
             return ResponseResult.Success(authModel, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
-        catch
+        catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
         }
     }
     #endregion
@@ -73,9 +73,9 @@ public sealed class UsersQueriesHandler :
             var dtos = _mapper.Map<IEnumerable<GetUserDto>>(users);
             return ResponseResult.Success(dtos);
         }
-        catch
+        catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<IEnumerable<GetUserDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+            return ResponseResult.InternalServerError<IEnumerable<GetUserDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
         }
     }
     #endregion

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristJourenysManagementDbContext))]
-    [Migration("20230922112724_AddIdentity")]
-    partial class AddIdentity
+    [Migration("20230923180854_AddIdentityTables")]
+    partial class AddIdentityTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,6 +120,9 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImgSrc")
                         .IsRequired()

@@ -118,6 +118,9 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImgSrc")
                         .IsRequired()
                         .HasMaxLength(1500)

@@ -1,6 +1,4 @@
-﻿
-
-namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
+﻿namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 
 [PrimaryKey(nameof(UserId), nameof(RoleId))]
 public class UserRoleMapper : IdentityUserRole<string>
@@ -13,11 +11,9 @@ public class UserRoleMapper : IdentityUserRole<string>
     [MaxLength(36)]
     public override string RoleId { get; set; }
 
-    [AllowNull]
     [ForeignKey(nameof(UserId))]
     public User? User { get; set; }
 
-    [AllowNull]
     [ForeignKey(nameof(RoleId))]
     public Role? Role { get; set; }
 

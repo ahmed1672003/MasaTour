@@ -56,7 +56,6 @@ public static class Startup
         #endregion
 
         #region Add Localization
-
         services
             .AddLocalization(/*options => options.ResourcesPath = ""*/)
             .Configure<RequestLocalizationOptions>(options =>
@@ -67,7 +66,7 @@ public static class Startup
                     new CultureInfo("ar-EG"), // arabic
                     new CultureInfo("de-DE"), // germaney
                     new CultureInfo("fr-FR"), // frensh
-                    new CultureInfo("es"), // spanish
+                    // new CultureInfo("es"), // spanish
                 };
                 options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
                 options.SupportedCultures = supportedCultures;

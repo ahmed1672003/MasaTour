@@ -26,7 +26,7 @@ public static class ResourcesKeys
         public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
         public const string FiledCanNotBeNull = "FiledCanNotBeNull";
         public const string EmailNotValid = "EmailNotValid";
-
+        public const string UserNameIsExist = "UserNameIsExist";
         public const string EmailIsExist = "EmailIsExist";
     }
 }

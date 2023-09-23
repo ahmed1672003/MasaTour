@@ -1,11 +1,9 @@
 ﻿using System.Net.Mail;
 
-using MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
-
 namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Mappers;
-public class UserProfile : Profile
+public class AuthProfile : Profile
 {
-    public UserProfile()
+    public AuthProfile()
     {
         Mapp();
     }

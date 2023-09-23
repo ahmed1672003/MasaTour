@@ -13,6 +13,9 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "GetUserByUserNameOrEmailIncludedJwtSpecification" => new GetUserByUserNameOrEmailIncludedJwtSpecification(parameters[0]),
             "PhoneNumberIsExistSpecification" => new PhoneNumberIsExistSpecification(parameters[0]),
             "GetUserByUserNameOrEmailSpecification" => new GetUserByUserNameOrEmailSpecification(parameters[0]),
+            "UserIdIsExistSpecification" => new UserIdIsExistSpecification(parameters[0]),
+            "CheckIfUserNameDuplicatedSpecification" => new CheckIfUserNameDuplicatedSpecification(parameters[0], parameters[1]),
+            "GetUserByIdSpecification" => new GetUserByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }

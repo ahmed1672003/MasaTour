@@ -16,4 +16,9 @@
     <PackageReference Include="MediatR" Version="12.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Users\Queries\Handlers\" />
+    <Folder Include="Features\Users\Validators\" />
+  </ItemGroup>
+
 </Project>

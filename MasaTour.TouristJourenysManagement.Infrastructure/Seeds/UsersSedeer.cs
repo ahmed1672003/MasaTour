@@ -8,6 +8,7 @@ public static class UsersSedeer
     {
         var superAdmin = new User
         {
+            Id = "C12791C9-1DAA-4A8D-B2BA-0055AA06DB34",
             UserName = "ahmedadel1672003",
             Email = "ahmedadel1672003@gmail.com",
             FirstName = "Ahmed",
@@ -15,13 +16,21 @@ public static class UsersSedeer
             ImgSrc = "path",
             PhoneNumber = "01018856093",
             Nationality = Nationality.Egyptian,
+            Gender = Gender.Male,
             EmailConfirmed = true,
             PhoneNumberConfirmed = true,
         };
-        var emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), superAdmin.Email);
-        var phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), superAdmin.PhoneNumber);
         // check if email of phone number are not
-        if ((await context.Users.AnyAsync(emailIsExistSpec) || await context.Users.AnyAsync(phoneNumberIsExisttSpec)))
+        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(UserIdIsExistSpecification), superAdmin.Id);
+        if (await context.Users.AnyAsync(userIdIsExistSpec))
+            return;
+
+        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), superAdmin.Email);
+        if (await context.Users.AnyAsync(emailIsExistSpec))
+            return;
+
+        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), superAdmin.PhoneNumber);
+        if ((await context.Users.AnyAsync(userIdIsExistSpec) || await context.Users.AnyAsync(emailIsExistSpec) || await context.Users.AnyAsync(phoneNumberIsExisttSpec)))
             return;
 
         // add user
@@ -40,6 +49,7 @@ public static class UsersSedeer
     {
         var admin = new User
         {
+            Id = "E29D0D63-A4E9-4381-BD42-9821E8F267EE",
             UserName = "ahmedadel112019",
             Email = "ahmedadel112019@gmail.com",
             FirstName = "Ahmed",
@@ -47,14 +57,21 @@ public static class UsersSedeer
             ImgSrc = "path",
             PhoneNumber = "01280755031",
             Nationality = Nationality.Egyptian,
+            Gender = Gender.Male,
             EmailConfirmed = true,
             PhoneNumberConfirmed = true,
         };
-
-        var emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), admin.Email);
-        var phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), admin.PhoneNumber);
         // check if email of phone number are not
-        if ((await context.Users.AnyAsync(emailIsExistSpec) || await context.Users.AnyAsync(phoneNumberIsExisttSpec)))
+        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(UserIdIsExistSpecification), admin.Id);
+        if (await context.Users.AnyAsync(userIdIsExistSpec))
+            return;
+
+        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), admin.Email);
+        if (await context.Users.AnyAsync(emailIsExistSpec))
+            return;
+
+        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), admin.PhoneNumber);
+        if (await context.Users.AnyAsync(phoneNumberIsExisttSpec))
             return;
 
         // add user
@@ -72,6 +89,7 @@ public static class UsersSedeer
     {
         var basic = new User
         {
+            Id = "24553FC1-821A-437C-8541-41F065A52DFC",
             UserName = "ahmedadel1122003",
             Email = "ahmedadel1122003@gmail.com",
             FirstName = "Ahmed",
@@ -79,14 +97,22 @@ public static class UsersSedeer
             ImgSrc = "path",
             PhoneNumber = "01280755041",
             Nationality = Nationality.Egyptian,
+            Gender = Gender.Male,
             EmailConfirmed = true,
             PhoneNumberConfirmed = true,
         };
 
-        var emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), basic.Email);
-        var phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), basic.PhoneNumber);
         // check if email of phone number are not
-        if ((await context.Users.AnyAsync(emailIsExistSpec) || await context.Users.AnyAsync(phoneNumberIsExisttSpec)))
+        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(UserIdIsExistSpecification), basic.Id);
+        if (await context.Users.AnyAsync(userIdIsExistSpec))
+            return;
+
+        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), basic.Email);
+        if (await context.Users.AnyAsync(emailIsExistSpec))
+            return;
+
+        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), basic.PhoneNumber);
+        if (await context.Users.AnyAsync(phoneNumberIsExisttSpec))
             return;
 
         // add user
@@ -98,5 +124,4 @@ public static class UsersSedeer
             Roles.Basic.ToString(),
         });
     }
-
 }

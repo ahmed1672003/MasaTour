@@ -1,6 +1,4 @@
-﻿
-
-namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
+﻿namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 
 [PrimaryKey(nameof(Id))]
 [Index(nameof(UserName), IsUnique = true)]
@@ -33,6 +31,8 @@ public class User : IdentityUser<string>
     [Required]
     public Nationality Nationality { get; set; }
 
+    public Gender Gender { get; set; }
+
     [Required]
     [MaxLength(1500)]
     public string ImgSrc { get; set; }
@@ -58,7 +58,6 @@ public class User : IdentityUser<string>
     {
         Id = Guid.NewGuid().ToString();
         IsDeleted = false;
-        Nationality = Nationality.Egyptian;
         CreatedAt = DateTime.Now;
         UpdatedAt = DateTime.Now;
         UserJWTs = new HashSet<UserJWT>();
