@@ -2,7 +2,7 @@
 
 using MasaTour.TouristJourenysManagement.Domain.Enums;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Dtos;
+namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
 public class AddUserDto
 {
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]

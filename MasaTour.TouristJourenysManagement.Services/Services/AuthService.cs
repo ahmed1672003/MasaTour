@@ -69,7 +69,7 @@ public class AuthService : IAuthService
             {
                 user.UserJWTs.Add(userJWT);
                 await _context.Users.UpdateAsync(user);
-                var result = await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch
             {

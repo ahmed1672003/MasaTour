@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Application.Features.Users.Commands;
+﻿using MasaTour.TouristJourenysManagement.Application.Features.Auth.Commands;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Validators;
+namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Validators;
 public class AddUserCommandValidator : AbstractValidator<AddUserCommand>
 {
     private readonly IStringLocalizer<SharedResources> _stringLocalizer;

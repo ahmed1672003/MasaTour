@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Queries.Handlers;
+namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Queries.Handlers;
 public sealed class UsersQueriesHandler :
     IRequestHandler<LoginUserQuery, ResponseModel<AuthModel>>,
     IRequestHandler<GetAllUsersQuery, ResponseModel<IEnumerable<GetUserDto>>>
@@ -28,14 +28,15 @@ public sealed class UsersQueriesHandler :
     #region Login User Query
     public async Task<ResponseModel<AuthModel>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
     {
-        var isEmailValid = new EmailAddressAttribute().IsValid(request.dto.EmailOrUserName);
-        // check user name or email found
-        ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), request.dto.EmailOrUserName);
-        ISpecification<User> userNameSpec = _specificationsFactory.CreateUserSpecifications(typeof(UserNameIsExistSpecification), request.dto.EmailOrUserName);
-        if (!await _context.Users.AnyAsync(isEmailValid ? userEmailSpec : userNameSpec, cancellationToken))
-            return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
         try
         {
+            var isEmailValid = new EmailAddressAttribute().IsValid(request.dto.EmailOrUserName);
+            // check user name or email found
+            ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), request.dto.EmailOrUserName);
+            ISpecification<User> userNameSpec = _specificationsFactory.CreateUserSpecifications(typeof(UserNameIsExistSpecification), request.dto.EmailOrUserName);
+            if (!await _context.Users.AnyAsync(isEmailValid ? userEmailSpec : userNameSpec, cancellationToken))
+                return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
             var user = await _context.Users.RetrieveAsync(_specificationsFactory.CreateUserSpecifications(typeof(GetUserByUserNameOrEmailIncludedJwtSpecification), request.dto.EmailOrUserName), cancellationToken);
 
             // ToDo: check if email confirm

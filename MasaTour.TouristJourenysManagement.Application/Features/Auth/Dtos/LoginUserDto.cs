@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Dtos;
+namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
 public class LoginUserDto
 {
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]

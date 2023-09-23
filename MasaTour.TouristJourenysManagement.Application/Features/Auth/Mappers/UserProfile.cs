@@ -2,7 +2,7 @@
 
 using MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Mappers;
+namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Mappers;
 public class UserProfile : Profile
 {
     public UserProfile()

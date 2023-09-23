@@ -12,6 +12,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "UserNameIsExistSpecification" => new UserNameIsExistSpecification(parameters[0]),
             "GetUserByUserNameOrEmailIncludedJwtSpecification" => new GetUserByUserNameOrEmailIncludedJwtSpecification(parameters[0]),
             "PhoneNumberIsExistSpecification" => new PhoneNumberIsExistSpecification(parameters[0]),
+            "GetUserByUserNameOrEmailSpecification" => new GetUserByUserNameOrEmailSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }

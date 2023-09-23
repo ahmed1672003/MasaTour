@@ -5,7 +5,7 @@ global using AutoMapper;
 global using FluentValidation;
 
 global using MasaTour.TouristJourenysManagement.Application.Behaviors;
-global using MasaTour.TouristJourenysManagement.Application.Features.Users.Dtos;
+global using MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
 global using MasaTour.TouristJourenysManagement.Application.Resources;
 global using MasaTour.TouristJourenysManagement.Application.Response;
 global using MasaTour.TouristJourenysManagement.Domain.Entities.Identity;

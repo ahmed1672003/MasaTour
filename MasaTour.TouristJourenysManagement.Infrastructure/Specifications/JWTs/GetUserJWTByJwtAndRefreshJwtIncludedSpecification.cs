@@ -3,6 +3,7 @@ public sealed class GetUserJWTByJwtAndRefreshJwtIncludedSpecification : Specific
 {
     public GetUserJWTByJwtAndRefreshJwtIncludedSpecification(string jwt, string refreshToken) : base(userJwt => userJwt.JWT.Equals(jwt) && userJwt.RefreshJWT.Equals(refreshToken) && userJwt.IsRefreshJWTUsed)
     {
+        //   StopTracking();
         AddIncludes(userJwt => userJwt.User);
     }
 }

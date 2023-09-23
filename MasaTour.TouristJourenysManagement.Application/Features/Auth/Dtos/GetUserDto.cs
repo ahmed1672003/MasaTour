@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Dtos;
+﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
 public class GetUserDto
 {
     public string Id { get; set; }

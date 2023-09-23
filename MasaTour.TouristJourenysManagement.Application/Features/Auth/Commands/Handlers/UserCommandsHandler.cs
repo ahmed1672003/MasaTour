@@ -1,12 +1,14 @@
 ﻿using MasaTour.TouristJourenysManagement.Infrastructure.Enums;
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Commands.Handlers;
+namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Commands.Handlers;
 public sealed class UserCommandsHandler :
     IRequestHandler<AddUserCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RefreshTokenCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RevokeTokenCommand, ResponseModel<AuthModel>>,
+    IRequestHandler<ChangePasswordCommand, ResponseModel<AuthModel>>,
     IRequestHandler<DeleteAllUsersCommand, ResponseModel<GetUserDto>>
 {
     #region Fields
@@ -141,6 +143,36 @@ public sealed class UserCommandsHandler :
             return ResponseResult.Success<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch
+        {
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+        }
+    }
+    #endregion
+
+    #region Change Password
+    public async Task<ResponseModel<AuthModel>> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<User> getUserByUserNameOrEmailSpecification = _specificationsFactory.CreateUserSpecifications(typeof(GetUserByUserNameOrEmailSpecification), request.dto.EmailOrUserName);
+            if (!await _context.Users.AnyAsync(getUserByUserNameOrEmailSpecification))
+                return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            User user = await _context.Users.RetrieveAsync(getUserByUserNameOrEmailSpecification);
+
+            bool IsSecure = await _context.Identity.UserManager.CheckPasswordAsync(user, request.dto.CurrentPassword);
+
+            if (!IsSecure)
+                return ResponseResult.UnAuthorized<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.UnAuthorized]);
+
+            IdentityResult changePassword = await _context.Identity.UserManager.ChangePasswordAsync(user, request.dto.CurrentPassword, request.dto.Password);
+
+            if (!changePassword.Succeeded)
+                return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+
+            return ResponseResult.Success<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception)
         {
             return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
         }
