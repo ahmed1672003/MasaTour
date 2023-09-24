@@ -48,19 +48,5 @@ public class AuthController : MasaTourController
     public async Task<IActionResult> ChangePassword([FromBody] ChangePassowrdDto dto) => MasaTourResponse(await Mediator.Send(new ChangePasswordCommand(dto)));
     #endregion
 
-    #region Get
-    [Authorize(Roles = nameof(Roles.SuperAdmin))]
-    [HttpGet(Router.Auth.GetAllUsers)]
-    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetUserDto>>))]
-    [SwaggerOperation(OperationId = EndPoints.Auth.GetAllUsers.OperationId, Summary = EndPoints.Auth.GetAllUsers.Summary, Description = EndPoints.Auth.GetAllUsers.Description)]
-    public async Task<IActionResult> GetAllUsers() => MasaTourResponse(await Mediator.Send(new GetAllUsersQuery()));
-    #endregion
 
-    #region Delete
-    [Authorize(Roles = nameof(Roles.SuperAdmin))]
-    [HttpDelete(Router.Auth.DeleteAllUsers)]
-    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<GetUserDto>))]
-    [SwaggerOperation(OperationId = EndPoints.Auth.DeleteAllUsers.OperationId, Summary = EndPoints.Auth.DeleteAllUsers.Summary, Description = EndPoints.Auth.DeleteAllUsers.Description)]
-    public async Task<IActionResult> DeleteAllUsers() => MasaTourResponse(await Mediator.Send(new DeleteAllUsersCommand()));
-    #endregion
 }

@@ -1,4 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Application.Features.Users.Commands;
+﻿using System.ComponentModel.DataAnnotations;
+
+using MasaTour.TouristJourenysManagement.Application.Features.Users.Commands;
 using MasaTour.TouristJourenysManagement.Application.Features.Users.Dtos;
 using MasaTour.TouristJourenysManagement.Application.Features.Users.Queries;
 using MasaTour.TouristJourenysManagement.Application.Response;
@@ -27,6 +29,20 @@ public class UserController : MasaTourController
     [HttpGet(Router.User.GetUserById)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<GetUserDto>))]
     [SwaggerOperation(OperationId = EndPoints.User.GetUserById.OperationId, Summary = EndPoints.User.GetUserById.Summary, Description = EndPoints.User.GetUserById.Description)]
-    public async Task<IActionResult> GetUserById(string userId) => MasaTourResponse(await Mediator.Send(new GetUserByIdQuery(userId)));
+    public async Task<IActionResult> GetUserById([Required] string userId) => MasaTourResponse(await Mediator.Send(new GetUserByIdQuery(userId)));
+
+    [Authorize(Roles = nameof(Roles.SuperAdmin))]
+    [HttpGet(Router.User.GetAllUsers)]
+    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetUserDto>>))]
+    [SwaggerOperation(OperationId = EndPoints.User.GetAllUsers.OperationId, Summary = EndPoints.User.GetAllUsers.Summary, Description = EndPoints.User.GetAllUsers.Description)]
+    public async Task<IActionResult> GetAllUsers() => MasaTourResponse(await Mediator.Send(new GetAllUsersQuery()));
+    #endregion
+
+    #region Delete
+    [Authorize(Roles = nameof(Roles.SuperAdmin))]
+    [HttpDelete(Router.User.DeleteAllUsers)]
+    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<GetUserDto>))]
+    [SwaggerOperation(OperationId = EndPoints.User.DeleteAllUsers.OperationId, Summary = EndPoints.User.DeleteAllUsers.Summary, Description = EndPoints.User.DeleteAllUsers.Description)]
+    public async Task<IActionResult> DeleteAllUsers() => MasaTourResponse(await Mediator.Send(new DeleteAllUsersCommand()));
     #endregion
 }

@@ -1,5 +1,7 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Queries.Handlers;
-public sealed class UserQueriesHandler : IRequestHandler<GetUserByIdQuery, ResponseModel<GetUserDto>>
+public sealed class UserQueriesHandler :
+    IRequestHandler<GetUserByIdQuery, ResponseModel<GetUserDto>>,
+    IRequestHandler<GetAllUsersQuery, ResponseModel<IEnumerable<GetUserDto>>>
 {
     private readonly IUnitOfWork _context;
     private readonly IUnitOfServices _services;
@@ -19,6 +21,7 @@ public sealed class UserQueriesHandler : IRequestHandler<GetUserByIdQuery, Respo
         _stringLocalizer = stringLocalizer;
         _specificationsFactory = specificationsFactory;
     }
+
     #region Get User By Id
     public async Task<ResponseModel<GetUserDto>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
@@ -35,6 +38,24 @@ public sealed class UserQueriesHandler : IRequestHandler<GetUserByIdQuery, Respo
         catch (Exception ex)
         {
             return ResponseResult.InternalServerError<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region Get All Users Query
+    public async Task<ResponseModel<IEnumerable<GetUserDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+    {
+        if (!await _context.Users.AnyAsync(cancellationToken: cancellationToken))
+            return ResponseResult.NotFound<IEnumerable<GetUserDto>>();
+        try
+        {
+            var users = await _context.Users.RetrieveAllAsync(cancellationToken: cancellationToken);
+            var dtos = _mapper.Map<IEnumerable<GetUserDto>>(users);
+            return ResponseResult.Success(dtos);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<IEnumerable<GetUserDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
         }
     }
     #endregion

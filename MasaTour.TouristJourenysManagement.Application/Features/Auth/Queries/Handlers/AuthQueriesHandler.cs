@@ -2,8 +2,7 @@
 
 namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Queries.Handlers;
 public sealed class AuthQueriesHandler :
-    IRequestHandler<LoginUserQuery, ResponseModel<AuthModel>>,
-    IRequestHandler<GetAllUsersQuery, ResponseModel<IEnumerable<GetUserDto>>>
+    IRequestHandler<LoginUserQuery, ResponseModel<AuthModel>>
 {
     #region Fields
 
@@ -62,21 +61,5 @@ public sealed class AuthQueriesHandler :
     }
     #endregion
 
-    #region Get All Users Query
-    public async Task<ResponseModel<IEnumerable<GetUserDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
-    {
-        if (!await _context.Users.AnyAsync(cancellationToken: cancellationToken))
-            return ResponseResult.NotFound<IEnumerable<GetUserDto>>();
-        try
-        {
-            var users = await _context.Users.RetrieveAllAsync(cancellationToken: cancellationToken);
-            var dtos = _mapper.Map<IEnumerable<GetUserDto>>(users);
-            return ResponseResult.Success(dtos);
-        }
-        catch (Exception ex)
-        {
-            return ResponseResult.InternalServerError<IEnumerable<GetUserDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
-        }
-    }
-    #endregion
+
 }

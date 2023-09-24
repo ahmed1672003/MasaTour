@@ -1,6 +1,7 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Commands.Handlers;
-public sealed class UserComandsHandler
-    : IRequestHandler<UpdateUserCommand, ResponseModel<GetUserDto>>
+public sealed class UserComandsHandler :
+    IRequestHandler<UpdateUserCommand, ResponseModel<GetUserDto>>,
+    IRequestHandler<DeleteAllUsersCommand, ResponseModel<GetUserDto>>
 {
     private readonly IUnitOfServices _services;
     private readonly IUnitOfWork _context;
@@ -68,6 +69,24 @@ public sealed class UserComandsHandler
         catch (Exception ex)
         {
             return ResponseResult.InternalServerError<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region Delete All Users 
+    public async Task<ResponseModel<GetUserDto>> Handle(DeleteAllUsersCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (!await _context.Users.AnyAsync(cancellationToken: cancellationToken))
+                return ResponseResult.NotFound<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            await _context.Users.ExecuteDeleteAsync(cancellationToken: cancellationToken);
+            return ResponseResult.Success<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch
+        {
+            return ResponseResult.InternalServerError<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
         }
     }
     #endregion

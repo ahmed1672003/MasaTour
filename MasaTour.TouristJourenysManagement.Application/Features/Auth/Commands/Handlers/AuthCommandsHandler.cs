@@ -8,8 +8,7 @@ public sealed class AuthCommandsHandler :
     IRequestHandler<AddUserCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RefreshTokenCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RevokeTokenCommand, ResponseModel<AuthModel>>,
-    IRequestHandler<ChangePasswordCommand, ResponseModel<AuthModel>>,
-    IRequestHandler<DeleteAllUsersCommand, ResponseModel<GetUserDto>>
+    IRequestHandler<ChangePasswordCommand, ResponseModel<AuthModel>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
@@ -179,21 +178,5 @@ public sealed class AuthCommandsHandler :
     }
     #endregion
 
-    #region Delete All Users 
-    public async Task<ResponseModel<GetUserDto>> Handle(DeleteAllUsersCommand request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            if (!await _context.Users.AnyAsync(cancellationToken: cancellationToken))
-                return ResponseResult.NotFound<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            await _context.Users.ExecuteDeleteAsync(cancellationToken: cancellationToken);
-            return ResponseResult.Success<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
-        }
-        catch
-        {
-            return ResponseResult.InternalServerError<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
-        }
-    }
-    #endregion
 }

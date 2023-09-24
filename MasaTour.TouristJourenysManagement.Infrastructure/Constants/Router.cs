@@ -8,8 +8,6 @@ public static class Router
     {
         private const string AuthPrefix = ApiPrefix + "auth/";
         public const string AddUser = AuthPrefix + "register-user";
-        public const string GetAllUsers = AuthPrefix + "get-all-users";
-        public const string DeleteAllUsers = AuthPrefix + "delete-all-users";
         public const string LoginUser = AuthPrefix + "login-user";
         public const string RefreshToken = AuthPrefix + "refresh-token";
         public const string RevokeToken = AuthPrefix + "revoke-token";
@@ -21,5 +19,7 @@ public static class Router
         private const string UserPrefix = ApiPrefix + "user/";
         public const string UpdateUser = UserPrefix + "update-user";
         public const string GetUserById = UserPrefix + "get-user-by-id";
+        public const string GetAllUsers = UserPrefix + "get-all-users";
+        public const string DeleteAllUsers = UserPrefix + "delete-all-users";
     }
 }
