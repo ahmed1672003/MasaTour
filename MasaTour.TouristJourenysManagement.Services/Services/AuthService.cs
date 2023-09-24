@@ -270,7 +270,7 @@ public class AuthService : IAuthService
 
         // get user roles
         //GetRolesByNameSpecification getRolesByNameSpec = new(userRolesNames);
-        var getRolesByNameSpec = _specificationsFactory.CreateRoleSpecifications(typeof(GetRolesByNameSpecification), userRolesNames);
+        var getRolesByNameSpec = _specificationsFactory.CreateRoleSpecifications(typeof(AsNoTrackingGetRolesByNameSpecification), userRolesNames);
 
         var userRoles = (await _context.Roles.RetrieveAllAsync(getRolesByNameSpec)).ToList();
         // get role claims

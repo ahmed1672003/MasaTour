@@ -43,7 +43,7 @@ public sealed class AuthCommandsHandler :
     {
         try
         {
-            ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), request.dto.Email);
+            ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingEmailIsExistSpecification), request.dto.Email);
             if (await _context.Users.AnyAsync(userEmailSpec, cancellationToken))
                 return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.User.EmailIsExist]);
 
@@ -83,7 +83,7 @@ public sealed class AuthCommandsHandler :
         {
             (string jwt, string refreshToken) = string.IsNullOrEmpty(request.dto.JWT) || string.IsNullOrEmpty(request.dto.RefreshToken) ? await _services.CookiesService.GetAuthInformationsAsync() : (request.dto.JWT, request.dto.RefreshToken);
 
-            ISpecification<UserJWT> jwtIsExistSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(JwtIsExistSpecification), jwt, refreshToken);
+            ISpecification<UserJWT> jwtIsExistSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(AsNoTrackingJwtIsExistSpecification), jwt, refreshToken);
 
             if (!await _context.UserJWTs.AnyAsync(jwtIsExistSpec, cancellationToken))
                 return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
@@ -93,7 +93,7 @@ public sealed class AuthCommandsHandler :
             if (!await _services.AuthService.IsJWTValid.Invoke(jwt, jwtSecurityToken))
                 return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            var getUserJWTByJwtAndRefreshJwtIncludedSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(GetUserJWTByJwtAndRefreshJwtIncludedSpecification), jwt, refreshToken);
+            var getUserJWTByJwtAndRefreshJwtIncludedSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(AsTrackingGetUserJWTByJwtAndRefreshJwtIncludedSpecification), jwt, refreshToken);
 
             var userJwt = await _context.UserJWTs.RetrieveAsync(getUserJWTByJwtAndRefreshJwtIncludedSpec, cancellationToken);
 
@@ -123,12 +123,12 @@ public sealed class AuthCommandsHandler :
         {
             (string jwt, string refreshToken) = string.IsNullOrEmpty(request.dto.JWT) || string.IsNullOrEmpty(request.dto.RefreshToken) ? await _services.CookiesService.GetAuthInformationsAsync() : (request.dto.JWT, request.dto.RefreshToken);
 
-            ISpecification<UserJWT> jwtIsExistSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(JwtIsExistSpecification), jwt, refreshToken);
+            ISpecification<UserJWT> jwtIsExistSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(AsNoTrackingJwtIsExistSpecification), jwt, refreshToken);
 
             if (!await _context.UserJWTs.AnyAsync(jwtIsExistSpec, cancellationToken))
                 return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            ISpecification<UserJWT> getUserJWTByJwtAndRefreshJwtIncludedSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(GetUserJWTByJwtAndRefreshJwtIncludedSpecification), jwt, refreshToken);
+            ISpecification<UserJWT> getUserJWTByJwtAndRefreshJwtIncludedSpec = _specificationsFactory.CreateUserJWTSpecifications(typeof(AsTrackingGetUserJWTByJwtAndRefreshJwtIncludedSpecification), jwt, refreshToken);
 
             var userJwt = await _context.UserJWTs.RetrieveAsync(getUserJWTByJwtAndRefreshJwtIncludedSpec, cancellationToken);
 
@@ -154,7 +154,7 @@ public sealed class AuthCommandsHandler :
     {
         try
         {
-            ISpecification<User> getUserByUserNameOrEmailSpecification = _specificationsFactory.CreateUserSpecifications(typeof(GetUserByUserNameOrEmailSpecification), request.dto.EmailOrUserName);
+            ISpecification<User> getUserByUserNameOrEmailSpecification = _specificationsFactory.CreateUserSpecifications(typeof(AsTrackingGetUserByUserNameOrEmailSpecification), request.dto.EmailOrUserName);
             if (!await _context.Users.AnyAsync(getUserByUserNameOrEmailSpecification))
                 return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 

@@ -8,16 +8,17 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
     {
         return type.Name switch
         {
-            "EmailIsExistSpecification" => new EmailIsExistSpecification(parameters[0]),
-            "UserNameIsExistSpecification" => new UserNameIsExistSpecification(parameters[0]),
-            "GetUserByUserNameOrEmailIncludedJwtSpecification" => new GetUserByUserNameOrEmailIncludedJwtSpecification(parameters[0]),
-            "PhoneNumberIsExistSpecification" => new PhoneNumberIsExistSpecification(parameters[0]),
-            "GetUserByUserNameOrEmailSpecification" => new GetUserByUserNameOrEmailSpecification(parameters[0]),
-            "UserIdIsExistSpecification" => new UserIdIsExistSpecification(parameters[0]),
-            "CheckIfUserNameDuplicatedSpecification" => new CheckIfUserNameDuplicatedSpecification(parameters[0], parameters[1]),
-            "GetUserByIdSpecification" => new GetUserByIdSpecification(parameters[0]),
-            "CheckIfPhoneNumberDuplicatedSpecification" => new CheckIfPhoneNumberDuplicatedSpecification(parameters[0], parameters[1]),
-            "CheckIfEmailDuplicatedSpecification" => new CheckIfEmailDuplicatedSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingEmailIsExistSpecification" => new AsNoTrackingEmailIsExistSpecification(parameters[0]),
+            "AsNoTrackingUserNameIsExistSpecification" => new AsNoTrackingUserNameIsExistSpecification(parameters[0]),
+            "AsNoTrackingPhoneNumberIsExistSpecification" => new AsNoTrackingPhoneNumberIsExistSpecification(parameters[0]),
+            "AsNoTrackingUserIdIsExistSpecification" => new AsNoTrackingUserIdIsExistSpecification(parameters[0]),
+            "AsNoTrackingCheckIfUserNameDuplicatedSpecification" => new AsNoTrackingCheckIfUserNameDuplicatedSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckIfPhoneNumberDuplicatedSpecification" => new AsNoTrackingCheckIfPhoneNumberDuplicatedSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckIfEmailDuplicatedSpecification" => new AsNoTrackingCheckIfEmailDuplicatedSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingGetUserByIdAsNoTrackingSpecification" => new AsNoTrackingGetUserByIdAsNoTrackingSpecification(parameters[0]),
+            "AsTrackingGetUserByUserNameOrEmailSpecification" => new AsTrackingGetUserByUserNameOrEmailSpecification(parameters[0]),
+            "AsTrackingGetUserByUserNameOrEmailIncludedJwtSpecification" => new AsTrackingGetUserByUserNameOrEmailIncludedJwtSpecification(parameters[0]),
+            "AsTrackingGetUserByIdSpecification" => new AsTrackingGetUserByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }
@@ -26,7 +27,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
     {
         return type.Name switch
         {
-            "GetRolesByNameSpecification" => new GetRolesByNameSpecification(parameters[0]),
+            "AsNoTrackingGetRolesByNameSpecification" => new AsNoTrackingGetRolesByNameSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }
@@ -35,8 +36,8 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
     {
         return type.Name switch
         {
-            "JwtIsExistSpecification" => new JwtIsExistSpecification(parameters[0], parameters[1]),
-            "GetUserJWTByJwtAndRefreshJwtIncludedSpecification" => new GetUserJWTByJwtAndRefreshJwtIncludedSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingJwtIsExistSpecification" => new AsNoTrackingJwtIsExistSpecification(parameters[0], parameters[1]),
+            "AsTrackingGetUserJWTByJwtAndRefreshJwtIncludedSpecification" => new AsTrackingGetUserJWTByJwtAndRefreshJwtIncludedSpecification(parameters[0], parameters[1]),
             _ => throw new InvalidOperationException()
         };
     }

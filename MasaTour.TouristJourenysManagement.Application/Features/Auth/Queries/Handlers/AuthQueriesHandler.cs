@@ -32,12 +32,12 @@ public sealed class AuthQueriesHandler :
         {
             var isEmailValid = new EmailAddressAttribute().IsValid(request.dto.EmailOrUserName);
             // check user name or email found
-            ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), request.dto.EmailOrUserName);
-            ISpecification<User> userNameSpec = _specificationsFactory.CreateUserSpecifications(typeof(UserNameIsExistSpecification), request.dto.EmailOrUserName);
+            ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingEmailIsExistSpecification), request.dto.EmailOrUserName);
+            ISpecification<User> userNameSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingUserNameIsExistSpecification), request.dto.EmailOrUserName);
             if (!await _context.Users.AnyAsync(isEmailValid ? userEmailSpec : userNameSpec, cancellationToken))
                 return ResponseResult.NotFound<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            var user = await _context.Users.RetrieveAsync(_specificationsFactory.CreateUserSpecifications(typeof(GetUserByUserNameOrEmailIncludedJwtSpecification), request.dto.EmailOrUserName), cancellationToken);
+            var user = await _context.Users.RetrieveAsync(_specificationsFactory.CreateUserSpecifications(typeof(AsTrackingGetUserByUserNameOrEmailIncludedJwtSpecification), request.dto.EmailOrUserName), cancellationToken);
 
             // ToDo: check if email confirm
 

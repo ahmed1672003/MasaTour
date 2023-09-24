@@ -20,5 +20,6 @@ public static class Router
     {
         private const string UserPrefix = ApiPrefix + "user/";
         public const string UpdateUser = UserPrefix + "update-user";
+        public const string GetUserById = UserPrefix + "get-user-by-id";
     }
 }

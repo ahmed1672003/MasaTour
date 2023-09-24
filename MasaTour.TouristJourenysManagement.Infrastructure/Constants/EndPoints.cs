@@ -66,5 +66,11 @@ public static class EndPoints
             public const string Description = "OnSuccess (New Data Will Be Rerieved)" +
                                    "</br></br> nationality  Egyptian[0] Other[1] </hr>";
         }
+        public static class GetUserById
+        {
+            public const string OperationId = "F6971800-455A-4877-B17E-E277EC5AEFC7";
+            public const string Summary = "Get User By Id | Allowed For Basic, Admin, SuperAdmin";
+            public const string Description = "<b>userId length must be equal 36</b>";
+        }
     }
 }

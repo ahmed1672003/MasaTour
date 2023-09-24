@@ -21,15 +21,15 @@ public static class UsersSedeer
             PhoneNumberConfirmed = true,
         };
         // check if email of phone number are not
-        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(UserIdIsExistSpecification), superAdmin.Id);
+        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingUserIdIsExistSpecification), superAdmin.Id);
         if (await context.Users.AnyAsync(userIdIsExistSpec))
             return;
 
-        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), superAdmin.Email);
+        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingEmailIsExistSpecification), superAdmin.Email);
         if (await context.Users.AnyAsync(emailIsExistSpec))
             return;
 
-        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), superAdmin.PhoneNumber);
+        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingPhoneNumberIsExistSpecification), superAdmin.PhoneNumber);
         if ((await context.Users.AnyAsync(userIdIsExistSpec) || await context.Users.AnyAsync(emailIsExistSpec) || await context.Users.AnyAsync(phoneNumberIsExisttSpec)))
             return;
 
@@ -62,15 +62,15 @@ public static class UsersSedeer
             PhoneNumberConfirmed = true,
         };
         // check if email of phone number are not
-        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(UserIdIsExistSpecification), admin.Id);
+        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingUserIdIsExistSpecification), admin.Id);
         if (await context.Users.AnyAsync(userIdIsExistSpec))
             return;
 
-        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), admin.Email);
+        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingEmailIsExistSpecification), admin.Email);
         if (await context.Users.AnyAsync(emailIsExistSpec))
             return;
 
-        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), admin.PhoneNumber);
+        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingPhoneNumberIsExistSpecification), admin.PhoneNumber);
         if (await context.Users.AnyAsync(phoneNumberIsExisttSpec))
             return;
 
@@ -103,15 +103,15 @@ public static class UsersSedeer
         };
 
         // check if email of phone number are not
-        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(UserIdIsExistSpecification), basic.Id);
+        ISpecification<User> userIdIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingUserIdIsExistSpecification), basic.Id);
         if (await context.Users.AnyAsync(userIdIsExistSpec))
             return;
 
-        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(EmailIsExistSpecification), basic.Email);
+        ISpecification<User> emailIsExistSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingEmailIsExistSpecification), basic.Email);
         if (await context.Users.AnyAsync(emailIsExistSpec))
             return;
 
-        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(PhoneNumberIsExistSpecification), basic.PhoneNumber);
+        ISpecification<User> phoneNumberIsExisttSpec = specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingPhoneNumberIsExistSpecification), basic.PhoneNumber);
         if (await context.Users.AnyAsync(phoneNumberIsExisttSpec))
             return;
 
