@@ -28,7 +28,7 @@ public sealed class UserQueriesHandler :
         try
         {
             // check if user found
-            ISpecification<User> userByIdSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingGetUserByIdAsNoTrackingSpecification), request.Id);
+            ISpecification<User> userByIdSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingGetUserByIdSpecification), request.Id);
             if (!await _context.Users.AnyAsync(userByIdSpec))
                 return ResponseResult.NotFound<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
@@ -55,7 +55,7 @@ public sealed class UserQueriesHandler :
         }
         catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<IEnumerable<GetUserDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
+            return ResponseResult.InternalServerError<IEnumerable<GetUserDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
     }
     #endregion

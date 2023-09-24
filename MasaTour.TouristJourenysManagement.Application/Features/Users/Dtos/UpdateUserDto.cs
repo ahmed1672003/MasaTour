@@ -37,7 +37,7 @@ public class UpdateUserDto
     public string Email { get; set; }
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]
-    public Nationality Nationality { get; set; }
+    public string Nationality { get; set; }
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]
     public Gender Gender { get; set; }

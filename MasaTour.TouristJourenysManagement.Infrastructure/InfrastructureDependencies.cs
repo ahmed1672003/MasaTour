@@ -1,4 +1,5 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Seeds;
+﻿using MasaTour.TouristJourenysManagement.Infrastructure.Context.Interceptors;
+using MasaTour.TouristJourenysManagement.Infrastructure.Seeds;
 using MasaTour.TouristJourenysManagement.Infrastructure.Settings;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure;
@@ -10,6 +11,7 @@ public static class InfrastructureDependencies
         services.AddDbContext<ITouristJourenysManagementDbContext, TouristJourenysManagementDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("MasaTour_TouristJourenysManagement"));
+            options.AddInterceptors(new SoftDeleteInterceptor());
         }, ServiceLifetime.Scoped);
         #endregion
 

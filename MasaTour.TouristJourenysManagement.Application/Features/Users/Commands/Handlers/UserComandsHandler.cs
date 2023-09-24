@@ -1,6 +1,8 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Commands.Handlers;
 public sealed class UserComandsHandler :
     IRequestHandler<UpdateUserCommand, ResponseModel<GetUserDto>>,
+    IRequestHandler<MakeUserHiddenByIdCommand, ResponseModel<GetUserDto>>,
+    IRequestHandler<MakeUserVisibleByIdCommand, ResponseModel<GetUserDto>>,
     IRequestHandler<DeleteAllUsersCommand, ResponseModel<GetUserDto>>
 {
     private readonly IUnitOfServices _services;
@@ -73,6 +75,54 @@ public sealed class UserComandsHandler :
     }
     #endregion
 
+    #region Make Use Visiable By Id
+    public async Task<ResponseModel<GetUserDto>> Handle(MakeUserVisibleByIdCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<User> changeVisibilitySpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingChangeVisibilitySpecification), request.UserId, false);
+            if (!await _context.Users.AnyAsync(changeVisibilitySpec, cancellationToken))
+                return ResponseResult.NotFound<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            User user = await _context.Users.RetrieveAsync(changeVisibilitySpec, cancellationToken);
+
+            _context.Users.UndoDeleted(ref user);
+
+            await _context.SaveChangesAsync();
+            GetUserDto dto = _mapper.Map<GetUserDto>(user);
+            return ResponseResult.Success(dto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region Make User Hidden User By Id 
+    public async Task<ResponseModel<GetUserDto>> Handle(MakeUserHiddenByIdCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<User> changeVisibilitySpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingChangeVisibilitySpecification), request.Id, true);
+            if (!await _context.Users.AnyAsync(changeVisibilitySpec, cancellationToken))
+                return ResponseResult.NotFound<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            User user = await _context.Users.RetrieveAsync(changeVisibilitySpec, cancellationToken);
+
+            await _context.Users.DeleteAsync(user);
+            await _context.SaveChangesAsync();
+            GetUserDto dto = _mapper.Map<GetUserDto>(user);
+
+            return ResponseResult.Success(dto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
     #region Delete All Users 
     public async Task<ResponseModel<GetUserDto>> Handle(DeleteAllUsersCommand request, CancellationToken cancellationToken)
     {
@@ -84,10 +134,12 @@ public sealed class UserComandsHandler :
             await _context.Users.ExecuteDeleteAsync(cancellationToken: cancellationToken);
             return ResponseResult.Success<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
-        catch
+        catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError]);
+            return ResponseResult.InternalServerError<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
     }
+
+
     #endregion
 }

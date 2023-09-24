@@ -1,4 +1,6 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
+﻿using MasaTour.TouristJourenysManagement.Domain.Abstracts;
+
+namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
 public interface IRepository<TEntity> where TEntity : class
 {
     #region Commands
@@ -6,8 +8,8 @@ public interface IRepository<TEntity> where TEntity : class
     Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
     Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
-    Task<int> ExecuteUpdateAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
-    Task<int> ExecuteDeleteAsync(ISpecification<TEntity> specification = default, CancellationToken cancellationToken = default);
+    Task<int> ExecuteDeleteAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default);
+    void UndoDeleted<T>(ref T entity) where T : ISoftDeleteable;
     #endregion
 
     #region Queries

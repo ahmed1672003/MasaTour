@@ -17,15 +17,16 @@ public class Specification<TEntity> : ISpecification<TEntity> where TEntity : cl
     public bool IsTrackingWithIdentityResolutionOf { get; private set; }
     public bool IsQueryFilterIgnored { get; private set; }
     public (int pageNumber, int pageSize) PaginationRequirments { get; private set; }
-    public (Func<TEntity, object> PropertyExpression, Expression<Func<TEntity, object>> ValueExpression) ExecuteUpdateRequirments { get; private set; }
+    public object ExecuteUpdateValue { get; private set; }
+
     protected virtual void AddIncludes(Expression<Func<TEntity, object>> include) => Includes.Add(include);
     protected virtual void AddIncludesString(string includesString) => IncludesString.Add(includesString);
     protected virtual void AddOrderBy(Expression<Func<TEntity, object>> orderBy) => OrderBy = orderBy;
     protected virtual void AddOrderByDescending(Expression<Func<TEntity, object>> orderByDescending) => OrderByDescending = orderByDescending;
-    protected virtual void AddExecuteUpdate((Func<TEntity, object> property, Expression<Func<TEntity, object>> propertyExpression) executeUpdateRequirments) => ExecuteUpdateRequirments = executeUpdateRequirments;
+    protected virtual void AddExecuteUpdateValue(object executeUpdateValue) => ExecuteUpdateValue = executeUpdateValue;
     protected virtual void ApplyGroupBy(Expression<Func<TEntity, object>> groupBy) => GroupBy = groupBy;
     protected virtual void StopTracking() => IsTrackingOf = true;
-    protected virtual void TrackingWithIdentityResolution() => IsTrackingWithIdentityResolutionOf = true;
+    protected virtual void StopTrackingWithIdentityResolution() => IsTrackingWithIdentityResolutionOf = true;
     protected virtual void IgnorQueryFilter() => IsQueryFilterIgnored = true;
     protected virtual void ApplyPaging((int pageNumber, int pageSize) paginationRequirments)
     {

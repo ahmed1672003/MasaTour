@@ -67,6 +67,10 @@ public static class EndPoints
                     "</br></br> nationality  Egyptian[0] Other[1] " +
                 "</b>";
         }
+
+
+
+
         public static class GetUserById
         {
             public const string OperationId = "F6971800-455A-4877-B17E-E277EC5AEFC7";
@@ -82,6 +86,26 @@ public static class EndPoints
                     "This Endpoint Created To Help BackEnd Developer At Development Phase Only" +
                 "</b>";
         }
+
+        public static class MakeUserHidden
+        {
+            public const string OperationId = "0B70CA81-86D9-4C34-9131-04523FCFD35C";
+            public const string Summary = "Make User Hidden By Id From Server | Allowed For Admin, SuperAdmin Only";
+            public const string Description =
+                "<b>" +
+                    "This Endpoint Mark At User (IsDeleted = true) And User Will Not Be Retrieved Any Time" +
+                "</b>";
+        }
+        public static class MakeUserVisible
+        {
+            public const string OperationId = "1FEA8E1D-B136-4AAE-B6F9-7767DE555F2D";
+            public const string Summary = "Make User Visible By Id From Server | Allowed For Admin, SuperAdmin Only";
+            public const string Description =
+                "<b>" +
+                    "This Endpoint Mark At User (IsDeleted = false) And User Will Be Retrieved Again" +
+                "</b>";
+        }
+
 
         public static class DeleteAllUsers
         {

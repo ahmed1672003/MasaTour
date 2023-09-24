@@ -6,7 +6,7 @@ public interface ISpecification<TEntity> where TEntity : class
     Expression<Func<TEntity, object>> OrderBy { get; }
     Expression<Func<TEntity, object>> OrderByDescending { get; }
     Expression<Func<TEntity, object>> GroupBy { get; }
-    (Func<TEntity, object> PropertyExpression, Expression<Func<TEntity, object>> ValueExpression) ExecuteUpdateRequirments { get; }
+    object ExecuteUpdateValue { get; }
     List<string> IncludesString { get; }
     (int pageNumber, int pageSize) PaginationRequirments { get; }
 

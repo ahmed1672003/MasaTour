@@ -70,7 +70,7 @@ public sealed class AuthCommandsHandler :
         }
         catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
     }
     #endregion
@@ -110,7 +110,7 @@ public sealed class AuthCommandsHandler :
         }
         catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
     }
     #endregion
@@ -143,7 +143,7 @@ public sealed class AuthCommandsHandler :
         }
         catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
     }
     #endregion
@@ -173,10 +173,8 @@ public sealed class AuthCommandsHandler :
         }
         catch (Exception ex)
         {
-            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.InnerException?.Message });
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
     }
     #endregion
-
-
 }

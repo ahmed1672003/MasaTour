@@ -1,9 +1,11 @@
-﻿namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
+﻿using MasaTour.TouristJourenysManagement.Domain.Abstracts;
+
+namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 
 [PrimaryKey(nameof(Id))]
 [Index(nameof(UserName), IsUnique = true)]
 [Index(nameof(Email), IsUnique = true)]
-public class User : IdentityUser<string>
+public class User : IdentityUser<string>, ISoftDeleteable
 {
     [MaxLength(36)]
     public override string Id { get; set; }
@@ -29,7 +31,7 @@ public class User : IdentityUser<string>
     public string LastName { get; set; }
 
     [Required]
-    public Nationality Nationality { get; set; }
+    public string Nationality { get; set; }
 
     public Gender Gender { get; set; }
 

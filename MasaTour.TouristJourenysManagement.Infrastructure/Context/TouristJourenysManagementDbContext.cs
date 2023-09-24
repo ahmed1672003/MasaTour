@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Context;
 public class TouristJourenysManagementDbContext
