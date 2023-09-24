@@ -20,8 +20,8 @@ public static class Router
         public const string UpdateUser = UserPrefix + "update-user";
         public const string GetUserById = UserPrefix + "get-user-by-id";
         public const string GetAllUsers = UserPrefix + "get-all-users";
-        public const string MakeUserHidden = UserPrefix + "make-user-hidden-by-id";
-        public const string MakeUserVisible = UserPrefix + "make-user-visible-by-id";
+        public const string DeleteUserById = UserPrefix + "delete-user-by-id";
+        public const string UndoDeleteUserById = UserPrefix + "undo-delete-user-by-id";
         public const string DeleteAllUsers = UserPrefix + "delete-all-users";
     }
 }

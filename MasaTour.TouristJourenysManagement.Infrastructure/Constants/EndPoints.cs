@@ -87,7 +87,7 @@ public static class EndPoints
                 "</b>";
         }
 
-        public static class MakeUserHidden
+        public static class DeleteUserById
         {
             public const string OperationId = "0B70CA81-86D9-4C34-9131-04523FCFD35C";
             public const string Summary = "Make User Hidden By Id From Server | Allowed For Admin, SuperAdmin Only";
@@ -96,7 +96,7 @@ public static class EndPoints
                     "This Endpoint Mark At User (IsDeleted = true) And User Will Not Be Retrieved Any Time" +
                 "</b>";
         }
-        public static class MakeUserVisible
+        public static class UndoDeleteUserById
         {
             public const string OperationId = "1FEA8E1D-B136-4AAE-B6F9-7767DE555F2D";
             public const string Summary = "Make User Visible By Id From Server | Allowed For Admin, SuperAdmin Only";

@@ -34,7 +34,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
     public void UndoDeleted<T>(ref T entity) where T : ISoftDeleteable
     {
-        entity.UndoDeleteAsync();
+        entity.IsDeleted = false;
+        entity.DeletedAt = null;
     }
 
 

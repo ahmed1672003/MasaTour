@@ -13,18 +13,18 @@ public class UserController : MasaTourController
     #endregion
 
     #region Patch
-    [HttpPatch(Router.User.MakeUserHidden)]
+    [HttpPatch(Router.User.DeleteUserById)]
     [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.SuperAdmin)}")]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<dynamic>))]
-    [SwaggerOperation(OperationId = EndPoints.User.MakeUserHidden.OperationId, Summary = EndPoints.User.MakeUserHidden.Summary, Description = EndPoints.User.MakeUserHidden.Description)]
-    public async Task<IActionResult> MakeUserHidden([Required] string userId) => MasaTourResponse(await Mediator.Send(new MakeUserHiddenByIdCommand(userId)));
+    [SwaggerOperation(OperationId = EndPoints.User.DeleteUserById.OperationId, Summary = EndPoints.User.DeleteUserById.Summary, Description = EndPoints.User.DeleteUserById.Description)]
+    public async Task<IActionResult> DeleteUserById([Required] string userId) => MasaTourResponse(await Mediator.Send(new UndoDeleteUserByIdCommand(userId)));
 
 
-    [HttpPatch(Router.User.MakeUserVisible)]
+    [HttpPatch(Router.User.UndoDeleteUserById)]
     [Authorize(Roles = $"{nameof(Roles.SuperAdmin)},{nameof(Roles.Admin)}")]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<dynamic>))]
-    [SwaggerOperation(OperationId = EndPoints.User.MakeUserVisible.OperationId, Summary = EndPoints.User.MakeUserVisible.Summary, Description = EndPoints.User.MakeUserVisible.Description)]
-    public async Task<IActionResult> MakeUserVisible([Required] string userId) => MasaTourResponse(await Mediator.Send(new MakeUserVisibleByIdCommand(userId)));
+    [SwaggerOperation(OperationId = EndPoints.User.UndoDeleteUserById.OperationId, Summary = EndPoints.User.UndoDeleteUserById.Summary, Description = EndPoints.User.UndoDeleteUserById.Description)]
+    public async Task<IActionResult> UndoDeleteUserById([Required] string userId) => MasaTourResponse(await Mediator.Send(new DeleteUserByIdCommand(userId)));
     #endregion
 
     #region Get

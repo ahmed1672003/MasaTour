@@ -1,8 +1,8 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Commands.Handlers;
 public sealed class UserComandsHandler :
     IRequestHandler<UpdateUserCommand, ResponseModel<GetUserDto>>,
-    IRequestHandler<MakeUserHiddenByIdCommand, ResponseModel<GetUserDto>>,
-    IRequestHandler<MakeUserVisibleByIdCommand, ResponseModel<GetUserDto>>,
+    IRequestHandler<UndoDeleteUserByIdCommand, ResponseModel<GetUserDto>>,
+    IRequestHandler<DeleteUserByIdCommand, ResponseModel<GetUserDto>>,
     IRequestHandler<DeleteAllUsersCommand, ResponseModel<GetUserDto>>
 {
     private readonly IUnitOfServices _services;
@@ -75,8 +75,8 @@ public sealed class UserComandsHandler :
     }
     #endregion
 
-    #region Make Use Visiable By Id
-    public async Task<ResponseModel<GetUserDto>> Handle(MakeUserVisibleByIdCommand request, CancellationToken cancellationToken)
+    #region Undo Delete User
+    public async Task<ResponseModel<GetUserDto>> Handle(DeleteUserByIdCommand request, CancellationToken cancellationToken)
     {
         try
         {
@@ -99,8 +99,8 @@ public sealed class UserComandsHandler :
     }
     #endregion
 
-    #region Make User Hidden User By Id 
-    public async Task<ResponseModel<GetUserDto>> Handle(MakeUserHiddenByIdCommand request, CancellationToken cancellationToken)
+    #region Delete User
+    public async Task<ResponseModel<GetUserDto>> Handle(UndoDeleteUserByIdCommand request, CancellationToken cancellationToken)
     {
         try
         {
