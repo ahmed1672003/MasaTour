@@ -26,7 +26,9 @@ public static class ResourcesKeys
         public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
         public const string FiledCanNotBeNull = "FiledCanNotBeNull";
         public const string EmailNotValid = "EmailNotValid";
-        public const string UserNameIsExist = "UserNameIsExist";
+        public const string UserNameIsDuplicated = "UserNameIsDuplicated";
+        public const string EmailIsDuplicated = "EmailIsDuplicated";
+        public const string PhoneNumberIsDuplicated = "PhoneNumberIsDuplicated";
         public const string EmailIsExist = "EmailIsExist";
     }
 }

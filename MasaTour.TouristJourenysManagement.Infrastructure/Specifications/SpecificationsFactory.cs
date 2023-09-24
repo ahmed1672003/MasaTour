@@ -16,6 +16,8 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "UserIdIsExistSpecification" => new UserIdIsExistSpecification(parameters[0]),
             "CheckIfUserNameDuplicatedSpecification" => new CheckIfUserNameDuplicatedSpecification(parameters[0], parameters[1]),
             "GetUserByIdSpecification" => new GetUserByIdSpecification(parameters[0]),
+            "CheckIfPhoneNumberDuplicatedSpecification" => new CheckIfPhoneNumberDuplicatedSpecification(parameters[0], parameters[1]),
+            "CheckIfEmailDuplicatedSpecification" => new CheckIfEmailDuplicatedSpecification(parameters[0], parameters[1]),
             _ => throw new InvalidOperationException()
         };
     }

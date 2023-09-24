@@ -62,7 +62,7 @@ public static class EndPoints
         public static class UpdateUser
         {
             public const string OperationId = "98962269-94EE-42D7-AC6F-48483D1FA289";
-            public const string Summary = "Update User | (UserName) Is Unique | User Name Can Not Be Duplicated With Another User |Allowed For Basic, Admin, SuperAdmin";
+            public const string Summary = "Update User | (UserName) Is Unique | User Name Can Not Be Duplicated With Another User | Allowed For Basic, Admin, SuperAdmin";
             public const string Description = "OnSuccess (New Data Will Be Rerieved)" +
                                    "</br></br> nationality  Egyptian[0] Other[1] </hr>";
         }
