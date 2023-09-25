@@ -17,5 +17,6 @@ public interface IRepository<TEntity> where TEntity : class
     Task<TEntity> RetrieveAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
     Task<int> CountAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default);
     Task<bool> AnyAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default);
+    Task<bool> AllAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default);
     #endregion
 }

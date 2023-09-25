@@ -1,7 +1,7 @@
 ﻿using System.Net;
 
 namespace MasaTour.TouristJourenysManagement.Application.Response;
-public class PaginationResponseModel<TData> : ResponseModel<TData>
+public sealed class PaginationResponseModel<TData> : ResponseModel<TData>
 {
     public PaginationResponseModel(
        HttpStatusCode statusCode = default,

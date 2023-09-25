@@ -48,26 +48,23 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
             return await _entities.Where(specification.Criteria).ExecuteDeleteAsync(cancellationToken);
     }
     #endregion
+
     #region Queries
     public virtual async Task<bool> AnyAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default)
     {
         return await SpecificationEvaluator.GetQuery(_entities, specification).AnyAsync(cancellationToken);
+    }
 
-        //if (specification?.Criteria is null)
-        //    return await _entities.AnyAsync(cancellationToken);
-        //else
-        //    return await _entities.AnyAsync(specification.Criteria, cancellationToken);
+    public virtual async Task<bool> AllAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default)
+    {
+        return await SpecificationEvaluator.GetQuery(_entities, specification).AllAsync(specification.Criteria);
     }
 
     public virtual async Task<int> CountAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default)
     {
         return await SpecificationEvaluator.GetQuery(_entities, specification).CountAsync(cancellationToken);
-
-        //if (specification?.Criteria is null)
-        //    return await _entities.CountAsync(cancellationToken);
-        //else
-        //    return await _entities.CountAsync(specification.Criteria, cancellationToken);
     }
+
     public virtual Task<IQueryable<TEntity>> RetrieveAllAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default)
     {
         return Task.FromResult(SpecificationEvaluator.GetQuery(_entities, specification));

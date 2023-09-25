@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Queries.Handlers;
+﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Queries.Handlers;
 public sealed class AuthQueriesHandler :
     IRequestHandler<LoginUserQuery, ResponseModel<AuthModel>>
 {
@@ -9,8 +7,8 @@ public sealed class AuthQueriesHandler :
     private readonly IStringLocalizer<SharedResources> _stringLocalizer;
     private readonly IUnitOfWork _context;
     private readonly IUnitOfServices _services;
+    private readonly ISpecificationsFactory _specificationsFactory;
     private readonly IMapper _mapper;
-    private ISpecificationsFactory _specificationsFactory;
     #endregion
 
     #region Ctor

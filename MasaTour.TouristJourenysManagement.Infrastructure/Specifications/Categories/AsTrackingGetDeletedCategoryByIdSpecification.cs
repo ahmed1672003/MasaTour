@@ -1,0 +1,8 @@
+﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Categories;
+public sealed class AsTrackingGetDeletedCategoryByIdSpecification : Specification<Category>
+{
+    public AsTrackingGetDeletedCategoryByIdSpecification(string categoryId) : base(category => category.Id.Equals(categoryId))
+    {
+        IgnorQueryFilter();
+    }
+}

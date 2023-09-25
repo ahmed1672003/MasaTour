@@ -1,6 +1,4 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Entities;
-
-using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Context;
 public interface ITouristJourenysManagementDbContext

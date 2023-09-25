@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Categories\Mappers\" />
-    <Folder Include="Features\Categories\Queries\" />
     <Folder Include="Features\Categories\Validators\" />
     <Folder Include="Features\Users\Validators\" />
   </ItemGroup>

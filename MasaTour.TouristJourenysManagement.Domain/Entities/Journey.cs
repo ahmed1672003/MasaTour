@@ -5,6 +5,8 @@ namespace MasaTour.TouristJourenysManagement.Domain.Entities;
 [PrimaryKey(nameof(Id))]
 [Index(nameof(Code), IsUnique = true)]
 [Index(nameof(NameAR), IsUnique = true)]
+[Index(nameof(NameEN), IsUnique = true)]
+[Index(nameof(NameDE), IsUnique = true)]
 public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker
 {
     [Required]
@@ -78,13 +80,17 @@ public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker
     public DateTime EndDate { get; set; }
 
     [Required]
-    public decimal PriceLE { get; set; }  // egyptian
+    public decimal PriceLE { get; set; }
 
     [Required]
-    public decimal PriceUSD { get; set; } // dolar
+    public decimal PriceUSD { get; set; }
 
     [Required]
-    public decimal PriceGbp { get; set; } // Gpg
+    public decimal PriceGBP { get; set; }
+
+    [Required]
+    public decimal PriceEUR { get; set; }
+
 
     [Required]
     public bool IsDeleted { get; set; }

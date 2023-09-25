@@ -84,6 +84,12 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                     b.HasIndex("NameAR")
                         .IsUnique();
 
+                    b.HasIndex("NameDE")
+                        .IsUnique();
+
+                    b.HasIndex("NameEN")
+                        .IsUnique();
+
                     b.ToTable("Catgeories", (string)null);
                 });
 
@@ -484,7 +490,10 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<decimal>("PriceGbp")
+                    b.Property<decimal>("PriceEUR")
+                        .HasColumnType("decimal(18, 5)");
+
+                    b.Property<decimal>("PriceGBP")
                         .HasColumnType("decimal(18, 5)");
 
                     b.Property<decimal>("PriceLE")
@@ -520,6 +529,12 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .IsUnique();
 
                     b.HasIndex("NameAR")
+                        .IsUnique();
+
+                    b.HasIndex("NameDE")
+                        .IsUnique();
+
+                    b.HasIndex("NameEN")
                         .IsUnique();
 
                     b.ToTable("Journeys", (string)null);

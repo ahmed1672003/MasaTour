@@ -6,6 +6,8 @@ global using MasaTour.TouristJourenysManagement.Application;
 global using MasaTour.TouristJourenysManagement.Application.Features.Auth.Commands;
 global using MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
 global using MasaTour.TouristJourenysManagement.Application.Features.Auth.Queries;
+global using MasaTour.TouristJourenysManagement.Application.Features.Categories.Commands;
+global using MasaTour.TouristJourenysManagement.Application.Features.Categories.Dtos;
 global using MasaTour.TouristJourenysManagement.Application.Features.Users.Commands;
 global using MasaTour.TouristJourenysManagement.Application.Features.Users.Dtos;
 global using MasaTour.TouristJourenysManagement.Application.Features.Users.Queries;

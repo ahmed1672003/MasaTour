@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentityAndCategoriesAndHourenys : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,7 +55,8 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PriceLE = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
                     PriceUSD = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
-                    PriceGbp = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceGBP = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceEUR = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -301,6 +302,18 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Catgeories_NameDE",
+                table: "Catgeories",
+                column: "NameDE",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Catgeories_NameEN",
+                table: "Catgeories",
+                column: "NameEN",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Journeys_Code",
                 table: "Journeys",
                 column: "Code",
@@ -310,6 +323,18 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 name: "IX_Journeys_NameAR",
                 table: "Journeys",
                 column: "NameAR",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Journeys_NameDE",
+                table: "Journeys",
+                column: "NameDE",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Journeys_NameEN",
+                table: "Journeys",
+                column: "NameEN",
                 unique: true);
 
             migrationBuilder.CreateIndex(

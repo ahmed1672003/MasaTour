@@ -1,0 +1,2 @@
+﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Categories.Commands;
+public sealed record DeleteCategoryByIdCommand([Required] string categoryId) : IRequest<ResponseModel<GetCategoryDto>>;

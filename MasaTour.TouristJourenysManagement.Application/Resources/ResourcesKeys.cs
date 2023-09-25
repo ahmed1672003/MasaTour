@@ -7,6 +7,7 @@ public static class ResourcesKeys
         public const string NotFound = "NotFound";
         public const string InternalServerError = "InternalServerError";
         public const string Success = "Success";
+        public const string Created = "Created";
         public const string UnAuthorized = "UnAuthorized";
         public const string Conflict = "Conflict";
     }

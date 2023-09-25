@@ -9,10 +9,11 @@ public class GetUserDto
     public string LastName { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    public Nationality Nationality { get; set; }
+    public string Nationality { get; set; }
     public Gender Gender { get; set; }
     public string ImgSrc { get; set; }
-    public string CreatedAt { get; set; }
-    public string UpdatedAt { get; set; }
-    public string DeletedAt { get; set; }
+    public bool IsDeleted { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+    public DateTime DeletedAt { get; set; }
 }

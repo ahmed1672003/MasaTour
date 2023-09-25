@@ -25,4 +25,16 @@ public static class Router
         public const string UndoDeleteUserById = UserPrefix + "undo-delete-user-by-id";
         public const string DeleteAllUsers = UserPrefix + "delete-all-users";
     }
+
+    public static class Category
+    {
+        private const string CategoryPrefix = ApiPrefix + "category/";
+        public const string AddCategory = CategoryPrefix + "add-category";
+        public const string UpdateCategory = CategoryPrefix + "update-category";
+        public const string DeleteCategoryById = CategoryPrefix + "delete-category-by-id";
+        public const string UndoDeleteCategoryById = CategoryPrefix + "undo-delete-category-by-id";
+        public const string GetCategoryById = CategoryPrefix + "get-category-by-id";
+        public const string GetAllCategories = CategoryPrefix + "get-all-categories";
+        public const string PaginateCategories = CategoryPrefix + "paginate-categories";
+    }
 }

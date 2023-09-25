@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristJourenysManagementDbContext))]
-    [Migration("20230925143648_AddIdentityAndCategoriesAndHourenys")]
-    partial class AddIdentityAndCategoriesAndHourenys
+    [Migration("20230925160944_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,12 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NameAR")
+                        .IsUnique();
+
+                    b.HasIndex("NameDE")
+                        .IsUnique();
+
+                    b.HasIndex("NameEN")
                         .IsUnique();
 
                     b.ToTable("Catgeories", (string)null);
@@ -487,7 +493,10 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<decimal>("PriceGbp")
+                    b.Property<decimal>("PriceEUR")
+                        .HasColumnType("decimal(18, 5)");
+
+                    b.Property<decimal>("PriceGBP")
                         .HasColumnType("decimal(18, 5)");
 
                     b.Property<decimal>("PriceLE")
@@ -523,6 +532,12 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .IsUnique();
 
                     b.HasIndex("NameAR")
+                        .IsUnique();
+
+                    b.HasIndex("NameDE")
+                        .IsUnique();
+
+                    b.HasIndex("NameEN")
                         .IsUnique();
 
                     b.ToTable("Journeys", (string)null);

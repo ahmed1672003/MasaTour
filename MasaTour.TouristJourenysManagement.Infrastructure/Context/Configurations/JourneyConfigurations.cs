@@ -6,6 +6,7 @@ public sealed class JourneyConfigurations : IEntityTypeConfiguration<Journey>
         builder.ToTable(Tables.Journeys);
         builder.Property(j => j.PriceLE).HasColumnType("decimal(18, 5)");
         builder.Property(j => j.PriceUSD).HasColumnType("decimal(18, 5)");
-        builder.Property(j => j.PriceGbp).HasColumnType("decimal(18, 5)");
+        builder.Property(j => j.PriceGBP).HasColumnType("decimal(18, 5)");
+        builder.Property(j => j.PriceEUR).HasColumnType("decimal(18, 5)");
     }
 }

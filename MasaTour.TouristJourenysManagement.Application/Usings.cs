@@ -1,4 +1,5 @@
-﻿global using System.Reflection;
+﻿global using System.ComponentModel.DataAnnotations;
+global using System.Reflection;
 
 global using AutoMapper;
 
@@ -6,12 +7,15 @@ global using FluentValidation;
 
 global using MasaTour.TouristJourenysManagement.Application.Behaviors;
 global using MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
+global using MasaTour.TouristJourenysManagement.Application.Features.Categories.Dtos;
 global using MasaTour.TouristJourenysManagement.Application.Resources;
 global using MasaTour.TouristJourenysManagement.Application.Response;
+global using MasaTour.TouristJourenysManagement.Domain.Entities;
 global using MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Constants;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Enums;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
+global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Categories;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.JWTs;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Users;

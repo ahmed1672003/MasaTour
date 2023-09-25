@@ -13,7 +13,9 @@ global using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Iden
 global using MasaTour.TouristJourenysManagement.Infrastructure.Seeds;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Settings;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
+global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Categories;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
+global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.JWTs;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Roles;
 global using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Users;
 

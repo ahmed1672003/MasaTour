@@ -1,6 +1,4 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.JWTs;
-
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
+﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
 
 public sealed class SpecificationsFactory : ISpecificationsFactory
 {
@@ -47,10 +45,20 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
     {
         return type.Name switch
         {
+            "AsNoTrackingCheckDuplicatedCategoryByNameARSpecification" => new AsNoTrackingCheckDuplicatedCategoryByNameARSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedCategoryByNameDESpecification" => new AsNoTrackingCheckDuplicatedCategoryByNameDESpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedCategoryByNameENSpecification" => new AsNoTrackingCheckDuplicatedCategoryByNameENSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingGetCategoryByIdSpecification" => new AsNoTrackingGetCategoryByIdSpecification(parameters[0]),
+            "AsNoTrackingGetCategoryByNameARSpecification" => new AsNoTrackingGetCategoryByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetCategoryByNameDESpecification" => new AsNoTrackingGetCategoryByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetCategoryByNameENSpecification" => new AsNoTrackingGetCategoryByNameENSpecification(parameters[0]),
+            "AsNoTrackingGetDeletedCategoryByIdSpecification" => new AsNoTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
+            "AsNoTrackingPaginateCategoriesSpecification" => new AsNoTrackingPaginateCategoriesSpecification(parameters[0], parameters[1], parameters[2]),
+            "AsTrackingGetDeletedCategoryByIdSpecification" => new AsTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
+            "AsTrackingGetCategoryByIdSpecification" => new AsTrackingGetCategoryByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }
-
     public ISpecification<Journey> CreatJourneySpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch

@@ -2,8 +2,11 @@
 
 namespace MasaTour.TouristJourenysManagement.Domain.Entities;
 
+
 [PrimaryKey(nameof(Id))]
 [Index(nameof(NameAR), IsUnique = true)]
+[Index(nameof(NameEN), IsUnique = true)]
+[Index(nameof(NameDE), IsUnique = true)]
 public class Category : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreateableTracker
 {
     [Required]

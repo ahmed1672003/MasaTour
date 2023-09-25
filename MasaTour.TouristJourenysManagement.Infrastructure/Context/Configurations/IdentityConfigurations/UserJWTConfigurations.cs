@@ -1,4 +1,4 @@
-﻿namespace ECommerce.Infrastructure.Context.Configurations.IdentityConfigurations;
+﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Context.Configurations.IdentityConfigurations;
 public sealed class UserJWTConfigurations : IEntityTypeConfiguration<UserJWT>
 {
     public void Configure(EntityTypeBuilder<UserJWT> builder)

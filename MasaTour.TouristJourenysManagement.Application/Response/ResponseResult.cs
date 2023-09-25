@@ -1,7 +1,7 @@
 ﻿using System.Net;
 
 namespace MasaTour.TouristJourenysManagement.Application.Response;
-public class ResponseResult
+public sealed class ResponseResult
 {
     public static ResponseModel<TData> Success<TData>(TData data = null, object meta = null, string message = null, object errors = null)
         where TData : class => new(statusCode: HttpStatusCode.OK, isSucceeded: true, message: message, data: data, errors: errors, meta: meta);

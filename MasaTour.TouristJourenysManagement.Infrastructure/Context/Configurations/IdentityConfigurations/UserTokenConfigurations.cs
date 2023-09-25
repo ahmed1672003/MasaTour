@@ -1,4 +1,4 @@
-﻿namespace ECommerce.Infrastructure.Context.Configurations.IdentityConfigurations;
+﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Context.Configurations.IdentityConfigurations;
 public sealed class UserTokenConfigurations : IEntityTypeConfiguration<UserToken>
 {
     public void Configure(EntityTypeBuilder<UserToken> builder)

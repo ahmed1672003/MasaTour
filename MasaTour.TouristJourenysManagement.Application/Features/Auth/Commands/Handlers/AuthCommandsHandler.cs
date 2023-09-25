@@ -87,7 +87,7 @@ public sealed class AuthCommandsHandler :
 
             await _services.CookiesService.SaveAuthInformationsAsync(authModel);
 
-            return ResponseResult.Created(authModel);
+            return ResponseResult.Created(authModel, message: _stringLocalizer[ResourcesKeys.Shared.Created]);
         }
         catch (Exception ex)
         {
