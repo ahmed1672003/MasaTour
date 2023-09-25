@@ -1,7 +1,7 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Domain.Abstracts;
 public interface IUpdateableTracker
 {
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     public Task UpdateAsync()
     {

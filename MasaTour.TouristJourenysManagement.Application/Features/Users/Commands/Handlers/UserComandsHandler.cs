@@ -5,11 +5,15 @@ public sealed class UserComandsHandler :
     IRequestHandler<DeleteUserByIdCommand, ResponseModel<GetUserDto>>,
     IRequestHandler<DeleteAllUsersCommand, ResponseModel<GetUserDto>>
 {
+    #region Fields
     private readonly IUnitOfServices _services;
     private readonly IUnitOfWork _context;
     private readonly ISpecificationsFactory _specificationsFactory;
     private readonly IStringLocalizer<SharedResources> _stringLocalizer;
     private readonly IMapper _mapper;
+    #endregion
+
+    #region Ctor
 
     public UserComandsHandler(
         IUnitOfServices services,
@@ -24,6 +28,9 @@ public sealed class UserComandsHandler :
         _mapper = mapper;
         _specificationsFactory = specificationsFactory;
     }
+
+
+    #endregion    #region Update User
 
     #region Update User
     public async Task<ResponseModel<GetUserDto>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)

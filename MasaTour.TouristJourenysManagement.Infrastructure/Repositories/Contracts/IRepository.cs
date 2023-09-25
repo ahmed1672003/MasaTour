@@ -9,7 +9,7 @@ public interface IRepository<TEntity> where TEntity : class
     Task UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
     Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task<int> ExecuteDeleteAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default);
-    void UndoDeleted<T>(ref T entity) where T : ISoftDeleteable;
+    void UndoDeleted<T>(ref T entity) where T : IDeleteableTracker;
     #endregion
 
     #region Queries

@@ -5,7 +5,7 @@ namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 [PrimaryKey(nameof(Id))]
 [Index(nameof(UserName), IsUnique = true)]
 [Index(nameof(Email), IsUnique = true)]
-public class User : IdentityUser<string>, ISoftDeleteable, IUpdateableTracker
+public class User : IdentityUser<string>, IDeleteableTracker, IUpdateableTracker, ICreateableTracker
 {
     [MaxLength(36)]
     public override string Id { get; set; }
@@ -45,9 +45,10 @@ public class User : IdentityUser<string>, ISoftDeleteable, IUpdateableTracker
     [Required]
     public DateTime CreatedAt { get; set; }
 
-    [Required]
-    public DateTime UpdatedAt { get; set; }
+    [AllowNull]
+    public DateTime? UpdatedAt { get; set; }
 
+    [AllowNull]
     public DateTime? DeletedAt { get; set; }
 
     [AllowNull]
@@ -61,7 +62,6 @@ public class User : IdentityUser<string>, ISoftDeleteable, IUpdateableTracker
         Id = Guid.NewGuid().ToString();
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        UpdatedAt = DateTime.Now;
         UserJWTs = new HashSet<UserJWT>();
         UserRoles = new HashSet<UserRoleMapper>();
     }

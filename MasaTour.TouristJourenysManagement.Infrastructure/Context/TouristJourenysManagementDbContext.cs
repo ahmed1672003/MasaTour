@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using MasaTour.TouristJourenysManagement.Domain.Entities;
+
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Context;
 public class TouristJourenysManagementDbContext
@@ -11,7 +13,6 @@ public class TouristJourenysManagementDbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
-
     public DbSet<User> Users => Set<User>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<RoleClaim> RoleClaims => Set<RoleClaim>();
@@ -20,4 +21,7 @@ public class TouristJourenysManagementDbContext
     public DbSet<UserRoleMapper> UserRoles => Set<UserRoleMapper>();
     public DbSet<UserToken> UserTokens => Set<UserToken>();
     public DbSet<UserJWT> UserJWTs => Set<UserJWT>();
+    public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Journey> Journeys => Set<Journey>();
+    public DbSet<CategoriesJourneysMapper> CategoryJourneys => Set<CategoriesJourneysMapper>();
 }

@@ -19,7 +19,6 @@ public class UserController : MasaTourController
     [SwaggerOperation(OperationId = EndPoints.User.DeleteUserById.OperationId, Summary = EndPoints.User.DeleteUserById.Summary, Description = EndPoints.User.DeleteUserById.Description)]
     public async Task<IActionResult> DeleteUserById([Required] string userId) => MasaTourResponse(await Mediator.Send(new UndoDeleteUserByIdCommand(userId)));
 
-
     [HttpPatch(Router.User.UndoDeleteUserById)]
     [Authorize(Roles = $"{nameof(Roles.SuperAdmin)},{nameof(Roles.Admin)}")]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<dynamic>))]
@@ -33,17 +32,14 @@ public class UserController : MasaTourController
     [SwaggerOperation(OperationId = EndPoints.User.GetUserById.OperationId, Summary = EndPoints.User.GetUserById.Summary, Description = EndPoints.User.GetUserById.Description)]
     public async Task<IActionResult> GetUserById([Required] string userId) => MasaTourResponse(await Mediator.Send(new GetUserByIdQuery(userId)));
 
-    [Authorize(Roles = nameof(Roles.SuperAdmin))]
+    [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.SuperAdmin)}")]
     [HttpGet(Router.User.GetAllUsers)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetUserDto>>))]
     [SwaggerOperation(OperationId = EndPoints.User.GetAllUsers.OperationId, Summary = EndPoints.User.GetAllUsers.Summary, Description = EndPoints.User.GetAllUsers.Description)]
     public async Task<IActionResult> GetAllUsers() => MasaTourResponse(await Mediator.Send(new GetAllUsersQuery()));
-
-
     #endregion
 
     #region Delete
-
     [Authorize(Roles = nameof(Roles.SuperAdmin))]
     [HttpDelete(Router.User.DeleteAllUsers)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<dynamic>))]

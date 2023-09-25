@@ -11,8 +11,9 @@ public static class InfrastructureDependencies
         services.AddDbContext<ITouristJourenysManagementDbContext, TouristJourenysManagementDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("MasaTour_TouristJourenysManagement"));
-            options.AddInterceptors(new SoftDeleteInterceptor());
+            options.AddInterceptors(new DeleteableTrackerInterceptor());
             options.AddInterceptors(new UpdateableTrackerInterceptor());
+            options.AddInterceptors(new CreateableTrackerInterceptors());
         }, ServiceLifetime.Scoped);
         #endregion
 

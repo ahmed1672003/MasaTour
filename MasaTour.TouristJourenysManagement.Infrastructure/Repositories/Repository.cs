@@ -32,7 +32,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         return Task.FromResult(_entities.Remove(entity));
     }
 
-    public void UndoDeleted<T>(ref T entity) where T : ISoftDeleteable
+    public void UndoDeleted<T>(ref T entity) where T : IDeleteableTracker
     {
         entity.IsDeleted = false;
         entity.DeletedAt = null;

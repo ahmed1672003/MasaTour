@@ -220,7 +220,6 @@ public sealed class AuthCommandsHandler :
         {
             return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
-
     }
     #endregion
 }

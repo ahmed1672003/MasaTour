@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Domain.Abstracts;
-public interface ISoftDeleteable
+public interface IDeleteableTracker
 {
     public bool IsDeleted { get; set; }
     public DateTime? DeletedAt { get; set; }

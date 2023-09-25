@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using MasaTour.TouristJourenysManagement.Domain.Entities;
+
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Context;
 public interface ITouristJourenysManagementDbContext
@@ -12,6 +14,9 @@ public interface ITouristJourenysManagementDbContext
     DbSet<UserRoleMapper> UserRoles { get; }
     DbSet<UserToken> UserTokens { get; }
     DbSet<UserJWT> UserJWTs { get; }
+    DbSet<Category> Categories { get; }
+    DbSet<Journey> Journeys { get; }
+    DbSet<CategoriesJourneysMapper> CategoryJourneys { get; }
     ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     DatabaseFacade Database { get; }
