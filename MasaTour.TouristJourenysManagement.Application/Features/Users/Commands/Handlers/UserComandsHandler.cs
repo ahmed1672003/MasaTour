@@ -52,17 +52,17 @@ public sealed class UserComandsHandler :
 
             // select user
             ISpecification<User> getUserByIdSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsTrackingGetUserByIdSpecification), request.dto.Id);
-            User user = await _context.Users.RetrieveAsync(getUserByIdSpec);
+            User user = await _context.Users.RetrieveAsync(getUserByIdSpec, cancellationToken);
             user.UserName = request.dto.UserName;
             user.NormalizedUserName = request.dto.UserName.ToUpper();
-            user.Email = request.dto.Email;
-            user.NormalizedEmail = request.dto.Email.ToUpper();
+            // user.Email = request.dto.Email;
+            // user.NormalizedEmail = request.dto.Email.ToUpper();
             user.FirstName = request.dto.FirstName;
             user.LastName = request.dto.LastName;
             user.Nationality = request.dto.Nationality;
-            user.PhoneNumber = request.dto.PhoneNumber;
+            // user.PhoneNumber = request.dto.PhoneNumber;
             user.ImgSrc = request.dto.ImgSrc;
-            user.UpdatedAt = DateTime.Now;
+
             // update user
             await _context.SaveChangesAsync();
             GetUserDto distenation = _mapper.Map<GetUserDto>(user);

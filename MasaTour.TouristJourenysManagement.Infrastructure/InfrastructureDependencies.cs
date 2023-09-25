@@ -12,6 +12,7 @@ public static class InfrastructureDependencies
         {
             options.UseSqlServer(configuration.GetConnectionString("MasaTour_TouristJourenysManagement"));
             options.AddInterceptors(new SoftDeleteInterceptor());
+            options.AddInterceptors(new UpdateableTrackerInterceptor());
         }, ServiceLifetime.Scoped);
         #endregion
 

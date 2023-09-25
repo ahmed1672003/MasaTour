@@ -5,7 +5,7 @@ namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 [PrimaryKey(nameof(Id))]
 [Index(nameof(UserName), IsUnique = true)]
 [Index(nameof(Email), IsUnique = true)]
-public class User : IdentityUser<string>, ISoftDeleteable
+public class User : IdentityUser<string>, ISoftDeleteable, IUpdateableTracker
 {
     [MaxLength(36)]
     public override string Id { get; set; }

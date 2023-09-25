@@ -204,8 +204,11 @@ public sealed class AuthCommandsHandler :
     {
         try
         {
+            // read token and userId From Query By HttpContext Because Automatic DotNet Query Reader Sometimes Read Token  Incorrectly
             string token = _contextAccessor.HttpContext.Request.Query["Token"];
             string UserId = _contextAccessor.HttpContext.Request.Query["UserId"];
+
+            // confirme email
             bool isEmailConfirmed = await _context.Identity.ConfirmEmailAsync(token, UserId, cancellationToken);
 
             if (!isEmailConfirmed)
@@ -217,7 +220,7 @@ public sealed class AuthCommandsHandler :
         {
             return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
-        #endregion
 
     }
+    #endregion
 }
