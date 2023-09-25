@@ -1,14 +1,10 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Enums;
-
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-
-namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Commands.Handlers;
+﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Commands.Handlers;
 public sealed class AuthCommandsHandler :
     IRequestHandler<AddUserCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RefreshTokenCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RevokeTokenCommand, ResponseModel<AuthModel>>,
-    IRequestHandler<ChangePasswordCommand, ResponseModel<AuthModel>>
+    IRequestHandler<ChangePasswordCommand, ResponseModel<AuthModel>>,
+    IRequestHandler<ConfirmeEmailCommand, ResponseModel<AuthModel>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
@@ -42,23 +38,48 @@ public sealed class AuthCommandsHandler :
     {
         try
         {
+            // check is email exist
             ISpecification<User> userEmailSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingEmailIsExistSpecification), request.dto.Email);
             if (await _context.Users.AnyAsync(userEmailSpec, cancellationToken))
                 return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.User.EmailIsExist]);
 
+            // add user
             var user = _mapper.Map<User>(request.dto);
             var createUserResult = await _context.Identity.UserManager.CreateAsync(user, request.dto.Password);
-
-            // TODo: Confirm Email
 
             if (!createUserResult.Succeeded)
                 return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
 
+            // generate confirme email token
+            string token = await _context.Identity.UserManager.GenerateEmailConfirmationTokenAsync(user);
+            HttpRequest httpRequest = _contextAccessor.HttpContext.Request;
+
+            // redirect url
+            string redirectUrl = $"{httpRequest.Scheme.Trim()}://{httpRequest.Host.ToUriComponent().Trim().ToLower()}/{Router.Auth.ConfirmeEmail}";
+
+            // set confirme email parameters
+            Dictionary<string, string> parameters = new Dictionary<string, string>
+            {
+                {"Token",token},
+                { "UserId" , user.Id}
+            };
+
+            // create uri
+            Uri url = new Uri(QueryHelpers.AddQueryString(redirectUrl, parameters));
+
+            // send email
+            SendEmailDto sendEmailDto = await _services.EmailService.SendEmailAsync(user.Email, "Confirm Your Email", url.ToString());
+
+            if (!sendEmailDto.IsSendSuccess)
+                return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+
+            // add user to role
             var assignUserToRoleResult = await _context.Identity.UserManager.AddToRoleAsync(user, Roles.Basic.ToString());
 
             if (!assignUserToRoleResult.Succeeded)
                 return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
 
+            // generate jwt
             var authModel = await _services.AuthService.GetJWTAsync(user);
 
             if (authModel is null)
@@ -177,4 +198,26 @@ public sealed class AuthCommandsHandler :
         }
     }
     #endregion
+
+    #region Confirme Email
+    public async Task<ResponseModel<AuthModel>> Handle(ConfirmeEmailCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            string token = _contextAccessor.HttpContext.Request.Query["Token"];
+            string UserId = _contextAccessor.HttpContext.Request.Query["UserId"];
+            bool isEmailConfirmed = await _context.Identity.ConfirmEmailAsync(token, UserId, cancellationToken);
+
+            if (!isEmailConfirmed)
+                return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+
+            return ResponseResult.Success<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+        #endregion
+
+    }
 }

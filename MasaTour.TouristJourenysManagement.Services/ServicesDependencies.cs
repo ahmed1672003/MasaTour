@@ -1,4 +1,5 @@
-﻿namespace MasaTour.TouristJourenysManagement.Services;
+﻿
+namespace MasaTour.TouristJourenysManagement.Services;
 public static class ServicesDependencies
 {
     public static IServiceCollection AddServicesDependencies(this IServiceCollection services, IConfiguration configuration)
@@ -7,6 +8,8 @@ public static class ServicesDependencies
         services.AddScoped<IUnitOfServices, UnitOfSevices>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ICookiesService, CookiesService>();
+        services.AddScoped<IEmailService, EmailService>();
+        services.Configure<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
         #endregion
 
         #region JWT Services

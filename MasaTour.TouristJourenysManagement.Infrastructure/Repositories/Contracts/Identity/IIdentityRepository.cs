@@ -6,4 +6,5 @@ public interface IIdentityRepository
     UserManager<User> UserManager { get; }
     SignInManager<User> SignInManager { get; }
     RoleManager<Role> RoleManager { get; }
+    Task<bool> ConfirmEmailAsync(string userId, string token, CancellationToken cancellationToken = default);
 }

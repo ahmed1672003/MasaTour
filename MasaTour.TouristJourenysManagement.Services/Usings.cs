@@ -8,6 +8,7 @@ global using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Cont
 global using MasaTour.TouristJourenysManagement.Infrastructure.Settings;
 global using MasaTour.TouristJourenysManagement.Services.Services;
 global using MasaTour.TouristJourenysManagement.Services.Services.Contracts;
+global using MasaTour.TouristJourenysManagement.Services.Settings;
 
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.Extensions.Configuration;

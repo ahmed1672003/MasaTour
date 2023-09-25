@@ -12,6 +12,7 @@ public static class Router
         public const string RefreshToken = AuthPrefix + "refresh-token";
         public const string RevokeToken = AuthPrefix + "revoke-token";
         public const string ChangePassword = AuthPrefix + "change-password";
+        public const string ConfirmeEmail = AuthPrefix + "confirme-email";
     }
 
     public static class User

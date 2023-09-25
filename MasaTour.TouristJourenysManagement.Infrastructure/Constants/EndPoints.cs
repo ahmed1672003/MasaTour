@@ -8,8 +8,7 @@ public static class EndPoints
             public const string OperationId = "664C7BF0-427E-4EA2-A1D4-151E236FBC1F";
             public const string Summary = "Register New User | (email, userName and phoneNumber) Are Unique | Allowed For Anonymous";
             public const string Description = "<b>On Success: ( jwt, refreshToken, jwtExpirationDate, refreshJwtExpirationDate ) Will Be Sent With Response In Cookies | User Will Be Assigned To Basic Role" +
-                                   "</br></br> nationality  Egyptian[0] Other[1] </hr>" +
-                                   "</br></br> gender  Male[0] Female[1] Other[2] UnKnown[3]</b>";
+                                   "</br></br> gender  { Male[0] Female[1] Other[2] UnKnown[3] }</b>";
         }
 
         public static class LoginUser
@@ -49,6 +48,16 @@ public static class EndPoints
         {
             public const string OperationId = "F76D3FF3-8ACA-488D-8FF0-6E0A5AE46CA1";
             public const string Summary = "Change Password | You Can Send Email Or User Name | Allowed For Basic, Admin And SuperAdmin";
+            public const string Description =
+                "<b>" +
+                    "data Will Be Null In Response" +
+                "</b>";
+        }
+
+        public static class ConfirmEmail
+        {
+            public const string OperationId = "4FBC7085-62B3-4753-9AAC-161EA4B65D15";
+            public const string Summary = "Confirm Email | Allowed For Anonymous";
             public const string Description =
                 "<b>" +
                     "data Will Be Null In Response" +
@@ -109,7 +118,7 @@ public static class EndPoints
 
         public static class DeleteAllUsers
         {
-            public const string OperationId = "732A3F62-B9CD-4A2D-AE8E-CE8CD468168A";
+            public const string OperationId = "9DD5608A-00A0-4B08-B91D-C72E326F079F";
             public const string Summary = "Delete All Users From Server | This Endpoint Used For BackEnd Developer Only | Allowed For SuperAdmin Only";
             public const string Description =
                 "<b>" +

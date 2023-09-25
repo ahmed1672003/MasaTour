@@ -38,7 +38,9 @@ public sealed class AuthQueriesHandler :
 
             var user = await _context.Users.RetrieveAsync(_specificationsFactory.CreateUserSpecifications(typeof(AsTrackingGetUserByUserNameOrEmailIncludedJwtSpecification), request.dto.EmailOrUserName), cancellationToken);
 
-            // ToDo: check if email confirm
+            // check if email confirm
+            if (!user.EmailConfirmed)
+                return ResponseResult.UnAuthorized<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.UnAuthorized]);
 
             var signInResult = await _context.Identity.SignInManager.CheckPasswordSignInAsync(user, request.dto.Password, true);
 
