@@ -42,5 +42,21 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
+
+    public ISpecification<Category> CreatCategorySpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            _ => throw new InvalidOperationException()
+        };
+    }
+
+    public ISpecification<Journey> CreatJourneySpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            _ => throw new InvalidOperationException()
+        };
+    }
 }
 

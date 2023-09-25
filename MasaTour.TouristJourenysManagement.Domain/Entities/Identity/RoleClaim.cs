@@ -21,6 +21,8 @@ public class RoleClaim : IdentityRoleClaim<string>
     public override string ClaimValue { get; set; }
 
     [AllowNull]
+
+    [NotMapped]
     [ForeignKey(nameof(RoleId))]
     public Role? Role { get; set; }
     public RoleClaim()

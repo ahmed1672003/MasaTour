@@ -6,11 +6,80 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentity : Migration
+    public partial class AddIdentityWithJourenys : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "CategoriesJourneysMapper",
+                columns: table => new
+                {
+                    CategoryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    JourneyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoriesJourneysMapper", x => new { x.CategoryId, x.JourneyId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Catgeories",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    NameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Catgeories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Journeys",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    LongDesceiptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
+                    LongDesceiptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
+                    LongDesceiptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
+                    MiniDesceiptionAR = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    MiniDesceiptionEN = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    MiniDesceiptionDE = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    FromAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    FromEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    FromDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ToAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ToEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ToDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PriceLE = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceUSD = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceGbp = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Journeys", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
@@ -40,7 +109,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                     ImgSrc = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -67,8 +136,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ClaimValue = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    RoleId1 = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    ClaimValue = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,11 +147,6 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoleClaims_Roles_RoleId1",
-                        column: x => x.RoleId1,
-                        principalTable: "Roles",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -157,9 +220,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(36)", nullable: true),
-                    RoleId1 = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    RoleId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -171,21 +232,11 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersRolesMappers_Roles_RoleId1",
-                        column: x => x.RoleId1,
-                        principalTable: "Roles",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_UsersRolesMappers_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UsersRolesMappers_Users_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "Users",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -209,14 +260,27 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Catgeories_NameAR",
+                table: "Catgeories",
+                column: "NameAR",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Journeys_Code",
+                table: "Journeys",
+                column: "Code",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Journeys_NameAR",
+                table: "Journeys",
+                column: "NameAR",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
                 table: "RoleClaims",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoleClaims_RoleId1",
-                table: "RoleClaims",
-                column: "RoleId1");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -268,21 +332,20 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 name: "IX_UsersRolesMappers_RoleId",
                 table: "UsersRolesMappers",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsersRolesMappers_RoleId1",
-                table: "UsersRolesMappers",
-                column: "RoleId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsersRolesMappers_UserId1",
-                table: "UsersRolesMappers",
-                column: "UserId1");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CategoriesJourneysMapper");
+
+            migrationBuilder.DropTable(
+                name: "Catgeories");
+
+            migrationBuilder.DropTable(
+                name: "Journeys");
+
             migrationBuilder.DropTable(
                 name: "RoleClaims");
 

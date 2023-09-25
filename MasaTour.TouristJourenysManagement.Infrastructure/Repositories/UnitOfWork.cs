@@ -1,9 +1,7 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts.Identity;
-
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories;
-public class UnitOfWork : IUnitOfWork
+public sealed class UnitOfWork : IUnitOfWork
 {
     private readonly ITouristJourenysManagementDbContext _context;
     public UnitOfWork(
@@ -16,7 +14,10 @@ public class UnitOfWork : IUnitOfWork
         IUserLoginRepository userLogins,
         IUserRoleMapperRepository userRoleMappers,
         IUserTokenRepository userTokens,
-        IUserRepository users)
+        IUserRepository users,
+        ICategoryRepository categories,
+        IJourenyRepository jourenys,
+        ICategoriesJourneysMapperRepository categoriesJourneysMappers)
     {
         _context = context;
         Identity = identity;
@@ -28,6 +29,9 @@ public class UnitOfWork : IUnitOfWork
         UserRoleMappers = userRoleMappers;
         UserTokens = userTokens;
         Users = users;
+        Categories = categories;
+        Jourenys = jourenys;
+        CategoriesJourneysMappers = categoriesJourneysMappers;
     }
 
     public IIdentityRepository Identity { get; }
@@ -39,6 +43,9 @@ public class UnitOfWork : IUnitOfWork
     public IUserRoleMapperRepository UserRoleMappers { get; }
     public IUserTokenRepository UserTokens { get; }
     public IUserRepository Users { get; }
+    public ICategoryRepository Categories { get; }
+    public IJourenyRepository Jourenys { get; }
+    public ICategoriesJourneysMapperRepository CategoriesJourneysMappers { get; }
 
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default) =>
          await _context.Database.BeginTransactionAsync(cancellationToken);

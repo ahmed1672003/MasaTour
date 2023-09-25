@@ -13,10 +13,12 @@ public class Role : IdentityRole<string>
     public override string Name { get; set; }
 
     [AllowNull]
-    public IEnumerable<RoleClaim> RoleClaims { get; set; }
+    [NotMapped]
+    public IEnumerable<RoleClaim>? RoleClaims { get; set; }
 
     [AllowNull]
-    public IEnumerable<UserRoleMapper> UserRoleMappers { get; set; }
+    [NotMapped]
+    public IEnumerable<UserRoleMapper>? UserRoleMappers { get; set; }
     public Role()
     {
         Id = Guid.NewGuid().ToString();

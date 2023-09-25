@@ -31,4 +31,19 @@ public static class ResourcesKeys
         public const string PhoneNumberIsDuplicated = "PhoneNumberIsDuplicated";
         public const string EmailIsExist = "EmailIsExist";
     }
+
+    public static class Category
+    {
+        public const string FiledCanNotBeNull = "FiledCanNotBeNull";
+        public const string FiledLengthIsBiggerThanMaxLength = "FiledLengthIsBiggerThanMaxLength";
+        public const string FiledLengthIsSmallerThanMinLength = "FiledLengthIsSmallerThanMinLength";
+        public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
+    }
+    public static class Joureny
+    {
+        public const string FiledCanNotBeNull = "FiledCanNotBeNull";
+        public const string FiledLengthIsBiggerThanMaxLength = "FiledLengthIsBiggerThanMaxLength";
+        public const string FiledLengthIsSmallerThanMinLength = "FiledLengthIsSmallerThanMinLength";
+        public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
+    }
 }

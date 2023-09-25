@@ -52,9 +52,11 @@ public class User : IdentityUser<string>, IDeleteableTracker, IUpdateableTracker
     public DateTime? DeletedAt { get; set; }
 
     [AllowNull]
+    [NotMapped]
     public ICollection<UserJWT> UserJWTs { get; set; }
 
     [AllowNull]
+    [NotMapped]
     public ICollection<UserRoleMapper> UserRoles { get; set; }
 
     public User()

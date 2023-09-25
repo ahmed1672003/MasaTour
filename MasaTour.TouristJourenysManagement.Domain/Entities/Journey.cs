@@ -98,10 +98,12 @@ public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker
     [AllowNull]
     public DateTime? DeletedAt { get; set; }
 
+    [NotMapped]
     public ICollection<CategoriesJourneysMapper>? CategoriesjourneysMappers { get; set; }
 
     public Journey()
     {
+        Id = Guid.NewGuid().ToString();
         IsDeleted = false;
         CategoriesjourneysMappers = new HashSet<CategoriesJourneysMapper>();
     }

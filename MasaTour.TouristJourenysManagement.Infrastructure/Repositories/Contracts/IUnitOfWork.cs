@@ -12,6 +12,10 @@ public interface IUnitOfWork : IAsyncDisposable
     IUserLoginRepository UserLogins { get; }
     IUserRoleMapperRepository UserRoleMappers { get; }
     IUserTokenRepository UserTokens { get; }
+    ICategoryRepository Categories { get; }
+    IJourenyRepository Jourenys { get; }
+    ICategoriesJourneysMapperRepository CategoriesJourneysMappers { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
     Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);

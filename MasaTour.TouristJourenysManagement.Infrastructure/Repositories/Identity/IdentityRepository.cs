@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Identity;
-public class IdentityRepository : IIdentityRepository
+public sealed class IdentityRepository : IIdentityRepository
 {
     public IdentityRepository(
         UserManager<User> userManager,

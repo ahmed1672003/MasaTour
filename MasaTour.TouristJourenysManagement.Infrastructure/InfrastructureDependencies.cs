@@ -1,8 +1,4 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Context.Interceptors;
-using MasaTour.TouristJourenysManagement.Infrastructure.Seeds;
-using MasaTour.TouristJourenysManagement.Infrastructure.Settings;
-
-namespace MasaTour.TouristJourenysManagement.Infrastructure;
+﻿namespace MasaTour.TouristJourenysManagement.Infrastructure;
 public static class InfrastructureDependencies
 {
     public static async Task<IServiceCollection> AddInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
@@ -67,8 +63,12 @@ public static class InfrastructureDependencies
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IUserRoleMapperRepository, UserRoleMapperRepository>()
                 .AddScoped<IUserTokenRepository, UserTokenRepository>()
+                .AddScoped<ICategoryRepository, CategoryRepository>()
+                .AddScoped<IJourenyRepository, JourenyRepository>()
+                .AddScoped<ICategoriesJourneysMapperRepository, CategoriesJourneysMapperRepository>()
                 .AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped(typeof(ISpecification<>), typeof(Specification<>));
+
         #endregion
 
         #region Seed Data
