@@ -3,9 +3,6 @@ global using System.Reflection;
 
 global using AutoMapper;
 
-global using FluentValidation;
-
-global using MasaTour.TouristJourenysManagement.Application.Behaviors;
 global using MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
 global using MasaTour.TouristJourenysManagement.Application.Features.Categories.Dtos;
 global using MasaTour.TouristJourenysManagement.Application.Resources;

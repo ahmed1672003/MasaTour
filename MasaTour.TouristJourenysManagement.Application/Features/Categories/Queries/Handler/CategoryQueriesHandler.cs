@@ -97,9 +97,11 @@ public sealed class CategoryQueriesHandler :
                     orderBy = category => category.CreatedAt;
                     break;
             }
+            int totalCount = await _context.Categories.CountAsync(cancellationToken: cancellationToken);
+
             ISpecification<Category> asNoTrackingPaginateCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingPaginateCategoriesSpecification), request.pageNumber!.Value, request.pageSize!.Value, orderBy);
             IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingPaginateCategoriesSpec, cancellationToken));
-            return PaginationResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+            return PaginationResponseResult.Success(categoriesDto, count: totalCount, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {

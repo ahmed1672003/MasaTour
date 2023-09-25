@@ -91,6 +91,8 @@ public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker
     [Required]
     public decimal PriceEUR { get; set; }
 
+    [Required]
+    public bool IsFamous { get; set; }
 
     [Required]
     public bool IsDeleted { get; set; }

@@ -2,10 +2,8 @@
 using System.Net;
 using System.Text.Json;
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
-using ValidationException = FluentValidation.ValidationException;
 
 namespace MasaTour.TouristJourenysManagement.Application.Middlewares;
 public class ErrorHandlerMiddleWare
