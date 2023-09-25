@@ -14,11 +14,9 @@ public class CategoriesJourneysMapper : ICreateableTracker, IUpdateableTracker
     [Required]
     public DateTime CreatedAt { get; set; }
 
-    [NotMapped]
     [ForeignKey(nameof(CategoryId))]
-    public Journey? Category { get; set; }
+    public Category Category { get; set; }
 
-    [NotMapped]
     [ForeignKey(nameof(JourneyId))]
-    public Journey? Journey { get; set; }
+    public Journey Journey { get; set; }
 }

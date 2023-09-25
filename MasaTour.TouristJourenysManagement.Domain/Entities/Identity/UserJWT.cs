@@ -1,6 +1,4 @@
-﻿
-
-namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
+﻿namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 
 [PrimaryKey(nameof(Id), nameof(UserId))]
 public class UserJWT : BaseEntity
@@ -43,7 +41,6 @@ public class UserJWT : BaseEntity
     public User? User { get; set; }
     public UserJWT()
     {
-        Id = Guid.NewGuid().ToString();
         CreatedAt = DateTime.Now;
         IsRefreshJWTUsed = true;
     }

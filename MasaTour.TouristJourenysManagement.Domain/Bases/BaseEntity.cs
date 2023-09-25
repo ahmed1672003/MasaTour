@@ -1,5 +1,7 @@
 ﻿
 namespace MasaTour.TouristJourenysManagement.Domain.Base;
+
+[NotMapped]
 public class BaseEntity
 {
     [Required]

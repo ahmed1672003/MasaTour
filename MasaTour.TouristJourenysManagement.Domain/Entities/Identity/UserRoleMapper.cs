@@ -11,11 +11,9 @@ public class UserRoleMapper : IdentityUserRole<string>
     [MaxLength(36)]
     public override string RoleId { get; set; }
 
-    [NotMapped]
     [ForeignKey(nameof(UserId))]
     public User? User { get; set; }
 
-    [NotMapped]
     [ForeignKey(nameof(RoleId))]
     public Role? Role { get; set; }
 

@@ -6,25 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentityWithJourenys : Migration
+    public partial class AddIdentityAndCategoriesAndHourenys : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "CategoriesJourneysMapper",
-                columns: table => new
-                {
-                    CategoryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    JourneyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategoriesJourneysMapper", x => new { x.CategoryId, x.JourneyId });
-                });
-
             migrationBuilder.CreateTable(
                 name: "Catgeories",
                 columns: table => new
@@ -129,6 +115,32 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CategoriesJourneysMapper",
+                columns: table => new
+                {
+                    CategoryId = table.Column<string>(type: "nvarchar(36)", nullable: false),
+                    JourneyId = table.Column<string>(type: "nvarchar(36)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoriesJourneysMapper", x => new { x.CategoryId, x.JourneyId });
+                    table.ForeignKey(
+                        name: "FK_CategoriesJourneysMapper_Catgeories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Catgeories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoriesJourneysMapper_Journeys_JourneyId",
+                        column: x => x.JourneyId,
+                        principalTable: "Journeys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 columns: table => new
                 {
@@ -136,7 +148,8 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ClaimValue = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                    ClaimValue = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    RoleId1 = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -147,6 +160,11 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleClaims_Roles_RoleId1",
+                        column: x => x.RoleId1,
+                        principalTable: "Roles",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -220,7 +238,9 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false)
+                    RoleId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(36)", nullable: true),
+                    RoleId1 = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -232,11 +252,21 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_UsersRolesMappers_Roles_RoleId1",
+                        column: x => x.RoleId1,
+                        principalTable: "Roles",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_UsersRolesMappers_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersRolesMappers_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -260,6 +290,11 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CategoriesJourneysMapper_JourneyId",
+                table: "CategoriesJourneysMapper",
+                column: "JourneyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Catgeories_NameAR",
                 table: "Catgeories",
                 column: "NameAR",
@@ -281,6 +316,11 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 name: "IX_RoleClaims_RoleId",
                 table: "RoleClaims",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleClaims_RoleId1",
+                table: "RoleClaims",
+                column: "RoleId1");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -332,6 +372,16 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 name: "IX_UsersRolesMappers_RoleId",
                 table: "UsersRolesMappers",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersRolesMappers_RoleId1",
+                table: "UsersRolesMappers",
+                column: "RoleId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersRolesMappers_UserId1",
+                table: "UsersRolesMappers",
+                column: "UserId1");
         }
 
         /// <inheritdoc />
@@ -339,12 +389,6 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CategoriesJourneysMapper");
-
-            migrationBuilder.DropTable(
-                name: "Catgeories");
-
-            migrationBuilder.DropTable(
-                name: "Journeys");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
@@ -363,6 +407,12 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Catgeories");
+
+            migrationBuilder.DropTable(
+                name: "Journeys");
 
             migrationBuilder.DropTable(
                 name: "Roles");

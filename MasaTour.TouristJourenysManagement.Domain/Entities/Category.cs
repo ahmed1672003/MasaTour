@@ -33,14 +33,14 @@ public class Category : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICre
     [AllowNull]
     public DateTime? DeletedAt { get; set; }
 
-    [NotMapped]
-    public ICollection<CategoriesJourneysMapper>? CategoriesjourneysMappers { get; set; }
+    [AllowNull]
+    [InverseProperty(nameof(CategoriesJourneysMapper.Category))]
+    public List<CategoriesJourneysMapper> CategoriesjourneysMappers { get; set; }
 
     public Category()
     {
-        Id = Guid.NewGuid().ToString();
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        CategoriesjourneysMappers = new HashSet<CategoriesJourneysMapper>();
+        CategoriesjourneysMappers = new List<CategoriesJourneysMapper>();
     }
 }

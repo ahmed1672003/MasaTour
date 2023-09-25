@@ -52,19 +52,18 @@ public class User : IdentityUser<string>, IDeleteableTracker, IUpdateableTracker
     public DateTime? DeletedAt { get; set; }
 
     [AllowNull]
-    [NotMapped]
-    public ICollection<UserJWT> UserJWTs { get; set; }
+    public List<UserJWT> UserJWTs { get; set; }
 
     [AllowNull]
-    [NotMapped]
-    public ICollection<UserRoleMapper> UserRoles { get; set; }
+    [InverseProperty(nameof(UserRoleMapper.User))]
+    public List<UserRoleMapper> UserRoles { get; set; }
 
     public User()
     {
         Id = Guid.NewGuid().ToString();
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        UserJWTs = new HashSet<UserJWT>();
-        UserRoles = new HashSet<UserRoleMapper>();
+        UserJWTs = new List<UserJWT>();
+        UserRoles = new List<UserRoleMapper>();
     }
 }

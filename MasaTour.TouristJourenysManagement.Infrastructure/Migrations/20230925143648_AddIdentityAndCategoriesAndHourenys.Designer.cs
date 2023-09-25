@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristJourenysManagementDbContext))]
-    [Migration("20230925141846_AddIdentityWithJourenys")]
-    partial class AddIdentityWithJourenys
+    [Migration("20230925143648_AddIdentityAndCategoriesAndHourenys")]
+    partial class AddIdentityAndCategoriesAndHourenys
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,10 +28,10 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
             modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.CategoriesJourneysMapper", b =>
                 {
                     b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("JourneyId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -40,6 +40,8 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("CategoryId", "JourneyId");
+
+                    b.HasIndex("JourneyId");
 
                     b.ToTable("CategoriesJourneysMapper", (string)null);
                 });
@@ -140,9 +142,14 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("RoleId1")
+                        .HasColumnType("nvarchar(36)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("RoleId1");
 
                     b.ToTable("RoleClaims", (string)null);
                 });
@@ -361,9 +368,19 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("RoleId1")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(36)");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("UsersRolesMappers", (string)null);
                 });
@@ -511,6 +528,25 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                     b.ToTable("Journeys", (string)null);
                 });
 
+            modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.CategoriesJourneysMapper", b =>
+                {
+                    b.HasOne("MasaTour.TouristJourenysManagement.Domain.Entities.Category", "Category")
+                        .WithMany("CategoriesjourneysMappers")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MasaTour.TouristJourenysManagement.Domain.Entities.Journey", "Journey")
+                        .WithMany("CategoriesjourneysMappers")
+                        .HasForeignKey("JourneyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Journey");
+                });
+
             modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.RoleClaim", b =>
                 {
                     b.HasOne("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.Role", null)
@@ -518,6 +554,12 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.Role", "Role")
+                        .WithMany("RoleClaims")
+                        .HasForeignKey("RoleId1");
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.UserClaim", b =>
@@ -532,7 +574,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
             modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.UserJWT", b =>
                 {
                     b.HasOne("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.User", "User")
-                        .WithMany()
+                        .WithMany("UserJWTs")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -557,11 +599,23 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.Role", "Role")
+                        .WithMany("UserRoleMappers")
+                        .HasForeignKey("RoleId1");
+
                     b.HasOne("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.UserToken", b =>
@@ -571,6 +625,30 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("CategoriesjourneysMappers");
+                });
+
+            modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.Role", b =>
+                {
+                    b.Navigation("RoleClaims");
+
+                    b.Navigation("UserRoleMappers");
+                });
+
+            modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.Identity.User", b =>
+                {
+                    b.Navigation("UserJWTs");
+
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("MasaTour.TouristJourenysManagement.Domain.Entities.Journey", b =>
+                {
+                    b.Navigation("CategoriesjourneysMappers");
                 });
 #pragma warning restore 612, 618
         }

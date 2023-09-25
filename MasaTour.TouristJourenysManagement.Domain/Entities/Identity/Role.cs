@@ -1,6 +1,4 @@
-﻿
-
-namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
+﻿namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
 
 [PrimaryKey(nameof(Id))]
 public class Role : IdentityRole<string>
@@ -13,16 +11,15 @@ public class Role : IdentityRole<string>
     public override string Name { get; set; }
 
     [AllowNull]
-    [NotMapped]
-    public IEnumerable<RoleClaim>? RoleClaims { get; set; }
+    public List<RoleClaim> RoleClaims { get; set; }
 
     [AllowNull]
-    [NotMapped]
-    public IEnumerable<UserRoleMapper>? UserRoleMappers { get; set; }
+    [InverseProperty(nameof(UserRoleMapper.Role))]
+    public List<UserRoleMapper> UserRoleMappers { get; set; }
     public Role()
     {
         Id = Guid.NewGuid().ToString();
-        RoleClaims = new HashSet<RoleClaim>();
-        UserRoleMappers = new HashSet<UserRoleMapper>();
+        RoleClaims = new List<RoleClaim>();
+        UserRoleMappers = new List<UserRoleMapper>();
     }
 }

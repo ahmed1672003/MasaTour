@@ -22,7 +22,6 @@ public class RoleClaim : IdentityRoleClaim<string>
 
     [AllowNull]
 
-    [NotMapped]
     [ForeignKey(nameof(RoleId))]
     public Role? Role { get; set; }
     public RoleClaim()
