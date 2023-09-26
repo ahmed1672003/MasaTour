@@ -5,13 +5,13 @@
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIsFamous : Migration
+    public partial class AddColumn : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "IsFamous",
+                name: "IsActive",
                 table: "Journeys",
                 type: "bit",
                 nullable: false,
@@ -22,7 +22,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsFamous",
+                name: "IsActive",
                 table: "Journeys");
         }
     }

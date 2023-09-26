@@ -1,4 +1,6 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
+﻿using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Jourenys;
+
+namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
 
 public sealed class SpecificationsFactory : ISpecificationsFactory
 {
@@ -22,7 +24,6 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
-
     public ISpecification<Role> CreateRoleSpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
@@ -31,7 +32,6 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
-
     public ISpecification<UserJWT> CreateUserJWTSpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
@@ -41,7 +41,6 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
-
     public ISpecification<Category> CreatCategorySpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
@@ -68,6 +67,20 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
     {
         return type.Name switch
         {
+            "AsNoTrackingCheckDuplicatedJourneyByNameARSpecification" => new AsNoTrackingCheckDuplicatedJourneyByNameARSpecification(parameters[0], parameters[0]),
+            "AsNoTrackingCheckDuplicatedJourneyByNameDESpecification" => new AsNoTrackingCheckDuplicatedJourneyByNameDESpecification(parameters[0], parameters[0]),
+            "AsNoTrackingCheckDuplicatedJourneyByNameENSpecification" => new AsNoTrackingCheckDuplicatedJourneyByNameENSpecification(parameters[0], parameters[0]),
+            "AsNoTrackingGetAllActiveJourneysSpecification" => new AsNoTrackingGetAllActiveJourneysSpecification(),
+            "AsNoTrackingGetAllDeletedJourneysSpecification" => new AsNoTrackingGetAllDeletedJourneysSpecification(),
+            "AsNoTrackingGetAllJourneysSpecification" => new AsNoTrackingGetAllJourneysSpecification(),
+            "AsNoTrackingGetAllNotActiveJourneysSpecification" => new AsNoTrackingGetAllNotActiveJourneysSpecification(),
+            "AsNoTrackingGetDeletedJourneyByIdSpecification" => new AsNoTrackingGetDeletedJourneyByIdSpecification(parameters[0]),
+            "AsNoTrackingGetJouernyByIdSpecification" => new AsNoTrackingGetJouernyByIdSpecification(parameters[0]),
+            "AsNoTrackingGetJourneyByNameARSpecification" => new AsNoTrackingGetJourneyByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetJourneyByNameDESpecification" => new AsNoTrackingGetJourneyByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetJourneyByNameENSpecification" => new AsNoTrackingGetJourneyByNameENSpecification(parameters[0]),
+            "AsNoTrackingPaginateJourneysSpecification" => new AsNoTrackingPaginateJourneysSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsTrackingGetJouernyByIdSpecification" => new AsTrackingGetJouernyByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }

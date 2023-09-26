@@ -7,7 +7,7 @@ namespace MasaTour.TouristJourenysManagement.Domain.Entities;
 [Index(nameof(NameAR), IsUnique = true)]
 [Index(nameof(NameEN), IsUnique = true)]
 [Index(nameof(NameDE), IsUnique = true)]
-public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker
+public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreateableTracker
 {
     [Required]
     [MaxLength(255)]
@@ -25,17 +25,14 @@ public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker
     [MaxLength(255)]
     public string NameDE { get; set; }
 
-    [Required]
     [MaxLength(3000)]
-    public string LongDesceiptionAR { get; set; }
+    public string? LongDesceiptionAR { get; set; }
 
-    [Required]
     [MaxLength(3000)]
-    public string LongDesceiptionEN { get; set; }
+    public string? LongDesceiptionEN { get; set; }
 
-    [Required]
     [MaxLength(3000)]
-    public string LongDesceiptionDE { get; set; }
+    public string? LongDesceiptionDE { get; set; }
 
     [Required]
     [MaxLength(1500)]
@@ -80,7 +77,7 @@ public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker
     public DateTime EndDate { get; set; }
 
     [Required]
-    public decimal PriceLE { get; set; }
+    public decimal PriceEGP { get; set; }
 
     [Required]
     public decimal PriceUSD { get; set; }
@@ -93,6 +90,11 @@ public class Journey : BaseEntity, IDeleteableTracker, IUpdateableTracker
 
     [Required]
     public bool IsFamous { get; set; }
+
+
+    [Required]
+    public bool IsActive { get; set; }
+
 
     [Required]
     public bool IsDeleted { get; set; }

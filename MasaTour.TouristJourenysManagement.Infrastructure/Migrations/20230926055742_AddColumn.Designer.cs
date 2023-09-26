@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristJourenysManagementDbContext))]
-    [Migration("20230925212239_AddIsFamous")]
-    partial class AddIsFamous
+    [Migration("20230926055742_AddColumn")]
+    partial class AddColumn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -445,6 +445,9 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -452,17 +455,14 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LongDesceiptionAR")
-                        .IsRequired()
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
                     b.Property<string>("LongDesceiptionDE")
-                        .IsRequired()
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
                     b.Property<string>("LongDesceiptionEN")
-                        .IsRequired()
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
@@ -496,13 +496,13 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<decimal>("PriceEGP")
+                        .HasColumnType("decimal(18, 5)");
+
                     b.Property<decimal>("PriceEUR")
                         .HasColumnType("decimal(18, 5)");
 
                     b.Property<decimal>("PriceGBP")
-                        .HasColumnType("decimal(18, 5)");
-
-                    b.Property<decimal>("PriceLE")
                         .HasColumnType("decimal(18, 5)");
 
                     b.Property<decimal>("PriceUSD")

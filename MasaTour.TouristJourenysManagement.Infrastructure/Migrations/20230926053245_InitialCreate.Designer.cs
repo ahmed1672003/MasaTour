@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristJourenysManagementDbContext))]
-    [Migration("20230925160944_InitialCreate")]
+    [Migration("20230926053245_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -448,18 +448,18 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsFamous")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LongDesceiptionAR")
-                        .IsRequired()
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
                     b.Property<string>("LongDesceiptionDE")
-                        .IsRequired()
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
                     b.Property<string>("LongDesceiptionEN")
-                        .IsRequired()
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
@@ -493,13 +493,13 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<decimal>("PriceEGP")
+                        .HasColumnType("decimal(18, 5)");
+
                     b.Property<decimal>("PriceEUR")
                         .HasColumnType("decimal(18, 5)");
 
                     b.Property<decimal>("PriceGBP")
-                        .HasColumnType("decimal(18, 5)");
-
-                    b.Property<decimal>("PriceLE")
                         .HasColumnType("decimal(18, 5)");
 
                     b.Property<decimal>("PriceUSD")
