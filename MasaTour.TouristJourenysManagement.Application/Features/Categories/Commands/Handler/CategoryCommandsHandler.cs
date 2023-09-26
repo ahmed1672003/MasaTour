@@ -85,7 +85,7 @@ public sealed class CategoryCommandsHandler :
                 return ResponseResult.BadRequest<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
             // select category
-            ISpecification<Category> asTrackingGetCategoryByIdSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsTrackingGetCategoryByIdSpecification), request.dto.Id[0]);
+            ISpecification<Category> asTrackingGetCategoryByIdSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsTrackingGetCategoryByIdSpecification), request.dto.Id);
             Category category = await _context.Categories.RetrieveAsync(asTrackingGetCategoryByIdSpec, cancellationToken);
 
             category.NameAR = request.dto.NameAR;

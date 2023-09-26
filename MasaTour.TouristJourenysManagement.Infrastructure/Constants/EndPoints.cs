@@ -88,10 +88,9 @@ public static class EndPoints
             public const string Summary = "Get All Users From Server | This Endpoint Used For BackEnd Developer Only | Allowed For SuperAdmin Only";
             public const string Description =
                 "<b>" +
-                    "This Endpoint Created To Help BackEnd Developer At Development Phase Only" +
+                    "Return All Deleted And UnDeleted Users" +
                 "</b>";
         }
-
         public static class DeleteUserById
         {
             public const string OperationId = "0B70CA81-86D9-4C34-9131-04523FCFD35C";
@@ -110,8 +109,6 @@ public static class EndPoints
                     "This Endpoint Mark At User (IsDeleted = false) And User Will Be Retrieved Again" +
                 "</b>";
         }
-
-
         public static class DeleteAllUsers
         {
             public const string OperationId = "9DD5608A-00A0-4B08-B91D-C72E326F079F";
@@ -122,7 +119,6 @@ public static class EndPoints
                 "</b>";
         }
     }
-
     public static class Category
     {
         public static class AddCategory
@@ -138,7 +134,7 @@ public static class EndPoints
         public static class UpdateCategory
         {
             public const string OperationId = "0B5B4339-A263-4465-AE1A-66DC4C0D3AA5";
-            public const string Summary = "Update Category By Id| Allowed For SuperAdmin And Admin";
+            public const string Summary = "Update Category By Id | Allowed For SuperAdmin And Admin";
             public const string Description =
                 "<b>" +
                 "If nameAr or nameDE or nameEN are Duplicated Will Send Bad Request" +
@@ -148,7 +144,7 @@ public static class EndPoints
         public static class DeleteCategoryById
         {
             public const string OperationId = "3BA9D0AF-8E1E-49FC-9FA9-ED89C4EAE7C5";
-            public const string Summary = "Delete Category By Id| Allowed For SuperAdmin And Admin";
+            public const string Summary = "Delete Category By Id | Allowed For SuperAdmin And Admin";
             public const string Description =
                 "<b>" +
                 "This Endpoint Mark At User (IsDeleted = true) And User Will Not Be Retrieved Any Time" +
@@ -157,7 +153,7 @@ public static class EndPoints
         public static class UndoDeleteCategoryById
         {
             public const string OperationId = "126E9D51-3238-4398-9D65-30075348239C";
-            public const string Summary = "Undo Delete Category By Id| Allowed For SuperAdmin And Admin";
+            public const string Summary = "Undo Delete Category By Id | Allowed For SuperAdmin And Admin";
             public const string Description =
                 "<b>" +
                   "This Endpoint Mark At User (IsDeleted = false) And User Will Be Retrieved Again" +
@@ -166,27 +162,50 @@ public static class EndPoints
         public static class GetCategoryById
         {
             public const string OperationId = "6C810EF7-D50F-43C9-8DB9-A1DA3CDA913F";
-            public const string Summary = "Get Category By Id| Allowed For Anonymous";
+            public const string Summary = "Get Category By Id | Allowed For Anonymous";
             public const string Description =
                 "<b>" +
                   "Get Category By Id" +
                 "</b>";
         }
-
         public static class GetAllCategories
         {
             public const string OperationId = "51C25943-A3FC-40FE-A4E3-2DEC5D682C72";
-            public const string Summary = "Get All Categories | Allowed For Anonymous";
+            public const string Summary = "Get All Categories | Allowed For Admin And SuperAdmin";
             public const string Description =
                 "<b>" +
-                  "Get All UnDeleted Categories" +
+                  "Get All UnDeleted And Deleted Categories" +
                 "</b>";
         }
+        public static class GetAllDeletedCategories
+        {
+            public const string OperationId = "51C25943-A3FC-40FE-A4E3-2DEC5D682C721";
+            public const string Summary = "Get All Deleted Categories | Allowed For Admin And SuperAdmin";
+            public const string Description = "";
+        }
+        public static class GetAllUnDeletedCategories
+        {
+            public const string OperationId = "51C25943-A3FC-40FE-A4E3-2DEC5D682C723";
+            public const string Summary = "Get All UnDeleted Categories | Allowed For Anonymous";
+            public const string Description = "";
+        }
 
+        public static class GetAllActiveCategories
+        {
+            public const string OperationId = "51C25943-A3FC-40FE-A4E3-2DEC5D682C7224";
+            public const string Summary = "Get All Active Categories | Allowed For Anonymous";
+            public const string Description = "";
+        }
+        public static class GetAllNotActiveCategories
+        {
+            public const string OperationId = "51C25943-A3FC-40FE-A4E3-2DEC5D682C727";
+            public const string Summary = "Get All Not Active Categories | Allowed For Admin And SuperAdmin";
+            public const string Description = "";
+        }
         public static class PaginateCategories
         {
             public const string OperationId = "A765CF7A-43B6-47EB-91ED-2990DAECAE49";
-            public const string Summary = "Paginate Categories | Allowed For Anonymous";
+            public const string Summary = "Paginate UnDeleted Categories | Allowed For Anonymous";
             public const string Description =
                 "<b>" +
                   "</br></br> pageNumber Default Value = 1" +

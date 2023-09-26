@@ -35,6 +35,10 @@ public static class Router
         public const string UndoDeleteCategoryById = CategoryPrefix + "undo-delete-category-by-id";
         public const string GetCategoryById = CategoryPrefix + "get-category-by-id";
         public const string GetAllCategories = CategoryPrefix + "get-all-categories";
+        public const string GetAllDeletedCategories = CategoryPrefix + "get-all-deleted-categories";
+        public const string GetAllUnDeletedCategories = CategoryPrefix + "get-all-un-deleted-categories";
+        public const string GetAllActiveCategories = CategoryPrefix + "get-all-active-categories";
+        public const string GetAllNotActiveCategories = CategoryPrefix + "get-all-not-active-categories";
         public const string PaginateCategories = CategoryPrefix + "paginate-categories";
     }
 }

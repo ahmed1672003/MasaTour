@@ -6,13 +6,11 @@ namespace MasaTour.TouristJourenysManagement.Application.Features.Categories.Que
 public sealed class CategoryQueriesHandler :
     IRequestHandler<GetCategoryByIdQuery, ResponseModel<GetCategoryDto>>,
     IRequestHandler<GetAllCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
-    IRequestHandler<GetAllDeletedCategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>,
-    IRequestHandler<GetAllUnDeletedCategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>,
-    IRequestHandler<GetAllActiveCategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>,
-    IRequestHandler<GetAllNotActiveCategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>,
-    IRequestHandler<PaginateCategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>,
-
-
+    IRequestHandler<GetAllDeletedCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
+    IRequestHandler<GetAllUnDeletedCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
+    IRequestHandler<GetAllActiveCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
+    IRequestHandler<GetAllNotActiveCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
+    IRequestHandler<PaginateCategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
@@ -77,11 +75,16 @@ public sealed class CategoryQueriesHandler :
     #endregion
 
     #region Get All Deleted Categories
-    public async Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllDeletedCategoriesQuery request, CancellationToken cancellationToken)
+    public async Task<ResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllDeletedCategoriesQuery request, CancellationToken cancellationToken)
     {
         try
         {
+            ISpecification<Category> asNoTrackingGetDeletedCategorySpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllDeletedCategoriesSpecification));
+            if (!await _context.Categories.AnyAsync(asNoTrackingGetDeletedCategorySpec, cancellationToken))
+                return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
+            IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingGetDeletedCategorySpec, cancellationToken));
+            return ResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {
@@ -91,11 +94,14 @@ public sealed class CategoryQueriesHandler :
     #endregion
 
     #region Get All UnDeleted Categories
-    public Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllUnDeletedCategoriesQuery request, CancellationToken cancellationToken)
+    public async Task<ResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllUnDeletedCategoriesQuery request, CancellationToken cancellationToken)
     {
         try
         {
-
+            if (!await _context.Categories.AnyAsync(cancellationToken: cancellationToken))
+                return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+            IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(cancellationToken: cancellationToken));
+            return ResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {
@@ -105,11 +111,15 @@ public sealed class CategoryQueriesHandler :
     #endregion
 
     #region Get All NotActive Categories
-    public Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllNotActiveCategoriesQuery request, CancellationToken cancellationToken)
+    public async Task<ResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllNotActiveCategoriesQuery request, CancellationToken cancellationToken)
     {
         try
         {
-
+            ISpecification<Category> asNoTrackingGetAllNotActiveCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllNotActiveCategoriesSpecification));
+            if (!await _context.Categories.AnyAsync(asNoTrackingGetAllNotActiveCategoriesSpec, cancellationToken))
+                return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+            IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingGetAllNotActiveCategoriesSpec, cancellationToken: cancellationToken));
+            return ResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {
@@ -120,57 +130,62 @@ public sealed class CategoryQueriesHandler :
     #endregion
 
     #region Get All Active Categories
-
-    public Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllActiveCategoriesQuery request, CancellationToken cancellationToken)
+    public async Task<ResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllActiveCategoriesQuery request, CancellationToken cancellationToken)
     {
         try
         {
-
+            ISpecification<Category> asNoTrackingGetAllActiveCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllActiveCategoriesSpecification));
+            if (!await _context.Categories.AnyAsync(asNoTrackingGetAllActiveCategoriesSpec, cancellationToken))
+                return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+            IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingGetAllActiveCategoriesSpec, cancellationToken: cancellationToken));
+            return ResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {
             return ResponseResult.InternalServerError<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
-        #endregion
-
-        #region Pagination Categories
-        public async Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(PaginateCategoriesQuery request, CancellationToken cancellationToken)
-        {
-            try
-            {
-                if (!await _context.Categories.AnyAsync(cancellationToken: cancellationToken))
-                    return PaginationResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
-                Expression<Func<Category, object>> orderBy = category => new();
-
-                switch (request.orderBy)
-                {
-                    case CategoryOrderBy.Id:
-                        orderBy = category => category.Id;
-                        break;
-                    case CategoryOrderBy.NameAR:
-                        orderBy = category => category.NameAR;
-                        break;
-                    case CategoryOrderBy.NameEN:
-                        orderBy = category => category.NameEN;
-                        break;
-                    case CategoryOrderBy.NameDE:
-                        orderBy = category => category.NameDE;
-                        break;
-                    default:
-                        orderBy = category => category.CreatedAt;
-                        break;
-                }
-                int totalCount = await _context.Categories.CountAsync(cancellationToken: cancellationToken);
-
-                ISpecification<Category> asNoTrackingPaginateCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingPaginateCategoriesSpecification), request.pageNumber!.Value, request.pageSize!.Value, request.keyWords, orderBy);
-                IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingPaginateCategoriesSpec, cancellationToken));
-                return PaginationResponseResult.Success(categoriesDto, count: totalCount, currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
-            }
-            catch (Exception ex)
-            {
-                return PaginationResponseResult.InternalServerError<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
-            }
-        }
-        #endregion
     }
+    #endregion
+
+    #region Pagination Categories
+
+    public async Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(PaginateCategoriesQuery request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (!await _context.Categories.AnyAsync(cancellationToken: cancellationToken))
+                return PaginationResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            Expression<Func<Category, object>> orderBy = category => new();
+
+            switch (request.orderBy)
+            {
+                case CategoryOrderBy.Id:
+                    orderBy = category => category.Id;
+                    break;
+                case CategoryOrderBy.NameAR:
+                    orderBy = category => category.NameAR;
+                    break;
+                case CategoryOrderBy.NameEN:
+                    orderBy = category => category.NameEN;
+                    break;
+                case CategoryOrderBy.NameDE:
+                    orderBy = category => category.NameDE;
+                    break;
+                default:
+                    orderBy = category => category.CreatedAt;
+                    break;
+            }
+            int totalCount = await _context.Categories.CountAsync(cancellationToken: cancellationToken);
+
+            ISpecification<Category> asNoTrackingPaginateCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingPaginateCategoriesSpecification), request.pageNumber!.Value, request.pageSize!.Value, request.keyWords, orderBy);
+            IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingPaginateCategoriesSpec, cancellationToken));
+            return PaginationResponseResult.Success(categoriesDto, count: totalCount, currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return PaginationResponseResult.InternalServerError<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+}
