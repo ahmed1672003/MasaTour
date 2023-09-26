@@ -31,44 +31,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Trips",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    NameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    NameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    NameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    LongDesceiptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
-                    LongDesceiptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
-                    LongDesceiptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
-                    MiniDesceiptionAR = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
-                    MiniDesceiptionEN = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
-                    MiniDesceiptionDE = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
-                    FromAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    FromEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    FromDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ToAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ToEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ToDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PriceEGP = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
-                    PriceUSD = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
-                    PriceGBP = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
-                    PriceEUR = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
-                    IsFamous = table.Column<bool>(type: "bit", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trips", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -117,27 +79,47 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoriesTripsMapper",
+                name: "Trips",
                 columns: table => new
                 {
-                    CategoryId = table.Column<string>(type: "nvarchar(36)", nullable: false),
-                    TripId = table.Column<string>(type: "nvarchar(36)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    LongDesceiptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    LongDesceiptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    LongDesceiptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    MiniDesceiptionAR = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    MiniDesceiptionEN = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    MiniDesceiptionDE = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    FromAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    FromEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    FromDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ToAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ToEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ToDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PriceEGP = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceUSD = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceGBP = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceEUR = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    IsFamous = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CategoryId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoriesTripsMapper", x => new { x.CategoryId, x.TripId });
+                    table.PrimaryKey("PK_Trips", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CategoriesTripsMapper_Catgeories_CategoryId",
+                        name: "FK_Trips_Catgeories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Catgeories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CategoriesTripsMapper_Trips_TripId",
-                        column: x => x.TripId,
-                        principalTable: "Trips",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -292,11 +274,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoriesTripsMapper_TripId",
-                table: "CategoriesTripsMapper",
-                column: "TripId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Catgeories_NameAR",
                 table: "Catgeories",
                 column: "NameAR",
@@ -313,6 +290,28 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 table: "Catgeories",
                 column: "NameEN",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleClaims_RoleId",
+                table: "RoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleClaims_RoleId1",
+                table: "RoleClaims",
+                column: "RoleId1");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "Roles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trips_CategoryId",
+                table: "Trips",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trips_Code",
@@ -337,23 +336,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 table: "Trips",
                 column: "NameEN",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoleClaims_RoleId",
-                table: "RoleClaims",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoleClaims_RoleId1",
-                table: "RoleClaims",
-                column: "RoleId1");
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "Roles",
-                column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -414,10 +396,10 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CategoriesTripsMapper");
+                name: "RoleClaims");
 
             migrationBuilder.DropTable(
-                name: "RoleClaims");
+                name: "Trips");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -436,9 +418,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Catgeories");
-
-            migrationBuilder.DropTable(
-                name: "Trips");
 
             migrationBuilder.DropTable(
                 name: "Roles");

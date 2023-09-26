@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Trips\Queries\Handler\" />
     <Folder Include="Features\Users\Validators\" />
   </ItemGroup>
 

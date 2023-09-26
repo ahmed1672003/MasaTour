@@ -14,7 +14,6 @@ public interface IUnitOfWork : IAsyncDisposable
     IUserTokenRepository UserTokens { get; }
     ICategoryRepository Categories { get; }
     ITripRepository Trips { get; }
-    ICategoriesTripsMapperRepository CategoriesTripsMappers { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

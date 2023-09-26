@@ -65,7 +65,6 @@ public static class InfrastructureDependencies
                 .AddScoped<IUserTokenRepository, UserTokenRepository>()
                 .AddScoped<ICategoryRepository, CategoryRepository>()
                 .AddScoped<ITripRepository, TripRepository>()
-                .AddScoped<ICategoriesTripsMapperRepository, CategoriesTripsMapperRepository>()
                 .AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped(typeof(ISpecification<>), typeof(Specification<>));
 

@@ -1,4 +1,2 @@
 ﻿namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands;
-internal class UpdateTripCommand
-{
-}
+public record class UpdateTripCommand(UpdateTripDto dto) : IRequest<ResponseModel<GetTripDto>>;

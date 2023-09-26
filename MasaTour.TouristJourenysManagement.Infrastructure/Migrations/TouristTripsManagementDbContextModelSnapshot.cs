@@ -22,27 +22,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.CategoriesTripsMapper", b =>
-                {
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("TripId")
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("CategoryId", "TripId");
-
-                    b.HasIndex("TripId");
-
-                    b.ToTable("CategoriesTripsMapper", (string)null);
-                });
-
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Category", b =>
                 {
                     b.Property<string>("Id")
@@ -413,6 +392,11 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("CategoryId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -528,6 +512,8 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("Code")
                         .IsUnique();
 
@@ -541,25 +527,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Trips", (string)null);
-                });
-
-            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.CategoriesTripsMapper", b =>
-                {
-                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Category", "Category")
-                        .WithMany("CategoriesTripsMappers")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
-                        .WithMany("CategoriesTripsMappers")
-                        .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Trip");
                 });
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Identity.RoleClaim", b =>
@@ -642,9 +609,20 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
+                {
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Category", "Category")
+                        .WithMany("Trips")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Category", b =>
                 {
-                    b.Navigation("CategoriesTripsMappers");
+                    b.Navigation("Trips");
                 });
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Identity.Role", b =>
@@ -659,11 +637,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("UserJWTs");
 
                     b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
-                {
-                    b.Navigation("CategoriesTripsMappers");
                 });
 #pragma warning restore 612, 618
         }

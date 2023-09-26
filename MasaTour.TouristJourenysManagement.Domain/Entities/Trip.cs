@@ -95,7 +95,6 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     [Required]
     public bool IsActive { get; set; }
 
-
     [Required]
     public bool IsDeleted { get; set; }
 
@@ -108,13 +107,17 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     [AllowNull]
     public DateTime? DeletedAt { get; set; }
 
+    [Required]
+    [MaxLength(36)]
+    [MinLength(36)]
+    public string CategoryId { get; set; }
+
     [AllowNull]
-    [InverseProperty(nameof(CategoriesTripsMapper.Trip))]
-    public List<CategoriesTripsMapper> CategoriesTripsMappers { get; set; }
+    [ForeignKey(nameof(CategoryId))]
+    public Category Category { get; set; }
 
     public Trip()
     {
         IsDeleted = false;
-        CategoriesTripsMappers = new List<CategoriesTripsMapper>();
     }
 }

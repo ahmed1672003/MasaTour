@@ -1,4 +1,2 @@
 ﻿namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands;
-internal class AddTripCommand
-{
-}
+public sealed record AddTripCommand(AddTripDto dto) : IRequest<ResponseModel<GetTripDto>>;

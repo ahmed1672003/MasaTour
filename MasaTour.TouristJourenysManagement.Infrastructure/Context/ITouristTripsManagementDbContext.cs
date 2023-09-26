@@ -14,7 +14,6 @@ public interface ITouristTripsManagementDbContext
     DbSet<UserJWT> UserJWTs { get; }
     DbSet<Category> Categories { get; }
     DbSet<Trip> Trips { get; }
-    DbSet<CategoriesTripsMapper> CategoryTrips { get; }
     ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     DatabaseFacade Database { get; }

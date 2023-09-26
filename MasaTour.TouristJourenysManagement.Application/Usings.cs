@@ -5,6 +5,7 @@ global using AutoMapper;
 
 global using MasaTour.TouristTripsManagement.Application.Features.Auth.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.Categories.Dtos;
+global using MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Resources;
 global using MasaTour.TouristTripsManagement.Application.Response;
 global using MasaTour.TouristTripsManagement.Domain.Entities;

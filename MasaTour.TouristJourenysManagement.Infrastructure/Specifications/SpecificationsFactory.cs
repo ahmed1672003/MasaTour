@@ -70,6 +70,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingCheckDuplicatedTripByNameARSpecification" => new AsNoTrackingCheckDuplicatedTripByNameARSpecification(parameters[0], parameters[0]),
             "AsNoTrackingCheckDuplicatedTripByNameDESpecification" => new AsNoTrackingCheckDuplicatedTripByNameDESpecification(parameters[0], parameters[0]),
             "AsNoTrackingCheckDuplicatedTripByNameENSpecification" => new AsNoTrackingCheckDuplicatedTripByNameENSpecification(parameters[0], parameters[0]),
+            "AsNoTrackingCheckDuplicatedTripByCodeSpecification" => new AsNoTrackingCheckDuplicatedTripByCodeSpecification(parameters[0], parameters[1]),
             "AsNoTrackingGetAllActiveTripsSpecification" => new AsNoTrackingGetAllActiveTripsSpecification(),
             "AsNoTrackingGetAllDeletedTripsSpecification" => new AsNoTrackingGetAllDeletedTripsSpecification(),
             "AsNoTrackingGetAllTripsSpecification" => new AsNoTrackingGetAllTripsSpecification(),
@@ -79,6 +80,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetTripByNameARSpecification" => new AsNoTrackingGetTripByNameARSpecification(parameters[0]),
             "AsNoTrackingGetTripByNameDESpecification" => new AsNoTrackingGetTripByNameDESpecification(parameters[0]),
             "AsNoTrackingGetTripByNameENSpecification" => new AsNoTrackingGetTripByNameENSpecification(parameters[0]),
+            "AsNoTrackingGetTripByCodeSpecification" => new AsNoTrackingGetTripByCodeSpecification(parameters[0]),
             "AsNoTrackingPaginateTripsSpecification" => new AsNoTrackingPaginateTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetTripByIdSpecification" => new AsTrackingGetTripByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()

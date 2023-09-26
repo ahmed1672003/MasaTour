@@ -5,6 +5,5 @@ public sealed class AsNoTrackingCheckDuplicatedTripByNameARSpecification : Speci
         : base(Trip => Trip.NameAR.Equals(nameAR) && !Trip.Id.Equals(TripId))
     {
         StopTracking();
-
     }
 }

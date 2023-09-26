@@ -37,13 +37,13 @@ public class Category : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICre
     public DateTime? DeletedAt { get; set; }
 
     [AllowNull]
-    [InverseProperty(nameof(CategoriesTripsMapper.Category))]
-    public List<CategoriesTripsMapper> CategoriesTripsMappers { get; set; }
+    public List<Trip> Trips { get; set; }
+
 
     public Category()
     {
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        CategoriesTripsMappers = new List<CategoriesTripsMapper>();
+        Trips = new List<Trip>();
     }
 }

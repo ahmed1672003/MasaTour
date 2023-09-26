@@ -1,4 +1,3 @@
 ﻿namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands;
-internal class DeleteTripByIdCommand
-{
-}
+public sealed record DeleteTripByIdCommand([Required] string Id) : IRequest<ResponseModel<GetTripDto>>;
+

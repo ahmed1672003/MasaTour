@@ -1,6 +1,4 @@
-﻿using MasaTour.TouristTripsManagement.Domain.Entities;
-
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MasaTour.TouristTripsManagement.Infrastructure.Context;
 public class TouristTripsManagementDbContext
@@ -23,5 +21,5 @@ public class TouristTripsManagementDbContext
     public DbSet<UserJWT> UserJWTs => Set<UserJWT>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Trip> Trips => Set<Trip>();
-    public DbSet<CategoriesTripsMapper> CategoryTrips => Set<CategoriesTripsMapper>();
+
 }

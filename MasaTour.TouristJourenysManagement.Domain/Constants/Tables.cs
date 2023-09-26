@@ -14,5 +14,4 @@ public static class Tables
     }
     public const string Trips = "Trips";
     public const string Catgeories = "Catgeories";
-    public const string CategoriesTripsMappers = "CategoriesTripsMapper";
 }
