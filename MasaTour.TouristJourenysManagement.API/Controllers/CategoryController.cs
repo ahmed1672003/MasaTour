@@ -58,6 +58,6 @@ public class CategoryController : MasaTourController
     [HttpGet(Router.Category.PaginateCategories)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetCategoryDto>>))]
     [SwaggerOperation(OperationId = EndPoints.Category.PaginateCategories.OperationId, Summary = EndPoints.Category.PaginateCategories.Summary, Description = EndPoints.Category.PaginateCategories.Description)]
-    public async Task<IActionResult> PaginateCategories(int? pageNumber = 1, int? pageSize = 10, CategoryOrderBy? orderBy = CategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateCategoriesQuery(pageNumber, pageSize, orderBy)));
+    public async Task<IActionResult> PaginateCategories(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", CategoryOrderBy? orderBy = CategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateCategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
     #endregion
 }

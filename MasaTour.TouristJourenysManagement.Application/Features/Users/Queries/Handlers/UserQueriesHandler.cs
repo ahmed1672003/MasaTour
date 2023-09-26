@@ -3,11 +3,15 @@ public sealed class UserQueriesHandler :
     IRequestHandler<GetUserByIdQuery, ResponseModel<GetUserDto>>,
     IRequestHandler<GetAllUsersQuery, ResponseModel<IEnumerable<GetUserDto>>>
 {
+    #region Field
     private readonly IUnitOfWork _context;
     private readonly IUnitOfServices _services;
     private readonly ISpecificationsFactory _specificationsFactory;
     private readonly IMapper _mapper;
     private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+    #endregion
+
+    #region Ctor
     public UserQueriesHandler(
         IUnitOfWork context,
         IUnitOfServices services,
@@ -21,6 +25,7 @@ public sealed class UserQueriesHandler :
         _stringLocalizer = stringLocalizer;
         _specificationsFactory = specificationsFactory;
     }
+    #endregion
 
     #region Get User By Id
     public async Task<ResponseModel<GetUserDto>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)

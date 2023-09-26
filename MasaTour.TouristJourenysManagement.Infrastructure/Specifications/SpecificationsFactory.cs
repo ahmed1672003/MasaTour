@@ -54,7 +54,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetCategoryByNameDESpecification" => new AsNoTrackingGetCategoryByNameDESpecification(parameters[0]),
             "AsNoTrackingGetCategoryByNameENSpecification" => new AsNoTrackingGetCategoryByNameENSpecification(parameters[0]),
             "AsNoTrackingGetDeletedCategoryByIdSpecification" => new AsNoTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
-            "AsNoTrackingPaginateCategoriesSpecification" => new AsNoTrackingPaginateCategoriesSpecification(parameters[0], parameters[1], parameters[2]),
+            "AsNoTrackingPaginateCategoriesSpecification" => new AsNoTrackingPaginateCategoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetDeletedCategoryByIdSpecification" => new AsTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
             "AsTrackingGetCategoryByIdSpecification" => new AsTrackingGetCategoryByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
