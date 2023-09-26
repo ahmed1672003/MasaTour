@@ -140,6 +140,9 @@ public sealed class CategoryCommandsHandler :
 
             ISpecification<Category> asTrackingGetDeletedCategoryByIdSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsTrackingGetDeletedCategoryByIdSpecification), request.categoryId);
             Category category = await _context.Categories.RetrieveAsync(asTrackingGetDeletedCategoryByIdSpec, cancellationToken);
+
+
+
             _context.Categories.UndoDeleted(ref category);
 
             await _context.SaveChangesAsync(cancellationToken);

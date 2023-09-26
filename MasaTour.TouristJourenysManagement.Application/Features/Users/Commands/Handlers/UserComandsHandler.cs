@@ -87,12 +87,13 @@ public sealed class UserComandsHandler :
     {
         try
         {
-            ISpecification<User> changeVisibilitySpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingChangeVisibilitySpecification), request.UserId, false);
-            if (!await _context.Users.AnyAsync(changeVisibilitySpec, cancellationToken))
+            ISpecification<User> asNoTrackingGetDeletedUserByIdSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingGetDeletedUserByIdSpecification), request.UserId);
+            if (!await _context.Users.AnyAsync(asNoTrackingGetDeletedUserByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            User user = await _context.Users.RetrieveAsync(changeVisibilitySpec, cancellationToken);
+            ISpecification<User> asTrackingGetDeletedUserByIdSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsTrackingGetDeletedUserByIdSpecification), request.UserId);
 
+            User user = await _context.Users.RetrieveAsync(asTrackingGetDeletedUserByIdSpec, cancellationToken);
             _context.Users.UndoDeleted(ref user);
 
             await _context.SaveChangesAsync();
@@ -111,11 +112,11 @@ public sealed class UserComandsHandler :
     {
         try
         {
-            ISpecification<User> changeVisibilitySpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingChangeVisibilitySpecification), request.Id, true);
-            if (!await _context.Users.AnyAsync(changeVisibilitySpec, cancellationToken))
+            ISpecification<User> asNoTrackingGetUserByIdSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsNoTrackingGetUserByIdSpecification), request.Id);
+            if (!await _context.Users.AnyAsync(asNoTrackingGetUserByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            User user = await _context.Users.RetrieveAsync(changeVisibilitySpec, cancellationToken);
+            User user = await _context.Users.RetrieveAsync(asNoTrackingGetUserByIdSpec, cancellationToken);
 
             await _context.Users.DeleteAsync(user);
             await _context.SaveChangesAsync();

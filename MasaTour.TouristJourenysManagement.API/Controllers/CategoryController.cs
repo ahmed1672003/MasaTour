@@ -48,6 +48,13 @@ public class CategoryController : MasaTourController
     public async Task<IActionResult> GetCategoryById([Required] string categoryId) => MasaTourResponse(await Mediator.Send(new GetCategoryByIdQuery(categoryId)));
 
     [AllowAnonymous]
+    [HttpGet(Router.Category.GetAllCategories)]
+    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetCategoryDto>>))]
+    [SwaggerOperation(OperationId = EndPoints.Category.GetAllCategories.OperationId, Summary = EndPoints.Category.GetAllCategories.Summary, Description = EndPoints.Category.GetAllCategories.Description)]
+    public async Task<IActionResult> GetAllCategories() => MasaTourResponse(await Mediator.Send(new GetAllCategoriesQuery()));
+
+
+    [AllowAnonymous]
     [HttpGet(Router.Category.PaginateCategories)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetCategoryDto>>))]
     [SwaggerOperation(OperationId = EndPoints.Category.PaginateCategories.OperationId, Summary = EndPoints.Category.PaginateCategories.Summary, Description = EndPoints.Category.PaginateCategories.Description)]
