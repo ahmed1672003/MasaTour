@@ -7,7 +7,9 @@ public class UpdateTripDto
     public string TripId { get; set; }
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
-    public List<string> CategoriesIds { get; set; }
+    [MaxLength(36, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsBiggerThanMaxLength)]
+    [MinLength(36, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsSmallerThanMinLength)]
+    public string CategoryId { get; set; }
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
     [MaxLength(255, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsBiggerThanMaxLength)]
@@ -16,7 +18,6 @@ public class UpdateTripDto
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
     [MaxLength(255, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsBiggerThanMaxLength)]
     public string NameAR { get; set; }
-
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
     [MaxLength(255, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsBiggerThanMaxLength)]
@@ -34,7 +35,6 @@ public class UpdateTripDto
 
     [MaxLength(3000, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsBiggerThanMaxLength)]
     public string? LongDesceiptionDE { get; set; }
-
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
     [MaxLength(1500, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsBiggerThanMaxLength)]

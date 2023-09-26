@@ -82,6 +82,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetTripByNameENSpecification" => new AsNoTrackingGetTripByNameENSpecification(parameters[0]),
             "AsNoTrackingGetTripByCodeSpecification" => new AsNoTrackingGetTripByCodeSpecification(parameters[0]),
             "AsNoTrackingPaginateTripsSpecification" => new AsNoTrackingPaginateTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsTrackingGetDeletedTripByIdSpecification" => new AsTrackingGetDeletedTripByIdSpecification(parameters[0]),
             "AsTrackingGetTripByIdSpecification" => new AsTrackingGetTripByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
