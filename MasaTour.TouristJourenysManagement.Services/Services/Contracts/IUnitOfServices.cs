@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Services.Services.Contracts;
+﻿namespace MasaTour.TouristTripsManagement.Services.Services.Contracts;
 public interface IUnitOfServices
 {
     IAuthService AuthService { get; }

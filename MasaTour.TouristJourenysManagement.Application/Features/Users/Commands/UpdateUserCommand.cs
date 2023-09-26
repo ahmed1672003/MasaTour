@@ -1,4 +1,4 @@
-﻿using MasaTour.TouristJourenysManagement.Application.Features.Users.Dtos;
+﻿using MasaTour.TouristTripsManagement.Application.Features.Users.Dtos;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Commands;
+namespace MasaTour.TouristTripsManagement.Application.Features.Users.Commands;
 public sealed record UpdateUserCommand(UpdateUserDto dto) : IRequest<ResponseModel<GetUserDto>>;

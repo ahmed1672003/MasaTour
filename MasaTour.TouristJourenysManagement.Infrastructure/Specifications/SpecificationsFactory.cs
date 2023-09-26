@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Jourenys;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
+namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
 public sealed class SpecificationsFactory : ISpecificationsFactory
 {
@@ -63,24 +63,24 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
-    public ISpecification<Journey> CreatJourneySpecifications(Type type, params dynamic[] parameters)
+    public ISpecification<Trip> CreatTripSpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
         {
-            "AsNoTrackingCheckDuplicatedJourneyByNameARSpecification" => new AsNoTrackingCheckDuplicatedJourneyByNameARSpecification(parameters[0], parameters[0]),
-            "AsNoTrackingCheckDuplicatedJourneyByNameDESpecification" => new AsNoTrackingCheckDuplicatedJourneyByNameDESpecification(parameters[0], parameters[0]),
-            "AsNoTrackingCheckDuplicatedJourneyByNameENSpecification" => new AsNoTrackingCheckDuplicatedJourneyByNameENSpecification(parameters[0], parameters[0]),
-            "AsNoTrackingGetAllActiveJourneysSpecification" => new AsNoTrackingGetAllActiveJourneysSpecification(),
-            "AsNoTrackingGetAllDeletedJourneysSpecification" => new AsNoTrackingGetAllDeletedJourneysSpecification(),
-            "AsNoTrackingGetAllJourneysSpecification" => new AsNoTrackingGetAllJourneysSpecification(),
-            "AsNoTrackingGetAllNotActiveJourneysSpecification" => new AsNoTrackingGetAllNotActiveJourneysSpecification(),
-            "AsNoTrackingGetDeletedJourneyByIdSpecification" => new AsNoTrackingGetDeletedJourneyByIdSpecification(parameters[0]),
-            "AsNoTrackingGetJouernyByIdSpecification" => new AsNoTrackingGetJouernyByIdSpecification(parameters[0]),
-            "AsNoTrackingGetJourneyByNameARSpecification" => new AsNoTrackingGetJourneyByNameARSpecification(parameters[0]),
-            "AsNoTrackingGetJourneyByNameDESpecification" => new AsNoTrackingGetJourneyByNameDESpecification(parameters[0]),
-            "AsNoTrackingGetJourneyByNameENSpecification" => new AsNoTrackingGetJourneyByNameENSpecification(parameters[0]),
-            "AsNoTrackingPaginateJourneysSpecification" => new AsNoTrackingPaginateJourneysSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
-            "AsTrackingGetJouernyByIdSpecification" => new AsTrackingGetJouernyByIdSpecification(parameters[0]),
+            "AsNoTrackingCheckDuplicatedTripByNameARSpecification" => new AsNoTrackingCheckDuplicatedTripByNameARSpecification(parameters[0], parameters[0]),
+            "AsNoTrackingCheckDuplicatedTripByNameDESpecification" => new AsNoTrackingCheckDuplicatedTripByNameDESpecification(parameters[0], parameters[0]),
+            "AsNoTrackingCheckDuplicatedTripByNameENSpecification" => new AsNoTrackingCheckDuplicatedTripByNameENSpecification(parameters[0], parameters[0]),
+            "AsNoTrackingGetAllActiveTripsSpecification" => new AsNoTrackingGetAllActiveTripsSpecification(),
+            "AsNoTrackingGetAllDeletedTripsSpecification" => new AsNoTrackingGetAllDeletedTripsSpecification(),
+            "AsNoTrackingGetAllTripsSpecification" => new AsNoTrackingGetAllTripsSpecification(),
+            "AsNoTrackingGetAllNotActiveTripsSpecification" => new AsNoTrackingGetAllNotActiveTripsSpecification(),
+            "AsNoTrackingGetDeletedTripByIdSpecification" => new AsNoTrackingGetDeletedTripByIdSpecification(parameters[0]),
+            "AsNoTrackingGetTripByIdSpecification" => new AsNoTrackingGetTripByIdSpecification(parameters[0]),
+            "AsNoTrackingGetTripByNameARSpecification" => new AsNoTrackingGetTripByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetTripByNameDESpecification" => new AsNoTrackingGetTripByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetTripByNameENSpecification" => new AsNoTrackingGetTripByNameENSpecification(parameters[0]),
+            "AsNoTrackingPaginateTripsSpecification" => new AsNoTrackingPaginateTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsTrackingGetTripByIdSpecification" => new AsTrackingGetTripByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }

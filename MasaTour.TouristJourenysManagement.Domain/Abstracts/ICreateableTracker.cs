@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Domain.Abstracts;
+﻿namespace MasaTour.TouristTripsManagement.Domain.Abstracts;
 public interface ICreateableTracker
 {
     public DateTime CreatedAt { get; set; }

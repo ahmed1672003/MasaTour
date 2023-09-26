@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Settings;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Settings;
 public class JwtSettings
 {
     public string Secret { get; set; }

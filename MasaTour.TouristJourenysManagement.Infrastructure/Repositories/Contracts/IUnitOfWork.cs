@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
+namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories.Contracts;
 public interface IUnitOfWork : IAsyncDisposable
 {
     IIdentityRepository Identity { get; }
@@ -13,8 +13,8 @@ public interface IUnitOfWork : IAsyncDisposable
     IUserRoleMapperRepository UserRoleMappers { get; }
     IUserTokenRepository UserTokens { get; }
     ICategoryRepository Categories { get; }
-    IJourenyRepository Jourenys { get; }
-    ICategoriesJourneysMapperRepository CategoriesJourneysMappers { get; }
+    ITripRepository Trips { get; }
+    ICategoriesTripsMapperRepository CategoriesTripsMappers { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

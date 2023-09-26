@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Users;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications.Users;
 public class AsNoTrackingCheckIfUserNameDuplicatedSpecification : Specification<User>
 {
     public AsNoTrackingCheckIfUserNameDuplicatedSpecification(string id, string userName)

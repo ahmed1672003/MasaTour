@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories.Contracts;
 public interface ICategoryRepository : IRepository<Category>
 {
 }

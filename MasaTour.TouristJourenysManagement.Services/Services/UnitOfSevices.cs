@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Services.Services;
+﻿namespace MasaTour.TouristTripsManagement.Services.Services;
 public class UnitOfSevices : IUnitOfServices
 {
     public UnitOfSevices(IAuthService authService, ICookiesService cookiesService, IEmailService emailService)

@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Domain.Constants;
+﻿namespace MasaTour.TouristTripsManagement.Domain.Constants;
 public static class Tables
 {
     public static class Identity
@@ -12,7 +12,7 @@ public static class Tables
         public const string UserRolesMappers = "UsersRolesMappers";
         public const string UserTokens = "UserTokens";
     }
-    public const string Journeys = "Journeys";
+    public const string Trips = "Trips";
     public const string Catgeories = "Catgeories";
-    public const string CategoriesJourneysMappers = "CategoriesJourneysMapper";
+    public const string CategoriesTripsMappers = "CategoriesTripsMapper";
 }

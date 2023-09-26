@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Categories;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications.Categories;
 public sealed class AsNoTrackingPaginateCategoriesSpecification : Specification<Category>
 {
     public AsNoTrackingPaginateCategoriesSpecification(int pageNumber = 1, int pageSize = 10, string keyWords = "", Expression<Func<Category, object>> orderBy = null)

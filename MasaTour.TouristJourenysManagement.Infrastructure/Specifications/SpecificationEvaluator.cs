@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 public class SpecificationEvaluator
 {
     public static IQueryable<TEntity> GetQuery<TEntity>(IQueryable<TEntity> queryable, ISpecification<TEntity> specification) where TEntity : class

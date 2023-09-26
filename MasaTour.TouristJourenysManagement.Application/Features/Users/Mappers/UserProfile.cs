@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Mappers;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Users.Mappers;
 public class UserProfile : Profile
 {
     public UserProfile()

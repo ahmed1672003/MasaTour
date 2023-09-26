@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Resources;
+﻿namespace MasaTour.TouristTripsManagement.Application.Resources;
 public static class ResourcesKeys
 {
     public static class Shared
@@ -40,7 +40,7 @@ public static class ResourcesKeys
         public const string FiledLengthIsSmallerThanMinLength = "FiledLengthIsSmallerThanMinLength";
         public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
     }
-    public static class Joureny
+    public static class Trip
     {
         public const string FiledCanNotBeNull = "FiledCanNotBeNull";
         public const string FiledLengthIsBiggerThanMaxLength = "FiledLengthIsBiggerThanMaxLength";

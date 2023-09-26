@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Abstracts;
+﻿using MasaTour.TouristTripsManagement.Domain.Abstracts;
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Contracts;
+namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories.Contracts;
 public interface IRepository<TEntity> where TEntity : class
 {
     #region Commands

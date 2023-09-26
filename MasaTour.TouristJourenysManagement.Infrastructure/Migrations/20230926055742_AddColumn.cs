@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
+namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddColumn : Migration
@@ -12,7 +12,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
         {
             migrationBuilder.AddColumn<bool>(
                 name: "IsActive",
-                table: "Journeys",
+                table: "Trips",
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
@@ -23,7 +23,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "IsActive",
-                table: "Journeys");
+                table: "Trips");
         }
     }
 }

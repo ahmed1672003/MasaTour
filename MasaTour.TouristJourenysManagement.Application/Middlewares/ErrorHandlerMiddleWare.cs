@@ -5,7 +5,7 @@ using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace MasaTour.TouristJourenysManagement.Application.Middlewares;
+namespace MasaTour.TouristTripsManagement.Application.Middlewares;
 public class ErrorHandlerMiddleWare
 {
     private readonly RequestDelegate _next;

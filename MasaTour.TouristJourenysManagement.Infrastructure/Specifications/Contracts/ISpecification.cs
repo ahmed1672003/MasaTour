@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications.Contracts;
 public interface ISpecification<TEntity> where TEntity : class
 {
     Expression<Func<TEntity, bool>> Criteria { get; }

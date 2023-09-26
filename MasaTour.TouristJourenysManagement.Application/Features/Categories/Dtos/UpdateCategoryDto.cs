@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Categories.Dtos;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Categories.Dtos;
 public class UpdateCategoryDto
 {
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Category.FiledCanNotBeNull)]

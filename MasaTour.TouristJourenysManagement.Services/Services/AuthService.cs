@@ -1,8 +1,8 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Contracts;
-using MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Roles;
-using MasaTour.TouristJourenysManagement.Services.Dtos.Auth;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Contracts;
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Roles;
+using MasaTour.TouristTripsManagement.Services.Dtos.Auth;
 
-namespace MasaTour.TouristJourenysManagement.Services.Services;
+namespace MasaTour.TouristTripsManagement.Services.Services;
 public class AuthService : IAuthService
 {
     private readonly IUnitOfWork _context;

@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Enums;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Enums;
 public enum Roles
 {
     SuperAdmin,

@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Abstracts;
+﻿using MasaTour.TouristTripsManagement.Domain.Abstracts;
 
-namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
+namespace MasaTour.TouristTripsManagement.Domain.Entities.Identity;
 
 [PrimaryKey(nameof(Id))]
 [Index(nameof(UserName), IsUnique = true)]

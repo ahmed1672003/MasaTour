@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Queries;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Users.Queries;
 internal class PaginateUsersQuery
 {
 }

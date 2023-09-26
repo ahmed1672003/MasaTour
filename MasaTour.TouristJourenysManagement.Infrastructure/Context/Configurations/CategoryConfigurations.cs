@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Context.Configurations;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Context.Configurations;
 
 public sealed class CategoryConfigurations : IEntityTypeConfiguration<Category>
 {

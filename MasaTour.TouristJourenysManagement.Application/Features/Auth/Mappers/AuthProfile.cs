@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Mappers;
+namespace MasaTour.TouristTripsManagement.Application.Features.Auth.Mappers;
 public class AuthProfile : Profile
 {
     public AuthProfile()

@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Queries.Handlers;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Auth.Queries.Handlers;
 public sealed class AuthQueriesHandler :
     IRequestHandler<LoginUserQuery, ResponseModel<AuthModel>>
 {

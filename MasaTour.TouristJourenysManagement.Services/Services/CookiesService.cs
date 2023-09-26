@@ -1,8 +1,8 @@
-﻿using MasaTour.TouristJourenysManagement.Services.Dtos.Auth;
+﻿using MasaTour.TouristTripsManagement.Services.Dtos.Auth;
 
 using Microsoft.AspNetCore.Http;
 
-namespace MasaTour.TouristJourenysManagement.Services.Services;
+namespace MasaTour.TouristTripsManagement.Services.Services;
 public class CookiesService : ICookiesService
 {
     private readonly IHttpContextAccessor _contextAccessor;

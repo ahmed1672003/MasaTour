@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Seeds;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Seeds;
 public static class PermissionsSedeer
 {
 }

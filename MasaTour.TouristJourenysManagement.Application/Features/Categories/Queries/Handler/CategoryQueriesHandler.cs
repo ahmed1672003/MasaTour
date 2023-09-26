@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-using MasaTour.TouristJourenysManagement.Application.Features.Enums;
+using MasaTour.TouristTripsManagement.Application.Features.Enums;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Categories.Queries.Handler;
+namespace MasaTour.TouristTripsManagement.Application.Features.Categories.Queries.Handler;
 public sealed class CategoryQueriesHandler :
     IRequestHandler<GetCategoryByIdQuery, ResponseModel<GetCategoryDto>>,
     IRequestHandler<GetAllCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace MasaTour.TouristJourenysManagement.Application.Response;
+namespace MasaTour.TouristTripsManagement.Application.Response;
 public sealed class PaginationResponseModel<TData> : ResponseModel<TData>
 {
     public PaginationResponseModel(

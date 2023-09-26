@@ -2,13 +2,13 @@
 using MailKit.Net.Smtp;
 using MailKit.Security;
 
-using MasaTour.TouristJourenysManagement.Services.Dtos.Messages;
+using MasaTour.TouristTripsManagement.Services.Dtos.Messages;
 
 using Microsoft.AspNetCore.Http;
 
 using MimeKit;
 
-namespace MasaTour.TouristJourenysManagement.Services.Services;
+namespace MasaTour.TouristTripsManagement.Services.Services;
 public class EmailService : IEmailService
 {
     private readonly EmailSettings _emailSettings;

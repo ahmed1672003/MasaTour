@@ -1,7 +1,7 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories;
 public sealed class CategoryRepository : Repository<Category>, ICategoryRepository
 {
-    public CategoryRepository(ITouristJourenysManagementDbContext context) : base(context)
+    public CategoryRepository(ITouristTripsManagementDbContext context) : base(context)
     {
     }
 }

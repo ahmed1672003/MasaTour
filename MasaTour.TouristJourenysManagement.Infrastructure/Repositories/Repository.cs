@@ -1,12 +1,12 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Abstracts;
+﻿using MasaTour.TouristTripsManagement.Domain.Abstracts;
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories;
+namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories;
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {
-    private readonly ITouristJourenysManagementDbContext _context;
+    private readonly ITouristTripsManagementDbContext _context;
     protected readonly DbSet<TEntity> _entities;
 
-    public Repository(ITouristJourenysManagementDbContext context)
+    public Repository(ITouristTripsManagementDbContext context)
     {
         _context = context;
         _entities = _context.Set<TEntity>();

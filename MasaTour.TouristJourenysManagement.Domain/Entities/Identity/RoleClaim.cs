@@ -1,6 +1,6 @@
 ﻿
 
-namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
+namespace MasaTour.TouristTripsManagement.Domain.Entities.Identity;
 
 [PrimaryKey(nameof(Id))]
 public class RoleClaim : IdentityRoleClaim<string>

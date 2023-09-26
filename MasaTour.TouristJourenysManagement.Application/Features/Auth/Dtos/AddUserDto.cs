@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using MasaTour.TouristJourenysManagement.Domain.Enums;
+using MasaTour.TouristTripsManagement.Domain.Enums;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
+namespace MasaTour.TouristTripsManagement.Application.Features.Auth.Dtos;
 public class AddUserDto
 {
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]

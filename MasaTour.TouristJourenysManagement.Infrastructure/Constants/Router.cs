@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Constants;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Constants;
 public static class Router
 {
     public const string Api = "api/";

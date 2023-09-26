@@ -1,12 +1,4 @@
-﻿using System.Globalization;
-using System.Text.Json.Serialization;
-
-using MasaTour.TouristJourenysManagement.Application.Middlewares;
-
-using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Options;
-
-namespace MasaTour.TouristJourenysManagement.API;
+﻿namespace MasaTour.TouristTripsManagement.API;
 
 public static class Startup
 {

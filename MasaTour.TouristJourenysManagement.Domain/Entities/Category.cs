@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Abstracts;
+﻿using MasaTour.TouristTripsManagement.Domain.Abstracts;
 
-namespace MasaTour.TouristJourenysManagement.Domain.Entities;
+namespace MasaTour.TouristTripsManagement.Domain.Entities;
 
 
 [PrimaryKey(nameof(Id))]
@@ -37,13 +37,13 @@ public class Category : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICre
     public DateTime? DeletedAt { get; set; }
 
     [AllowNull]
-    [InverseProperty(nameof(CategoriesJourneysMapper.Category))]
-    public List<CategoriesJourneysMapper> CategoriesjourneysMappers { get; set; }
+    [InverseProperty(nameof(CategoriesTripsMapper.Category))]
+    public List<CategoriesTripsMapper> CategoriesTripsMappers { get; set; }
 
     public Category()
     {
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        CategoriesjourneysMappers = new List<CategoriesJourneysMapper>();
+        CategoriesTripsMappers = new List<CategoriesTripsMapper>();
     }
 }

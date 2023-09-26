@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Commands.Handlers;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Auth.Commands.Handlers;
 public sealed class AuthCommandsHandler :
     IRequestHandler<AddUserCommand, ResponseModel<AuthModel>>,
     IRequestHandler<RefreshTokenCommand, ResponseModel<AuthModel>>,

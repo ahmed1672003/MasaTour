@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Context.Configurations.IdentityConfigurations;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Context.Configurations.IdentityConfigurations;
 public sealed class RoleClaimConfigurations : IEntityTypeConfiguration<RoleClaim>
 {
     public void Configure(EntityTypeBuilder<RoleClaim> builder)

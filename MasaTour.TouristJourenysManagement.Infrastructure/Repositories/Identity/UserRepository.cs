@@ -1,5 +1,5 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories.Identity;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories.Identity;
 public sealed class UserRepository : Repository<User>, IUserRepository
 {
-    public UserRepository(ITouristJourenysManagementDbContext context) : base(context) { }
+    public UserRepository(ITouristTripsManagementDbContext context) : base(context) { }
 }

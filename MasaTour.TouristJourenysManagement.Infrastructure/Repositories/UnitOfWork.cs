@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Repositories;
+namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories;
 public sealed class UnitOfWork : IUnitOfWork
 {
-    private readonly ITouristJourenysManagementDbContext _context;
+    private readonly ITouristTripsManagementDbContext _context;
     public UnitOfWork(
-        ITouristJourenysManagementDbContext context,
+        ITouristTripsManagementDbContext context,
         IIdentityRepository identity,
         IRoleClaimRepository roleClaims,
         IRoleRepository roles,
@@ -16,8 +16,8 @@ public sealed class UnitOfWork : IUnitOfWork
         IUserTokenRepository userTokens,
         IUserRepository users,
         ICategoryRepository categories,
-        IJourenyRepository jourenys,
-        ICategoriesJourneysMapperRepository categoriesJourneysMappers)
+        ITripRepository Trips,
+        ICategoriesTripsMapperRepository categoriesTripsMappers)
     {
         _context = context;
         Identity = identity;
@@ -30,8 +30,8 @@ public sealed class UnitOfWork : IUnitOfWork
         UserTokens = userTokens;
         Users = users;
         Categories = categories;
-        Jourenys = jourenys;
-        CategoriesJourneysMappers = categoriesJourneysMappers;
+        Trips = Trips;
+        CategoriesTripsMappers = categoriesTripsMappers;
     }
 
     public IIdentityRepository Identity { get; }
@@ -44,8 +44,8 @@ public sealed class UnitOfWork : IUnitOfWork
     public IUserTokenRepository UserTokens { get; }
     public IUserRepository Users { get; }
     public ICategoryRepository Categories { get; }
-    public IJourenyRepository Jourenys { get; }
-    public ICategoriesJourneysMapperRepository CategoriesJourneysMappers { get; }
+    public ITripRepository Trips { get; }
+    public ICategoriesTripsMapperRepository CategoriesTripsMappers { get; }
 
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default) =>
          await _context.Database.BeginTransactionAsync(cancellationToken);

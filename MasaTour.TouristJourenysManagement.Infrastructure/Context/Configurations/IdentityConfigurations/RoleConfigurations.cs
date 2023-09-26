@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Context.Configurations.IdentityConfigurations;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Context.Configurations.IdentityConfigurations;
 public sealed class RoleConfigurations : IEntityTypeConfiguration<Role>
 {
     public void Configure(EntityTypeBuilder<Role> builder)

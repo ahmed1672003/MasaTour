@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Queries.Handlers;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Users.Queries.Handlers;
 public sealed class UserQueriesHandler :
     IRequestHandler<GetUserByIdQuery, ResponseModel<GetUserDto>>,
     IRequestHandler<GetAllUsersQuery, ResponseModel<IEnumerable<GetUserDto>>>

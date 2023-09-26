@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Categories.Mappers;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Categories.Mappers;
 public sealed class CatgeoryProfile : Profile
 {
     public CatgeoryProfile()

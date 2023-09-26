@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Domain.Entities.Identity;
+﻿namespace MasaTour.TouristTripsManagement.Domain.Entities.Identity;
 
 [PrimaryKey(nameof(Id), nameof(UserId))]
 public class UserJWT : BaseEntity

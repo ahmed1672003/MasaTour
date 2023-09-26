@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Services.Dtos.Auth;
+﻿using MasaTour.TouristTripsManagement.Services.Dtos.Auth;
 
-namespace MasaTour.TouristJourenysManagement.Services.Services.Contracts;
+namespace MasaTour.TouristTripsManagement.Services.Services.Contracts;
 public interface IAuthService
 {
     Func<string, JwtSecurityToken, Task<bool>> IsJWTValid { get; }

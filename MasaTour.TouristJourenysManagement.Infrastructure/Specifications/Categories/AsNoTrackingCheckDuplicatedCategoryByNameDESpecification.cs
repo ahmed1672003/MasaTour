@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications.Categories;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications.Categories;
 public sealed class AsNoTrackingCheckDuplicatedCategoryByNameDESpecification : Specification<Category>
 {
     public AsNoTrackingCheckDuplicatedCategoryByNameDESpecification(string categoryId, string nameDE)

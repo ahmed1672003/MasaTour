@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Enums;
+﻿using MasaTour.TouristTripsManagement.Domain.Enums;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
+namespace MasaTour.TouristTripsManagement.Application.Features.Auth.Dtos;
 public class GetUserDto
 {
     public string Id { get; set; }

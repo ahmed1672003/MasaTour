@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Enums;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Enums;
 public enum CategoryOrderBy
 {
     Id,

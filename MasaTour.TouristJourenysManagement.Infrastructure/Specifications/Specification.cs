@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure.Specifications;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 public class Specification<TEntity> : ISpecification<TEntity> where TEntity : class
 {
     public Specification(Expression<Func<TEntity, bool>> criteria = null)

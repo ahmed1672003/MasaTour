@@ -1,8 +1,8 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Abstracts;
+﻿using MasaTour.TouristTripsManagement.Domain.Abstracts;
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Context.Interceptors;
+namespace MasaTour.TouristTripsManagement.Infrastructure.Context.Interceptors;
 public sealed class DeleteableTrackerInterceptor : SaveChangesInterceptor
 {
     public sealed override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)

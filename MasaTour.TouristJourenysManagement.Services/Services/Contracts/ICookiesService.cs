@@ -1,5 +1,5 @@
-﻿using MasaTour.TouristJourenysManagement.Services.Dtos.Auth;
-namespace MasaTour.TouristJourenysManagement.Services.Services.Contracts;
+﻿using MasaTour.TouristTripsManagement.Services.Dtos.Auth;
+namespace MasaTour.TouristTripsManagement.Services.Services.Contracts;
 public interface ICookiesService
 {
     Task SaveAuthInformationsAsync(AuthModel authModel);

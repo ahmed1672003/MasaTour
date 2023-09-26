@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Categories.Commands.Handler;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Categories.Commands.Handler;
 public sealed class CategoryCommandsHandler :
     IRequestHandler<AddCategoryCommand, ResponseModel<GetCategoryDto>>,
     IRequestHandler<UpdateCategoryCommand, ResponseModel<GetCategoryDto>>,

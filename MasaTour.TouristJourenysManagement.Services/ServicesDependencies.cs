@@ -1,5 +1,5 @@
 ﻿
-namespace MasaTour.TouristJourenysManagement.Services;
+namespace MasaTour.TouristTripsManagement.Services;
 public static class ServicesDependencies
 {
     public static IServiceCollection AddServicesDependencies(this IServiceCollection services, IConfiguration configuration)

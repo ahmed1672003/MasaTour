@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Services.Settings;
+﻿namespace MasaTour.TouristTripsManagement.Services.Settings;
 public class EmailSettings
 {
     public int Port { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Domain.Enums;
+﻿namespace MasaTour.TouristTripsManagement.Domain.Enums;
 public enum Gender
 {
     Male,

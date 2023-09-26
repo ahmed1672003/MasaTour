@@ -1,7 +1,7 @@
-﻿using MasaTour.TouristJourenysManagement.Application.Features.Categories.Queries;
-using MasaTour.TouristJourenysManagement.Application.Features.Enums;
+﻿using MasaTour.TouristTripsManagement.Application.Features.Categories.Queries;
+using MasaTour.TouristTripsManagement.Application.Features.Enums;
 
-namespace MasaTour.TouristJourenysManagement.API.Controllers;
+namespace MasaTour.TouristTripsManagement.API.Controllers;
 //[Authorize(AuthenticationSchemes = "Bearer", Roles = $"{nameof(Roles.Admin)}")]
 [ApiController]
 public class CategoryController : MasaTourController

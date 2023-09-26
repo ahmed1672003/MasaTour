@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace MasaTour.TouristJourenysManagement.Application.Response;
+namespace MasaTour.TouristTripsManagement.Application.Response;
 public sealed class PaginationResponseResult
 {
     public static PaginationResponseModel<TData> Success<TData>(TData data = null, object meta = null, string message = null, object errors = null, int count = 0, int currentPage = 1, int pageSize = 10)

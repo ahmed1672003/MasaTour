@@ -1,12 +1,12 @@
-﻿namespace MasaTour.TouristJourenysManagement.Infrastructure;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure;
 public static class InfrastructureDependencies
 {
     public static async Task<IServiceCollection> AddInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         #region Register DbContext Options
-        services.AddDbContext<ITouristJourenysManagementDbContext, TouristJourenysManagementDbContext>(options =>
+        services.AddDbContext<ITouristTripsManagementDbContext, TouristTripsManagementDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("MasaTour_TouristJourenysManagement"));
+            options.UseSqlServer(configuration.GetConnectionString("MasaTour_TouristTripsManagement"));
             options.AddInterceptors(new DeleteableTrackerInterceptor());
             options.AddInterceptors(new UpdateableTrackerInterceptor());
             options.AddInterceptors(new CreateableTrackerInterceptors());
@@ -44,7 +44,7 @@ public static class InfrastructureDependencies
             options.Lockout.AllowedForNewUsers = true;
             #endregion
 
-        }).AddEntityFrameworkStores<TouristJourenysManagementDbContext>().AddDefaultTokenProviders().AddDefaultUI();
+        }).AddEntityFrameworkStores<TouristTripsManagementDbContext>().AddDefaultTokenProviders().AddDefaultUI();
         #endregion
 
         #region Register Contracts
@@ -64,8 +64,8 @@ public static class InfrastructureDependencies
                 .AddScoped<IUserRoleMapperRepository, UserRoleMapperRepository>()
                 .AddScoped<IUserTokenRepository, UserTokenRepository>()
                 .AddScoped<ICategoryRepository, CategoryRepository>()
-                .AddScoped<IJourenyRepository, JourenyRepository>()
-                .AddScoped<ICategoriesJourneysMapperRepository, CategoriesJourneysMapperRepository>()
+                .AddScoped<ITripRepository, TripRepository>()
+                .AddScoped<ICategoriesTripsMapperRepository, CategoriesTripsMapperRepository>()
                 .AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped(typeof(ISpecification<>), typeof(Specification<>));
 

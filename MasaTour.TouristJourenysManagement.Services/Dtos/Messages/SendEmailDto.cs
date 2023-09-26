@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Services.Dtos.Messages;
+﻿namespace MasaTour.TouristTripsManagement.Services.Dtos.Messages;
 public class SendEmailDto
 {
     public string ServiceMessage { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Services.Dtos.Auth;
+﻿namespace MasaTour.TouristTripsManagement.Services.Dtos.Auth;
 public class AuthModel
 {
     public JWTModel JWTModel { get; set; }

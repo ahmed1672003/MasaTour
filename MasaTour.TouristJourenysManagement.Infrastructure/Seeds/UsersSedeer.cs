@@ -1,7 +1,7 @@
-﻿using MasaTour.TouristJourenysManagement.Domain.Enums;
-using MasaTour.TouristJourenysManagement.Infrastructure.Enums;
+﻿using MasaTour.TouristTripsManagement.Domain.Enums;
+using MasaTour.TouristTripsManagement.Infrastructure.Enums;
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Seeds;
+namespace MasaTour.TouristTripsManagement.Infrastructure.Seeds;
 public static class UsersSedeer
 {
     public static async Task SeedSuperAdminAsync(IUnitOfWork context, ISpecificationsFactory specificationsFactory)

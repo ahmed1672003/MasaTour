@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Features.Users.Commands.Handlers;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Users.Commands.Handlers;
 public sealed class UserComandsHandler :
     IRequestHandler<UpdateUserCommand, ResponseModel<GetUserDto>>,
     IRequestHandler<UndoDeleteUserByIdCommand, ResponseModel<GetUserDto>>,

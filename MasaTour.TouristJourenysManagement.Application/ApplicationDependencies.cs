@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application;
+﻿namespace MasaTour.TouristTripsManagement.Application;
 public static class ApplicationDependencies
 {
     public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)

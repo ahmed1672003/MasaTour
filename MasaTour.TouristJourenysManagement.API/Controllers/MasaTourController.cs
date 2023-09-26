@@ -1,8 +1,8 @@
-﻿using MasaTour.TouristJourenysManagement.Application.Response;
+﻿using MasaTour.TouristTripsManagement.Application.Response;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace MasaTour.TouristJourenysManagement.API.Controllers;
+namespace MasaTour.TouristTripsManagement.API.Controllers;
 //[Route("api/[controller]")]
 [ApiController]
 public class MasaTourController : ControllerBase

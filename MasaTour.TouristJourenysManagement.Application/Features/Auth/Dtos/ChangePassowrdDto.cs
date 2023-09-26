@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MasaTour.TouristJourenysManagement.Application.Features.Auth.Dtos;
+namespace MasaTour.TouristTripsManagement.Application.Features.Auth.Dtos;
 public class ChangePassowrdDto
 {
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]

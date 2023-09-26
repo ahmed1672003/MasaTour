@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace MasaTour.TouristJourenysManagement.Application.Response;
+namespace MasaTour.TouristTripsManagement.Application.Response;
 public sealed class ResponseResult
 {
     public static ResponseModel<TData> Success<TData>(TData data = null, object meta = null, string message = null, object errors = null)

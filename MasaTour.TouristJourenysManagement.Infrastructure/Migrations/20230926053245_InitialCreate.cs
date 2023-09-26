@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
+namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -31,7 +31,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Journeys",
+                name: "Trips",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
@@ -65,7 +65,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Journeys", x => x.Id);
+                    table.PrimaryKey("PK_Trips", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,27 +117,27 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoriesJourneysMapper",
+                name: "CategoriesTripsMapper",
                 columns: table => new
                 {
                     CategoryId = table.Column<string>(type: "nvarchar(36)", nullable: false),
-                    JourneyId = table.Column<string>(type: "nvarchar(36)", nullable: false),
+                    TripId = table.Column<string>(type: "nvarchar(36)", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoriesJourneysMapper", x => new { x.CategoryId, x.JourneyId });
+                    table.PrimaryKey("PK_CategoriesTripsMapper", x => new { x.CategoryId, x.TripId });
                     table.ForeignKey(
-                        name: "FK_CategoriesJourneysMapper_Catgeories_CategoryId",
+                        name: "FK_CategoriesTripsMapper_Catgeories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Catgeories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CategoriesJourneysMapper_Journeys_JourneyId",
-                        column: x => x.JourneyId,
-                        principalTable: "Journeys",
+                        name: "FK_CategoriesTripsMapper_Trips_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trips",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -292,9 +292,9 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoriesJourneysMapper_JourneyId",
-                table: "CategoriesJourneysMapper",
-                column: "JourneyId");
+                name: "IX_CategoriesTripsMapper_TripId",
+                table: "CategoriesTripsMapper",
+                column: "TripId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Catgeories_NameAR",
@@ -315,26 +315,26 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Journeys_Code",
-                table: "Journeys",
+                name: "IX_Trips_Code",
+                table: "Trips",
                 column: "Code",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Journeys_NameAR",
-                table: "Journeys",
+                name: "IX_Trips_NameAR",
+                table: "Trips",
                 column: "NameAR",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Journeys_NameDE",
-                table: "Journeys",
+                name: "IX_Trips_NameDE",
+                table: "Trips",
                 column: "NameDE",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Journeys_NameEN",
-                table: "Journeys",
+                name: "IX_Trips_NameEN",
+                table: "Trips",
                 column: "NameEN",
                 unique: true);
 
@@ -414,7 +414,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CategoriesJourneysMapper");
+                name: "CategoriesTripsMapper");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
@@ -438,7 +438,7 @@ namespace MasaTour.TouristJourenysManagement.Infrastructure.Migrations
                 name: "Catgeories");
 
             migrationBuilder.DropTable(
-                name: "Journeys");
+                name: "Trips");
 
             migrationBuilder.DropTable(
                 name: "Roles");

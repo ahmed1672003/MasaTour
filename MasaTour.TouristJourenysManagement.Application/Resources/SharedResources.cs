@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.Application.Resources;
+﻿namespace MasaTour.TouristTripsManagement.Application.Resources;
 public class SharedResources
 {
 }

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace MasaTour.TouristJourenysManagement.Application.Features.Categories.Dtos;
+namespace MasaTour.TouristTripsManagement.Application.Features.Categories.Dtos;
 public class AddCategoryDto
 {
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Category.FiledCanNotBeNull)]

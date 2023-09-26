@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Services.Dtos.Auth;
+﻿using MasaTour.TouristTripsManagement.Services.Dtos.Auth;
 
-namespace MasaTour.TouristJourenysManagement.API.Controllers;
+namespace MasaTour.TouristTripsManagement.API.Controllers;
 
 [Authorize(AuthenticationSchemes = "Bearer", Roles = nameof(Roles.Basic))]
 [ApiController]

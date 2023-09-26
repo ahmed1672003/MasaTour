@@ -1,6 +1,6 @@
-﻿using MasaTour.TouristJourenysManagement.Infrastructure.Enums;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Enums;
 
-namespace MasaTour.TouristJourenysManagement.Infrastructure.Seeds;
+namespace MasaTour.TouristTripsManagement.Infrastructure.Seeds;
 public static class RolesSedeer
 {
     public static async Task SeedRolesAsync(IUnitOfWork context)

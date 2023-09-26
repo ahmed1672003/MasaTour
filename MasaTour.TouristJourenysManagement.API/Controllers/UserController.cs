@@ -1,4 +1,4 @@
-﻿namespace MasaTour.TouristJourenysManagement.API.Controllers;
+﻿namespace MasaTour.TouristTripsManagement.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer", Roles = nameof(Roles.Basic))]
 [ApiController]
 public class UserController : MasaTourController
