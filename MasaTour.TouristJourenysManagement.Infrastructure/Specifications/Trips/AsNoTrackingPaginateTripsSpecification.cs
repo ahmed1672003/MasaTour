@@ -2,28 +2,29 @@
 public sealed class AsNoTrackingPaginateTripsSpecification : Specification<Trip>
 {
     public AsNoTrackingPaginateTripsSpecification(int pageNumber = 1, int pageSize = 10, string keyWords = "", Expression<Func<Category, object>> orderBy = null)
-        : base(j =>
-            j.NameAR.Contains(keyWords) ||
-            j.NameEN.Contains(keyWords) ||
-            j.NameDE.Contains(keyWords) ||
-            j.Code.Contains(keyWords) ||
-            j.PriceEGP.ToString().Contains(keyWords) ||
-            j.PriceUSD.ToString().Contains(keyWords) ||
-            j.PriceEUR.ToString().Contains(keyWords) ||
-            j.PriceGBP.ToString().Contains(keyWords) ||
-            j.FromAR.ToString().Contains(keyWords) ||
-            j.FromEN.ToString().Contains(keyWords) ||
-            j.FromDE.ToString().Contains(keyWords) ||
-            j.ToAR.ToString().Contains(keyWords) ||
-            j.ToEN.ToString().Contains(keyWords) ||
-            j.ToDE.ToString().Contains(keyWords) ||
-            j.LongDesceiptionAR.ToString().Contains(keyWords) ||
-            j.LongDesceiptionEN.ToString().Contains(keyWords) ||
-            j.LongDesceiptionDE.ToString().Contains(keyWords) ||
-            j.MiniDesceiptionAR.ToString().Contains(keyWords) ||
-            j.MiniDesceiptionDE.ToString().Contains(keyWords) ||
-            j.MiniDesceiptionEN.ToString().Contains(keyWords)
-            )
+        : base(t =>
+            t.NameAR.Contains(keyWords) ||
+            t.NameEN.Contains(keyWords) ||
+            t.NameDE.Contains(keyWords) ||
+            t.Code.Contains(keyWords) ||
+            t.PriceEGP.ToString().Contains(keyWords) ||
+            t.PriceUSD.ToString().Contains(keyWords) ||
+            t.PriceEUR.ToString().Contains(keyWords) ||
+            t.PriceGBP.ToString().Contains(keyWords) ||
+            t.FromAR.ToString().Contains(keyWords) ||
+            t.FromEN.ToString().Contains(keyWords) ||
+            t.FromDE.ToString().Contains(keyWords) ||
+            t.ToAR.ToString().Contains(keyWords) ||
+            t.ToEN.ToString().Contains(keyWords) ||
+            t.ToDE.ToString().Contains(keyWords) ||
+            t.LongDesceiptionAR.ToString().Contains(keyWords) ||
+            t.LongDesceiptionEN.ToString().Contains(keyWords) ||
+            t.LongDesceiptionDE.ToString().Contains(keyWords) ||
+            t.MiniDesceiptionAR.ToString().Contains(keyWords) ||
+            t.MiniDesceiptionDE.ToString().Contains(keyWords) ||
+            t.MiniDesceiptionEN.ToString().Contains(keyWords) ||
+            t.CreatedAt.ToShortDateString().Contains(keyWords) ||
+            t.CreatedAt.ToShortTimeString().Contains(keyWords))
     {
         StopTracking();
         ApplyPaging((pageNumber, pageSize));

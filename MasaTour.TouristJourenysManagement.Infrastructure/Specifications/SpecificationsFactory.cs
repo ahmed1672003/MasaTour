@@ -75,6 +75,8 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetAllDeletedTripsSpecification" => new AsNoTrackingGetAllDeletedTripsSpecification(),
             "AsNoTrackingGetAllTripsSpecification" => new AsNoTrackingGetAllTripsSpecification(),
             "AsNoTrackingGetAllNotActiveTripsSpecification" => new AsNoTrackingGetAllNotActiveTripsSpecification(),
+            "AsNoTrackingGetAllFamousTripsSpecification" => new AsNoTrackingGetAllFamousTripsSpecification(),
+            "AsNoTrackingGetAllUnFamousTripsSpecification" => new AsNoTrackingGetAllUnFamousTripsSpecification(),
             "AsNoTrackingGetDeletedTripByIdSpecification" => new AsNoTrackingGetDeletedTripByIdSpecification(parameters[0]),
             "AsNoTrackingGetTripByIdSpecification" => new AsNoTrackingGetTripByIdSpecification(parameters[0]),
             "AsNoTrackingGetTripByNameARSpecification" => new AsNoTrackingGetTripByNameARSpecification(parameters[0]),

@@ -11,6 +11,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         _context = context;
         _entities = _context.Set<TEntity>();
     }
+
     #region Commands
     public virtual async Task CreateAsync(TEntity entity, CancellationToken cancellation = default)
     {

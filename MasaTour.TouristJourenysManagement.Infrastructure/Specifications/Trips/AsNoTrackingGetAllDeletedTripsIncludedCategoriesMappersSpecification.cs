@@ -1,4 +1,0 @@
-﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
-public sealed class AsNoTrackingGetAllDeletedTripsIncludedCategoriesMappersSpecification
-{
-}
