@@ -1,7 +1,7 @@
 ﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
 public sealed class AsNoTrackingPaginateTripsSpecification : Specification<Trip>
 {
-    public AsNoTrackingPaginateTripsSpecification(int pageNumber = 1, int pageSize = 10, string keyWords = "", Expression<Func<Category, object>> orderBy = null)
+    public AsNoTrackingPaginateTripsSpecification(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", Expression<Func<Trip, object>> orderBy = null)
         : base(t =>
             t.NameAR.Contains(keyWords) ||
             t.NameEN.Contains(keyWords) ||
@@ -11,23 +11,21 @@ public sealed class AsNoTrackingPaginateTripsSpecification : Specification<Trip>
             t.PriceUSD.ToString().Contains(keyWords) ||
             t.PriceEUR.ToString().Contains(keyWords) ||
             t.PriceGBP.ToString().Contains(keyWords) ||
-            t.FromAR.ToString().Contains(keyWords) ||
-            t.FromEN.ToString().Contains(keyWords) ||
-            t.FromDE.ToString().Contains(keyWords) ||
-            t.ToAR.ToString().Contains(keyWords) ||
-            t.ToEN.ToString().Contains(keyWords) ||
-            t.ToDE.ToString().Contains(keyWords) ||
-            t.LongDesceiptionAR.ToString().Contains(keyWords) ||
-            t.LongDesceiptionEN.ToString().Contains(keyWords) ||
-            t.LongDesceiptionDE.ToString().Contains(keyWords) ||
-            t.MiniDesceiptionAR.ToString().Contains(keyWords) ||
-            t.MiniDesceiptionDE.ToString().Contains(keyWords) ||
-            t.MiniDesceiptionEN.ToString().Contains(keyWords) ||
-            t.CreatedAt.ToShortDateString().Contains(keyWords) ||
-            t.CreatedAt.ToShortTimeString().Contains(keyWords))
+            t.FromAR.Contains(keyWords) ||
+            t.FromEN.Contains(keyWords) ||
+            t.FromDE.Contains(keyWords) ||
+            t.ToAR.Contains(keyWords) ||
+            t.ToEN.Contains(keyWords) ||
+            t.ToDE.Contains(keyWords) ||
+            t.LongDesceiptionAR.Contains(keyWords) ||
+            t.LongDesceiptionEN.Contains(keyWords) ||
+            t.LongDesceiptionDE.Contains(keyWords) ||
+            t.MiniDesceiptionAR.Contains(keyWords) ||
+            t.MiniDesceiptionDE.Contains(keyWords) ||
+            t.MiniDesceiptionEN.Contains(keyWords))
     {
         StopTracking();
-        ApplyPaging((pageNumber, pageSize));
+        ApplyPaging((pageNumber.Value, pageSize.Value));
         AddOrderBy(orderBy => orderBy.CreatedAt);
     }
 }

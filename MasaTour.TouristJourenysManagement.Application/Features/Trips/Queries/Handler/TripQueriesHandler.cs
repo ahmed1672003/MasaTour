@@ -191,7 +191,6 @@ public sealed class TripQueriesHandler :
                 return PaginationResponseResult.NotFound<IEnumerable<GetTripDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
             Expression<Func<Trip, object>> orderBy = category => new();
-
             switch (request.orderBy)
             {
                 case TripOrderBy.Id:
@@ -233,11 +232,8 @@ public sealed class TripQueriesHandler :
                     orderBy = Trip => Trip.CreatedAt;
                     break;
             }
-
-            ISpecification<Trip> asNoTrackingPaginateTripsSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingPaginateTripsSpecification), request.pageNumber.Value, request.pageSize.Value, request.keyWords, orderBy);
+            ISpecification<Trip> asNoTrackingPaginateTripsSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingPaginateTripsSpecification), request.pageNumber, request.pageSize, request.keyWords, orderBy);
             IEnumerable<GetTripDto> tripDtos = _mapper.Map<IEnumerable<GetTripDto>>(await _context.Trips.RetrieveAllAsync(asNoTrackingPaginateTripsSpec, cancellationToken));
-
-
             return PaginationResponseResult.Success(tripDtos, pageSize: request.pageSize.Value, currentPage: request.pageNumber.Value, count: tripDtos.Count());
         }
         catch (Exception ex)
