@@ -43,6 +43,22 @@ public sealed class CategoryCommandsHandler :
             if (await _context.Categories.AnyAsync(getCategoryByNameENSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
+            ISpecification<Category> asNoTrackingGetDeletedCategoryByNameARSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetDeletedCategoryByNameARSpecification), request.dto.NameAR);
+            if (await _context.Categories.AnyAsync(asNoTrackingGetDeletedCategoryByNameARSpec, cancellationToken))
+                return ResponseResult.Conflict<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+
+
+            ISpecification<Category> asNoTrackingGetDeletedCategoryByNameENSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetDeletedCategoryByNameENSpecification), request.dto.NameEN);
+            if (await _context.Categories.AnyAsync(asNoTrackingGetDeletedCategoryByNameENSpec, cancellationToken))
+                return ResponseResult.Conflict<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+
+
+            ISpecification<Category> asNoTrackingGetDeletedCategoryByNameDESpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetDeletedCategoryByNameDESpecification), request.dto.NameDE);
+            if (await _context.Categories.AnyAsync(asNoTrackingGetDeletedCategoryByNameDESpec, cancellationToken))
+                return ResponseResult.Conflict<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+
+
+
             Category category = _mapper.Map<Category>(request.dto);
 
             await _context.Categories.CreateAsync(category);
@@ -69,20 +85,24 @@ public sealed class CategoryCommandsHandler :
             if (!await _context.Categories.AnyAsync(asNoTrackingGetCategoryByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            // check duplicated anmeAR
+            // check duplicated nmeAR
             ISpecification<Category> asNoTrackingcheckDuplicatedNameArSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedCategoryByNameARSpecification), request.dto.Id, request.dto.NameAR);
             if (await _context.Categories.AnyAsync(asNoTrackingcheckDuplicatedNameArSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            // check duplicated anmeDE
+            // check duplicated nmeDE
             ISpecification<Category> asNoTrackingcheckDuplicatedNameDESpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedCategoryByNameDESpecification), request.dto.Id, request.dto.NameDE);
             if (await _context.Categories.AnyAsync(asNoTrackingcheckDuplicatedNameDESpec, cancellationToken))
                 return ResponseResult.BadRequest<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            // check duplicated anmeEN
+            // check duplicated nmeEN
             ISpecification<Category> asNoTrackingcheckDuplicatedNameENSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedCategoryByNameENSpecification), request.dto.Id, request.dto.NameEN);
             if (await _context.Categories.AnyAsync(asNoTrackingcheckDuplicatedNameENSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
+
+
+
+
 
             // select category
             ISpecification<Category> asTrackingGetCategoryByIdSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsTrackingGetCategoryByIdSpecification), request.dto.Id);
@@ -143,8 +163,8 @@ public sealed class CategoryCommandsHandler :
 
 
 
-            ISpecification<Category> asTrackingGetDeletedCategoryByIdSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsTrackingGetDeletedCategoryById_SubCategories_Trips_Specification), request.categoryId);
-            Category category = await _context.Categories.RetrieveAsync(asTrackingGetDeletedCategoryByIdSpec, cancellationToken);
+            ISpecification<Category> asTrackingGetDeletedCategoryById_SubCategories_Trips_Spec = _specificationsFactory.CreateCategorySpecifications(typeof(AsTrackingGetDeletedCategoryById_SubCategories_Trips_Specification), request.categoryId);
+            Category category = await _context.Categories.RetrieveAsync(asTrackingGetDeletedCategoryById_SubCategories_Trips_Spec, cancellationToken);
 
             _context.UndoDeleted(ref category);
 
