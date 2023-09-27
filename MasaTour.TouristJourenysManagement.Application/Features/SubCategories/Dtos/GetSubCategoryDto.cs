@@ -1,7 +1,7 @@
-﻿namespace MasaTour.TouristTripsManagement.Application.Features.Categories.Dtos;
-public class GetCategoryDto
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.SubCategories.Dtos;
+public class GetSubCategoryDto
 {
-    public string CategoryId { get; set; }
+    public string SubCategoryId { get; set; }
     public string NameAR { get; set; }
     public string NameEN { get; set; }
     public string NameDE { get; set; }
@@ -9,4 +9,5 @@ public class GetCategoryDto
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public DateTime? DeletedAt { get; set; }
+    public string CategoryId { get; set; }
 }

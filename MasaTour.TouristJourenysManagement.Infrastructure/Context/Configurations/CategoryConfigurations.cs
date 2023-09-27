@@ -4,7 +4,7 @@ public sealed class CategoryConfigurations : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
-        builder.ToTable(Tables.Catgeories);
+        builder.ToTable(Tables.Categories);
         builder.HasQueryFilter(c => !c.IsDeleted);
     }
 }

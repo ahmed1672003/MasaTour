@@ -1,6 +1,4 @@
-﻿using MasaTour.TouristTripsManagement.Domain.Abstracts;
-
-namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Repositories;
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {
     private readonly ITouristTripsManagementDbContext _context;
@@ -17,6 +15,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         await _entities.AddAsync(entity, cancellation);
     }
+
+
     public virtual Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         _entities.Update(entity);
@@ -33,15 +33,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         return Task.FromResult(_entities.Remove(entity));
     }
 
-    public void UndoDeleted<T>(ref T entity) where T : IDeleteableTracker
+    public virtual Task DeleteRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
-        entity.IsDeleted = false;
-        entity.DeletedAt = null;
+        _entities.RemoveRange(entities);
+        return Task.CompletedTask;
     }
-
-
-
     public virtual async Task<int> ExecuteDeleteAsync(ISpecification<TEntity> specification = null, CancellationToken cancellationToken = default)
+
     {
         if (specification?.Criteria is null)
             return await _entities.ExecuteDeleteAsync(cancellationToken);

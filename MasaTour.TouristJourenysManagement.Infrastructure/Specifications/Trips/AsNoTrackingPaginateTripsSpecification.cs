@@ -1,7 +1,7 @@
 ﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
-public sealed class AsNoTrackingPaginateTripsSpecification : Specification<Trip>
+public sealed class AsNoTrackingPaginateUnDeletedTripsSpecification : Specification<Trip>
 {
-    public AsNoTrackingPaginateTripsSpecification(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", Expression<Func<Trip, object>> orderBy = null)
+    public AsNoTrackingPaginateUnDeletedTripsSpecification(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", Expression<Func<Trip, object>> orderBy = null)
         : base(t =>
             t.NameAR.Contains(keyWords) ||
             t.NameEN.Contains(keyWords) ||

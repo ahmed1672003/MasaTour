@@ -19,7 +19,6 @@ public class TripController : MasaTourController
     #region Post
     [HttpPost(Router.Trip.AddTrip)]
     public async Task<IActionResult> AddAtrip([FromBody] AddTripDto dto) => MasaTourResponse(await Mediator.Send(new AddTripCommand(dto)));
-
     #endregion
 
     #region Put
@@ -54,8 +53,8 @@ public class TripController : MasaTourController
     [HttpGet(Router.Trip.GetAllUnDeletedTrips)]
     public async Task<IActionResult> GetAllUnDeletedTrips() => MasaTourResponse(await Mediator.Send(new GetAllUnDeletedTripsQuery()));
 
-    [HttpGet(Router.Trip.PaginateTrips)]
-    public async Task<IActionResult> PaginateTrips(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", TripOrderBy orderBy = TripOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
+    [HttpGet(Router.Trip.PaginateUnDeletedTrips)]
+    public async Task<IActionResult> PaginateTrips(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", TripOrderBy orderBy = TripOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateUnDeletedTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
 
     [HttpGet(Router.Trip.GetCurrenciesBasedOnUSD)]
 
@@ -64,6 +63,5 @@ public class TripController : MasaTourController
 
         return Ok(await _services.FastForexService.FetchMultiAsync());
     }
-
     #endregion
 }

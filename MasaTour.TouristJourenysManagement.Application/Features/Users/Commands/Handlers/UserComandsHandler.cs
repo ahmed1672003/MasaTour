@@ -94,7 +94,7 @@ public sealed class UserComandsHandler :
             ISpecification<User> asTrackingGetDeletedUserByIdSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsTrackingGetDeletedUserByIdSpecification), request.UserId);
 
             User user = await _context.Users.RetrieveAsync(asTrackingGetDeletedUserByIdSpec, cancellationToken);
-            _context.Users.UndoDeleted(ref user);
+            _context.UndoDeleted(ref user);
 
             await _context.SaveChangesAsync();
             GetUserDto dto = _mapper.Map<GetUserDto>(user);

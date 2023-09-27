@@ -40,6 +40,15 @@ public static class ResourcesKeys
         public const string FiledLengthIsSmallerThanMinLength = "FiledLengthIsSmallerThanMinLength";
         public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
     }
+
+    public static class SubCategory
+    {
+        public const string FiledCanNotBeNull = "FiledCanNotBeNull";
+        public const string FiledLengthIsBiggerThanMaxLength = "FiledLengthIsBiggerThanMaxLength";
+        public const string FiledLengthIsSmallerThanMinLength = "FiledLengthIsSmallerThanMinLength";
+        public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
+    }
+
     public static class Trip
     {
         public const string FiledCanNotBeNull = "FiledCanNotBeNull";

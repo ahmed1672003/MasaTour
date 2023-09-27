@@ -64,10 +64,10 @@ public static class InfrastructureDependencies
                 .AddScoped<IUserRoleMapperRepository, UserRoleMapperRepository>()
                 .AddScoped<IUserTokenRepository, UserTokenRepository>()
                 .AddScoped<ICategoryRepository, CategoryRepository>()
+                .AddScoped<ISubCategoryRepository, SubCategoryRepository>()
                 .AddScoped<ITripRepository, TripRepository>()
                 .AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped(typeof(ISpecification<>), typeof(Specification<>));
-
         #endregion
 
         #region Seed Data
@@ -82,7 +82,7 @@ public static class InfrastructureDependencies
         }
         catch
         {
-
+            //throw new("Seed Data Failed");
         }
         #endregion
 

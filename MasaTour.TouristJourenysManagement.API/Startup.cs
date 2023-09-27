@@ -15,6 +15,7 @@ public static class Startup
            {
                ApplyCurrentCultureToResponseHeaders = true,
            });
+
         var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
         app.UseRequestLocalization(options.Value);
         app.UseStaticFiles();

@@ -4,7 +4,7 @@ public sealed class CategoryQueriesHandler :
     IRequestHandler<GetAllCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
     IRequestHandler<GetAllDeletedCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
     IRequestHandler<GetAllUnDeletedCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
-    IRequestHandler<PaginateCategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>
+    IRequestHandler<PaginateUnDeletedategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
@@ -18,8 +18,7 @@ public sealed class CategoryQueriesHandler :
     IUnitOfWork context,
     ISpecificationsFactory specificationsFactory,
     IStringLocalizer<SharedResources> stringLocalizer,
-    IMapper mapper
-        )
+    IMapper mapper)
     {
         _context = context;
         _specificationsFactory = specificationsFactory;
@@ -33,7 +32,7 @@ public sealed class CategoryQueriesHandler :
     {
         try
         {
-            ISpecification<Category> asNoTrackingGetCategoryByIdSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetCategoryByIdSpecification), request.categoryId);
+            ISpecification<Category> asNoTrackingGetCategoryByIdSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetCategoryByIdSpecification), request.categoryId);
 
             if (!await _context.Categories.AnyAsync(asNoTrackingGetCategoryByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
@@ -54,7 +53,7 @@ public sealed class CategoryQueriesHandler :
     {
         try
         {
-            ISpecification<Category> asNoTrackingGetAllCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllCategoriesSpecification));
+            ISpecification<Category> asNoTrackingGetAllCategoriesSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetAllCategoriesSpecification));
             if (!await _context.Categories.AnyAsync(asNoTrackingGetAllCategoriesSpec, cancellationToken))
                 return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
@@ -73,7 +72,7 @@ public sealed class CategoryQueriesHandler :
     {
         try
         {
-            ISpecification<Category> asNoTrackingGetDeletedCategorySpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllDeletedCategoriesSpecification));
+            ISpecification<Category> asNoTrackingGetDeletedCategorySpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetAllDeletedCategoriesSpecification));
             if (!await _context.Categories.AnyAsync(asNoTrackingGetDeletedCategorySpec, cancellationToken))
                 return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
@@ -105,7 +104,7 @@ public sealed class CategoryQueriesHandler :
     #endregion
 
     #region Pagination Categories
-    public async Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(PaginateCategoriesQuery request, CancellationToken cancellationToken)
+    public async Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(PaginateUnDeletedategoriesQuery request, CancellationToken cancellationToken)
     {
         try
         {
@@ -132,7 +131,8 @@ public sealed class CategoryQueriesHandler :
                     orderBy = category => category.CreatedAt;
                     break;
             }
-            ISpecification<Category> asNoTrackingPaginateCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingPaginateCategoriesSpecification), request.pageNumber!.Value, request.pageSize!.Value, request.keyWords, orderBy);
+
+            ISpecification<Category> asNoTrackingPaginateCategoriesSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingPaginateUnDeletedCategoriesSpecification), request.pageNumber!.Value, request.pageSize!.Value, request.keyWords, orderBy);
             IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingPaginateCategoriesSpec, cancellationToken));
             return PaginationResponseResult.Success(categoriesDto, count: categoriesDto.Count(), currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }

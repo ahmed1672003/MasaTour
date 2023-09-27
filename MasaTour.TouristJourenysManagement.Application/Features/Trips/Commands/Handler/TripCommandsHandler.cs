@@ -32,27 +32,27 @@ public sealed class TripCommandsHandler :
     {
         try
         {
-            ISpecification<Trip> asNoTrackingGetTripByCodeSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetTripByCodeSpecification), request.dto.Code);
+            ISpecification<Trip> asNoTrackingGetTripByCodeSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByCodeSpecification), request.dto.Code);
             if (await _context.Trips.AnyAsync(asNoTrackingGetTripByCodeSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
-            ISpecification<Trip> asNoTrackingGetTripByNameARSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetTripByNameARSpecification), request.dto.NameAR);
+            ISpecification<Trip> asNoTrackingGetTripByNameARSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByNameARSpecification), request.dto.NameAR);
             if (await _context.Trips.AnyAsync(asNoTrackingGetTripByNameARSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
-            ISpecification<Trip> asNoTrackingGetTripByNameENSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetTripByNameENSpecification), request.dto.NameEN);
+            ISpecification<Trip> asNoTrackingGetTripByNameENSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByNameENSpecification), request.dto.NameEN);
             if (await _context.Trips.AnyAsync(asNoTrackingGetTripByNameENSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
-            ISpecification<Trip> asNoTrackingGetTripByNameDESpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetTripByNameDESpecification), request.dto.NameDE);
+            ISpecification<Trip> asNoTrackingGetTripByNameDESpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByNameDESpecification), request.dto.NameDE);
             if (await _context.Trips.AnyAsync(asNoTrackingGetTripByNameDESpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
             // check category
-            ISpecification<Category> asNoTrackingGetCategoryByIdSpecification = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetCategoryByIdSpecification), request.dto.CategoryId);
+            ISpecification<Category> asNoTrackingGetCategoryByIdSpecification = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetCategoryByIdSpecification), request.dto.SubCategoryId);
             if (!await _context.Categories.AnyAsync(asNoTrackingGetCategoryByIdSpecification, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
@@ -77,37 +77,37 @@ public sealed class TripCommandsHandler :
     {
         try
         {
-            ISpecification<Trip> asNoTrackingGetTripByIdSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.dto.TripId);
+            ISpecification<Trip> asNoTrackingGetTripByIdSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.dto.TripId);
             if (!await _context.Trips.AnyAsync(asNoTrackingGetTripByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
 
-            ISpecification<Trip> asNoTrackingCheckDuplicatedTripByCodeSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingCheckDuplicatedTripByCodeSpecification), request.dto.TripId, request.dto.Code);
+            ISpecification<Trip> asNoTrackingCheckDuplicatedTripByCodeSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingCheckDuplicatedTripByCodeSpecification), request.dto.TripId, request.dto.Code);
             if (await _context.Trips.AnyAsync(asNoTrackingCheckDuplicatedTripByCodeSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
-            ISpecification<Trip> asNoTrackingCheckDuplicatedTripByNameARSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingCheckDuplicatedTripByNameARSpecification), request.dto.TripId, request.dto.NameAR);
+            ISpecification<Trip> asNoTrackingCheckDuplicatedTripByNameARSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingCheckDuplicatedTripByNameARSpecification), request.dto.TripId, request.dto.NameAR);
             if (await _context.Trips.AnyAsync(asNoTrackingCheckDuplicatedTripByNameARSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            ISpecification<Trip> asNoTrackingCheckDuplicatedTripByNameENSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingCheckDuplicatedTripByNameENSpecification), request.dto.TripId, request.dto.NameEN);
+            ISpecification<Trip> asNoTrackingCheckDuplicatedTripByNameENSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingCheckDuplicatedTripByNameENSpecification), request.dto.TripId, request.dto.NameEN);
             if (await _context.Trips.AnyAsync(asNoTrackingCheckDuplicatedTripByNameENSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
-            ISpecification<Trip> asNoTrackingCheckDuplicatedTripByNameDESpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingCheckDuplicatedTripByNameDESpecification), request.dto.TripId, request.dto.NameDE);
+            ISpecification<Trip> asNoTrackingCheckDuplicatedTripByNameDESpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingCheckDuplicatedTripByNameDESpecification), request.dto.TripId, request.dto.NameDE);
             if (await _context.Trips.AnyAsync(asNoTrackingCheckDuplicatedTripByNameDESpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
             // check category
-            ISpecification<Category> asNoTrackingGetCategoryByIdSpecification = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetCategoryByIdSpecification), request.dto.CategoryId);
+            ISpecification<Category> asNoTrackingGetCategoryByIdSpecification = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetCategoryByIdSpecification), request.dto.SubCategoryId);
             if (!await _context.Categories.AnyAsync(asNoTrackingGetCategoryByIdSpecification, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
-            ISpecification<Trip> asNoTrackingGetTripByIdSpecification = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.dto.TripId);
+            ISpecification<Trip> asNoTrackingGetTripByIdSpecification = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.dto.TripId);
             Trip trip = await _context.Trips.RetrieveAsync(asNoTrackingGetTripByIdSpecification, cancellationToken);
             trip.Code = request.dto.Code;
             trip.NameAR = request.dto.NameAR;
@@ -133,7 +133,7 @@ public sealed class TripCommandsHandler :
             trip.PriceEUR = request.dto.PriceEUR;
             trip.PriceGBP = request.dto.PriceEGP;
             trip.PriceUSD = request.dto.PriceUSD;
-            trip.CategoryId = request.dto.CategoryId;
+            trip.SubCategoryId = request.dto.SubCategoryId;
 
             await _context.Trips.UpdateAsync(trip, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
@@ -153,11 +153,11 @@ public sealed class TripCommandsHandler :
     {
         try
         {
-            ISpecification<Trip> asNoTrackingGetTripByIdSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.Id);
+            ISpecification<Trip> asNoTrackingGetTripByIdSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.Id);
             if (!await _context.Trips.AnyAsync(asNoTrackingGetTripByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            ISpecification<Trip> asTrackingGetTripByIdSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsTrackingGetTripByIdSpecification), request.Id);
+            ISpecification<Trip> asTrackingGetTripByIdSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsTrackingGetTripByIdSpecification), request.Id);
 
             Trip trip = await _context.Trips.RetrieveAsync(asTrackingGetTripByIdSpec, cancellationToken);
 
@@ -179,13 +179,15 @@ public sealed class TripCommandsHandler :
     {
         try
         {
-            ISpecification<Trip> asNoTrackingGetDeletedTripByIdSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetDeletedTripByIdSpecification), request.Id);
+            ISpecification<Trip> asNoTrackingGetDeletedTripByIdSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetDeletedTripByIdSpecification), request.Id);
             if (!await _context.Trips.AnyAsync(asNoTrackingGetDeletedTripByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            ISpecification<Trip> asTrackingGetDeletedTripByIdSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsTrackingGetDeletedTripByIdSpecification), request.Id);
+            // ToDo: Get All Realted Data For This Trip To UndoDeleted Also
+
+            ISpecification<Trip> asTrackingGetDeletedTripByIdSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsTrackingGetDeletedTripByIdSpecification), request.Id);
             Trip trip = await _context.Trips.RetrieveAsync(asTrackingGetDeletedTripByIdSpec, cancellationToken);
-            _context.Trips.UndoDeleted(ref trip);
+            _context.UndoDeleted(ref trip);
             await _context.SaveChangesAsync();
 
             GetTripDto tripDto = _mapper.Map<GetTripDto>(trip);

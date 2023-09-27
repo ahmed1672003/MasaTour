@@ -16,7 +16,8 @@ public sealed class UnitOfWork : IUnitOfWork
         IUserTokenRepository userTokens,
         IUserRepository users,
         ICategoryRepository categories,
-        ITripRepository trips)
+        ITripRepository trips,
+        ISubCategoryRepository subCategories)
     {
         _context = context;
         Identity = identity;
@@ -30,6 +31,7 @@ public sealed class UnitOfWork : IUnitOfWork
         Users = users;
         Categories = categories;
         Trips = trips;
+        SubCategories = subCategories;
     }
 
     public IIdentityRepository Identity { get; }
@@ -42,6 +44,8 @@ public sealed class UnitOfWork : IUnitOfWork
     public IUserTokenRepository UserTokens { get; }
     public IUserRepository Users { get; }
     public ICategoryRepository Categories { get; }
+    public ISubCategoryRepository SubCategories { get; }
+
     public ITripRepository Trips { get; }
 
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default) =>

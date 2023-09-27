@@ -189,7 +189,7 @@ public static class EndPoints
             public const string Summary = "Get All UnDeleted Categories | Allowed For Anonymous";
             public const string Description = "";
         }
-        public static class PaginateCategories
+        public static class PaginateUnDeletedCategories
         {
             public const string OperationId = "A765CF7A-43B6-47EB-91ED-2990DAECAE49";
             public const string Summary = "Paginate UnDeleted Categories | Allowed For Anonymous";

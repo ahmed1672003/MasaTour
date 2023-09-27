@@ -91,7 +91,6 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     [Required]
     public bool IsFamous { get; set; }
 
-
     [Required]
     public bool IsActive { get; set; }
 
@@ -110,11 +109,11 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     [Required]
     [MaxLength(36)]
     [MinLength(36)]
-    public string CategoryId { get; set; }
+    public string SubCategoryId { get; set; }
 
     [AllowNull]
-    [ForeignKey(nameof(CategoryId))]
-    public Category Category { get; set; }
+    [ForeignKey(nameof(SubCategoryId))]
+    public SubCategory SubCategory { get; set; }
 
     public Trip()
     {

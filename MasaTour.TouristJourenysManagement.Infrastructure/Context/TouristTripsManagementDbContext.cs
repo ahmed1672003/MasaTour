@@ -20,6 +20,7 @@ public class TouristTripsManagementDbContext
     public DbSet<UserToken> UserTokens => Set<UserToken>();
     public DbSet<UserJWT> UserJWTs => Set<UserJWT>();
     public DbSet<Category> Categories => Set<Category>();
+    public DbSet<SubCategory> SubCategories => Set<SubCategory>();
     public DbSet<Trip> Trips => Set<Trip>();
 
 }

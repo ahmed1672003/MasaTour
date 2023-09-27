@@ -1,11 +1,12 @@
 ﻿using MasaTour.TouristTripsManagement.Domain.Abstracts;
 
 namespace MasaTour.TouristTripsManagement.Domain.Entities;
+
 [PrimaryKey(nameof(Id))]
 [Index(nameof(NameAR), IsUnique = true)]
 [Index(nameof(NameEN), IsUnique = true)]
 [Index(nameof(NameDE), IsUnique = true)]
-public class Category : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreateableTracker
+public class SubCategory : BaseEntity, ICreateableTracker, IUpdateableTracker, IDeleteableTracker
 {
     [Required]
     [MaxLength(255)]
@@ -31,14 +32,22 @@ public class Category : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICre
     [AllowNull]
     public DateTime? DeletedAt { get; set; }
 
+    [Required]
+    [MaxLength(36)]
+    [MinLength(36)]
+    public string CategoryId { get; set; }
+
     [AllowNull]
-    public List<SubCategory> SubCategories { get; set; }
+    [ForeignKey(nameof(CategoryId))]
+    public Category Category { get; set; }
 
+    [AllowNull]
+    public List<Trip> Trips { get; set; }
 
-    public Category()
+    public SubCategory()
     {
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        SubCategories = new List<SubCategory>();
+        Trips = new List<Trip>();
     }
 }

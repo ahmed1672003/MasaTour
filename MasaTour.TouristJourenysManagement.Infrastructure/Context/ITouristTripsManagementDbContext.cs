@@ -13,6 +13,7 @@ public interface ITouristTripsManagementDbContext
     DbSet<UserToken> UserTokens { get; }
     DbSet<UserJWT> UserJWTs { get; }
     DbSet<Category> Categories { get; }
+    DbSet<SubCategory> SubCategories { get; }
     DbSet<Trip> Trips { get; }
     ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

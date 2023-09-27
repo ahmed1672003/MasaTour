@@ -12,6 +12,7 @@ public static class Tables
         public const string UserRolesMappers = "UsersRolesMappers";
         public const string UserTokens = "UserTokens";
     }
+    public const string Categories = "Categories";
+    public const string SubCategories = "SubCategories";
     public const string Trips = "Trips";
-    public const string Catgeories = "Catgeories";
 }

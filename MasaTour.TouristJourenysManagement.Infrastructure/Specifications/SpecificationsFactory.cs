@@ -1,4 +1,5 @@
-﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
 
 namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
@@ -41,7 +42,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
-    public ISpecification<Category> CreatCategorySpecifications(Type type, params dynamic[] parameters)
+    public ISpecification<Category> CreateCategorySpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
         {
@@ -53,15 +54,36 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetCategoryByNameDESpecification" => new AsNoTrackingGetCategoryByNameDESpecification(parameters[0]),
             "AsNoTrackingGetCategoryByNameENSpecification" => new AsNoTrackingGetCategoryByNameENSpecification(parameters[0]),
             "AsNoTrackingGetDeletedCategoryByIdSpecification" => new AsNoTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
-            "AsNoTrackingPaginateCategoriesSpecification" => new AsNoTrackingPaginateCategoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateUnDeletedCategoriesSpecification" => new AsNoTrackingPaginateUnDeletedCategoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsNoTrackingGetAllCategoriesSpecification" => new AsNoTrackingGetAllCategoriesSpecification(),
             "AsNoTrackingGetAllDeletedCategoriesSpecification" => new AsNoTrackingGetAllDeletedCategoriesSpecification(),
             "AsTrackingGetDeletedCategoryByIdSpecification" => new AsTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
             "AsTrackingGetCategoryByIdSpecification" => new AsTrackingGetCategoryByIdSpecification(parameters[0]),
+            "AsTrackingGetDeletedCategoryById_SubCategories_Trips_Specification" => new AsTrackingGetDeletedCategoryById_SubCategories_Trips_Specification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }
-    public ISpecification<Trip> CreatTripSpecifications(Type type, params dynamic[] parameters)
+    public ISpecification<SubCategory> CreateSubCategorySpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            "AsNoTrackingCheckDuplicatedSubCategoryByNameARSpecification" => new AsNoTrackingCheckDuplicatedSubCategoryByNameARSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedSubCategoryByNameDESpecification" => new AsNoTrackingCheckDuplicatedSubCategoryByNameDESpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedSubCategoryByNameENSpecification" => new AsNoTrackingCheckDuplicatedSubCategoryByNameENSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingGetAllDeletedSubCategoriesSpecification" => new AsNoTrackingGetAllDeletedSubCategoriesSpecification(),
+            "AsNoTrackingGetAllSubCategoriesSpecification" => new AsNoTrackingGetAllSubCategoriesSpecification(),
+            "AsNoTrackingGetSubCategoryByIdSpecification" => new AsNoTrackingGetSubCategoryByIdSpecification(parameters[0]),
+            "AsNoTrackingGetDeletedSubCategoryByIdSpecification" => new AsNoTrackingGetDeletedSubCategoryByIdSpecification(parameters[0]),
+            "AsNoTrackingGetSubCategoryByNameARSpecification" => new AsNoTrackingGetSubCategoryByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetSubCategoryByNameDESpecification" => new AsNoTrackingGetSubCategoryByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetSubCategoryByNameENSpecification" => new AsNoTrackingGetSubCategoryByNameENSpecification(parameters[0]),
+            "AsNoTrackingPaginateUnDeletedSubCategories" => new AsNoTrackingPaginateUnDeletedSubCategories(parameters[0], parameters[1], parameters[2], parameters[3]),
+
+            _ => throw new InvalidOperationException()
+        };
+    }
+
+    public ISpecification<Trip> CreateTripSpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
         {
@@ -81,7 +103,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetTripByNameDESpecification" => new AsNoTrackingGetTripByNameDESpecification(parameters[0]),
             "AsNoTrackingGetTripByNameENSpecification" => new AsNoTrackingGetTripByNameENSpecification(parameters[0]),
             "AsNoTrackingGetTripByCodeSpecification" => new AsNoTrackingGetTripByCodeSpecification(parameters[0]),
-            "AsNoTrackingPaginateTripsSpecification" => new AsNoTrackingPaginateTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateUnDeletedTripsSpecification" => new AsNoTrackingPaginateUnDeletedTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetDeletedTripByIdSpecification" => new AsTrackingGetDeletedTripByIdSpecification(parameters[0]),
             "AsTrackingGetTripByIdSpecification" => new AsTrackingGetTripByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()

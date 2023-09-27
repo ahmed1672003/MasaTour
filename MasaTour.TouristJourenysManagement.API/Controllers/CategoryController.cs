@@ -65,10 +65,10 @@ public class CategoryController : MasaTourController
 
 
     [AllowAnonymous]
-    [HttpGet(Router.Category.PaginateCategories)]
+    [HttpGet(Router.Category.PaginateUnDeletedCategories)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetCategoryDto>>))]
-    [SwaggerOperation(OperationId = EndPoints.Category.PaginateCategories.OperationId, Summary = EndPoints.Category.PaginateCategories.Summary, Description = EndPoints.Category.PaginateCategories.Description)]
-    public async Task<IActionResult> PaginateCategories(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", CategoryOrderBy? orderBy = CategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateCategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
+    [SwaggerOperation(OperationId = EndPoints.Category.PaginateUnDeletedCategories.OperationId, Summary = EndPoints.Category.PaginateUnDeletedCategories.Summary, Description = EndPoints.Category.PaginateUnDeletedCategories.Description)]
+    public async Task<IActionResult> PaginateCategories(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", CategoryOrderBy? orderBy = CategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateUnDeletedategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
 
 
 

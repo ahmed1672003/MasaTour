@@ -4,6 +4,7 @@ public interface ISpecificationsFactory
     ISpecification<User> CreateUserSpecifications(Type type, params dynamic[] parameters);
     ISpecification<Role> CreateRoleSpecifications(Type type, params dynamic[] parameters);
     ISpecification<UserJWT> CreateUserJWTSpecifications(Type type, params dynamic[] parameters);
-    ISpecification<Category> CreatCategorySpecifications(Type type, params dynamic[] parameters);
-    ISpecification<Trip> CreatTripSpecifications(Type type, params dynamic[] parameters);
+    ISpecification<Category> CreateCategorySpecifications(Type type, params dynamic[] parameters);
+    ISpecification<SubCategory> CreateSubCategorySpecifications(Type type, params dynamic[] parameters);
+    ISpecification<Trip> CreateTripSpecifications(Type type, params dynamic[] parameters);
 }

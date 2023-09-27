@@ -37,7 +37,21 @@ public static class Router
         public const string GetAllCategories = CategoryPrefix + "get-all-categories";
         public const string GetAllDeletedCategories = CategoryPrefix + "get-all-deleted-categories";
         public const string GetAllUnDeletedCategories = CategoryPrefix + "get-all-un-deleted-categories";
-        public const string PaginateCategories = CategoryPrefix + "paginate-categories";
+        public const string PaginateUnDeletedCategories = CategoryPrefix + "paginate-all-un-deleted-categories";
+    }
+
+    public static class SubCategory
+    {
+        private const string CategoryPrefix = ApiPrefix + "sub-category/";
+        public const string AddCategory = CategoryPrefix + "add-sub-category";
+        public const string UpdateCategory = CategoryPrefix + "update-sub-category";
+        public const string DeleteCategoryById = CategoryPrefix + "delete-sub-category-by-id";
+        public const string UndoDeleteCategoryById = CategoryPrefix + "undo-delete-sub-category-by-id";
+        public const string GetCategoryById = CategoryPrefix + "get-sub-category-by-id";
+        public const string GetAllCategories = CategoryPrefix + "get-all-sub-categories";
+        public const string GetAllDeletedCategories = CategoryPrefix + "get-all-deleted-sub-categories";
+        public const string GetAllUnDeletedCategories = CategoryPrefix + "get-all-un-deleted-sub-categories";
+        public const string PaginateUnDeletedCategories = CategoryPrefix + "paginate-all-un-deleted-sub-categories";
     }
 
     public static class Trip
@@ -53,7 +67,7 @@ public static class Router
         public const string GetAllTrips = TripPrefix + "get-all-trips";
         public const string GetAllDeletedTrips = TripPrefix + "get-all-deleted-trips";
         public const string GetAllUnDeletedTrips = TripPrefix + "get-all-un-deleted-trips";
-        public const string PaginateTrips = TripPrefix + "paginate-trips";
+        public const string PaginateUnDeletedTrips = TripPrefix + "paginate-all-un-deleted-trips";
         public const string GetCurrenciesBasedOnUSD = TripPrefix + "get-all-currencies-based-on-usd";
     }
 }
