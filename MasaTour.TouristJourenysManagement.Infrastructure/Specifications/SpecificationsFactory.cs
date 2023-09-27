@@ -60,6 +60,9 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetDeletedCategoryByNameARSpecification" => new AsNoTrackingGetDeletedCategoryByNameARSpecification(parameters[0]),
             "AsNoTrackingGetDeletedCategoryByNameDESpecification" => new AsNoTrackingGetDeletedCategoryByNameDESpecification(parameters[0]),
             "AsNoTrackingGetDeletedCategoryByNameENSpecification" => new AsNoTrackingGetDeletedCategoryByNameENSpecification(parameters[0]),
+            "AsNoTrackingCheckDuplicatedDeletedCategoryByNameDESpecification" => new AsNoTrackingCheckDuplicatedDeletedCategoryByNameDESpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedCategoryByNameARSpecification" => new AsNoTrackingCheckDuplicatedDeletedCategoryByNameARSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedCategoryByNameENSpecification" => new AsNoTrackingCheckDuplicatedDeletedCategoryByNameENSpecification(parameters[0], parameters[1]),
             "AsTrackingGetDeletedCategoryByIdSpecification" => new AsTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
             "AsTrackingGetCategoryByIdSpecification" => new AsTrackingGetCategoryByIdSpecification(parameters[0]),
             "AsTrackingGetDeletedCategoryById_SubCategories_Trips_Specification" => new AsTrackingGetDeletedCategoryById_SubCategories_Trips_Specification(parameters[0]),
@@ -73,6 +76,12 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingCheckDuplicatedSubCategoryByNameARSpecification" => new AsNoTrackingCheckDuplicatedSubCategoryByNameARSpecification(parameters[0], parameters[1]),
             "AsNoTrackingCheckDuplicatedSubCategoryByNameDESpecification" => new AsNoTrackingCheckDuplicatedSubCategoryByNameDESpecification(parameters[0], parameters[1]),
             "AsNoTrackingCheckDuplicatedSubCategoryByNameENSpecification" => new AsNoTrackingCheckDuplicatedSubCategoryByNameENSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameENSpecification" => new AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameENSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameARSpecification" => new AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameARSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameDESpecification" => new AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameDESpecification(parameters[0], parameters[1]),
+            "AsNoTrackingGetDeletedSubCategoryByNameARSpecification" => new AsNoTrackingGetDeletedSubCategoryByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetDeletedSubCategoryByNameDESpecification" => new AsNoTrackingGetDeletedSubCategoryByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetDeletedSubCategoryByNameENSpecification" => new AsNoTrackingGetDeletedSubCategoryByNameENSpecification(parameters[0]),
             "AsNoTrackingGetAllDeletedSubCategoriesSpecification" => new AsNoTrackingGetAllDeletedSubCategoriesSpecification(),
             "AsNoTrackingGetAllSubCategoriesSpecification" => new AsNoTrackingGetAllSubCategoriesSpecification(),
             "AsNoTrackingGetSubCategoryByIdSpecification" => new AsNoTrackingGetSubCategoryByIdSpecification(parameters[0]),
@@ -81,11 +90,9 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetSubCategoryByNameDESpecification" => new AsNoTrackingGetSubCategoryByNameDESpecification(parameters[0]),
             "AsNoTrackingGetSubCategoryByNameENSpecification" => new AsNoTrackingGetSubCategoryByNameENSpecification(parameters[0]),
             "AsNoTrackingPaginateUnDeletedSubCategories" => new AsNoTrackingPaginateUnDeletedSubCategories(parameters[0], parameters[1], parameters[2], parameters[3]),
-
             _ => throw new InvalidOperationException()
         };
     }
-
     public ISpecification<Trip> CreateTripSpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
