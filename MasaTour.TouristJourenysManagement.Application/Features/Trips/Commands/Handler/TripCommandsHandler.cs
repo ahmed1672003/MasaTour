@@ -1,6 +1,4 @@
-﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
-
-namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands.Handler;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands.Handler;
 public sealed class TripCommandsHandler :
     IRequestHandler<AddTripCommand, ResponseModel<GetTripDto>>,
     IRequestHandler<UpdateTripCommand, ResponseModel<GetTripDto>>,
@@ -182,7 +180,7 @@ public sealed class TripCommandsHandler :
         try
         {
             ISpecification<Trip> asNoTrackingGetDeletedTripByIdSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetDeletedTripByIdSpecification), request.Id);
-            if (await _context.Trips.AnyAsync(asNoTrackingGetDeletedTripByIdSpec, cancellationToken))
+            if (!await _context.Trips.AnyAsync(asNoTrackingGetDeletedTripByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
             ISpecification<Trip> asTrackingGetDeletedTripByIdSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsTrackingGetDeletedTripByIdSpecification), request.Id);

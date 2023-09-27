@@ -37,8 +37,22 @@ public static class Router
         public const string GetAllCategories = CategoryPrefix + "get-all-categories";
         public const string GetAllDeletedCategories = CategoryPrefix + "get-all-deleted-categories";
         public const string GetAllUnDeletedCategories = CategoryPrefix + "get-all-un-deleted-categories";
-        public const string GetAllActiveCategories = CategoryPrefix + "get-all-active-categories";
-        public const string GetAllNotActiveCategories = CategoryPrefix + "get-all-not-active-categories";
         public const string PaginateCategories = CategoryPrefix + "paginate-categories";
+    }
+
+    public static class Trip
+    {
+        private const string TripPrefix = ApiPrefix + "trip/";
+        public const string AddTrip = TripPrefix + "add-trip";
+        public const string UpdateTrip = TripPrefix + "update-trip";
+        public const string DeleteTripById = TripPrefix + "delete-trip-by-id";
+        public const string UndoDeleteTripById = TripPrefix + "undo-delete-trip-by-id";
+        public const string GetTripById = TripPrefix + "get-trip-by-id";
+        public const string GetAllActiveTrips = TripPrefix + "get-all-active-trips";
+        public const string GetAllNotActiveTrips = TripPrefix + "get-all-not-active-trips";
+        public const string GetAllTrips = TripPrefix + "get-all-trips";
+        public const string GetAllDeletedTrips = TripPrefix + "get-all-deleted-trips";
+        public const string GetAllUnDeletedTrips = TripPrefix + "get-all-un-deleted-trips";
+        public const string PaginateTrips = TripPrefix + "paginate-trips";
     }
 }

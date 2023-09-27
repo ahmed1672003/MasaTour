@@ -58,7 +58,6 @@ public sealed class TripQueriesHandler :
             ISpecification<Trip> asNoTrackingGetAllTripsSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingGetAllTripsSpecification));
             if (!await _context.Trips.AnyAsync(asNoTrackingGetAllTripsSpec, cancellationToken))
                 return ResponseResult.NotFound<IEnumerable<GetTripDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             IEnumerable<GetTripDto> tripDtos = _mapper.Map<IEnumerable<GetTripDto>>(await _context.Trips.RetrieveAllAsync(asNoTrackingGetAllTripsSpec, cancellationToken));
             return ResponseResult.Success(tripDtos, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
@@ -235,7 +234,7 @@ public sealed class TripQueriesHandler :
                     break;
             }
 
-            ISpecification<Trip> asNoTrackingPaginateTripsSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingPaginateTripsSpecification), request.pageNumber, request.pageSize, request.keyWords, orderBy);
+            ISpecification<Trip> asNoTrackingPaginateTripsSpec = _specificationsFactory.CreatTripSpecifications(typeof(AsNoTrackingPaginateTripsSpecification), request.pageNumber.Value, request.pageSize.Value, request.keyWords, orderBy);
             IEnumerable<GetTripDto> tripDtos = _mapper.Map<IEnumerable<GetTripDto>>(await _context.Trips.RetrieveAllAsync(asNoTrackingPaginateTripsSpec, cancellationToken));
 
 

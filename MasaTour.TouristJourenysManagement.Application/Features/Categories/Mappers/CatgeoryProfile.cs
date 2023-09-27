@@ -8,6 +8,9 @@ public sealed class CatgeoryProfile : Profile
     void Mapp()
     {
         CreateMap<AddCategoryDto, Category>();
-        CreateMap<Category, GetCategoryDto>();
+        CreateMap<Category, GetCategoryDto>()
+            .ForMember(dist => dist.CreatedAt, cfg => cfg.MapFrom(src => src.CreatedAt.ToLocalTime()))
+            .ForMember(dist => dist.UpdatedAt, cfg => cfg.MapFrom(src => src.UpdatedAt.Value.ToLocalTime()))
+            .ForMember(dist => dist.DeletedAt, cfg => cfg.MapFrom(src => src.DeletedAt.Value.ToLocalTime()));
     }
 }

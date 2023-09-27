@@ -8,6 +8,9 @@ public class TripProfile : Profile
     void Map()
     {
         CreateMap<AddTripDto, Trip>();
-        CreateMap<GetTripDto, Trip>();
+        CreateMap<Trip, GetTripDto>()
+            .ForMember(dist => dist.CreatedAt, cfg => cfg.MapFrom(src => src.CreatedAt.ToLocalTime()))
+            .ForMember(dist => dist.UpdatedAt, cfg => cfg.MapFrom(src => src.UpdatedAt.Value.ToLocalTime()))
+            .ForMember(dist => dist.DeletedAt, cfg => cfg.MapFrom(src => src.DeletedAt.Value.ToLocalTime()));
     }
 }

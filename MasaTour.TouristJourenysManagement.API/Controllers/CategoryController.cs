@@ -27,7 +27,7 @@ public class CategoryController : MasaTourController
     [HttpPatch(Router.Category.DeleteCategoryById)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<GetCategoryDto>))]
     [SwaggerOperation(OperationId = EndPoints.Category.DeleteCategoryById.OperationId, Summary = EndPoints.Category.DeleteCategoryById.Summary, Description = EndPoints.Category.DeleteCategoryById.Description)]
-    public async Task<IActionResult> DeleteCategoryById([Required] string categoryId) => MasaTourResponse(await Mediator.Send(new DeleteCategoryByIdCommand(categoryId)));
+    public async Task<IActionResult> DeleteCategoryById([Required][MaxLength(36)][MinLength(36)] string categoryId) => MasaTourResponse(await Mediator.Send(new DeleteCategoryByIdCommand(categoryId)));
 
 
     [HttpPatch(Router.Category.UndoDeleteCategoryById)]
@@ -41,7 +41,7 @@ public class CategoryController : MasaTourController
     [HttpGet(Router.Category.GetCategoryById)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetCategoryDto>>))]
     [SwaggerOperation(OperationId = EndPoints.Category.GetCategoryById.OperationId, Summary = EndPoints.Category.GetCategoryById.Summary, Description = EndPoints.Category.GetCategoryById.Description)]
-    public async Task<IActionResult> GetCategoryById([Required] string categoryId) => MasaTourResponse(await Mediator.Send(new GetCategoryByIdQuery(categoryId)));
+    public async Task<IActionResult> GetCategoryById([Required][MaxLength(36)][MinLength(36)] string categoryId) => MasaTourResponse(await Mediator.Send(new GetCategoryByIdQuery(categoryId)));
 
 
     [HttpGet(Router.Category.GetAllCategories)]
@@ -62,17 +62,6 @@ public class CategoryController : MasaTourController
     [SwaggerOperation(OperationId = EndPoints.Category.GetAllUnDeletedCategories.OperationId, Summary = EndPoints.Category.GetAllUnDeletedCategories.Summary, Description = EndPoints.Category.GetAllUnDeletedCategories.Description)]
     public async Task<IActionResult> GetAllUnDeletedCategories() => MasaTourResponse(await Mediator.Send(new GetAllUnDeletedCategoriesQuery()));
 
-    [AllowAnonymous]
-    [HttpGet(Router.Category.GetAllActiveCategories)]
-    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetCategoryDto>>))]
-    [SwaggerOperation(OperationId = EndPoints.Category.GetAllActiveCategories.OperationId, Summary = EndPoints.Category.GetAllActiveCategories.Summary, Description = EndPoints.Category.GetAllActiveCategories.Description)]
-    public async Task<IActionResult> GetAllActiveCategories() => MasaTourResponse(await Mediator.Send(new GetAllActiveCategoriesQuery()));
-
-
-    [HttpGet(Router.Category.GetAllNotActiveCategories)]
-    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetCategoryDto>>))]
-    [SwaggerOperation(OperationId = EndPoints.Category.GetAllNotActiveCategories.OperationId, Summary = EndPoints.Category.GetAllNotActiveCategories.Summary, Description = EndPoints.Category.GetAllNotActiveCategories.Description)]
-    public async Task<IActionResult> GetAllNotActiveCategories() => MasaTourResponse(await Mediator.Send(new GetAllNotActiveCategoriesQuery()));
 
 
     [AllowAnonymous]

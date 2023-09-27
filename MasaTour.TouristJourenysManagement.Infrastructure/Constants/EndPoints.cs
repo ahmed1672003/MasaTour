@@ -189,19 +189,6 @@ public static class EndPoints
             public const string Summary = "Get All UnDeleted Categories | Allowed For Anonymous";
             public const string Description = "";
         }
-
-        public static class GetAllActiveCategories
-        {
-            public const string OperationId = "51C25943-A3FC-40FE-A4E3-2DEC5D682C7224";
-            public const string Summary = "Get All Active Categories | Allowed For Anonymous";
-            public const string Description = "";
-        }
-        public static class GetAllNotActiveCategories
-        {
-            public const string OperationId = "51C25943-A3FC-40FE-A4E3-2DEC5D682C727";
-            public const string Summary = "Get All Not Active Categories | Allowed For Admin And SuperAdmin";
-            public const string Description = "";
-        }
         public static class PaginateCategories
         {
             public const string OperationId = "A765CF7A-43B6-47EB-91ED-2990DAECAE49";
@@ -213,5 +200,10 @@ public static class EndPoints
                   "</br></br> orderBy    Default Value = 4 , Id[0] , NameAR[1] , NameEN[2] , NameDE[3] , CreatedAt[4]" +
                 "</b>";
         }
+    }
+
+    public static class Trip
+    {
+
     }
 }

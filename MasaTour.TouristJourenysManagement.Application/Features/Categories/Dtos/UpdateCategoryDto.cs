@@ -22,8 +22,4 @@ public class UpdateCategoryDto
     [MaxLength(255, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Category.FiledLengthIsBiggerThanMaxLength)]
     [MinLength(3, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Category.FiledLengthIsSmallerThanMinLength)]
     public string NameDE { get; set; }
-
-
-    [Required]
-    public bool IsActive { get; set; }
 }

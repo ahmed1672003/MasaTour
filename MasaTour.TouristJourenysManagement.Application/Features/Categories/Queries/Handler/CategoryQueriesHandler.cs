@@ -1,15 +1,9 @@
-﻿using System.Linq.Expressions;
-
-using MasaTour.TouristTripsManagement.Application.Features.Enums;
-
-namespace MasaTour.TouristTripsManagement.Application.Features.Categories.Queries.Handler;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Categories.Queries.Handler;
 public sealed class CategoryQueriesHandler :
     IRequestHandler<GetCategoryByIdQuery, ResponseModel<GetCategoryDto>>,
     IRequestHandler<GetAllCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
     IRequestHandler<GetAllDeletedCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
     IRequestHandler<GetAllUnDeletedCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
-    IRequestHandler<GetAllActiveCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
-    IRequestHandler<GetAllNotActiveCategoriesQuery, ResponseModel<IEnumerable<GetCategoryDto>>>,
     IRequestHandler<PaginateCategoriesQuery, PaginationResponseModel<IEnumerable<GetCategoryDto>>>
 {
     #region Fields
@@ -60,10 +54,10 @@ public sealed class CategoryQueriesHandler :
     {
         try
         {
-            if (!await _context.Categories.AnyAsync(cancellationToken: cancellationToken))
+            ISpecification<Category> asNoTrackingGetAllCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllCategoriesSpecification));
+            if (!await _context.Categories.AnyAsync(asNoTrackingGetAllCategoriesSpec, cancellationToken))
                 return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            ISpecification<Category> asNoTrackingGetAllCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllCategoriesSpecification));
             IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingGetAllCategoriesSpec, cancellationToken));
             return ResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
@@ -101,43 +95,6 @@ public sealed class CategoryQueriesHandler :
             if (!await _context.Categories.AnyAsync(cancellationToken: cancellationToken))
                 return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
             IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(cancellationToken: cancellationToken));
-            return ResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
-        }
-        catch (Exception ex)
-        {
-            return ResponseResult.InternalServerError<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
-        }
-    }
-    #endregion
-
-    #region Get All NotActive Categories
-    public async Task<ResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllNotActiveCategoriesQuery request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            ISpecification<Category> asNoTrackingGetAllNotActiveCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllNotActiveCategoriesSpecification));
-            if (!await _context.Categories.AnyAsync(asNoTrackingGetAllNotActiveCategoriesSpec, cancellationToken))
-                return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-            IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingGetAllNotActiveCategoriesSpec, cancellationToken: cancellationToken));
-            return ResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
-        }
-        catch (Exception ex)
-        {
-            return ResponseResult.InternalServerError<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
-        }
-    }
-
-    #endregion
-
-    #region Get All Active Categories
-    public async Task<ResponseModel<IEnumerable<GetCategoryDto>>> Handle(GetAllActiveCategoriesQuery request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            ISpecification<Category> asNoTrackingGetAllActiveCategoriesSpec = _specificationsFactory.CreatCategorySpecifications(typeof(AsNoTrackingGetAllActiveCategoriesSpecification));
-            if (!await _context.Categories.AnyAsync(asNoTrackingGetAllActiveCategoriesSpec, cancellationToken))
-                return ResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-            IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingGetAllActiveCategoriesSpec, cancellationToken: cancellationToken));
             return ResponseResult.Success(categoriesDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)

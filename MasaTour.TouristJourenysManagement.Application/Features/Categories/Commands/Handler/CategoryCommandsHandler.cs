@@ -91,7 +91,7 @@ public sealed class CategoryCommandsHandler :
             category.NameAR = request.dto.NameAR;
             category.NameDE = request.dto.NameDE;
             category.NameDE = request.dto.NameDE;
-            category.IsActive = request.dto.IsActive;
+            // category.IsActive = request.dto.IsActive;
 
             await _context.SaveChangesAsync(cancellationToken);
 

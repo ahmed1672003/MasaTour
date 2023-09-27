@@ -2,7 +2,7 @@
 
 namespace MasaTour.TouristTripsManagement.API.Controllers;
 
-[Authorize(AuthenticationSchemes = "Bearer", Roles = nameof(Roles.Basic))]
+//[Authorize(AuthenticationSchemes = "Bearer", Roles = nameof(Roles.Basic))]
 [ApiController]
 public class AuthController : MasaTourController
 {
