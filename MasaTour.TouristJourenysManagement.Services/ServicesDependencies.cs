@@ -1,15 +1,17 @@
-﻿
-namespace MasaTour.TouristTripsManagement.Services;
+﻿namespace MasaTour.TouristTripsManagement.Services;
 public static class ServicesDependencies
 {
     public static IServiceCollection AddServicesDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         #region Register Services
-        services.AddScoped<IUnitOfServices, UnitOfSevices>();
-        services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<ICookiesService, CookiesService>();
-        services.AddScoped<IEmailService, EmailService>();
+        services.AddHttpClient();
+        services.AddScoped<IUnitOfServices, UnitOfSevices>()
+                .AddScoped<IAuthService, AuthService>()
+                .AddScoped<ICookiesService, CookiesService>()
+                .AddScoped<IEmailService, EmailService>()
+                .AddScoped<IFastForexService, FastForexService>();
         services.Configure<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
+        services.Configure<FastForexSettings>(configuration.GetSection(nameof(FastForexSettings)));
         #endregion
 
         #region JWT Services

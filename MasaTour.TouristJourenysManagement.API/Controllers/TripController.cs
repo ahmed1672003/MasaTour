@@ -2,6 +2,7 @@
 using MasaTour.TouristTripsManagement.Application.Features.Trips.Commands;
 using MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
 using MasaTour.TouristTripsManagement.Application.Features.Trips.Queries;
+using MasaTour.TouristTripsManagement.Services.Services.Contracts;
 
 namespace MasaTour.TouristTripsManagement.API.Controllers;
 
@@ -9,7 +10,11 @@ namespace MasaTour.TouristTripsManagement.API.Controllers;
 [ApiController]
 public class TripController : MasaTourController
 {
-    public TripController(IMediator mediator) : base(mediator) { }
+    private readonly IUnitOfServices _services;
+    public TripController(IMediator mediator, IUnitOfServices services) : base(mediator)
+    {
+        _services = services;
+    }
 
     #region Post
     [HttpPost(Router.Trip.AddTrip)]
@@ -51,5 +56,14 @@ public class TripController : MasaTourController
 
     [HttpGet(Router.Trip.PaginateTrips)]
     public async Task<IActionResult> PaginateTrips(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", TripOrderBy orderBy = TripOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
+
+    [HttpGet(Router.Trip.GetCurrenciesBasedOnUSD)]
+
+    public async Task<IActionResult> GetCurrenciesBasedOnUSD()
+    {
+
+        return Ok(await _services.FastForexService.FetchMultiAsync());
+    }
+
     #endregion
 }

@@ -54,5 +54,6 @@ public static class Router
         public const string GetAllDeletedTrips = TripPrefix + "get-all-deleted-trips";
         public const string GetAllUnDeletedTrips = TripPrefix + "get-all-un-deleted-trips";
         public const string PaginateTrips = TripPrefix + "paginate-trips";
+        public const string GetCurrenciesBasedOnUSD = TripPrefix + "get-all-currencies-based-on-usd";
     }
 }

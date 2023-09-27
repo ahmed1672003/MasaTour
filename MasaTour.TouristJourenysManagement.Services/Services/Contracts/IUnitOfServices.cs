@@ -4,4 +4,5 @@ public interface IUnitOfServices
     IAuthService AuthService { get; }
     ICookiesService CookiesService { get; }
     IEmailService EmailService { get; }
+    IFastForexService FastForexService { get; }
 }
