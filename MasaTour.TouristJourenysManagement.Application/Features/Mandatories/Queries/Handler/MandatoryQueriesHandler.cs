@@ -6,8 +6,8 @@ public sealed class MandatoryQueriesHandler :
     IRequestHandler<GetAllMandatoriesQuery, ResponseModel<IEnumerable<GetMandatoryDto>>>,
     IRequestHandler<GetAllDeletedMandatoriesQuery, ResponseModel<IEnumerable<GetMandatoryDto>>>,
     IRequestHandler<GetAllUnDeletedMandatoriesQuery, ResponseModel<IEnumerable<GetMandatoryDto>>>,
-    IRequestHandler<PaginateDeletedMandatiriesQuery, PaginationResponseModel<IEnumerable<GetMandatoryDto>>>,
-    IRequestHandler<PaginateUnDeletedMandatiriesQuery, PaginationResponseModel<IEnumerable<GetMandatoryDto>>>
+    IRequestHandler<PaginateDeletedMandatoriesQuery, PaginationResponseModel<IEnumerable<GetMandatoryDto>>>,
+    IRequestHandler<PaginateUnDeletedMandatoriesQuery, PaginationResponseModel<IEnumerable<GetMandatoryDto>>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
@@ -122,7 +122,7 @@ public sealed class MandatoryQueriesHandler :
     #endregion
 
     #region Paginate Deleted Mandatories
-    public async Task<PaginationResponseModel<IEnumerable<GetMandatoryDto>>> Handle(PaginateDeletedMandatiriesQuery request, CancellationToken cancellationToken)
+    public async Task<PaginationResponseModel<IEnumerable<GetMandatoryDto>>> Handle(PaginateDeletedMandatoriesQuery request, CancellationToken cancellationToken)
     {
         try
         {
@@ -171,7 +171,7 @@ public sealed class MandatoryQueriesHandler :
     #endregion
 
     #region Paginate UnDeleted Mandatories
-    public async Task<PaginationResponseModel<IEnumerable<GetMandatoryDto>>> Handle(PaginateUnDeletedMandatiriesQuery request, CancellationToken cancellationToken)
+    public async Task<PaginationResponseModel<IEnumerable<GetMandatoryDto>>> Handle(PaginateUnDeletedMandatoriesQuery request, CancellationToken cancellationToken)
     {
         try
         {

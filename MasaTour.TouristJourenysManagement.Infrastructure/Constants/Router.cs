@@ -72,4 +72,19 @@ public static class Router
         public const string PaginateUnDeletedTrips = TripPrefix + "paginate-all-un-deleted-trips";
         public const string GetCurrenciesBasedOnUSD = TripPrefix + "get-all-currencies-based-on-usd";
     }
+
+    public static class Mandatory
+    {
+        private const string MandatoryPrefix = ApiPrefix + "mandatorys/";
+        public const string AddMandatory = MandatoryPrefix + "add-mandatory";
+        public const string UpdateMandatory = MandatoryPrefix + "update-mandatory";
+        public const string DeleteMandatoryById = MandatoryPrefix + "delete-mandatory-by-id";
+        public const string UndoDeleteMandatoryById = MandatoryPrefix + "undo-delete-mandatory-by-id";
+        public const string GetMandatoryById = MandatoryPrefix + "get-mandatory-by-id";
+        public const string GetAllMandatories = MandatoryPrefix + "get-all-mandatories";
+        public const string GetAllDeletedMandatories = MandatoryPrefix + "get-all-deleted-mandatories";
+        public const string GetAllUnDeletedMandatories = MandatoryPrefix + "get-all-un-deleted-mandatories";
+        public const string PaginateUnDeletedMandatories = MandatoryPrefix + "paginate-all-un-deleted-mandatories";
+        public const string PaginateDeletedMandatories = MandatoryPrefix + "paginate-all-deleted-mandatories";
+    }
 }
