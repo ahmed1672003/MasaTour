@@ -33,6 +33,11 @@ public sealed class SubCategoryCommandsHandler :
     {
         try
         {
+            // Category Shold Be Is Exist
+            ISpecification<Category> asNoTrackingGetCategoryByIdSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetCategoryByIdSpecification), request.dto.CategoryId);
+            if (!await _context.Categories.AnyAsync(asNoTrackingGetCategoryByIdSpec, cancellationToken))
+                return ResponseResult.BadRequest<GetSubCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
+
             // UnDeleted SubCategory NameAR Should Be Does Not Exist
             ISpecification<SubCategory> asNoTrackingGetSubCategoryByNameARSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingGetSubCategoryByNameARSpecification), request.dto.NameAR);
             if (await _context.SubCategories.AnyAsync(asNoTrackingGetSubCategoryByNameARSpec, cancellationToken))
@@ -92,17 +97,17 @@ public sealed class SubCategoryCommandsHandler :
                 return ResponseResult.BadRequest<GetSubCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
             // UnDeleted SubCategory NameAR Should Not Be Duplicated
-            ISpecification<SubCategory> asNoTrackingCheckDuplicatedCategoryByNameARSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedCategoryByNameARSpecification), request.dto.NameAR);
+            ISpecification<SubCategory> asNoTrackingCheckDuplicatedCategoryByNameARSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedSubCategoryByNameARSpecification), request.dto.SubCategoryId, request.dto.NameAR);
             if (await _context.SubCategories.AnyAsync(asNoTrackingCheckDuplicatedCategoryByNameARSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetSubCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
             // UnDeleted SubCategory NameEN Should Not Be Duplicated
-            ISpecification<SubCategory> asNoTrackingCheckDuplicatedCategoryByNameENSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedCategoryByNameENSpecification), request.dto.NameEN);
+            ISpecification<SubCategory> asNoTrackingCheckDuplicatedCategoryByNameENSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedSubCategoryByNameENSpecification), request.dto.SubCategoryId, request.dto.NameEN);
             if (await _context.SubCategories.AnyAsync(asNoTrackingCheckDuplicatedCategoryByNameENSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetSubCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
             // UnDeleted SubCategory NameDE Should Not Be Duplicated
-            ISpecification<SubCategory> asNoTrackingCheckDuplicatedCategoryByNameDESpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedCategoryByNameDESpecification), request.dto.NameDE);
+            ISpecification<SubCategory> asNoTrackingCheckDuplicatedCategoryByNameDESpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingCheckDuplicatedSubCategoryByNameDESpecification), request.dto.SubCategoryId, request.dto.NameDE);
             if (await _context.SubCategories.AnyAsync(asNoTrackingCheckDuplicatedCategoryByNameDESpec, cancellationToken))
                 return ResponseResult.BadRequest<GetSubCategoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
@@ -124,9 +129,9 @@ public sealed class SubCategoryCommandsHandler :
             ISpecification<SubCategory> asTrackingGetSubCategoryByIdSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsTrackingGetSubCategoryByIdSpecification), request.dto.SubCategoryId);
             SubCategory subCategory = await _context.SubCategories.RetrieveAsync(asTrackingGetSubCategoryByIdSpec, cancellationToken);
             subCategory.NameAR = request.dto.NameAR;
-            subCategory.NameDE = request.dto.NameEN;
+            subCategory.NameEN = request.dto.NameEN;
             subCategory.NameDE = request.dto.NameDE;
-            subCategory.CategoryId = request.dto.SubCategoryId;
+            subCategory.CategoryId = request.dto.CategoryId;
             await _context.SaveChangesAsync(cancellationToken);
             GetSubCategoryDto subCategoryDto = _mapper.Map<GetSubCategoryDto>(subCategory);
             return ResponseResult.Success(subCategoryDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);

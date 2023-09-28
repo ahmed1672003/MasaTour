@@ -234,7 +234,7 @@ public sealed class TripQueriesHandler :
             }
             ISpecification<Trip> asNoTrackingPaginateTripsSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingPaginateUnDeletedTripsSpecification), request.pageNumber, request.pageSize, request.keyWords, orderBy);
             IEnumerable<GetTripDto> tripDtos = _mapper.Map<IEnumerable<GetTripDto>>(await _context.Trips.RetrieveAllAsync(asNoTrackingPaginateTripsSpec, cancellationToken));
-            return PaginationResponseResult.Success(tripDtos, pageSize: request.pageSize.Value, currentPage: request.pageNumber.Value, count: tripDtos.Count());
+            return PaginationResponseResult.Success(tripDtos, pageSize: request.pageSize.Value, currentPage: request.pageNumber.Value, count: await _context.Trips.CountAsync());
         }
         catch (Exception ex)
         {

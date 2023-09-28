@@ -80,6 +80,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameENSpecification" => new AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameENSpecification(parameters[0], parameters[1]),
             "AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameARSpecification" => new AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameARSpecification(parameters[0], parameters[1]),
             "AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameDESpecification" => new AsNoTrackingCheckDuplicatedDeletedSubCategoryByNameDESpecification(parameters[0], parameters[1]),
+            "AsTrackingGetSubCategoryByIdSpecification" => new AsTrackingGetSubCategoryByIdSpecification(parameters[0]),
             "AsNoTrackingGetDeletedSubCategoryByNameARSpecification" => new AsNoTrackingGetDeletedSubCategoryByNameARSpecification(parameters[0]),
             "AsNoTrackingGetDeletedSubCategoryByNameDESpecification" => new AsNoTrackingGetDeletedSubCategoryByNameDESpecification(parameters[0]),
             "AsNoTrackingGetDeletedSubCategoryByNameENSpecification" => new AsNoTrackingGetDeletedSubCategoryByNameENSpecification(parameters[0]),
@@ -90,7 +91,8 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetSubCategoryByNameARSpecification" => new AsNoTrackingGetSubCategoryByNameARSpecification(parameters[0]),
             "AsNoTrackingGetSubCategoryByNameDESpecification" => new AsNoTrackingGetSubCategoryByNameDESpecification(parameters[0]),
             "AsNoTrackingGetSubCategoryByNameENSpecification" => new AsNoTrackingGetSubCategoryByNameENSpecification(parameters[0]),
-            "AsNoTrackingPaginateUnDeletedSubCategories" => new AsNoTrackingPaginateUnDeletedSubCategories(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateUnDeletedSubCategoriesSpecification" => new AsNoTrackingPaginateUnDeletedSubCategoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateDeletedSubCategoriesSpecification" => new AsNoTrackingPaginateDeletedSubCategoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetDeletedSubCategoryById_Trips_Specification" => new AsTrackingGetDeletedSubCategoryById_Trips_Specification(parameters[0]),
             "AsTrackingGetDeletedSubCategoryByIdSpecification" => new AsTrackingGetDeletedSubCategoryByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()

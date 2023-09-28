@@ -1,6 +1,4 @@
-﻿using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Dtos;
-
-namespace MasaTour.TouristTripsManagement.Application.Features.SubCategories.Mappers;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.SubCategories.Mappers;
 public class SubCategoryProfile : Profile
 {
     public SubCategoryProfile()
@@ -13,7 +11,7 @@ public class SubCategoryProfile : Profile
         CreateMap<SubCategory, GetSubCategoryDto>()
             .ForMember(dist => dist.SubCategoryId, cfg => cfg.MapFrom(src => src.Id))
             .ForMember(dist => dist.CreatedAt, cfg => cfg.MapFrom(src => src.CreatedAt.ToLocalTime()))
-            .ForMember(dist => dist.SubCategoryId, cfg => cfg.MapFrom(src => src.UpdatedAt.Value.ToLocalTime()))
-            .ForMember(dist => dist.SubCategoryId, cfg => cfg.MapFrom(src => src.DeletedAt.Value.ToLocalTime()));
+            .ForMember(dist => dist.UpdatedAt, cfg => cfg.MapFrom(src => src.UpdatedAt.Value.ToLocalTime()))
+            .ForMember(dist => dist.DeletedAt, cfg => cfg.MapFrom(src => src.DeletedAt.Value.ToLocalTime()));
     }
 }

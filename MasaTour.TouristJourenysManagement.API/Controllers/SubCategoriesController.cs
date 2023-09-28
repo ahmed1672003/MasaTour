@@ -1,7 +1,4 @@
-﻿using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Commands;
-using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Dtos;
-
-namespace MasaTour.TouristTripsManagement.API.Controllers;
+﻿namespace MasaTour.TouristTripsManagement.API.Controllers;
 
 [ApiController]
 public class SubCategoriesController : MasaTourController
@@ -27,6 +24,23 @@ public class SubCategoriesController : MasaTourController
     #endregion
 
     #region Get
+    [HttpGet(Router.SubCategory.GetSubCategoryById)]
+    public async Task<IActionResult> GetSubCategoryById([Required][MaxLength(36)][MinLength(36)] string subCategoryId) => MasaTourResponse(await Mediator.Send(new GetSubCategoryByIdQuery(subCategoryId)));
+
+    [HttpGet(Router.SubCategory.GetAllSubCategories)]
+    public async Task<IActionResult> GetAllSubCategories() => MasaTourResponse(await Mediator.Send(new GetAllSubCategoriesQuery()));
+
+    [HttpGet(Router.SubCategory.GetAllUnDeletedSubCategories)]
+    public async Task<IActionResult> GetAllUnDeletedSubCategories() => MasaTourResponse(await Mediator.Send(new GetAllUnDeletedSubCategoriesQuery()));
+
+    [HttpGet(Router.SubCategory.GetAllDeletedSubCategories)]
+    public async Task<IActionResult> GetAllDeletedSubCategories() => MasaTourResponse(await Mediator.Send(new GetAllDeletedSubCategoriesQuery()));
+
+    [HttpGet(Router.SubCategory.PaginateUnDeletedSubCategories)]
+    public async Task<IActionResult> PaginateUnDeletedSubCategories(int? pageNumber = 1, int? pageSize = 1, string? keyWords = "", SubCategoryOrderBy? orderBy = SubCategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateUnDeletedSubCategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
+
+    [HttpGet(Router.SubCategory.PaginateDeletedSubCategories)]
+    public async Task<IActionResult> PaginateDeletedSubCategories(int? pageNumber = 1, int? pageSize = 01, string? keyWords = "", SubCategoryOrderBy? orderBy = SubCategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateDeletedSubCategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
 
     #endregion
 }

@@ -135,7 +135,7 @@ public sealed class CategoryQueriesHandler :
 
             ISpecification<Category> asNoTrackingPaginateCategoriesSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingPaginateUnDeletedCategoriesSpecification), request.pageNumber!.Value, request.pageSize!.Value, request.keyWords, orderBy);
             IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingPaginateCategoriesSpec, cancellationToken));
-            return PaginationResponseResult.Success(categoriesDto, count: categoriesDto.Count(), currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+            return PaginationResponseResult.Success(categoriesDto, count: await _context.Categories.CountAsync(cancellationToken: cancellationToken), currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {
@@ -174,11 +174,9 @@ public sealed class CategoryQueriesHandler :
                     break;
             }
 
-            ISpecification<Category> asNoTrackingPaginateDeletedCategoriesSpec = _specificationsFactory.
-                CreateCategorySpecifications(typeof(AsNoTrackingPaginateDeletedCategoriesSpecification),
-                        request.pageNumber!.Value, request.pageSize!.Value, request.keyWords, orderBy);
+            ISpecification<Category> asNoTrackingPaginateDeletedCategoriesSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingPaginateDeletedCategoriesSpecification), request.pageNumber!.Value, request.pageSize!.Value, request.keyWords, orderBy);
             IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingPaginateDeletedCategoriesSpec, cancellationToken));
-            return PaginationResponseResult.Success(categoriesDto, count: categoriesDto.Count(), currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+            return PaginationResponseResult.Success(categoriesDto, count: await _context.Categories.CountAsync(asNoTrackingGetAllDeletedCategoriesSpec, cancellationToken), currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {

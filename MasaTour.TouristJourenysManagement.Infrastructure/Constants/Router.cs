@@ -53,6 +53,7 @@ public static class Router
         public const string GetAllDeletedSubCategories = CategoryPrefix + "get-all-deleted-sub-categories";
         public const string GetAllUnDeletedSubCategories = CategoryPrefix + "get-all-un-deleted-sub-categories";
         public const string PaginateUnDeletedSubCategories = CategoryPrefix + "paginate-all-un-deleted-sub-categories";
+        public const string PaginateDeletedSubCategories = CategoryPrefix + "paginate-all-deleted-sub-categories";
     }
 
     public static class Trip
