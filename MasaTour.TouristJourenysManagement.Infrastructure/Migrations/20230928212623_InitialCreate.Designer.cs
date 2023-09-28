@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristTripsManagementDbContext))]
-    [Migration("20230928174902_InitialCreate")]
+    [Migration("20230928212623_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -396,7 +396,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DesceiptionAR")

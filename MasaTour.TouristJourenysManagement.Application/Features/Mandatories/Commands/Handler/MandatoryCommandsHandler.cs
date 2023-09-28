@@ -200,6 +200,7 @@ public sealed class MandatoryCommandsHandler :
 
             Mandatory mandatory = await _context.Mandatories.RetrieveAsync(asNoTrackingetGetMandatoryByIdSpec, cancellationToken);
             await _context.Mandatories.DeleteAsync(mandatory, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
             GetMandatoryDto mandatoryDto = _mapper.Map<GetMandatoryDto>(mandatory);
             return ResponseResult.Success<GetMandatoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }

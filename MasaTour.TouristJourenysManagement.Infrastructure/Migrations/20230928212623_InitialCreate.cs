@@ -41,9 +41,9 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     DesceiptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
                     DesceiptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {

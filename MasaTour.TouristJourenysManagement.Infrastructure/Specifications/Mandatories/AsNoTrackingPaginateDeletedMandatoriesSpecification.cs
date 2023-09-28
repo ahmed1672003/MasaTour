@@ -12,7 +12,9 @@ public sealed class AsNoTrackingPaginateDeletedMandatoriesSpecification : Specif
         m.DesceiptionDE.Contains(keyWords)))
     {
         StopTracking();
+        IgnorQueryFilter();
         ApplyPaging((pageNumber.Value, pageSize.Value));
-        AddIncludes(m => m.TripMandatoryMapper);
+        AddOrderBy(orderBy);
+        // AddIncludes(m => m.TripMandatoryMapper);
     }
 }

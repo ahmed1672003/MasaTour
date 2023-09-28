@@ -63,7 +63,7 @@ public sealed class MandatoryQueriesHandler :
             ISpecification<Mandatory> asNoTrackingGetAllMandatoriesSpec = _specificationsFactory.
                 CreateMandatorySpecifications(typeof(AsNoTrackingGetAllMandatoriesSpecification));
 
-            if (await _context.Mandatories.AnyAsync(asNoTrackingGetAllMandatoriesSpec, cancellationToken))
+            if (!await _context.Mandatories.AnyAsync(asNoTrackingGetAllMandatoriesSpec, cancellationToken))
                 return ResponseResult.NotFound<IEnumerable<GetMandatoryDto>>
                         (message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
@@ -111,7 +111,7 @@ public sealed class MandatoryQueriesHandler :
                          (message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
             IEnumerable<GetMandatoryDto> mandatoryDtos = _mapper.Map<IEnumerable<GetMandatoryDto>>
-                (await _context.Mandatories.RetrieveAllAsync(cancellationToken: cancellationToken));
+                    (await _context.Mandatories.RetrieveAllAsync(cancellationToken: cancellationToken));
             return ResponseResult.Success(mandatoryDtos, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)

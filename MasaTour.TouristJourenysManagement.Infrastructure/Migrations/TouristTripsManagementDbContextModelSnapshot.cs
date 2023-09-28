@@ -393,7 +393,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DesceiptionAR")
