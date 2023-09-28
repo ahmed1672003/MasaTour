@@ -18,8 +18,6 @@ public class AddSubCategoryDto
     [MinLength(3, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.SubCategory.FiledLengthIsSmallerThanMinLength)]
     public string NameEN { get; set; }
 
-
-
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.SubCategory.FiledCanNotBeNull)]
     [MaxLength(255, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.SubCategory.FiledLengthIsBiggerThanMaxLength)]
     [MinLength(3, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.SubCategory.FiledLengthIsSmallerThanMinLength)]

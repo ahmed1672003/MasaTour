@@ -90,6 +90,8 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetSubCategoryByNameDESpecification" => new AsNoTrackingGetSubCategoryByNameDESpecification(parameters[0]),
             "AsNoTrackingGetSubCategoryByNameENSpecification" => new AsNoTrackingGetSubCategoryByNameENSpecification(parameters[0]),
             "AsNoTrackingPaginateUnDeletedSubCategories" => new AsNoTrackingPaginateUnDeletedSubCategories(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsTrackingGetDeletedSubCategoryById_Trips_Specification" => new AsTrackingGetDeletedSubCategoryById_Trips_Specification(parameters[0]),
+            "AsTrackingGetDeletedSubCategoryByIdSpecification" => new AsTrackingGetDeletedSubCategoryByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }

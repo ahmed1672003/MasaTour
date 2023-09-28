@@ -43,15 +43,15 @@ public static class Router
     public static class SubCategory
     {
         private const string CategoryPrefix = ApiPrefix + "sub-category/";
-        public const string AddCategory = CategoryPrefix + "add-sub-category";
-        public const string UpdateCategory = CategoryPrefix + "update-sub-category";
-        public const string DeleteCategoryById = CategoryPrefix + "delete-sub-category-by-id";
-        public const string UndoDeleteCategoryById = CategoryPrefix + "undo-delete-sub-category-by-id";
-        public const string GetCategoryById = CategoryPrefix + "get-sub-category-by-id";
-        public const string GetAllCategories = CategoryPrefix + "get-all-sub-categories";
-        public const string GetAllDeletedCategories = CategoryPrefix + "get-all-deleted-sub-categories";
-        public const string GetAllUnDeletedCategories = CategoryPrefix + "get-all-un-deleted-sub-categories";
-        public const string PaginateUnDeletedCategories = CategoryPrefix + "paginate-all-un-deleted-sub-categories";
+        public const string AddSubCategory = CategoryPrefix + "add-sub-category";
+        public const string UpdateSubCategory = CategoryPrefix + "update-sub-category";
+        public const string DeleteSubCategoryById = CategoryPrefix + "delete-sub-category-by-id";
+        public const string UndoDeleteSubCategoryById = CategoryPrefix + "undo-delete-sub-category-by-id";
+        public const string GetSubCategoryById = CategoryPrefix + "get-sub-category-by-id";
+        public const string GetAllSubCategories = CategoryPrefix + "get-all-sub-categories";
+        public const string GetAllDeletedSubCategories = CategoryPrefix + "get-all-deleted-sub-categories";
+        public const string GetAllUnDeletedSubCategories = CategoryPrefix + "get-all-un-deleted-sub-categories";
+        public const string PaginateUnDeletedSubCategories = CategoryPrefix + "paginate-all-un-deleted-sub-categories";
     }
 
     public static class Trip
