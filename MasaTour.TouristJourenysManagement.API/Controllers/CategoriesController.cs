@@ -4,9 +4,9 @@ using MasaTour.TouristTripsManagement.Application.Features.Enums;
 namespace MasaTour.TouristTripsManagement.API.Controllers;
 //[Authorize(AuthenticationSchemes = "Bearer", Roles = $"{nameof(Roles.Admin)}")]
 [ApiController]
-public class CategoryController : MasaTourController
+public class CategoriesController : MasaTourController
 {
-    public CategoryController(IMediator mediator) : base(mediator) { }
+    public CategoriesController(IMediator mediator) : base(mediator) { }
 
     #region Post
     [HttpPost(Router.Category.AddCategory)]
@@ -21,7 +21,6 @@ public class CategoryController : MasaTourController
     [SwaggerOperation(OperationId = EndPoints.Category.UpdateCategory.OperationId, Summary = EndPoints.Category.UpdateCategory.Summary, Description = EndPoints.Category.UpdateCategory.Description)]
     public async Task<IActionResult> UpdateCategory(UpdateCategoryDto dto) => MasaTourResponse(await Mediator.Send(new UpdateCategoryCommand(dto)));
     #endregion
-
 
     #region Patch
     [HttpPatch(Router.Category.DeleteCategoryById)]
@@ -62,15 +61,17 @@ public class CategoryController : MasaTourController
     [SwaggerOperation(OperationId = EndPoints.Category.GetAllUnDeletedCategories.OperationId, Summary = EndPoints.Category.GetAllUnDeletedCategories.Summary, Description = EndPoints.Category.GetAllUnDeletedCategories.Description)]
     public async Task<IActionResult> GetAllUnDeletedCategories() => MasaTourResponse(await Mediator.Send(new GetAllUnDeletedCategoriesQuery()));
 
-
-
     [AllowAnonymous]
     [HttpGet(Router.Category.PaginateUnDeletedCategories)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetCategoryDto>>))]
     [SwaggerOperation(OperationId = EndPoints.Category.PaginateUnDeletedCategories.OperationId, Summary = EndPoints.Category.PaginateUnDeletedCategories.Summary, Description = EndPoints.Category.PaginateUnDeletedCategories.Description)]
-    public async Task<IActionResult> PaginateCategories(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", CategoryOrderBy? orderBy = CategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateUnDeletedategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
+    public async Task<IActionResult> PaginateUnDeletedCategories(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", CategoryOrderBy? orderBy = CategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateUnDeletedCategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
 
 
-
+    [AllowAnonymous]
+    [HttpGet(Router.Category.PaginateDeletedCategories)]
+    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetCategoryDto>>))]
+    [SwaggerOperation(OperationId = EndPoints.Category.PaginateUnDeletedCategories.OperationId, Summary = EndPoints.Category.PaginateUnDeletedCategories.Summary, Description = EndPoints.Category.PaginateUnDeletedCategories.Description)]
+    public async Task<IActionResult> PaginateDeletedCategories(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", CategoryOrderBy? orderBy = CategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateDeletedCategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
     #endregion
 }

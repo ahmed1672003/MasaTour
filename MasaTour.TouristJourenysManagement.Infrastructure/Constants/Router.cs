@@ -1,9 +1,9 @@
 ﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Constants;
 public static class Router
 {
-    public const string Api = "api/";
-    public const string ApiVersion = "v1/";
-    public const string ApiPrefix = Api + ApiVersion;
+    private const string Api = "api/";
+    private const string ApiVersion = "v1/";
+    private const string ApiPrefix = Api + ApiVersion;
     public static class Auth
     {
         private const string AuthPrefix = ApiPrefix + "auth/";
@@ -38,6 +38,7 @@ public static class Router
         public const string GetAllDeletedCategories = CategoryPrefix + "get-all-deleted-categories";
         public const string GetAllUnDeletedCategories = CategoryPrefix + "get-all-un-deleted-categories";
         public const string PaginateUnDeletedCategories = CategoryPrefix + "paginate-all-un-deleted-categories";
+        public const string PaginateDeletedCategories = CategoryPrefix + "paginate-all-deleted-categories";
     }
 
     public static class SubCategory

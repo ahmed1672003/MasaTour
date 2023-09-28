@@ -55,6 +55,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetCategoryByNameENSpecification" => new AsNoTrackingGetCategoryByNameENSpecification(parameters[0]),
             "AsNoTrackingGetDeletedCategoryByIdSpecification" => new AsNoTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
             "AsNoTrackingPaginateUnDeletedCategoriesSpecification" => new AsNoTrackingPaginateUnDeletedCategoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateDeletedCategoriesSpecification" => new AsNoTrackingPaginateDeletedCategoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsNoTrackingGetAllCategoriesSpecification" => new AsNoTrackingGetAllCategoriesSpecification(),
             "AsNoTrackingGetAllDeletedCategoriesSpecification" => new AsNoTrackingGetAllDeletedCategoriesSpecification(),
             "AsNoTrackingGetDeletedCategoryByNameARSpecification" => new AsNoTrackingGetDeletedCategoryByNameARSpecification(parameters[0]),

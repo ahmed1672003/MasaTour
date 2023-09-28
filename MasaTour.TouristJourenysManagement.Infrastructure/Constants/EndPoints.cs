@@ -200,6 +200,17 @@ public static class EndPoints
                   "</br></br> orderBy    Default Value = 4 , Id[0] , NameAR[1] , NameEN[2] , NameDE[3] , CreatedAt[4]" +
                 "</b>";
         }
+        public static class PaginateDeletedCategories
+        {
+            public const string OperationId = "CA60B5AE-5475-4884-A008-A26D81F68527";
+            public const string Summary = "Paginate Deleted Categories | Allowed For SuperAdmin And Admin";
+            public const string Description =
+                "<b>" +
+                  "</br></br> pageNumber Default Value = 1" +
+                  "</br></br> pageSize   Default Value = 10" +
+                  "</br></br> orderBy    Default Value = 4 , Id[0] , NameAR[1] , NameEN[2] , NameDE[3] , CreatedAt[4]" +
+                "</b>";
+        }
     }
 
     public static class Trip

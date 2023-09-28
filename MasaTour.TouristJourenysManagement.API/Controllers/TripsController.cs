@@ -8,10 +8,10 @@ namespace MasaTour.TouristTripsManagement.API.Controllers;
 
 // [Authorize(AuthenticationSchemes = "Bearer", Roles = $"{nameof(Roles.Admin)}")]
 [ApiController]
-public class TripController : MasaTourController
+public class TripsController : MasaTourController
 {
     private readonly IUnitOfServices _services;
-    public TripController(IMediator mediator, IUnitOfServices services) : base(mediator)
+    public TripsController(IMediator mediator, IUnitOfServices services) : base(mediator)
     {
         _services = services;
     }

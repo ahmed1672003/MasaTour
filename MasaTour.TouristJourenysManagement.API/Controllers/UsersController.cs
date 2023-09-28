@@ -1,9 +1,9 @@
 ﻿namespace MasaTour.TouristTripsManagement.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer", Roles = nameof(Roles.Basic))]
 [ApiController]
-public class UserController : MasaTourController
+public class UsersController : MasaTourController
 {
-    public UserController(IMediator mediator) : base(mediator) { }
+    public UsersController(IMediator mediator) : base(mediator) { }
 
     #region Put
     [HttpPut(Router.User.UpdateUser)]
