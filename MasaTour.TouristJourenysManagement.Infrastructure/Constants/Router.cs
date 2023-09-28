@@ -18,7 +18,7 @@ public static class Router
     public static class User
     {
         private const string UserPrefix = ApiPrefix + "user/";
-        public const string UpdateUser = UserPrefix + "update-user";
+        public const string UpdateUser = UserPrefix + "update-users";
         public const string GetUserById = UserPrefix + "get-user-by-id";
         public const string GetAllUsers = UserPrefix + "get-all-users";
         public const string DeleteUserById = UserPrefix + "delete-user-by-id";
@@ -28,7 +28,7 @@ public static class Router
 
     public static class Category
     {
-        private const string CategoryPrefix = ApiPrefix + "category/";
+        private const string CategoryPrefix = ApiPrefix + "categories/";
         public const string AddCategory = CategoryPrefix + "add-category";
         public const string UpdateCategory = CategoryPrefix + "update-category";
         public const string DeleteCategoryById = CategoryPrefix + "delete-category-by-id";
@@ -43,7 +43,7 @@ public static class Router
 
     public static class SubCategory
     {
-        private const string CategoryPrefix = ApiPrefix + "sub-category/";
+        private const string CategoryPrefix = ApiPrefix + "sub-categories/";
         public const string AddSubCategory = CategoryPrefix + "add-sub-category";
         public const string UpdateSubCategory = CategoryPrefix + "update-sub-category";
         public const string DeleteSubCategoryById = CategoryPrefix + "delete-sub-category-by-id";
@@ -57,7 +57,7 @@ public static class Router
 
     public static class Trip
     {
-        private const string TripPrefix = ApiPrefix + "trip/";
+        private const string TripPrefix = ApiPrefix + "trips/";
         public const string AddTrip = TripPrefix + "add-trip";
         public const string UpdateTrip = TripPrefix + "update-trip";
         public const string DeleteTripById = TripPrefix + "delete-trip-by-id";

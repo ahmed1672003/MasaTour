@@ -71,7 +71,7 @@ public class CategoriesController : MasaTourController
     [AllowAnonymous]
     [HttpGet(Router.Category.PaginateDeletedCategories)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetCategoryDto>>))]
-    [SwaggerOperation(OperationId = EndPoints.Category.PaginateUnDeletedCategories.OperationId, Summary = EndPoints.Category.PaginateUnDeletedCategories.Summary, Description = EndPoints.Category.PaginateUnDeletedCategories.Description)]
+    [SwaggerOperation(OperationId = EndPoints.Category.PaginateDeletedCategories.OperationId, Summary = EndPoints.Category.PaginateDeletedCategories.Summary, Description = EndPoints.Category.PaginateDeletedCategories.Description)]
     public async Task<IActionResult> PaginateDeletedCategories(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", CategoryOrderBy? orderBy = CategoryOrderBy.CreatedAt) => MasaTourResponse(await Mediator.Send(new PaginateDeletedCategoriesQuery(pageNumber, pageSize, keyWords, orderBy)));
     #endregion
 }

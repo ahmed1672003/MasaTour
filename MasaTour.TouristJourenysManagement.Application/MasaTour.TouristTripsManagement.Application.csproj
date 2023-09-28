@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\SubCategories\Queries\Handler\" />
     <Folder Include="Features\Users\Validators\" />
   </ItemGroup>
 

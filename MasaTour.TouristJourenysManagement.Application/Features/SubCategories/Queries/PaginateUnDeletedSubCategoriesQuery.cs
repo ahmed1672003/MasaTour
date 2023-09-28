@@ -1,10 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MasaTour.TouristTripsManagement.Application.Features.SubCategories.Queries;
-internal class PaginateUnDeletedSubCategoriesQuery
-{
-}
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.SubCategories.Queries;
+public sealed record PaginateUnDeletedSubCategoriesQuery(int? pageNumber = 1, int pageSize = 10, string keyWords = "", SubCategoryOrderBy orderBy = SubCategoryOrderBy.CreatedAt)
+    : IRequest<PaginationResponseModel<IEnumerable<GetSubCategoryDto>>>;

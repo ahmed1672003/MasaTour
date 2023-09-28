@@ -144,7 +144,7 @@ public sealed class CategoryQueriesHandler :
     }
     #endregion
 
-    #region Pagination UnDeleted Categories
+    #region Pagination Deleted Categories
     public async Task<PaginationResponseModel<IEnumerable<GetCategoryDto>>> Handle(PaginateDeletedCategoriesQuery request, CancellationToken cancellationToken)
     {
         try
