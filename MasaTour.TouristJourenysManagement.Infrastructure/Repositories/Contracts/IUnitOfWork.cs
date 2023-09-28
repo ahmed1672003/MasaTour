@@ -17,6 +17,9 @@ public interface IUnitOfWork : IAsyncDisposable
     ICategoryRepository Categories { get; }
     ISubCategoryRepository SubCategories { get; }
     ITripRepository Trips { get; }
+    ITripMandatoryMapperRepository TripsMandatoryMappers { get; }
+    IMandatoryRepository Mandatories { get; }
+
     void UndoDeleted<T>(ref T entity) where T : IDeleteableTracker
     {
         entity.IsDeleted = false;

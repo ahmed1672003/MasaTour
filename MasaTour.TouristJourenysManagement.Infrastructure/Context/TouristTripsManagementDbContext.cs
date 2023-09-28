@@ -22,5 +22,6 @@ public class TouristTripsManagementDbContext
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<SubCategory> SubCategories => Set<SubCategory>();
     public DbSet<Trip> Trips => Set<Trip>();
-
+    public DbSet<TripMandatoryMapper> TripMandatoryMappers => Set<TripMandatoryMapper>();
+    public DbSet<Mandatory> Mandatories => Set<Mandatory>();
 }

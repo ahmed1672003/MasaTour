@@ -15,4 +15,6 @@ public static class Tables
     public const string Categories = "Categories";
     public const string SubCategories = "SubCategories";
     public const string Trips = "Trips";
+    public const string Mandatories = "Mandatories";
+    public const string TripMandatoryMappers = "TripMandatoryMappers";
 }

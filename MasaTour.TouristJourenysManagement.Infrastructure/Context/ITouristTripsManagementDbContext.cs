@@ -15,6 +15,9 @@ public interface ITouristTripsManagementDbContext
     DbSet<Category> Categories { get; }
     DbSet<SubCategory> SubCategories { get; }
     DbSet<Trip> Trips { get; }
+    DbSet<TripMandatoryMapper> TripMandatoryMappers { get; }
+    DbSet<Mandatory> Mandatories { get; }
+
     ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     DatabaseFacade Database { get; }
