@@ -13,6 +13,7 @@ global using MasaTour.TouristTripsManagement.Application.Resources;
 global using MasaTour.TouristTripsManagement.Application.Response;
 global using MasaTour.TouristTripsManagement.Domain.Entities;
 global using MasaTour.TouristTripsManagement.Domain.Entities.Identity;
+global using MasaTour.TouristTripsManagement.Domain.Mandatories.Dtos;
 global using MasaTour.TouristTripsManagement.Infrastructure.Constants;
 global using MasaTour.TouristTripsManagement.Infrastructure.Enums;
 global using MasaTour.TouristTripsManagement.Infrastructure.Repositories.Contracts;

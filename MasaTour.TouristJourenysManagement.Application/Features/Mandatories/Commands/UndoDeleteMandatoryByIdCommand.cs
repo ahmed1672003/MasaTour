@@ -1,0 +1,2 @@
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Mandatories.Commands;
+public sealed record UndoDeleteMandatoryByIdCommand([Required] string Id) : IRequest<ResponseModel<GetMandatoryDto>>;

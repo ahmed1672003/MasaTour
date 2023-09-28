@@ -16,7 +16,10 @@ global using MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Categories;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Contracts;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.JWTs;
+global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Mandatories;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Roles;
+global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
+global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Users;
 
 global using Microsoft.AspNetCore.Identity;

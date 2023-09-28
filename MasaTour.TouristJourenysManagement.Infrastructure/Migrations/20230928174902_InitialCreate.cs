@@ -34,13 +34,12 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     NameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     NameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     NameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    DesceiptionEN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DesceiptionAR = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DesceiptionDE = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DesceiptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    DesceiptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    DesceiptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),

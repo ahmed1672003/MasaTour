@@ -12,10 +12,4 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.11" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mandatories\Commands\Handler\" />
-    <Folder Include="Mandatories\Mappers\" />
-    <Folder Include="Mandatories\Queries\Handler\" />
-  </ItemGroup>
-
 </Project>

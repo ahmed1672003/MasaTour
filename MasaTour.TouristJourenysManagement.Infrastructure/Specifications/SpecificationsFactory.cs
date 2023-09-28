@@ -1,8 +1,4 @@
-﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Mandatories;
-using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
-using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
-
-namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
 public sealed class SpecificationsFactory : ISpecificationsFactory
 {

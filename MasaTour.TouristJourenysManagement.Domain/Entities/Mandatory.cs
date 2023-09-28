@@ -10,10 +10,6 @@ public class Mandatory : BaseEntity, ICreateableTracker, IUpdateableTracker, IDe
 {
     [Required]
     [MaxLength(255)]
-    public string Code { get; set; }
-
-    [Required]
-    [MaxLength(255)]
     public string NameAR { get; set; }
 
     [Required]
@@ -25,12 +21,15 @@ public class Mandatory : BaseEntity, ICreateableTracker, IUpdateableTracker, IDe
     public string NameDE { get; set; }
 
     [AllowNull]
+    [MaxLength(3000)]
     public string? DesceiptionEN { get; set; }
 
     [AllowNull]
+    [MaxLength(3000)]
     public string? DesceiptionAR { get; set; }
 
     [AllowNull]
+    [MaxLength(3000)]
     public string? DesceiptionDE { get; set; }
 
     [Required]
