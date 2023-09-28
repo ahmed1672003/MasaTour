@@ -2,7 +2,7 @@
 public sealed class AsNoTrackingPaginateDeletedSubCategoriesSpecification : Specification<SubCategory>
 {
     public AsNoTrackingPaginateDeletedSubCategoriesSpecification(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", Expression<Func<SubCategory, object>> orderBy = null)
-        : base(sc => (sc.IsDeleted) &&
+        : base(sc => (sc.IsDeleted) &
         ((sc.NameAR.Contains(keyWords)) ||
         (sc.NameAR.Contains(keyWords)) ||
         (sc.NameDE.Contains(keyWords)) ||

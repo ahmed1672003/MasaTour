@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristTripsManagementDbContext))]
-    [Migration("20230927204200_InitialCreate")]
+    [Migration("20230928174018_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -386,6 +386,68 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Mandatory", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DesceiptionAR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesceiptionDE")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesceiptionEN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NameAR")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("NameDE")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("NameEN")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NameAR")
+                        .IsUnique();
+
+                    b.HasIndex("NameDE")
+                        .IsUnique();
+
+                    b.HasIndex("NameEN")
+                        .IsUnique();
+
+                    b.ToTable("Mandatories", (string)null);
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.SubCategory", b =>
                 {
                     b.Property<string>("Id")
@@ -583,6 +645,35 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.ToTable("Trips", (string)null);
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripMandatoryMapper", b =>
+                {
+                    b.Property<string>("MandatoryId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("TripId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MandatoryId", "TripId");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("TripMandatoryMappers", (string)null);
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Identity.RoleClaim", b =>
                 {
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Identity.Role", null)
@@ -685,6 +776,25 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("SubCategory");
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripMandatoryMapper", b =>
+                {
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Mandatory", "Mandatory")
+                        .WithMany("TripMandatoryMapper")
+                        .HasForeignKey("MandatoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
+                        .WithMany()
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Mandatory");
+
+                    b.Navigation("Trip");
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
@@ -702,6 +812,11 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("UserJWTs");
 
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Mandatory", b =>
+                {
+                    b.Navigation("TripMandatoryMapper");
                 });
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.SubCategory", b =>

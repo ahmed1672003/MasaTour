@@ -7,4 +7,5 @@ public interface ISpecificationsFactory
     ISpecification<Category> CreateCategorySpecifications(Type type, params dynamic[] parameters);
     ISpecification<SubCategory> CreateSubCategorySpecifications(Type type, params dynamic[] parameters);
     ISpecification<Trip> CreateTripSpecifications(Type type, params dynamic[] parameters);
+    ISpecification<Mandatory> CreateMandatorySpecifications(Type type, params dynamic[] parameters);
 }

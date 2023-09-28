@@ -1,4 +1,5 @@
-﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Mandatories;
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
 using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
 
 namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
@@ -22,7 +23,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsTrackingGetUserByUserNameOrEmailIncludedJwtSpecification" => new AsTrackingGetUserByUserNameOrEmailIncludedJwtSpecification(parameters[0]),
             "AsTrackingGetUserByIdSpecification" => new AsTrackingGetUserByIdSpecification(parameters[0]),
             "AsTrackingGetDeletedUserByIdSpecification" => new AsTrackingGetDeletedUserByIdSpecification(parameters[0]),
-            _ => throw new InvalidOperationException()
+            _ => throw new InvalidOperationException("Create User Specification Exception!")
         };
     }
     public ISpecification<Role> CreateRoleSpecifications(Type type, params dynamic[] parameters)
@@ -30,7 +31,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
         return type.Name switch
         {
             "AsNoTrackingGetRolesByNameSpecification" => new AsNoTrackingGetRolesByNameSpecification(parameters[0]),
-            _ => throw new InvalidOperationException()
+            _ => throw new InvalidOperationException("Create Role Specification Exception!")
         };
     }
     public ISpecification<UserJWT> CreateUserJWTSpecifications(Type type, params dynamic[] parameters)
@@ -39,7 +40,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
         {
             "AsNoTrackingJwtIsExistSpecification" => new AsNoTrackingJwtIsExistSpecification(parameters[0], parameters[1]),
             "AsTrackingGetUserJWTByJwtAndRefreshJwtIncludedSpecification" => new AsTrackingGetUserJWTByJwtAndRefreshJwtIncludedSpecification(parameters[0], parameters[1]),
-            _ => throw new InvalidOperationException()
+            _ => throw new InvalidOperationException("Create UserJWT Specification Exception!")
         };
     }
     public ISpecification<Category> CreateCategorySpecifications(Type type, params dynamic[] parameters)
@@ -67,7 +68,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsTrackingGetDeletedCategoryByIdSpecification" => new AsTrackingGetDeletedCategoryByIdSpecification(parameters[0]),
             "AsTrackingGetCategoryByIdSpecification" => new AsTrackingGetCategoryByIdSpecification(parameters[0]),
             "AsTrackingGetDeletedCategoryById_SubCategories_Trips_Specification" => new AsTrackingGetDeletedCategoryById_SubCategories_Trips_Specification(parameters[0]),
-            _ => throw new InvalidOperationException()
+            _ => throw new InvalidOperationException("Create Category Specification Exception!")
         };
     }
     public ISpecification<SubCategory> CreateSubCategorySpecifications(Type type, params dynamic[] parameters)
@@ -95,7 +96,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingPaginateDeletedSubCategoriesSpecification" => new AsNoTrackingPaginateDeletedSubCategoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetDeletedSubCategoryById_Trips_Specification" => new AsTrackingGetDeletedSubCategoryById_Trips_Specification(parameters[0]),
             "AsTrackingGetDeletedSubCategoryByIdSpecification" => new AsTrackingGetDeletedSubCategoryByIdSpecification(parameters[0]),
-            _ => throw new InvalidOperationException()
+            _ => throw new InvalidOperationException("Create SubCategory Specification Exception!")
         };
     }
     public ISpecification<Trip> CreateTripSpecifications(Type type, params dynamic[] parameters)
@@ -121,7 +122,35 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingPaginateUnDeletedTripsSpecification" => new AsNoTrackingPaginateUnDeletedTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetDeletedTripByIdSpecification" => new AsTrackingGetDeletedTripByIdSpecification(parameters[0]),
             "AsTrackingGetTripByIdSpecification" => new AsTrackingGetTripByIdSpecification(parameters[0]),
-            _ => throw new InvalidOperationException()
+            _ => throw new InvalidOperationException("Create Trip Specification Exception!")
+        };
+    }
+    public ISpecification<Mandatory> CreateMandatorySpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            "AsNoTrackingCheckDuplicatedDeletedMandatoryByNameARSpecification" => new AsNoTrackingCheckDuplicatedDeletedMandatoryByNameARSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedMandatoryByNameDESpecification" => new AsNoTrackingCheckDuplicatedDeletedMandatoryByNameDESpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedMandatoryByNameENSpecification" => new AsNoTrackingCheckDuplicatedDeletedMandatoryByNameENSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedMandatoryByNameARSpecification" => new AsNoTrackingCheckDuplicatedMandatoryByNameARSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedMandatoryByNameDESpecification" => new AsNoTrackingCheckDuplicatedMandatoryByNameDESpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedMandatoryByNameENSpecification" => new AsNoTrackingCheckDuplicatedMandatoryByNameENSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingetGetMandatoryByIdSpecification" => new AsNoTrackingetGetMandatoryByIdSpecification(parameters[0]),
+            "AsNoTrackingGetAllDeletedMandatoriesSpecification" => new AsNoTrackingGetAllDeletedMandatoriesSpecification(),
+            "AsNoTrackingGetAllMandatoriesSpecification" => new AsNoTrackingGetAllMandatoriesSpecification(),
+            "AsNoTrackingGetDeletedMandatoryByIdSpecification" => new AsNoTrackingGetDeletedMandatoryByIdSpecification(parameters[0]),
+            "AsNoTrackingGetDeletedMandatoryByNameARSpecification" => new AsNoTrackingGetDeletedMandatoryByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetDeletedMandatoryByNameDESpecification" => new AsNoTrackingGetDeletedMandatoryByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetDeletedMandatoryByNameENSpecification" => new AsNoTrackingGetDeletedMandatoryByNameENSpecification(parameters[0]),
+            "AsNoTrackingGetMandatoryByNameARSpecification" => new AsNoTrackingGetMandatoryByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetMandatoryByNameDESpecification" => new AsNoTrackingGetMandatoryByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetMandatoryByNameENSpecification" => new AsNoTrackingGetMandatoryByNameENSpecification(parameters[0]),
+            "AsNoTrackingPaginateDeletedMandatoriesSpecification" => new AsNoTrackingPaginateDeletedMandatoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateUnDeletedMandatoriesSpecification" => new AsNoTrackingPaginateUnDeletedMandatoriesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsTrackingGetDeletedMandatoryById_TripMandatoryMapper_Specification" => new AsTrackingGetDeletedMandatoryById_TripMandatoryMapper_Specification(parameters[0]),
+            "AsTrackingGetDeletedMandatoryByIdSpecification" => new AsTrackingGetDeletedMandatoryByIdSpecification(parameters[0]),
+            "AsTrackingGetMandatoryByIdSpecification" => new AsTrackingGetDeletedMandatoryByIdSpecification(parameters[0]),
+            _ => throw new InvalidOperationException("Create Mandatory Specification Exception!")
         };
     }
 }
