@@ -1,11 +1,13 @@
-﻿namespace MasaTour.TouristTripsManagement.API;
+﻿using System.Reflection;
+
+namespace MasaTour.TouristTripsManagement.API;
 
 public static class Startup
 {
     public static void Build(WebApplication app)
     {
         app.UseSwagger()
-           .UseSwaggerUI()
+            .UseSwaggerUI()
            .UseCors("MasaTour")
            .UseMiddleware<ErrorHandlerMiddleWare>()
            .UseHttpsRedirection()
@@ -15,6 +17,8 @@ public static class Startup
            {
                ApplyCurrentCultureToResponseHeaders = true,
            });
+
+
 
         var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
         app.UseRequestLocalization(options.Value);
@@ -29,6 +33,18 @@ public static class Startup
         services.AddApplicationDependencies()
                 .AddServicesDependencies(configuration)
                 .AddDomainDependencies();
+
+        #region Allow Comment Documentation
+        services.AddSwaggerGen(options =>
+        {
+            // Set the comments path for the Swagger JSON and UI.
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            options.IncludeXmlComments(xmlPath);
+        });
+
+        #endregion
+
 
         await services.AddInfrastructureDependencies(configuration);
 

@@ -28,7 +28,6 @@ public sealed class MandatoryCommandsHandler :
     }
     #endregion
 
-
     #region Add Mandatory
     public async Task<ResponseModel<GetMandatoryDto>> Handle(AddMandatoryCommand request, CancellationToken cancellationToken)
     {
@@ -202,7 +201,7 @@ public sealed class MandatoryCommandsHandler :
             await _context.Mandatories.DeleteAsync(mandatory, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             GetMandatoryDto mandatoryDto = _mapper.Map<GetMandatoryDto>(mandatory);
-            return ResponseResult.Success<GetMandatoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+            return ResponseResult.Success(mandatoryDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {
@@ -220,7 +219,7 @@ public sealed class MandatoryCommandsHandler :
             ISpecification<Mandatory> asNoTrackingGetDeletedMandatoryByIdSpec = _specificationsFactory.
                 CreateMandatorySpecifications(typeof(AsNoTrackingGetDeletedMandatoryByIdSpecification), request.Id);
 
-            if (await _context.Mandatories.AnyAsync(asNoTrackingGetDeletedMandatoryByIdSpec, cancellationToken))
+            if (!await _context.Mandatories.AnyAsync(asNoTrackingGetDeletedMandatoryByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetMandatoryDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
             ISpecification<Mandatory> asTrackingGetDeletedMandatoryById_TripMandatoryMapper_Spec = _specificationsFactory.
@@ -230,7 +229,7 @@ public sealed class MandatoryCommandsHandler :
             _context.UndoDeleted(ref mandatory);
             await _context.SaveChangesAsync(cancellationToken);
             GetMandatoryDto mandatoryDto = _mapper.Map<GetMandatoryDto>(mandatory);
-            return ResponseResult.Success(mandatoryDto, cancellationToken);
+            return ResponseResult.Success(mandatoryDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {
