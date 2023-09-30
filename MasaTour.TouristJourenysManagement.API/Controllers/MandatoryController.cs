@@ -11,10 +11,10 @@ public class MandatoryController : MasaTourController
 
     #region Post
     /// <summary>
-    /// Add Mandatory | Allowed For SuperAdmin Or Admin
+    /// Add New Mandatory
     /// </summary>
-    /// <param name="dto">البيانات المطلوبة لنجاح عملية الاضافة ,من فضلك التزم بشروط ادخال الحقول وعدد الحروف المسموح لكل حقل</param>
-    /// <returns>المودل اللذي تمت أضافته في قاعدة البيانات</returns>
+    /// <param name="dto">Data required to send the request</param>
+    /// <returns>Data added in the database</returns>
     /// <remarks>
     /// 
     /// Sample request:
@@ -28,13 +28,21 @@ public class MandatoryController : MasaTourController
     ///          "desceiptionAR": null,
     ///          "desceiptionDE": null
     ///        }
+    /// Warnings:
+    /// 
+    ///     (1) Duplicate name is not allowed 
+    ///     (2) Images and mandatories are optional
+    /// Access:
+    ///         
+    ///     (1) SuperAdmin
+    ///     (2) Admin
     /// </remarks>
-    /// <response code="201">في حالة نجاح عملية الاضافة</response>
-    /// <response code="403">في حالة عدم وجود صلاحية الوصول</response>
-    /// <response code="401">في حالة عدم تسجيل الدخول</response>
-    /// <response code="400">في حالة ادخال بيانات غير مطابقة للشروط وللتأكد من صحة البيانات قم بمراجعة الاسكيمة</response>       
-    /// <response code="409">في حالة الاسم موجود من قبل</response>       
-    /// <response code="500">في حالة حدوث خطأ في السيرفر, تأكد من صحة البيانات المدخلة وفي حالة حدوثه مرة أخري تواصل مع مطوري الخدمة</response>       
+    /// <response code="201">In case the addition process is not successful</response>
+    /// <response code="403">If there is no access</response>
+    /// <response code="401">If you are not signed in</response>
+    /// <response code="400">In the event of entering data that does not comply with the conditions, and to ensure the validity of the data, review the required data actors</response>       
+    /// <response code="409">In case the name already exists, whether it is from any language</response>       
+    /// <response code="500">In the event of an error in the server, make sure that the entered data is correct, and in case it occurs again, contact the service developers</response>       
     [HttpPost(Router.Mandatory.AddMandatory)]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<GetMandatoryDto>))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(object))]
@@ -49,7 +57,13 @@ public class MandatoryController : MasaTourController
 
     #region Put
     [HttpPut(Router.Mandatory.UpdateMandatory)]
-    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<GetMandatoryDto>))]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<GetMandatoryDto>))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(object))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(object))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<object>))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ResponseModel<object>))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ResponseModel<object>))]
+    [Produces(ContentTypes.ApplicationOverJson)]
     public async Task<IActionResult> UpdateMandatory(UpdateMandatoryDto dto) =>
         MasaTourResponse(await Mediator.Send(new UpdateMandatoryCommand(dto)));
     #endregion

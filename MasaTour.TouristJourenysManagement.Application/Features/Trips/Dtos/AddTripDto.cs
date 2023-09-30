@@ -1,7 +1,6 @@
 ﻿namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
 public class AddTripDto
 {
-
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
     [MaxLength(36, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsBiggerThanMaxLength)]
     [MinLength(36, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsSmallerThanMinLength)]
@@ -99,4 +98,8 @@ public class AddTripDto
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
     public bool IsActive { get; set; }
+
+    public List<AddTripImageDto>? TripImages { get; set; }
+
+    public List<string>? MandatoriesIds { get; set; }
 }

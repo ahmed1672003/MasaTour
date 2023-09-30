@@ -14,7 +14,7 @@ public class ImageController : MasaTourController
     /// <param name="image">File</param>
     /// <returns></returns>
     /// <remarks>
-    /// Extensions: [".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"],
+    /// Allowed Extensions: [".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"],
     /// Maxe Size : 3MB
     /// </remarks>
     [HttpPost(Router.Image.AddImage)]
@@ -23,6 +23,9 @@ public class ImageController : MasaTourController
     /// <summary>
     /// Add Collection Of Images To Gellary
     /// </summary>
+    /// <remarks>
+    /// Allowed Extensions: [".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"],
+    /// </remarks>
     /// <param name="images">Files</param>
     /// <returns></returns>
     [HttpPost(Router.Image.AddImages)]

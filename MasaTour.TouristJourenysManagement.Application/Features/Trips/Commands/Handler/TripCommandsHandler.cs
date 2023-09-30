@@ -1,4 +1,6 @@
-﻿namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands.Handler;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
+
+namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands.Handler;
 public sealed class TripCommandsHandler :
     IRequestHandler<AddTripCommand, ResponseModel<GetTripDto>>,
     IRequestHandler<UpdateTripCommand, ResponseModel<GetTripDto>>,
@@ -51,14 +53,29 @@ public sealed class TripCommandsHandler :
             if (await _context.Trips.AnyAsync(asNoTrackingGetTripByNameDESpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            // check category
-            ISpecification<Category> asNoTrackingGetCategoryByIdSpecification = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetCategoryByIdSpecification), request.dto.SubCategoryId);
-            if (!await _context.Categories.AnyAsync(asNoTrackingGetCategoryByIdSpecification, cancellationToken))
+            // check sub category
+            ISpecification<SubCategory> asNoTrackingGetCategoryByIdSpecification = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingGetSubCategoryByIdSpecification), request.dto.SubCategoryId);
+            if (!await _context.SubCategories.AnyAsync(asNoTrackingGetCategoryByIdSpecification, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-
-
             Trip trip = _mapper.Map<Trip>(request.dto);
+
+            request.dto.MandatoriesIds.ForEach(mandatoryId =>
+            {
+                trip.TripMandatoryMappers.Add(new TripMandatoryMapper()
+                {
+                    MandatoryId = mandatoryId,
+                });
+            });
+
+            request.dto.TripImages.ForEach(image =>
+            {
+                trip.TripImageMappers.Add(new()
+                {
+                    ImageId = image.ImageId,
+                    IsCover = image.IsCover,
+                });
+            });
 
             await _context.Trips.CreateAsync(trip, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
