@@ -7,6 +7,7 @@ global using AutoMapper;
 global using MasaTour.TouristTripsManagement.Application.Features.Auth.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.Categories.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.Enums;
+global using MasaTour.TouristTripsManagement.Application.Features.Images.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Resources;
@@ -23,6 +24,7 @@ global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.JWTs;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Users;
 global using MasaTour.TouristTripsManagement.Services.Dtos.Auth;
+global using MasaTour.TouristTripsManagement.Services.Dtos.Files;
 global using MasaTour.TouristTripsManagement.Services.Dtos.Messages;
 global using MasaTour.TouristTripsManagement.Services.Services.Contracts;
 

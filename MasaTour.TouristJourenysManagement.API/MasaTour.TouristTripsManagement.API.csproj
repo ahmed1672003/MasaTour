@@ -42,7 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Gallery\" />
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Gellary\" />
   </ItemGroup>
 
 </Project>

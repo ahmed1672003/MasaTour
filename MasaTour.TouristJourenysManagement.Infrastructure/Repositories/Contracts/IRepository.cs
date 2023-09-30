@@ -3,6 +3,7 @@ public interface IRepository<TEntity> where TEntity : class
 {
     #region Commands
     Task CreateAsync(TEntity entity, CancellationToken cancellation = default);
+    Task CreateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellation = default);
     Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
     Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);

@@ -87,4 +87,16 @@ public static class Router
         public const string PaginateUnDeletedMandatories = MandatoryPrefix + "paginate-all-un-deleted-mandatories";
         public const string PaginateDeletedMandatories = MandatoryPrefix + "paginate-all-deleted-mandatories";
     }
+
+    public static class Image
+    {
+        private const string ImagePrefix = ApiPrefix + "image/";
+        public const string AddImage = ImagePrefix + "add-image";
+        public const string AddImages = ImagePrefix + "add-images";
+        public const string DeleteImage = ImagePrefix + "delete-image";
+        public const string DeleteImages = ImagePrefix + "delete-images";
+        public const string GetImageById = ImagePrefix + "get-by-id";
+        public const string GetAllImages = ImagePrefix + "get-all";
+        public const string PaginateImages = ImagePrefix + "paginate-all-images";
+    }
 }

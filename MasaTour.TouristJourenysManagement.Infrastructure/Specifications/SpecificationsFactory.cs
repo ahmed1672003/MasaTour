@@ -1,4 +1,6 @@
-﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Images;
+
+namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
 public sealed class SpecificationsFactory : ISpecificationsFactory
 {
@@ -147,6 +149,16 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsTrackingGetDeletedMandatoryByIdSpecification" => new AsTrackingGetDeletedMandatoryByIdSpecification(parameters[0]),
             "AsTrackingGetMandatoryByIdSpecification" => new AsTrackingGetDeletedMandatoryByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException("Create Mandatory Specification Exception!")
+        };
+    }
+    public ISpecification<Image> CreateImageSpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            "AsNoTrackingGetImageByIdSpecification" => new AsNoTrackingGetImageByIdSpecification(parameters[0]),
+            "AsNoTrackingPaginateImagesSpecification" => new AsNoTrackingPaginateImagesSpecification(parameters[0], parameters[1], parameters[2]),
+            "AsTrackingGetImagesByIdsSpecification" => new AsTrackingGetImagesByIdsSpecification(parameters[0]),
+            _ => throw new InvalidOperationException()
         };
     }
 }

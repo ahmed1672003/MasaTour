@@ -5,16 +5,18 @@ public sealed class UnitOfSevices : IUnitOfServices
         IAuthService authService,
         ICookiesService cookiesService,
         IEmailService emailService,
-        IFastForexService fastForexService)
+        IFastForexService fastForexService,
+        IFileService fileService)
     {
         AuthService = authService;
         CookiesService = cookiesService;
         EmailService = emailService;
         FastForexService = fastForexService;
+        FileService = fileService;
     }
-
     public IAuthService AuthService { get; }
     public ICookiesService CookiesService { get; }
     public IEmailService EmailService { get; }
     public IFastForexService FastForexService { get; }
+    public IFileService FileService { get; }
 }

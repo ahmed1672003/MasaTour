@@ -16,7 +16,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         await _entities.AddAsync(entity, cancellation);
     }
 
-
+    public virtual async Task CreateRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellation = default)
+    {
+        await _entities.AddRangeAsync(entities, cancellation);
+    }
     public virtual Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         _entities.Update(entity);

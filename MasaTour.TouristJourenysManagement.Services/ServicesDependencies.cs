@@ -9,7 +9,8 @@ public static class ServicesDependencies
                 .AddScoped<IAuthService, AuthService>()
                 .AddScoped<ICookiesService, CookiesService>()
                 .AddScoped<IEmailService, EmailService>()
-                .AddScoped<IFastForexService, FastForexService>();
+                .AddScoped<IFastForexService, FastForexService>()
+                .AddScoped<IFileService, FileService>();
         services.Configure<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
         services.Configure<FastForexSettings>(configuration.GetSection(nameof(FastForexSettings)));
         #endregion

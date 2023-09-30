@@ -6,8 +6,12 @@ namespace MasaTour.TouristTripsManagement.Domain.Entities;
 public class Image : BaseEntity, ICreateableTracker
 {
     [Required]
-    [MaxLength(255)]
+    [MaxLength(1500)]
     public string FileName { get; set; }
+
+    [Required]
+    [MaxLength(255)]
+    public string ContentType { get; set; }
 
     [Required]
     [MaxLength(3000)]
