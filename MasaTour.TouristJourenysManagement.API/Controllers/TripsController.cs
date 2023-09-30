@@ -1,7 +1,6 @@
 ﻿using MasaTour.TouristTripsManagement.Application.Features.Trips.Commands;
 using MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
 using MasaTour.TouristTripsManagement.Application.Features.Trips.Queries;
-using MasaTour.TouristTripsManagement.Services.Services.Contracts;
 
 namespace MasaTour.TouristTripsManagement.API.Controllers;
 
@@ -9,10 +8,8 @@ namespace MasaTour.TouristTripsManagement.API.Controllers;
 [ApiController]
 public class TripsController : MasaTourController
 {
-    private readonly IUnitOfServices _services;
-    public TripsController(IMediator mediator, IUnitOfServices services) : base(mediator)
+    public TripsController(IMediator mediator) : base(mediator)
     {
-        _services = services;
     }
 
     #region Post
@@ -51,6 +48,13 @@ public class TripsController : MasaTourController
         MasaTourResponse(await Mediator.Send(new GetTripByIdQuery(id)));
 
 
+    [HttpGet(Router.Trip.GetTripById_Mandatories_Images)]
+    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<GetTrip_Mandatories_Images_Dto>))]
+    public async Task<IActionResult> GetTripById_Mandatories_Images([Required][MaxLength(36)][MinLength(36)] string id) =>
+        MasaTourResponse(await Mediator.Send(new GetTripById_Mandatories_Images_Query(id)));
+
+
+
     [HttpGet(Router.Trip.GetAllTrips)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetTripDto>>))]
     public async Task<IActionResult> GetAllTrips() =>
@@ -77,24 +81,20 @@ public class TripsController : MasaTourController
         MasaTourResponse(await Mediator.Send(new GetAllDeletedTripsQuery()));
 
 
-
     [HttpGet(Router.Trip.GetAllUnDeletedTrips)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetTripDto>>))]
     public async Task<IActionResult> GetAllUnDeletedTrips() =>
         MasaTourResponse(await Mediator.Send(new GetAllUnDeletedTripsQuery()));
 
+    [HttpGet(Router.Trip.PaginateDeletedTrips)]
+    [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetTripDto>>))]
+    public async Task<IActionResult> PaginateDeletedTrips(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", TripOrderBy orderBy = TripOrderBy.CreatedAt) =>
+        MasaTourResponse(await Mediator.Send(new PaginateDeletedTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
 
 
     [HttpGet(Router.Trip.PaginateUnDeletedTrips)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetTripDto>>))]
-    public async Task<IActionResult> PaginateTrips(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", TripOrderBy orderBy = TripOrderBy.CreatedAt) =>
-        MasaTourResponse(await Mediator.Send(new PaginateUnDeletedTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
-
-    [HttpGet(Router.Trip.GetCurrenciesBasedOnUSD)]
-    public async Task<IActionResult> GetCurrenciesBasedOnUSD()
-    {
-
-        return Ok(await _services.FastForexService.FetchMultiAsync());
-    }
+    public async Task<IActionResult> PaginateUnDeletedTrips(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", TripOrderBy orderBy = TripOrderBy.CreatedAt) =>
+     MasaTourResponse(await Mediator.Send(new PaginateUnDeletedTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
     #endregion
 }

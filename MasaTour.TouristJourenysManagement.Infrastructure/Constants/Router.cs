@@ -64,13 +64,14 @@ public static class Router
         public const string DeleteTripById = TripPrefix + "delete-trip-by-id";
         public const string UndoDeleteTripById = TripPrefix + "undo-delete-trip-by-id";
         public const string GetTripById = TripPrefix + "get-trip-by-id";
+        public const string GetTripById_Mandatories_Images = TripPrefix + "get-trip-by-id_mandatories_images";
         public const string GetAllActiveTrips = TripPrefix + "get-all-active-trips";
         public const string GetAllNotActiveTrips = TripPrefix + "get-all-not-active-trips";
         public const string GetAllTrips = TripPrefix + "get-all-trips";
         public const string GetAllDeletedTrips = TripPrefix + "get-all-deleted-trips";
         public const string GetAllUnDeletedTrips = TripPrefix + "get-all-un-deleted-trips";
         public const string PaginateUnDeletedTrips = TripPrefix + "paginate-all-un-deleted-trips";
-        public const string GetCurrenciesBasedOnUSD = TripPrefix + "get-all-currencies-based-on-usd";
+        public const string PaginateDeletedTrips = TripPrefix + "paginate-all-deleted-trips";
     }
 
     public static class Mandatory

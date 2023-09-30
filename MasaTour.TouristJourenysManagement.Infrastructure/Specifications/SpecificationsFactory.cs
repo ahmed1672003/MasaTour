@@ -117,7 +117,9 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetTripByNameDESpecification" => new AsNoTrackingGetTripByNameDESpecification(parameters[0]),
             "AsNoTrackingGetTripByNameENSpecification" => new AsNoTrackingGetTripByNameENSpecification(parameters[0]),
             "AsNoTrackingGetTripByCodeSpecification" => new AsNoTrackingGetTripByCodeSpecification(parameters[0]),
+            "AsNoTrackingGetTripById_Mandatories_Images_Specification" => new AsNoTrackingGetTripById_Mandatories_Images_Specification(parameters[0]),
             "AsNoTrackingPaginateUnDeletedTripsSpecification" => new AsNoTrackingPaginateUnDeletedTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateDeletedTripsSpecification" => new AsNoTrackingPaginateDeletedTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetDeletedTripByIdSpecification" => new AsTrackingGetDeletedTripByIdSpecification(parameters[0]),
             "AsTrackingGetTripByIdSpecification" => new AsTrackingGetTripByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException("Create Trip Specification Exception!")

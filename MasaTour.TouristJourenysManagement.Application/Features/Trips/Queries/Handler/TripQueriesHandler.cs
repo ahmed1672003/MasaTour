@@ -8,7 +8,9 @@ public sealed class TripQueriesHandler :
     IRequestHandler<GetAllUnDeletedTripsQuery, ResponseModel<IEnumerable<GetTripDto>>>,
     IRequestHandler<GetAllUnFamousTripsQuery, ResponseModel<IEnumerable<GetTripDto>>>,
     IRequestHandler<PaginateUnDeletedTripsQuery, PaginationResponseModel<IEnumerable<GetTripDto>>>,
-    IRequestHandler<GetTripByIdQuery, ResponseModel<GetTripDto>>
+    IRequestHandler<PaginateDeletedTripsQuery, PaginationResponseModel<IEnumerable<GetTripDto>>>,
+    IRequestHandler<GetTripByIdQuery, ResponseModel<GetTripDto>>,
+    IRequestHandler<GetTripById_Mandatories_Images_Query, ResponseModel<GetTrip_Mandatories_Images_Dto>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
@@ -46,6 +48,46 @@ public sealed class TripQueriesHandler :
         catch (Exception ex)
         {
             return ResponseResult.InternalServerError<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region GetTripById_Mandatories_Images
+    public async Task<ResponseModel<GetTrip_Mandatories_Images_Dto>> Handle(GetTripById_Mandatories_Images_Query request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<Trip> asNoTrackingGetTripByIdSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.TripId);
+            if (!await _context.Trips.AnyAsync(asNoTrackingGetTripByIdSpec, cancellationToken))
+                return ResponseResult.NotFound<GetTrip_Mandatories_Images_Dto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            ISpecification<Trip> AsNoTrackingGetTripById_Mandatories_Images_Specific = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripById_Mandatories_Images_Specification), request.TripId);
+            Trip trip = await _context.Trips.RetrieveAsync(AsNoTrackingGetTripById_Mandatories_Images_Specific, cancellationToken);
+
+            GetTripDto tripDto = _mapper.Map<GetTripDto>(trip);
+            IEnumerable<GetMandatoryDto> mandatoryDtos = new HashSet<GetMandatoryDto>();
+            IEnumerable<GetImageDto> imageDtos = new HashSet<GetImageDto>();
+
+            if (trip.TripMandatoryMappers.Any())
+                mandatoryDtos = _mapper.Map<IEnumerable<GetMandatoryDto>>(trip.TripMandatoryMappers.Select(tm => tm.Mandatory));
+
+            if (trip.TripImageMappers.Any())
+                imageDtos = _mapper.Map<IEnumerable<GetImageDto>>(trip.TripImageMappers.Select(ti => ti.Image));
+
+
+            GetTrip_Mandatories_Images_Dto trip_Mandatoriies_Images_Dto = new()
+            {
+                Trip = tripDto,
+                TripMandatories = mandatoryDtos,
+                TripImages = imageDtos
+            };
+
+            return ResponseResult.Success(trip_Mandatoriies_Images_Dto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<GetTrip_Mandatories_Images_Dto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+
         }
     }
     #endregion
@@ -182,7 +224,7 @@ public sealed class TripQueriesHandler :
     }
     #endregion
 
-    #region Paginate Trips
+    #region Paginate UnDeleted Trips
     public async Task<PaginationResponseModel<IEnumerable<GetTripDto>>> Handle(PaginateUnDeletedTripsQuery request, CancellationToken cancellationToken)
     {
         try
@@ -238,6 +280,70 @@ public sealed class TripQueriesHandler :
         }
         catch (Exception ex)
         {
+            return PaginationResponseResult.InternalServerError<IEnumerable<GetTripDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region Paginate Deleted Trips
+    public async Task<PaginationResponseModel<IEnumerable<GetTripDto>>> Handle(PaginateDeletedTripsQuery request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<Trip> asNoTrackingGetAllDeletedTripsSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetAllDeletedTripsSpecification));
+            if (await _context.Trips.AnyAsync(asNoTrackingGetAllDeletedTripsSpec, cancellationToken))
+                return PaginationResponseResult.NotFound<IEnumerable<GetTripDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            Expression<Func<Trip, object>> orderBy = category => new();
+            switch (request.orderBy)
+            {
+                case TripOrderBy.Id:
+                    orderBy = Trip => Trip.Id;
+                    break;
+                case TripOrderBy.StartDate:
+                    orderBy = Trip => Trip.StartDate;
+                    break;
+                case TripOrderBy.EndDate:
+                    orderBy = Trip => Trip.EndDate;
+                    break;
+                case TripOrderBy.NameAR:
+                    orderBy = Trip => Trip.NameAR;
+                    break;
+                case TripOrderBy.NameEN:
+                    orderBy = Trip => Trip.NameEN;
+                    break;
+                case TripOrderBy.NameDE:
+                    orderBy = Trip => Trip.NameDE;
+                    break;
+                case TripOrderBy.Code:
+                    orderBy = Trip => Trip.Code;
+                    break;
+                case TripOrderBy.PriceEUR:
+                    orderBy = Trip => Trip.PriceEUR;
+                    break;
+                case TripOrderBy.PriceUSD:
+                    orderBy = Trip => Trip.PriceUSD;
+                    break;
+                case TripOrderBy.PriceEGP:
+                    orderBy = Trip => Trip.PriceEGP;
+                    break;
+
+                case TripOrderBy.PriceGBP:
+                    orderBy = Trip => Trip.PriceGBP;
+                    break;
+
+                default:
+                    orderBy = Trip => Trip.CreatedAt;
+                    break;
+            }
+
+            ISpecification<Trip> asNoTrackingPaginateDeletedTripsSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingPaginateDeletedTripsSpecification), request.PageNumber, request.PageSize, request.KeyWorks, orderBy);
+            IEnumerable<GetTripDto> tripsDtos = _mapper.Map<IEnumerable<GetTripDto>>(await _context.Trips.RetrieveAllAsync(asNoTrackingPaginateDeletedTripsSpec, cancellationToken));
+            return PaginationResponseResult.Success(tripsDtos, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+
             return PaginationResponseResult.InternalServerError<IEnumerable<GetTripDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
         }
     }
