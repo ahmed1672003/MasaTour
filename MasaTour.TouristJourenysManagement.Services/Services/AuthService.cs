@@ -3,7 +3,7 @@ using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Roles;
 using MasaTour.TouristTripsManagement.Services.Dtos.Auth;
 
 namespace MasaTour.TouristTripsManagement.Services.Services;
-public class AuthService : IAuthService
+public sealed class AuthService : IAuthService
 {
     private readonly IUnitOfWork _context;
     private readonly ISpecificationsFactory _specificationsFactory;

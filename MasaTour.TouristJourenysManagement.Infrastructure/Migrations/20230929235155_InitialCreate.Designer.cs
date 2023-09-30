@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristTripsManagementDbContext))]
-    [Migration("20230928212623_InitialCreate")]
+    [Migration("20230929235155_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -386,6 +386,30 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images", (string)null);
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Mandatory", b =>
                 {
                     b.Property<string>("Id")
@@ -642,6 +666,26 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.ToTable("Trips", (string)null);
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripImageMapper", b =>
+                {
+                    b.Property<string>("ImageId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("TripId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<bool>("IsCover")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ImageId", "TripId");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("TripImageMappers", (string)null);
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripMandatoryMapper", b =>
                 {
                     b.Property<string>("MandatoryId")
@@ -651,18 +695,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Property<string>("TripId")
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("MandatoryId", "TripId");
 
@@ -773,6 +805,25 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("SubCategory");
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripImageMapper", b =>
+                {
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Image", "Image")
+                        .WithMany("TripImageMapper")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
+                        .WithMany("TripImageMappers")
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
+
+                    b.Navigation("Trip");
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripMandatoryMapper", b =>
                 {
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Mandatory", "Mandatory")
@@ -811,6 +862,11 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("UserRoles");
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Image", b =>
+                {
+                    b.Navigation("TripImageMapper");
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Mandatory", b =>
                 {
                     b.Navigation("TripMandatoryMapper");
@@ -819,6 +875,11 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.SubCategory", b =>
                 {
                     b.Navigation("Trips");
+                });
+
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
+                {
+                    b.Navigation("TripImageMappers");
                 });
 #pragma warning restore 612, 618
         }

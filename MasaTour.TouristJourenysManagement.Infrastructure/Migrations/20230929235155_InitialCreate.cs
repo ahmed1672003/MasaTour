@@ -30,6 +30,20 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    FilePath = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Mandatories",
                 columns: table => new
                 {
@@ -319,15 +333,36 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TripImageMappers",
+                columns: table => new
+                {
+                    ImageId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    TripId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    IsCover = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TripImageMappers", x => new { x.ImageId, x.TripId });
+                    table.ForeignKey(
+                        name: "FK_TripImageMappers_Images_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Images",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TripImageMappers_Trips_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trips",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TripMandatoryMappers",
                 columns: table => new
                 {
                     MandatoryId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    TripId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    TripId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -421,6 +456,11 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 table: "SubCategories",
                 column: "NameEN",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TripImageMappers_TripId",
+                table: "TripImageMappers",
+                column: "TripId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TripMandatoryMappers_TripId",
@@ -518,6 +558,9 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 name: "RoleClaims");
 
             migrationBuilder.DropTable(
+                name: "TripImageMappers");
+
+            migrationBuilder.DropTable(
                 name: "TripMandatoryMappers");
 
             migrationBuilder.DropTable(
@@ -534,6 +577,9 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "Mandatories");

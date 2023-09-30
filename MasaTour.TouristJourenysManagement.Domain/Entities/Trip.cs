@@ -1,7 +1,5 @@
 ﻿using MasaTour.TouristTripsManagement.Domain.Abstracts;
-
 namespace MasaTour.TouristTripsManagement.Domain.Entities;
-
 [PrimaryKey(nameof(Id))]
 [Index(nameof(Code), IsUnique = true)]
 [Index(nameof(NameAR), IsUnique = true)]
@@ -115,8 +113,11 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     [ForeignKey(nameof(SubCategoryId))]
     public SubCategory SubCategory { get; set; }
 
+    public List<TripImageMapper> TripImageMappers { get; set; }
+
     public Trip()
     {
         IsDeleted = false;
+        TripImageMappers = new();
     }
 }

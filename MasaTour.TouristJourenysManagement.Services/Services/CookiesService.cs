@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Http;
 
 namespace MasaTour.TouristTripsManagement.Services.Services;
-public class CookiesService : ICookiesService
+public sealed class CookiesService : ICookiesService
 {
     private readonly IHttpContextAccessor _contextAccessor;
 

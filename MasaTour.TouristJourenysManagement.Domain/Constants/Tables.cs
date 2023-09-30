@@ -17,4 +17,6 @@ public static class Tables
     public const string Trips = "Trips";
     public const string Mandatories = "Mandatories";
     public const string TripMandatoryMappers = "TripMandatoryMappers";
+    public const string Images = "Images";
+    public const string TripImageMapper = "TripImageMappers";
 }

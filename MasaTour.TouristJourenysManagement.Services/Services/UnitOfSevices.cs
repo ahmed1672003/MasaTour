@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristTripsManagement.Services.Services;
-public class UnitOfSevices : IUnitOfServices
+public sealed class UnitOfSevices : IUnitOfServices
 {
     public UnitOfSevices(
         IAuthService authService,

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using MimeKit;
 
 namespace MasaTour.TouristTripsManagement.Services.Services;
-public class EmailService : IEmailService
+public sealed class EmailService : IEmailService
 {
     private readonly EmailSettings _emailSettings;
     public EmailService(IOptions<EmailSettings> options)

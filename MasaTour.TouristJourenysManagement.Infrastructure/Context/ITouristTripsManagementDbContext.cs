@@ -17,7 +17,8 @@ public interface ITouristTripsManagementDbContext
     DbSet<Trip> Trips { get; }
     DbSet<TripMandatoryMapper> TripMandatoryMappers { get; }
     DbSet<Mandatory> Mandatories { get; }
-
+    DbSet<Image> Images { get; }
+    DbSet<TripImageMapper> TripImageMapper { get; }
     ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     DatabaseFacade Database { get; }

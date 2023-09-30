@@ -19,7 +19,9 @@ public sealed class UnitOfWork : IUnitOfWork
         ITripRepository trips,
         ISubCategoryRepository subCategories,
         ITripMandatoryMapperRepository tripsMandatoryMappers,
-        IMandatoryRepository mandatories)
+        IMandatoryRepository mandatories,
+        IImageRepository images,
+        ITripImageMapperRepository imagesImageMapper)
     {
         _context = context;
         Identity = identity;
@@ -36,6 +38,8 @@ public sealed class UnitOfWork : IUnitOfWork
         SubCategories = subCategories;
         TripsMandatoryMappers = tripsMandatoryMappers;
         Mandatories = mandatories;
+        Images = images;
+        ImagesImageMapper = imagesImageMapper;
     }
 
     public IIdentityRepository Identity { get; }
@@ -52,6 +56,8 @@ public sealed class UnitOfWork : IUnitOfWork
     public ITripRepository Trips { get; }
     public ITripMandatoryMapperRepository TripsMandatoryMappers { get; }
     public IMandatoryRepository Mandatories { get; }
+    public IImageRepository Images { get; }
+    public ITripImageMapperRepository ImagesImageMapper { get; }
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default) =>
          await _context.Database.BeginTransactionAsync(cancellationToken);
 

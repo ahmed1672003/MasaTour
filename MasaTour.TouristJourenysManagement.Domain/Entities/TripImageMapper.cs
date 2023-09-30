@@ -1,19 +1,21 @@
 ﻿namespace MasaTour.TouristTripsManagement.Domain.Entities;
 
-[PrimaryKey(nameof(MandatoryId), nameof(TripId))]
-public class TripMandatoryMapper
+[PrimaryKey(nameof(ImageId), nameof(TripId))]
+public class TripImageMapper
 {
     [MaxLength(36)]
     [MinLength(36)]
-    public string MandatoryId { get; set; }
+    public string ImageId { get; set; }
 
     [MaxLength(36)]
     [MinLength(36)]
     public string TripId { get; set; }
 
-    [ForeignKey(nameof(MandatoryId))]
-    public Mandatory Mandatory { get; set; }
+    public bool IsCover { get; set; }
 
     [ForeignKey(nameof(TripId))]
     public Trip Trip { get; set; }
+
+    [ForeignKey(nameof(ImageId))]
+    public Image Image { get; set; }
 }
