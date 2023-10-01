@@ -5,7 +5,7 @@ public sealed class FileService : IFileService
 {
     private static string[] allowedExtension = new string[]
     {
-            ".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"
+        ".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"
     };
 
     private readonly IWebHostEnvironment _webHostEnvironment;
