@@ -18,42 +18,33 @@ public sealed class FileService : IFileService
 
     public async Task<UploadFileResultDto> UploadFileAsync(IFormFile file, string storageName)
     {
-        try
+
+        if (file is null || file.Length <= 0 || file.Length >= ((1024 * 1024) * 4))
+            throw new InvalidImageSizeException("Invalid Image Size !");
+
+        if (!allowedExtension.Contains(Path.GetExtension(file.FileName).ToLower()))
+            throw new InvalidImageSizeException("Invalid Image Extension !");
+
+        string path = $"{_webHostEnvironment.WebRootPath}/{storageName}/";
+        string extension = Path.GetExtension(file.FileName);
+        string fileName = $"{Guid.NewGuid().ToString().Replace("-", string.Empty)}{extension}";
+
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(path);
+
+        using FileStream stream = File.Create($"{path}{fileName}");
+        await file.CopyToAsync(stream);
+        await stream.FlushAsync();
+
+        HttpRequest httpRequest = _contextAccessor.HttpContext.Request;
+
+        return new UploadFileResultDto()
         {
-            if (file is null || file.Length <= 0 || file.Length >= ((1024 * 1024) * 10))
-                throw new InvalidImageSizeException("Invalid Image Size !");
-
-            if (!allowedExtension.Contains(Path.GetExtension(file.FileName).ToLower()))
-                throw new InvalidImageSizeException("Invalid Image Extension !");
-
-            string path = $"{_webHostEnvironment.WebRootPath}/{storageName}/";
-            string extension = Path.GetExtension(file.FileName);
-            string fileName = $"{Guid.NewGuid().ToString().Replace("-", string.Empty)}{extension}";
-
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-
-            using FileStream stream = File.Create($"{path}{fileName}");
-            await file.CopyToAsync(stream);
-            await stream.FlushAsync();
-
-
-            return new UploadFileResultDto()
-            {
-                Success = true,
-                ContentType = file.ContentType,
-                FileName = fileName,
-                FilePath = $"{_contextAccessor.HttpContext.Request.Scheme}://{_contextAccessor.HttpContext.Request.Host}/{storageName}/{fileName}"
-            };
-
-        }
-        catch (Exception)
-        {
-            return new()
-            {
-                Success = false
-            };
-        }
+            Success = true,
+            ContentType = file.ContentType,
+            FileName = fileName,
+            FilePath = $"{httpRequest.Scheme}://{httpRequest.Host}/{storageName}/{fileName}"
+        };
     }
 
     public Task<bool> DeleteFileAsync(string filePath)
@@ -72,6 +63,4 @@ public sealed class FileService : IFileService
             throw new InvalidDeleteImageException("Deleted File Process Fail !");
         }
     }
-
-
 }

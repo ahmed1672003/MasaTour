@@ -7,10 +7,11 @@ namespace MasaTour.TouristTripsManagement.API.Controllers;
 public class ImageController : MasaTourController
 {
     private readonly IUnitOfServices _services;
-    public ImageController(IMediator mediator, IUnitOfServices services) : base(mediator)
+    public ImageController(IMediator mediator) : base(mediator)
     {
-        _services = services;
     }
+
+
     #region Post
     /// <summary>
     /// Add Image To Gellary
@@ -18,8 +19,12 @@ public class ImageController : MasaTourController
     /// <param name="image">File</param>
     /// <returns></returns>
     /// <remarks>
-    /// Allowed Extensions: [".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"],
-    /// Maxe Size : 3MB
+    /// Allowed Extensions: 
+    /// 
+    ///         [".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"]
+    /// Maxe Size : 
+    /// 
+    ///     3MB
     /// </remarks>
     [HttpPost(Router.Image.AddImage)]
     public async Task<IActionResult> AddImage([Required] IFormFile image) => MasaTourResponse(await Mediator.Send(new AddImageCommand(image)));
@@ -28,8 +33,12 @@ public class ImageController : MasaTourController
     /// Add Collection Of Images To Gellary
     /// </summary>
     /// <remarks>
-    /// Allowed Extensions: [".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"],
-    /// Maxe Size : 3MB
+    /// Allowed Extensions: 
+    /// 
+    /// [".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"],
+    /// Maxe Size :
+    ///     
+    /// 3MB
     /// </remarks>
     /// <param name="images">Files</param>
     /// <returns></returns>
