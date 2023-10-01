@@ -4,6 +4,7 @@ using MasaTour.TouristTripsManagement.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristTripsManagementDbContext))]
-    partial class TouristTripsManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231001184128_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -623,9 +626,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Property<decimal>("PriceUSD")
                         .HasColumnType("decimal(18, 5)");
 
-                    b.Property<double>("Rate")
-                        .HasColumnType("float");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -764,9 +764,6 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("PhaseNumber")
-                        .HasColumnType("int");
 
                     b.Property<TimeSpan>("ToClock")
                         .HasColumnType("time");
@@ -940,7 +937,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripPhase", b =>
                 {
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
-                        .WithMany("TripPhases")
+                        .WithMany("Phases")
                         .HasForeignKey("TripId");
 
                     b.Navigation("Trip");
@@ -982,11 +979,11 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
                 {
+                    b.Navigation("Phases");
+
                     b.Navigation("TripImageMappers");
 
                     b.Navigation("TripMandatoryMappers");
-
-                    b.Navigation("TripPhases");
                 });
 #pragma warning restore 612, 618
         }

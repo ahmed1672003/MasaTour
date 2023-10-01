@@ -382,6 +382,41 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TripPhases",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    LocationNameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    LocationNameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    LocationNameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    FromClock = table.Column<TimeSpan>(type: "time", nullable: false),
+                    ToClock = table.Column<TimeSpan>(type: "time", nullable: false),
+                    FromTimeAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    FromTimeEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    FromTimeDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ToTimeAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ToTimeEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ToTimeDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    DesceiptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    DesceiptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    DesceiptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TripId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TripPhases", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TripPhases_Trips_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trips",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_NameAR",
                 table: "Categories",
@@ -466,6 +501,11 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TripMandatoryMappers_TripId",
                 table: "TripMandatoryMappers",
+                column: "TripId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TripPhases_TripId",
+                table: "TripPhases",
                 column: "TripId");
 
             migrationBuilder.CreateIndex(
@@ -563,6 +603,9 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "TripMandatoryMappers");
+
+            migrationBuilder.DropTable(
+                name: "TripPhases");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");

@@ -5,6 +5,9 @@ namespace MasaTour.TouristTripsManagement.Domain.Entities;
 public class TripPhase : BaseEntity, ICreateableTracker, IDeleteableTracker, IUpdateableTracker
 {
     [Required]
+    public int PhaseNumber { get; set; }
+
+    [Required]
     [MaxLength(255)]
     public string LocationNameAR { get; set; }
 
@@ -30,10 +33,10 @@ public class TripPhase : BaseEntity, ICreateableTracker, IDeleteableTracker, IUp
     public int ToMinutes { private get; set; }
 
     [Required]
-    public TimeOnly FromClock { get; set; } //  year     , days    ,  Hours    , Minutes   , seconds
+    public TimeSpan FromClock { get; set; } //  year     , days    ,  Hours    , Minutes   , seconds
 
     [Required]
-    public TimeOnly ToClock { get; set; }
+    public TimeSpan ToClock { get; set; }
 
     [MaxLength(255)]
     public string FromTimeAR { get; set; }
@@ -78,7 +81,7 @@ public class TripPhase : BaseEntity, ICreateableTracker, IDeleteableTracker, IUp
     public Trip Trip { get; set; }
     public TripPhase()
     {
-        FromClock = new TimeOnly(FromHours, FromMinutes);
-        ToClock = new TimeOnly(ToHours, ToMinutes);
+        FromClock = new TimeSpan(FromHours, FromMinutes, 0);
+        ToClock = new TimeSpan(ToHours, ToMinutes, 0);
     }
 }

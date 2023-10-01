@@ -11,6 +11,11 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     [MaxLength(255)]
     public string Code { get; set; }
 
+
+    [Required]
+    public double Rate { get; set; }
+
+
     [Required]
     [MaxLength(255)]
     public string NameAR { get; set; }
@@ -117,7 +122,7 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
 
     public List<TripMandatoryMapper> TripMandatoryMappers { get; set; }
 
-    public List<TripPhase> Phases { get; set; }
+    public List<TripPhase> TripPhases { get; set; }
 
 
     public Trip()
@@ -125,6 +130,6 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
         IsDeleted = false;
         TripImageMappers = new();
         TripMandatoryMappers = new();
-        Phases = new();
+        TripPhases = new();
     }
 }

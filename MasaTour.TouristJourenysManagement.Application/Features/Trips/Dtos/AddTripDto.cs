@@ -1,4 +1,6 @@
-﻿namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
+﻿using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Dtos;
+
+namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
 public class AddTripDto
 {
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
@@ -6,6 +8,8 @@ public class AddTripDto
     [MinLength(36, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsSmallerThanMinLength)]
     public string SubCategoryId { get; set; }
 
+    [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
+    public double Rate { get; set; }
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
     [MaxLength(255, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledLengthIsBiggerThanMaxLength)]
@@ -99,7 +103,9 @@ public class AddTripDto
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Trip.FiledCanNotBeNull)]
     public bool IsActive { get; set; }
 
-    public List<AddTripImageDto>? TripImages { get; set; }
+    public List<AddTripPhaseDto>? TripPhases { get; set; } = new(0);
 
-    public List<string>? MandatoriesIds { get; set; }
+    public List<AddTripImageDto>? TripImages { get; set; } = new(0);
+
+    public List<string>? MandatoriesIds { get; set; } = new(0);
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristTripsManagementDbContext))]
-    [Migration("20231001170524_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231001202550_AlterColumns")]
+    partial class AlterColumns
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -626,6 +626,9 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Property<decimal>("PriceUSD")
                         .HasColumnType("decimal(18, 5)");
 
+                    b.Property<double>("Rate")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -706,6 +709,95 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.HasIndex("TripId");
 
                     b.ToTable("TripMandatoryMappers", (string)null);
+                });
+
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripPhase", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DesceiptionAR")
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<string>("DesceiptionDE")
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<string>("DesceiptionEN")
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<TimeSpan>("FromClock")
+                        .HasColumnType("time");
+
+                    b.Property<string>("FromTimeAR")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FromTimeDE")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FromTimeEN")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LocationNameAR")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("LocationNameDE")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("LocationNameEN")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("PhaseNumber")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("ToClock")
+                        .HasColumnType("time");
+
+                    b.Property<string>("ToTimeAR")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ToTimeDE")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ToTimeEN")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("TripId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("TripPhases", (string)null);
                 });
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Identity.RoleClaim", b =>
@@ -848,6 +940,15 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("Trip");
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TripPhase", b =>
+                {
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
+                        .WithMany("TripPhases")
+                        .HasForeignKey("TripId");
+
+                    b.Navigation("Trip");
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
@@ -887,6 +988,8 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("TripImageMappers");
 
                     b.Navigation("TripMandatoryMappers");
+
+                    b.Navigation("TripPhases");
                 });
 #pragma warning restore 612, 618
         }

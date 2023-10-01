@@ -3,6 +3,7 @@ public class GetTripDto
 {
     public string Id { get; set; }
     public string SubCategoryId { get; set; }
+    public double Rate { get; set; }
     public string Code { get; set; }
     public string NameAR { get; set; }
     public string NameEN { get; set; }

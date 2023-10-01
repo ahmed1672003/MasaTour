@@ -77,6 +77,10 @@ public sealed class TripCommandsHandler :
                 });
             });
 
+            // TODO: Solve problem because tripPhases Added Two Objects
+            trip.TripPhases.Clear();
+            trip.TripPhases.AddRange(_mapper.Map<List<TripPhase>>(request.dto.TripPhases));
+
             await _context.Trips.CreateAsync(trip, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             GetTripDto tripDto = _mapper.Map<GetTripDto>(trip);
