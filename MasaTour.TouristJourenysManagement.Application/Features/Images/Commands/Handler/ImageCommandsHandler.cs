@@ -36,6 +36,9 @@ public sealed class ImageCommandsHandler :
     {
         try
         {
+            _services.FileService.EnsureFileSize(request.File);
+            _services.FileService.EnsureFileExctension(request.File);
+
             UploadFileResultDto uploadImageResult = await _services.FileService.UploadFileAsync(request.File, "Gellary");
 
             if (!uploadImageResult.Success)
@@ -75,7 +78,7 @@ public sealed class ImageCommandsHandler :
             await _context.Images.DeleteAsync(img, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
-            bool isDeletedSuccess = await _services.FileService.DeleteFileAsync(img.FilePath);
+            bool isDeletedSuccess = await _services.FileService.DeleteFileAsync("Gellary", img.FileName);
 
             if (!isDeletedSuccess)
                 return ResponseResult.BadRequest<GetImageDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
@@ -139,7 +142,7 @@ public sealed class ImageCommandsHandler :
 
             foreach (var image in images)
             {
-                bool isDeletedSeccess = await _services.FileService.DeleteFileAsync(image.FilePath);
+                bool isDeletedSeccess = await _services.FileService.DeleteFileAsync("Gellary", image.FileName);
                 await _context.Images.DeleteAsync(image, cancellationToken);
                 if (!isDeletedSeccess)
                     return ResponseResult.BadRequest<IEnumerable<GetImageDto>>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);

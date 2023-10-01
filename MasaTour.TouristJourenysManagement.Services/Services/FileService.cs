@@ -16,45 +16,52 @@ public sealed class FileService : IFileService
         _contextAccessor = contextAccessor;
     }
 
-    public async Task<UploadFileResultDto> UploadFileAsync(IFormFile file, string storageName)
-    {
-
-        if (file is null || file.Length <= 0 || file.Length >= ((1024 * 1024) * 4))
-            throw new InvalidImageSizeException("Invalid Image Size !");
-
-        if (!allowedExtension.Contains(Path.GetExtension(file.FileName).ToLower()))
-            throw new InvalidImageSizeException("Invalid Image Extension !");
-
-        string path = $"{_webHostEnvironment.WebRootPath}/{storageName}/";
-        string extension = Path.GetExtension(file.FileName);
-        string fileName = $"{Guid.NewGuid().ToString().Replace("-", string.Empty)}{extension}";
-
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
-
-        using FileStream stream = File.Create($"{path}{fileName}");
-        await file.CopyToAsync(stream);
-        await stream.FlushAsync();
-
-        HttpRequest httpRequest = _contextAccessor.HttpContext.Request;
-
-        return new UploadFileResultDto()
-        {
-            Success = true,
-            ContentType = file.ContentType,
-            FileName = fileName,
-            FilePath = $"{httpRequest.Scheme}://{httpRequest.Host}/{storageName}/{fileName}"
-        };
-    }
-
-    public Task<bool> DeleteFileAsync(string filePath)
+    public async Task<UploadFileResultDto> UploadFileAsync(IFormFile file, string storage)
     {
         try
         {
-            if (!File.Exists(filePath))
+            if (file is null)
+                throw new ArgumentNullException(nameof(file));
+
+            string path = $"{_webHostEnvironment.WebRootPath}/{storage}/";
+            string extension = Path.GetExtension(file.FileName);
+            string fileName = $"{Guid.NewGuid().ToString().Replace("-", string.Empty)}{extension}";
+
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            using FileStream stream = File.Create($"{path}{fileName}");
+            await file.CopyToAsync(stream);
+            await stream.FlushAsync();
+
+            HttpRequest httpRequest = _contextAccessor.HttpContext.Request;
+
+            return new UploadFileResultDto()
+            {
+                Success = true,
+                ContentType = file.ContentType,
+                FileName = fileName,
+                FilePath = $"{httpRequest.Scheme}://{httpRequest.Host}/{storage}/{fileName}"
+            };
+        }
+        catch (Exception ex)
+        {
+            return new UploadFileResultDto()
+            {
+                Success = false,
+            };
+        }
+    }
+
+    public Task<bool> DeleteFileAsync(string storage, string fileName)
+    {
+        try
+        {
+            string path = $"{_webHostEnvironment.WebRootPath}/{storage}/{fileName}";
+            if (!File.Exists(path))
                 return Task.FromResult(false);
 
-            File.Delete(filePath);
+            File.Delete(path);
 
             return Task.FromResult(true);
         }

@@ -81,9 +81,9 @@ public static class InfrastructureDependencies
         try
         {
             await RolesSedeer.SeedRolesAsync(context);
-            //await UsersSedeer.SeedSuperAdminAsync(context, specificationsFactory);
-            //await UsersSedeer.SeedAdminAsync(context, specificationsFactory);
-            //await UsersSedeer.SeedBasicAsync(context, specificationsFactory);
+            await UsersSedeer.SeedSuperAdminAsync(context, specificationsFactory);
+            await UsersSedeer.SeedAdminAsync(context, specificationsFactory);
+            await UsersSedeer.SeedBasicAsync(context, specificationsFactory);
         }
         catch
         {
