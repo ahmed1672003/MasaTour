@@ -17,6 +17,7 @@ public interface IUnitOfWork : IAsyncDisposable
     ICategoryRepository Categories { get; }
     ISubCategoryRepository SubCategories { get; }
     ITripRepository Trips { get; }
+    ITripPhaseRepository TripPhases { get; }
     ITripMandatoryMapperRepository TripsMandatoryMappers { get; }
     IMandatoryRepository Mandatories { get; }
     IImageRepository Images { get; }

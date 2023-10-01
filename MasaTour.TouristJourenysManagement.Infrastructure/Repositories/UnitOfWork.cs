@@ -21,7 +21,8 @@ public sealed class UnitOfWork : IUnitOfWork
         ITripMandatoryMapperRepository tripsMandatoryMappers,
         IMandatoryRepository mandatories,
         IImageRepository images,
-        ITripImageMapperRepository imagesImageMapper)
+        ITripImageMapperRepository imagesImageMapper,
+        ITripPhaseRepository tripPhases)
     {
         _context = context;
         Identity = identity;
@@ -40,6 +41,7 @@ public sealed class UnitOfWork : IUnitOfWork
         Mandatories = mandatories;
         Images = images;
         ImagesImageMapper = imagesImageMapper;
+        TripPhases = tripPhases;
     }
 
     public IIdentityRepository Identity { get; }
@@ -54,6 +56,7 @@ public sealed class UnitOfWork : IUnitOfWork
     public ICategoryRepository Categories { get; }
     public ISubCategoryRepository SubCategories { get; }
     public ITripRepository Trips { get; }
+    public ITripPhaseRepository TripPhases { get; }
     public ITripMandatoryMapperRepository TripsMandatoryMappers { get; }
     public IMandatoryRepository Mandatories { get; }
     public IImageRepository Images { get; }

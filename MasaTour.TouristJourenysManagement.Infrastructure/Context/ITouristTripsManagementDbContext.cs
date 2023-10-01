@@ -15,6 +15,7 @@ public interface ITouristTripsManagementDbContext
     DbSet<Category> Categories { get; }
     DbSet<SubCategory> SubCategories { get; }
     DbSet<Trip> Trips { get; }
+    DbSet<TripPhase> TripPhases { get; }
     DbSet<TripMandatoryMapper> TripMandatoryMappers { get; }
     DbSet<Mandatory> Mandatories { get; }
     DbSet<Image> Images { get; }

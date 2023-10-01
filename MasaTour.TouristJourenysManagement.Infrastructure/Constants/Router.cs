@@ -100,4 +100,9 @@ public static class Router
         public const string GetAllImages = ImagePrefix + "get-all";
         public const string PaginateImages = ImagePrefix + "paginate-all-images";
     }
+
+    public static class TripPhase
+    {
+
+    }
 }
