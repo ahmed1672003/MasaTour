@@ -20,7 +20,7 @@ public sealed class FileService : IFileService
     {
         try
         {
-            if (file is null || file.Length <= 0 || file.Length >= ((1024 * 1024) * 5))
+            if (file is null || file.Length <= 0 || file.Length >= ((1024 * 1024) * 10))
                 throw new InvalidImageSizeException("Invalid Image Size !");
 
             if (!allowedExtension.Contains(Path.GetExtension(file.FileName).ToLower()))
