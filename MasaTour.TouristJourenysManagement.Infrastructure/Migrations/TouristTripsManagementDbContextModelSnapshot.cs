@@ -835,7 +835,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
-                        .WithMany()
+                        .WithMany("TripMandatoryMappers")
                         .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -882,6 +882,8 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
                 {
                     b.Navigation("TripImageMappers");
+
+                    b.Navigation("TripMandatoryMappers");
                 });
 #pragma warning restore 612, 618
         }

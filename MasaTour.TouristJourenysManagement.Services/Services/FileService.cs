@@ -9,44 +9,45 @@ public sealed class FileService : IFileService
     };
 
     private readonly IWebHostEnvironment _webHostEnvironment;
-    public FileService(IWebHostEnvironment webHostEnvironment)
+    private readonly IHttpContextAccessor _contextAccessor;
+    public FileService(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor contextAccessor)
     {
         _webHostEnvironment = webHostEnvironment;
+        _contextAccessor = contextAccessor;
     }
 
-    public async Task<UploadFileResultDto> UploadFileAsync(IFormFile imgFile, string storageName)
+    public async Task<UploadFileResultDto> UploadFileAsync(IFormFile file, string storageName)
     {
-        if (imgFile is null || imgFile.Length <= 0 || imgFile.Length >= ((1024 * 1024) * 10))
-            throw new InvalidImageSizeException("Invalid Image Size !");
-
-        if (!allowedExtension.Contains(Path.GetExtension(imgFile.FileName).ToLower()))
-            throw new InvalidImageSizeException("Invalid Image Extension !");
-
         try
         {
-            string storagePath = Path.Combine(_webHostEnvironment.WebRootPath, storageName);
+            if (file is null || file.Length <= 0 || file.Length >= ((1024 * 1024) * 5))
+                throw new InvalidImageSizeException("Invalid Image Size !");
 
-            if (!Directory.Exists(storagePath))
-                Directory.CreateDirectory(storagePath);
+            if (!allowedExtension.Contains(Path.GetExtension(file.FileName).ToLower()))
+                throw new InvalidImageSizeException("Invalid Image Extension !");
 
-            string fileName = Guid.NewGuid().ToString() + "_" + imgFile.FileName;
-            string fullPath = Path.Combine(storagePath, fileName);
+            string path = $"{_webHostEnvironment.WebRootPath}/{storageName}/";
+            string extension = Path.GetExtension(file.FileName);
+            string fileName = $"{Guid.NewGuid().ToString().Replace("-", string.Empty)}{extension}";
 
-            using var stream = new FileStream(fullPath, FileMode.Create);
-            await imgFile.CopyToAsync(stream);
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
-            if (!File.Exists(fullPath))
-                throw new InvalidUploadImageException("Invalid Upload Image !");
+            using FileStream stream = File.Create($"{path}{fileName}");
+            await file.CopyToAsync(stream);
+            await stream.FlushAsync();
 
-            return new()
+
+            return new UploadFileResultDto()
             {
-                FileName = fileName,
-                FilePath = fullPath,
-                ContentType = imgFile.ContentType,
                 Success = true,
+                ContentType = file.ContentType,
+                FileName = fileName,
+                FilePath = $"{_contextAccessor.HttpContext.Request.Scheme}://{_contextAccessor.HttpContext.Request.Host}/{storageName}/{fileName}"
             };
+
         }
-        catch
+        catch (Exception)
         {
             return new()
             {
@@ -71,4 +72,6 @@ public sealed class FileService : IFileService
             throw new InvalidDeleteImageException("Deleted File Process Fail !");
         }
     }
+
+
 }

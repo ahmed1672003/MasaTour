@@ -1,12 +1,16 @@
 ﻿using MasaTour.TouristTripsManagement.Application.Features.Images.Commands;
 using MasaTour.TouristTripsManagement.Application.Features.Images.Queries;
+using MasaTour.TouristTripsManagement.Services.Services.Contracts;
 
 namespace MasaTour.TouristTripsManagement.API.Controllers;
 [ApiController]
 public class ImageController : MasaTourController
 {
-    public ImageController(IMediator mediator) : base(mediator) { }
-
+    private readonly IUnitOfServices _services;
+    public ImageController(IMediator mediator, IUnitOfServices services) : base(mediator)
+    {
+        _services = services;
+    }
     #region Post
     /// <summary>
     /// Add Image To Gellary
@@ -25,6 +29,7 @@ public class ImageController : MasaTourController
     /// </summary>
     /// <remarks>
     /// Allowed Extensions: [".png",".jpg",".jpeg",".gif",".bmp",".tiff",".tif",".svg",".webp",".heic"],
+    /// Maxe Size : 3MB
     /// </remarks>
     /// <param name="images">Files</param>
     /// <returns></returns>

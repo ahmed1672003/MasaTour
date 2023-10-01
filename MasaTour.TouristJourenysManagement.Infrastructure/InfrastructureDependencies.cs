@@ -76,19 +76,19 @@ public static class InfrastructureDependencies
         #endregion
 
         #region Seed Data
-        var context = services.BuildServiceProvider().GetRequiredService<IUnitOfWork>();
-        var specificationsFactory = services.BuildServiceProvider().GetRequiredService<ISpecificationsFactory>();
-        try
-        {
-            await RolesSedeer.SeedRolesAsync(context);
-            await UsersSedeer.SeedSuperAdminAsync(context, specificationsFactory);
-            await UsersSedeer.SeedAdminAsync(context, specificationsFactory);
-            await UsersSedeer.SeedBasicAsync(context, specificationsFactory);
-        }
-        catch
-        {
-            //throw new("Seed Data Failed");
-        }
+        //var context = services.BuildServiceProvider().GetRequiredService<IUnitOfWork>();
+        //var specificationsFactory = services.BuildServiceProvider().GetRequiredService<ISpecificationsFactory>();
+        //try
+        //{
+        //    await RolesSedeer.SeedRolesAsync(context);
+        //    await UsersSedeer.SeedSuperAdminAsync(context, specificationsFactory);
+        //    await UsersSedeer.SeedAdminAsync(context, specificationsFactory);
+        //    await UsersSedeer.SeedBasicAsync(context, specificationsFactory);
+        //}
+        //catch
+        //{
+        //    //throw new("Seed Data Failed");
+        //}
         #endregion
 
         #region Configurations

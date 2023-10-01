@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristTripsManagementDbContext))]
-    [Migration("20230930144627_InitialCreate")]
+    [Migration("20231001045111_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -838,7 +838,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
-                        .WithMany()
+                        .WithMany("TripMandatoryMappers")
                         .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -885,6 +885,8 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
                 {
                     b.Navigation("TripImageMappers");
+
+                    b.Navigation("TripMandatoryMappers");
                 });
 #pragma warning restore 612, 618
         }
