@@ -1,4 +1,5 @@
-﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Images;
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
 
 namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands.Handler;
 public sealed class TripCommandsHandler :
@@ -59,10 +60,15 @@ public sealed class TripCommandsHandler :
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
+            foreach (var img in request.dto.TripImages)
+            {
+                ISpecification<Image> asNoTrackingGetImageByIdSpec = _specificationsFactory.CreateImageSpecifications(typeof(AsNoTrackingGetImageByIdSpecification), img.ImageId);
+                if (!await _context.Images.AnyAsync(asNoTrackingGetImageByIdSpec, cancellationToken))
+                    return ResponseResult.NotFound<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+            }
+
 
             Trip trip = _mapper.Map<Trip>(request.dto);
-
-
 
 
             // Add Mandatories to Trip
@@ -83,31 +89,6 @@ public sealed class TripCommandsHandler :
                     IsCover = image.IsCover,
                 });
             });
-
-            // Add Phases to trip
-            //request.dto.TripPhases.ForEach(tp =>
-            //{
-            //    trip.TripPhases.Add(new TripPhase()
-            //    {
-            //        PhaseNumber = tp.PhaseNumber,
-            //        DescriptionAR = tp.DesceiptionAR,
-            //        DescriptionDE = tp.DesceiptionDE,
-            //        DescriptionEN = tp.DesceiptionEN,
-            //        FromHours = tp.FromHours,
-            //        FromMinutes = tp.FromMinutes,
-            //        FromTimeAR = tp.FromTimeAR,
-            //        FromTimeDE = tp.FromTimeDE,
-            //        FromTimeEN = tp.FromTimeEN,
-            //        LocationNameAR = tp.LocationNameAR,
-            //        LocationNameDE = tp.LocationNameDE,
-            //        LocationNameEN = tp.LocationNameEN,
-            //        ToHours = tp.ToHours,
-            //        ToMinutes = tp.ToMinutes,
-            //        ToTimeAR = tp.FromTimeAR,
-            //        ToTimeDE = tp.FromTimeDE,
-            //        ToTimeEN = tp.FromTimeEN,
-            //    });
-            //});
 
             // Add Trip
             await _context.Trips.CreateAsync(trip, cancellationToken);
