@@ -22,6 +22,6 @@ public class Image : BaseEntity, ICreateableTracker
     public List<TripImageMapper> TripImageMapper { get; set; }
     public Image()
     {
-        TripImageMapper = new List<TripImageMapper>();
+        TripImageMapper = new(0);
     }
 }

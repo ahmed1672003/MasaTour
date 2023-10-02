@@ -58,8 +58,14 @@ public sealed class TripCommandsHandler :
             if (!await _context.SubCategories.AnyAsync(asNoTrackingGetCategoryByIdSpecification, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
+
+
             Trip trip = _mapper.Map<Trip>(request.dto);
 
+
+
+
+            // Add Mandatories to Trip
             request.dto.MandatoriesIds.ForEach(mandatoryId =>
             {
                 trip.TripMandatoryMappers.Add(new TripMandatoryMapper()
@@ -68,6 +74,7 @@ public sealed class TripCommandsHandler :
                 });
             });
 
+            // Add Images to Trip
             request.dto.TripImages.ForEach(image =>
             {
                 trip.TripImageMappers.Add(new()
@@ -77,10 +84,32 @@ public sealed class TripCommandsHandler :
                 });
             });
 
-            // TODO: Solve problem because tripPhases Added Two Objects
-            trip.TripPhases.Clear();
-            trip.TripPhases.AddRange(_mapper.Map<List<TripPhase>>(request.dto.TripPhases));
+            // Add Phases to trip
+            //request.dto.TripPhases.ForEach(tp =>
+            //{
+            //    trip.TripPhases.Add(new TripPhase()
+            //    {
+            //        PhaseNumber = tp.PhaseNumber,
+            //        DescriptionAR = tp.DesceiptionAR,
+            //        DescriptionDE = tp.DesceiptionDE,
+            //        DescriptionEN = tp.DesceiptionEN,
+            //        FromHours = tp.FromHours,
+            //        FromMinutes = tp.FromMinutes,
+            //        FromTimeAR = tp.FromTimeAR,
+            //        FromTimeDE = tp.FromTimeDE,
+            //        FromTimeEN = tp.FromTimeEN,
+            //        LocationNameAR = tp.LocationNameAR,
+            //        LocationNameDE = tp.LocationNameDE,
+            //        LocationNameEN = tp.LocationNameEN,
+            //        ToHours = tp.ToHours,
+            //        ToMinutes = tp.ToMinutes,
+            //        ToTimeAR = tp.FromTimeAR,
+            //        ToTimeDE = tp.FromTimeDE,
+            //        ToTimeEN = tp.FromTimeEN,
+            //    });
+            //});
 
+            // Add Trip
             await _context.Trips.CreateAsync(trip, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             GetTripDto tripDto = _mapper.Map<GetTripDto>(trip);
@@ -140,12 +169,12 @@ public sealed class TripCommandsHandler :
             trip.ToAR = request.dto.ToAR;
             trip.ToEN = request.dto.ToEN;
             trip.ToDE = request.dto.ToDE;
-            trip.LongDesceiptionAR = request.dto.LongDesceiptionAR;
-            trip.LongDesceiptionEN = request.dto.LongDesceiptionEN;
+            trip.LongDescriptionAR = request.dto.LongDesceiptionAR;
+            trip.LongDescriptionEN = request.dto.LongDesceiptionEN;
             trip.LongDesceiptionDE = request.dto.LongDesceiptionDE;
-            trip.MiniDesceiptionAR = request.dto.MiniDesceiptionAR;
-            trip.MiniDesceiptionEN = request.dto.MiniDesceiptionEN;
-            trip.MiniDesceiptionDE = request.dto.MiniDesceiptionDE;
+            trip.MiniDescriptionAR = request.dto.MiniDesceiptionAR;
+            trip.MiniDescriptionEN = request.dto.MiniDesceiptionEN;
+            trip.MiniDescriptionDE = request.dto.MiniDesceiptionDE;
             trip.IsFamous = request.dto.IsFamous;
             trip.IsActive = request.dto.IsActive;
             trip.StartDate = request.dto.StartDate;

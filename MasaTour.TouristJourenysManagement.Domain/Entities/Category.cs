@@ -25,13 +25,11 @@ public class Category : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICre
     [Required]
     public DateTime CreatedAt { get; set; }
 
-    [AllowNull]
     public DateTime? UpdatedAt { get; set; }
 
     [AllowNull]
     public DateTime? DeletedAt { get; set; }
 
-    [AllowNull]
     public List<SubCategory> SubCategories { get; set; }
 
 
@@ -39,6 +37,6 @@ public class Category : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICre
     {
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        SubCategories = new List<SubCategory>();
+        SubCategories = new(0);
     }
 }

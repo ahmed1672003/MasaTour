@@ -57,13 +57,13 @@ public class TripPhase : BaseEntity, ICreateableTracker, IDeleteableTracker, IUp
     public string ToTimeDE { get; set; }
 
     [MaxLength(3000)]
-    public string? DesceiptionAR { get; set; }
+    public string? DescriptionAR { get; set; }
 
     [MaxLength(3000)]
-    public string? DesceiptionEN { get; set; }
+    public string? DescriptionEN { get; set; }
 
     [MaxLength(3000)]
-    public string? DesceiptionDE { get; set; }
+    public string? DescriptionDE { get; set; }
 
     [Required]
     public DateTime CreatedAt { get; set; }
@@ -73,6 +73,7 @@ public class TripPhase : BaseEntity, ICreateableTracker, IDeleteableTracker, IUp
     public DateTime? DeletedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
+    [Required]
     [MaxLength(36)]
     [MinLength(36)]
     public string TripId { get; set; }

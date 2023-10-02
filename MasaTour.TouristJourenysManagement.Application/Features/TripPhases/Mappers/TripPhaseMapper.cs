@@ -10,7 +10,10 @@ public sealed class TripPhaseMapper : Profile
 
     void Map()
     {
-        CreateMap<AddTripPhaseDto, TripPhase>();
+        CreateMap<AddTripPhaseDto, TripPhase>()
+            .ForMember(dist => dist.FromClock, cfg => cfg.MapFrom(src => new TimeSpan(src.FromHours, src.FromMinutes, 0)))
+            .ForMember(dist => dist.ToClock, cfg => cfg.MapFrom(src => new TimeSpan(src.ToHours, src.ToMinutes, 0)));
+
 
         CreateMap<TripPhase, GetTripPhaseDto>()
             .ForMember(dist => dist.CreatedAt, cfg => cfg.MapFrom(src => src.CreatedAt.ToLocalTime()))

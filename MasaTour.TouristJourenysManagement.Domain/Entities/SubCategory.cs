@@ -41,13 +41,12 @@ public class SubCategory : BaseEntity, ICreateableTracker, IUpdateableTracker, I
     [ForeignKey(nameof(CategoryId))]
     public Category Category { get; set; }
 
-    [AllowNull]
     public List<Trip> Trips { get; set; }
 
     public SubCategory()
     {
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        Trips = new List<Trip>();
+        Trips = new();
     }
 }

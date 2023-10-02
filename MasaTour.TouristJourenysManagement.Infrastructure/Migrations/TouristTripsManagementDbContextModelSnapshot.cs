@@ -569,29 +569,29 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Property<bool>("IsFamous")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LongDesceiptionAR")
-                        .HasMaxLength(3000)
-                        .HasColumnType("nvarchar(3000)");
-
                     b.Property<string>("LongDesceiptionDE")
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
-                    b.Property<string>("LongDesceiptionEN")
+                    b.Property<string>("LongDescriptionAR")
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
-                    b.Property<string>("MiniDesceiptionAR")
+                    b.Property<string>("LongDescriptionEN")
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<string>("MiniDescriptionAR")
                         .IsRequired()
                         .HasMaxLength(1500)
                         .HasColumnType("nvarchar(1500)");
 
-                    b.Property<string>("MiniDesceiptionDE")
+                    b.Property<string>("MiniDescriptionDE")
                         .IsRequired()
                         .HasMaxLength(1500)
                         .HasColumnType("nvarchar(1500)");
 
-                    b.Property<string>("MiniDesceiptionEN")
+                    b.Property<string>("MiniDescriptionEN")
                         .IsRequired()
                         .HasMaxLength(1500)
                         .HasColumnType("nvarchar(1500)");
@@ -720,15 +720,15 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DesceiptionAR")
+                    b.Property<string>("DescriptionAR")
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
-                    b.Property<string>("DesceiptionDE")
+                    b.Property<string>("DescriptionDE")
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
-                    b.Property<string>("DesceiptionEN")
+                    b.Property<string>("DescriptionEN")
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
@@ -784,6 +784,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("TripId")
+                        .IsRequired()
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
@@ -941,7 +942,9 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 {
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
                         .WithMany("TripPhases")
-                        .HasForeignKey("TripId");
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Trip");
                 });

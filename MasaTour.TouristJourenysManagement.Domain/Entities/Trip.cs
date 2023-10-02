@@ -29,25 +29,25 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     public string NameDE { get; set; }
 
     [MaxLength(3000)]
-    public string? LongDesceiptionAR { get; set; }
+    public string? LongDescriptionAR { get; set; }
 
     [MaxLength(3000)]
-    public string? LongDesceiptionEN { get; set; }
+    public string? LongDescriptionEN { get; set; }
 
     [MaxLength(3000)]
     public string? LongDesceiptionDE { get; set; }
 
     [Required]
     [MaxLength(1500)]
-    public string MiniDesceiptionAR { get; set; }
+    public string MiniDescriptionAR { get; set; }
 
     [Required]
     [MaxLength(1500)]
-    public string MiniDesceiptionEN { get; set; }
+    public string MiniDescriptionEN { get; set; }
 
     [Required]
     [MaxLength(1500)]
-    public string MiniDesceiptionDE { get; set; }
+    public string MiniDescriptionDE { get; set; }
 
     [Required]
     [MaxLength(255)]
@@ -119,17 +119,14 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     public SubCategory SubCategory { get; set; }
 
     public List<TripImageMapper> TripImageMappers { get; set; }
-
     public List<TripMandatoryMapper> TripMandatoryMappers { get; set; }
-
     public List<TripPhase> TripPhases { get; set; }
-
 
     public Trip()
     {
         IsDeleted = false;
-        TripImageMappers = new();
-        TripMandatoryMappers = new();
-        TripPhases = new();
+        TripImageMappers = new(0);
+        TripMandatoryMappers = new(0);
+        TripPhases = new(0);
     }
 }

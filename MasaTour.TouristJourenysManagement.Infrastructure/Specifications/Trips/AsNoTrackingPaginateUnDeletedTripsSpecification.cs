@@ -17,12 +17,12 @@ public sealed class AsNoTrackingPaginateUnDeletedTripsSpecification : Specificat
             t.ToAR.Contains(keyWords) ||
             t.ToEN.Contains(keyWords) ||
             t.ToDE.Contains(keyWords) ||
-            t.LongDesceiptionAR.Contains(keyWords) ||
-            t.LongDesceiptionEN.Contains(keyWords) ||
+            t.LongDescriptionAR.Contains(keyWords) ||
+            t.LongDescriptionEN.Contains(keyWords) ||
             t.LongDesceiptionDE.Contains(keyWords) ||
-            t.MiniDesceiptionAR.Contains(keyWords) ||
-            t.MiniDesceiptionDE.Contains(keyWords) ||
-            t.MiniDesceiptionEN.Contains(keyWords))
+            t.MiniDescriptionAR.Contains(keyWords) ||
+            t.MiniDescriptionDE.Contains(keyWords) ||
+            t.MiniDescriptionEN.Contains(keyWords))
     {
         StopTracking();
         ApplyPaging((pageNumber.Value, pageSize.Value));

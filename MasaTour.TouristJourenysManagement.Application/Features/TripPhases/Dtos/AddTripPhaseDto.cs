@@ -58,11 +58,11 @@ public class AddTripPhaseDto
     public string ToTimeDE { get; set; }
 
     [MaxLength(3000)]
-    public string? DesceiptionAR { get; set; }
+    public string? DescriptionAR { get; set; }
 
     [MaxLength(3000)]
-    public string? DesceiptionEN { get; set; }
+    public string? DescriptionEN { get; set; }
 
     [MaxLength(3000)]
-    public string? DesceiptionDE { get; set; }
+    public string? DescriptionDE { get; set; }
 }

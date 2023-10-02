@@ -40,13 +40,11 @@ public class Mandatory : BaseEntity, ICreateableTracker, IUpdateableTracker, IDe
 
     public DateTime? DeletedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-
-    [AllowNull]
     public List<TripMandatoryMapper> TripMandatoryMapper { get; set; }
     public Mandatory()
     {
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        TripMandatoryMapper = new List<TripMandatoryMapper>();
+        TripMandatoryMapper = new(0);
     }
 }

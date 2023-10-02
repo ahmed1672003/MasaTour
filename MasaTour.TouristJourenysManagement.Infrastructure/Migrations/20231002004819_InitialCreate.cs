@@ -293,15 +293,16 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Rate = table.Column<double>(type: "float", nullable: false),
                     NameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     NameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     NameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    LongDesceiptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
-                    LongDesceiptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    LongDescriptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    LongDescriptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
                     LongDesceiptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
-                    MiniDesceiptionAR = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
-                    MiniDesceiptionEN = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
-                    MiniDesceiptionDE = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    MiniDescriptionAR = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    MiniDescriptionEN = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    MiniDescriptionDE = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
                     FromAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     FromEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     FromDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
@@ -387,6 +388,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    PhaseNumber = table.Column<int>(type: "int", nullable: false),
                     LocationNameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     LocationNameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     LocationNameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
@@ -398,14 +400,14 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     ToTimeAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     ToTimeEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     ToTimeDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    DesceiptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
-                    DesceiptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
-                    DesceiptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    DescriptionAR = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    DescriptionEN = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
+                    DescriptionDE = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TripId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true)
+                    TripId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -414,7 +416,8 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         name: "FK_TripPhases_Trips_TripId",
                         column: x => x.TripId,
                         principalTable: "Trips",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
