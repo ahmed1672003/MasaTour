@@ -9,6 +9,7 @@ global using MasaTour.TouristTripsManagement.Application.Features.Categories.Dto
 global using MasaTour.TouristTripsManagement.Application.Features.Enums;
 global using MasaTour.TouristTripsManagement.Application.Features.Images.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Dtos;
+global using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Resources;
 global using MasaTour.TouristTripsManagement.Application.Response;

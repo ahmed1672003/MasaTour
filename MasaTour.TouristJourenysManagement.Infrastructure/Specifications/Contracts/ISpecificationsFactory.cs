@@ -9,4 +9,6 @@ public interface ISpecificationsFactory
     ISpecification<Trip> CreateTripSpecifications(Type type, params dynamic[] parameters);
     ISpecification<Mandatory> CreateMandatorySpecifications(Type type, params dynamic[] parameters);
     ISpecification<Image> CreateImageSpecifications(Type type, params dynamic[] parameters);
+    ISpecification<TripImageMapper> CreateTripImageMapperSpecifications(Type type, params dynamic[] parameters);
+    ISpecification<TripPhase> CreateTripPhaseSpecifications(Type type, params dynamic[] parameters);
 }

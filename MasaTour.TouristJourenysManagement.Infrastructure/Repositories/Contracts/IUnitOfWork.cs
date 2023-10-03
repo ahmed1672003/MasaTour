@@ -21,7 +21,7 @@ public interface IUnitOfWork : IAsyncDisposable
     ITripMandatoryMapperRepository TripsMandatoryMappers { get; }
     IMandatoryRepository Mandatories { get; }
     IImageRepository Images { get; }
-    ITripImageMapperRepository ImagesImageMapper { get; }
+    ITripImageMapperRepository TripImageMappers { get; }
 
     void UndoDeleted<T>(ref T entity) where T : IDeleteableTracker
     {

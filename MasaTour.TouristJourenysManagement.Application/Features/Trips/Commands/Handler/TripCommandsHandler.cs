@@ -1,12 +1,14 @@
 ﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Images;
 using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripImagesMappers;
 
 namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Commands.Handler;
 public sealed class TripCommandsHandler :
     IRequestHandler<AddTripCommand, ResponseModel<GetTripDto>>,
     IRequestHandler<UpdateTripCommand, ResponseModel<GetTripDto>>,
     IRequestHandler<DeleteTripByIdCommand, ResponseModel<GetTripDto>>,
-    IRequestHandler<UndoDeleteTripByIdCommand, ResponseModel<GetTripDto>>
+    IRequestHandler<UndoDeleteTripByIdCommand, ResponseModel<GetTripDto>>,
+    IRequestHandler<DeleteImagesFromTripCommand, ResponseModel<GetTripDto>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
@@ -137,7 +139,6 @@ public sealed class TripCommandsHandler :
             if (!await _context.Categories.AnyAsync(asNoTrackingGetCategoryByIdSpecification, cancellationToken))
                 return ResponseResult.BadRequest<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-
             ISpecification<Trip> asNoTrackingGetTripByIdSpecification = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.dto.TripId);
             Trip trip = await _context.Trips.RetrieveAsync(asNoTrackingGetTripByIdSpecification, cancellationToken);
             trip.Code = request.dto.Code;
@@ -216,13 +217,33 @@ public sealed class TripCommandsHandler :
 
             // ToDo: Get All Realted Data For This Trip To UndoDeleted Also
 
-            ISpecification<Trip> asTrackingGetDeletedTripByIdSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsTrackingGetDeletedTripByIdSpecification), request.Id);
-            Trip trip = await _context.Trips.RetrieveAsync(asTrackingGetDeletedTripByIdSpec, cancellationToken);
+            ISpecification<Trip> asTrackingGetTripById_TripPhases_Spec = _specificationsFactory.CreateTripSpecifications(typeof(AsTrackingGetTripById_TripPhases_Specification), request.Id);
+            Trip trip = await _context.Trips.RetrieveAsync(asTrackingGetTripById_TripPhases_Spec, cancellationToken);
+            trip.TripPhases.ForEach(t => _context.UndoDeleted(ref t));
             _context.UndoDeleted(ref trip);
             await _context.SaveChangesAsync();
 
             GetTripDto tripDto = _mapper.Map<GetTripDto>(trip);
             return ResponseResult.Success(tripDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region Delete Images From Trips
+    public async Task<ResponseModel<GetTripDto>> Handle(DeleteImagesFromTripCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<TripImageMapper> asNoTrackingGetTripImagesMappersByCompositeKeySpec = _specificationsFactory.CreateTripImageMapperSpecifications(typeof(AsNoTrackingGetTripImagesMappersByCompositeKeySpecification), request.TripId, request.ImagesIds);
+            if (!await _context.TripImageMappers.AnyAsync(asNoTrackingGetTripImagesMappersByCompositeKeySpec, cancellationToken))
+                return ResponseResult.NotFound<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            await _context.TripImageMappers.ExecuteDeleteAsync(asNoTrackingGetTripImagesMappersByCompositeKeySpec, cancellationToken);
+            return ResponseResult.Success<GetTripDto>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {

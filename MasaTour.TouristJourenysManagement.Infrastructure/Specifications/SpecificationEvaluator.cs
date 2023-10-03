@@ -32,8 +32,6 @@ public class SpecificationEvaluator
         if (specification.OrderByDescending is not null)
             query = query.OrderByDescending(specification.OrderByDescending);
 
-        if (specification.GroupBy is not null)
-            query = query.GroupBy(specification.GroupBy).SelectMany(x => x);
 
         if (specification.IsPagingEnabled)
         {

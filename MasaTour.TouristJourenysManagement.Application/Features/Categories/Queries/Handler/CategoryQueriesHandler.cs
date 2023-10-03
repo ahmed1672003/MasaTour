@@ -109,9 +109,6 @@ public sealed class CategoryQueriesHandler :
     {
         try
         {
-            if (!await _context.Categories.AnyAsync(cancellationToken: cancellationToken))
-                return PaginationResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             Expression<Func<Category, object>> orderBy = category => new();
 
             switch (request.orderBy)
@@ -149,10 +146,6 @@ public sealed class CategoryQueriesHandler :
     {
         try
         {
-            ISpecification<Category> asNoTrackingGetAllDeletedCategoriesSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetAllDeletedCategoriesSpecification));
-            if (!await _context.Categories.AnyAsync(asNoTrackingGetAllDeletedCategoriesSpec, cancellationToken))
-                return PaginationResponseResult.NotFound<IEnumerable<GetCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             Expression<Func<Category, object>> orderBy = category => new();
 
             switch (request.orderBy)
@@ -174,6 +167,7 @@ public sealed class CategoryQueriesHandler :
                     break;
             }
 
+            ISpecification<Category> asNoTrackingGetAllDeletedCategoriesSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingGetAllDeletedCategoriesSpecification));
             ISpecification<Category> asNoTrackingPaginateDeletedCategoriesSpec = _specificationsFactory.CreateCategorySpecifications(typeof(AsNoTrackingPaginateDeletedCategoriesSpecification), request.pageNumber!.Value, request.pageSize!.Value, request.keyWords, orderBy);
             IEnumerable<GetCategoryDto> categoriesDto = _mapper.Map<IEnumerable<GetCategoryDto>>(await _context.Categories.RetrieveAllAsync(asNoTrackingPaginateDeletedCategoriesSpec, cancellationToken));
             return PaginationResponseResult.Success(categoriesDto, count: await _context.Categories.CountAsync(asNoTrackingGetAllDeletedCategoriesSpec, cancellationToken), currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, message: _stringLocalizer[ResourcesKeys.Shared.Success]);

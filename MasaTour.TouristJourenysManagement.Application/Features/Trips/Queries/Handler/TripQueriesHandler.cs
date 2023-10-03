@@ -229,9 +229,6 @@ public sealed class TripQueriesHandler :
     {
         try
         {
-            if (!await _context.Trips.AnyAsync(cancellationToken: cancellationToken))
-                return PaginationResponseResult.NotFound<IEnumerable<GetTripDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             Expression<Func<Trip, object>> orderBy = category => new();
             switch (request.orderBy)
             {
@@ -290,10 +287,6 @@ public sealed class TripQueriesHandler :
     {
         try
         {
-            ISpecification<Trip> asNoTrackingGetAllDeletedTripsSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetAllDeletedTripsSpecification));
-            if (await _context.Trips.AnyAsync(asNoTrackingGetAllDeletedTripsSpec, cancellationToken))
-                return PaginationResponseResult.NotFound<IEnumerable<GetTripDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             Expression<Func<Trip, object>> orderBy = category => new();
             switch (request.orderBy)
             {
@@ -339,7 +332,9 @@ public sealed class TripQueriesHandler :
 
             ISpecification<Trip> asNoTrackingPaginateDeletedTripsSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingPaginateDeletedTripsSpecification), request.PageNumber, request.PageSize, request.KeyWorks, orderBy);
             IEnumerable<GetTripDto> tripsDtos = _mapper.Map<IEnumerable<GetTripDto>>(await _context.Trips.RetrieveAllAsync(asNoTrackingPaginateDeletedTripsSpec, cancellationToken));
-            return PaginationResponseResult.Success(tripsDtos, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+            ISpecification<Trip> asNoTrackingGetAllDeletedTripsSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetAllDeletedTripsSpecification));
+            return PaginationResponseResult.Success(tripsDtos, message: _stringLocalizer[ResourcesKeys.Shared.Success],
+                currentPage: request.PageNumber.Value, pageSize: request.PageSize.Value, count: await _context.Trips.CountAsync(asNoTrackingGetAllDeletedTripsSpec, cancellationToken));
         }
         catch (Exception ex)
         {

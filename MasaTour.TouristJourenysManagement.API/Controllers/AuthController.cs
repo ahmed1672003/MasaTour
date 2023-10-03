@@ -7,6 +7,7 @@ namespace MasaTour.TouristTripsManagement.API.Controllers;
 public class AuthController : MasaTourController
 {
     public AuthController(IMediator mediator) : base(mediator) { }
+
     #region Post
 
     [HttpPost(Router.Auth.AddUser)]

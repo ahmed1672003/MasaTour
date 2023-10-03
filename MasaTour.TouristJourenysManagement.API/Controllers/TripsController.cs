@@ -97,4 +97,9 @@ public class TripsController : MasaTourController
     public async Task<IActionResult> PaginateUnDeletedTrips(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", TripOrderBy orderBy = TripOrderBy.CreatedAt) =>
      MasaTourResponse(await Mediator.Send(new PaginateUnDeletedTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
     #endregion
+
+    #region Delete
+    [HttpDelete(Router.Trip.DeleteImagesFromTrip)]
+    public async Task<IActionResult> DeleteImagesFromTrip([Required][MaxLength(36)][MinLength(36)] string tripId, List<string> imagesIds) => MasaTourResponse(await Mediator.Send(new DeleteImagesFromTripCommand(tripId, imagesIds)));
+    #endregion
 }

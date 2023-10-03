@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\TripPhases\Commands\" />
-    <Folder Include="Features\TripPhases\Queries\" />
     <Folder Include="Features\Users\Validators\" />
   </ItemGroup>
 

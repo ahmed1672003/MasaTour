@@ -1,4 +1,6 @@
 ﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Images;
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripImagesMappers;
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripPhases;
 
 namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
@@ -122,6 +124,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingPaginateDeletedTripsSpecification" => new AsNoTrackingPaginateDeletedTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetDeletedTripByIdSpecification" => new AsTrackingGetDeletedTripByIdSpecification(parameters[0]),
             "AsTrackingGetTripByIdSpecification" => new AsTrackingGetTripByIdSpecification(parameters[0]),
+            "AsTrackingGetTripById_TripPhases_Specification" => new AsTrackingGetTripById_TripPhases_Specification(parameters[0]),
             _ => throw new InvalidOperationException("Create Trip Specification Exception!")
         };
     }
@@ -160,6 +163,24 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetImageByIdSpecification" => new AsNoTrackingGetImageByIdSpecification(parameters[0]),
             "AsNoTrackingPaginateImagesSpecification" => new AsNoTrackingPaginateImagesSpecification(parameters[0], parameters[1], parameters[2]),
             "AsTrackingGetImagesByIdsSpecification" => new AsTrackingGetImagesByIdsSpecification(parameters[0]),
+            _ => throw new InvalidOperationException()
+        };
+    }
+    public ISpecification<TripImageMapper> CreateTripImageMapperSpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            "AsNoTrackingGetTripImagesMappersByCompositeKeySpecification" => new AsNoTrackingGetTripImagesMappersByCompositeKeySpecification(parameters[0], parameters[1]),
+            _ => throw new InvalidOperationException()
+        };
+    }
+    public ISpecification<TripPhase> CreateTripPhaseSpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            "AsNoTrackingGetAllTripPhasesSpecification" => new AsNoTrackingGetAllTripPhasesSpecification(),
+            "AsNoTrackingGetTripPhaseByIdSpecification" => new AsNoTrackingGetTripPhaseByIdSpecification(parameters[0]),
+            "AsTrackingGetTripPhaseSpecification" => new AsTrackingGetTripPhaseSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }

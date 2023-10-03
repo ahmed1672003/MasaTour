@@ -40,7 +40,7 @@ public sealed class UnitOfWork : IUnitOfWork
         TripsMandatoryMappers = tripsMandatoryMappers;
         Mandatories = mandatories;
         Images = images;
-        ImagesImageMapper = imagesImageMapper;
+        TripImageMappers = imagesImageMapper;
         TripPhases = tripPhases;
     }
 
@@ -60,7 +60,7 @@ public sealed class UnitOfWork : IUnitOfWork
     public ITripMandatoryMapperRepository TripsMandatoryMappers { get; }
     public IMandatoryRepository Mandatories { get; }
     public IImageRepository Images { get; }
-    public ITripImageMapperRepository ImagesImageMapper { get; }
+    public ITripImageMapperRepository TripImageMappers { get; }
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default) =>
          await _context.Database.BeginTransactionAsync(cancellationToken);
 

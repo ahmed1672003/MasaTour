@@ -126,12 +126,6 @@ public sealed class MandatoryQueriesHandler :
     {
         try
         {
-            ISpecification<Mandatory> asNoTrackingGetAllDeletedMandatoriesSpec = _specificationsFactory.
-                CreateMandatorySpecifications(typeof(AsNoTrackingGetAllDeletedMandatoriesSpecification));
-            if (!await _context.Mandatories.AnyAsync(asNoTrackingGetAllDeletedMandatoriesSpec, cancellationToken))
-                return PaginationResponseResult.NotFound<IEnumerable<GetMandatoryDto>>
-                    (message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             Expression<Func<Mandatory, object>> orderBy = mandatory => new();
             switch (request.OrderBy)
             {
@@ -158,6 +152,10 @@ public sealed class MandatoryQueriesHandler :
 
             IEnumerable<GetMandatoryDto> mandatoryDtos = _mapper.Map<IEnumerable<GetMandatoryDto>>
                     (await _context.Mandatories.RetrieveAllAsync(asNoTrackingPaginateDeletedMandatoriesSpec, cancellationToken));
+
+            ISpecification<Mandatory> asNoTrackingGetAllDeletedMandatoriesSpec = _specificationsFactory.
+                    CreateMandatorySpecifications(typeof(AsNoTrackingGetAllDeletedMandatoriesSpecification));
+
             return PaginationResponseResult.Success(mandatoryDtos,
                                             pageSize: request.PageSize.Value,
                                             currentPage: request.PageNumber.Value,
@@ -175,10 +173,6 @@ public sealed class MandatoryQueriesHandler :
     {
         try
         {
-            if (!await _context.Mandatories.AnyAsync(cancellationToken: cancellationToken))
-                return PaginationResponseResult.NotFound<IEnumerable<GetMandatoryDto>>
-                            (message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             Expression<Func<Mandatory, object>> orderBy = mandatory => new();
             switch (request.OrderBy)
             {

@@ -109,10 +109,6 @@ public sealed class SubCategoryQueriesHandler :
     {
         try
         {
-            ISpecification<SubCategory> asNoTrackingGetAllDeletedSubCategoriesSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingGetAllDeletedSubCategoriesSpecification));
-            if (!await _context.SubCategories.AnyAsync(asNoTrackingGetAllDeletedSubCategoriesSpec, cancellationToken))
-                return PaginationResponseResult.NotFound<IEnumerable<GetSubCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             Expression<Func<SubCategory, object>> orderBy = subCategory => new();
             switch (request.orderBy)
             {
@@ -132,8 +128,14 @@ public sealed class SubCategoryQueriesHandler :
                     orderBy = subCategory => subCategory.CreatedAt;
                     break;
             }
-            ISpecification<SubCategory> asNoTrackingPaginateDeletedSubCategoriesSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingPaginateDeletedSubCategoriesSpecification), request.pageNumber, request.pageSize, request.keyWords, orderBy);
+            ISpecification<SubCategory> asNoTrackingPaginateDeletedSubCategoriesSpec = _specificationsFactory.
+                CreateSubCategorySpecifications(typeof(AsNoTrackingPaginateDeletedSubCategoriesSpecification), request.pageNumber, request.pageSize, request.keyWords, orderBy);
+
             IEnumerable<GetSubCategoryDto> subCategoryDtos = _mapper.Map<IEnumerable<GetSubCategoryDto>>(await _context.SubCategories.RetrieveAllAsync(asNoTrackingPaginateDeletedSubCategoriesSpec, cancellationToken));
+
+            ISpecification<SubCategory> asNoTrackingGetAllDeletedSubCategoriesSpec = _specificationsFactory.
+                                   CreateSubCategorySpecifications(typeof(AsNoTrackingGetAllDeletedSubCategoriesSpecification));
+
             return PaginationResponseResult.Success(subCategoryDtos, currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, count: await _context.SubCategories.CountAsync(asNoTrackingGetAllDeletedSubCategoriesSpec, cancellationToken), message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
@@ -142,14 +144,12 @@ public sealed class SubCategoryQueriesHandler :
         }
     }
     #endregion
+
     #region Paginate UnDeleted SubCategories
     public async Task<PaginationResponseModel<IEnumerable<GetSubCategoryDto>>> Handle(PaginateUnDeletedSubCategoriesQuery request, CancellationToken cancellationToken)
     {
         try
         {
-            if (!await _context.SubCategories.AnyAsync(cancellationToken: cancellationToken))
-                return PaginationResponseResult.NotFound<IEnumerable<GetSubCategoryDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
-
             Expression<Func<SubCategory, object>> orderBy = subCategory => new();
             switch (request.orderBy)
             {
@@ -169,7 +169,10 @@ public sealed class SubCategoryQueriesHandler :
                     orderBy = subCategory => subCategory.CreatedAt;
                     break;
             }
-            ISpecification<SubCategory> asNoTrackingPaginateUnDeletedSubCategoriesSpec = _specificationsFactory.CreateSubCategorySpecifications(typeof(AsNoTrackingPaginateUnDeletedSubCategoriesSpecification), request.pageNumber.Value, request.pageSize.Value, request.keyWords, orderBy);
+            ISpecification<SubCategory> asNoTrackingPaginateUnDeletedSubCategoriesSpec = _specificationsFactory.
+                                CreateSubCategorySpecifications(typeof(AsNoTrackingPaginateUnDeletedSubCategoriesSpecification),
+                                        request.pageNumber.Value, request.pageSize.Value, request.keyWords, orderBy);
+
             IEnumerable<GetSubCategoryDto> subCategoryDtos = _mapper.Map<IEnumerable<GetSubCategoryDto>>(await _context.SubCategories.RetrieveAllAsync(asNoTrackingPaginateUnDeletedSubCategoriesSpec, cancellationToken));
             return PaginationResponseResult.Success(subCategoryDtos, currentPage: request.pageNumber.Value, pageSize: request.pageSize.Value, count: await _context.SubCategories.CountAsync(cancellationToken: cancellationToken), message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }

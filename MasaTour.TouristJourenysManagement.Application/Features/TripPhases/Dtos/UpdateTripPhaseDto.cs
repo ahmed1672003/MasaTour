@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristTripsManagement.Application.Features.TripPhases.Dtos;
-internal class UpdateTripPhaseDto
+public class UpdateTripPhaseDto
 {
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.TripPhase.FiledCanNotBeNull)]
     [MaxLength(36, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.TripPhase.FiledLengthIsBiggerThanMaxLength)]

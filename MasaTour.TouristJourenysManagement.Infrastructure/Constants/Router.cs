@@ -72,6 +72,7 @@ public static class Router
         public const string GetAllUnDeletedTrips = TripPrefix + "get-all-un-deleted-trips";
         public const string PaginateUnDeletedTrips = TripPrefix + "paginate-all-un-deleted-trips";
         public const string PaginateDeletedTrips = TripPrefix + "paginate-all-deleted-trips";
+        public const string DeleteImagesFromTrip = TripPrefix + "delete-images-from-trip";
     }
 
     public static class Mandatory
@@ -103,6 +104,8 @@ public static class Router
 
     public static class TripPhase
     {
-
+        private const string TripPhasePrefix = ApiPrefix + "tripphase/";
+        public const string UpdateTripPhase = TripPhasePrefix + "update-trip-phase";
+        public const string GetAllTripPhasesGroupingByTripId = TripPhasePrefix + "get-all-trip-phases";
     }
 }
