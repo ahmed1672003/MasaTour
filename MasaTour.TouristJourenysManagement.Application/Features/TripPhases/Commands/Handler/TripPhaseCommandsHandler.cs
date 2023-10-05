@@ -1,9 +1,10 @@
-﻿using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Dtos;
-using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripPhases;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripPhases;
 
 namespace MasaTour.TouristTripsManagement.Application.Features.TripPhases.Commands.Handler;
 public sealed class TripPhaseCommandsHandler :
-    IRequestHandler<UpdateTripPhaseCommand, ResponseModel<GetTripPhaseDto>>
+    IRequestHandler<UpdateTripPhaseCommand, ResponseModel<GetTripPhaseDto>>,
+    IRequestHandler<DeleteTripPhaseByPhaseIdCommand, ResponseModel<GetTripPhaseDto>>,
+    IRequestHandler<DeleteTripPhasesByTripIdCommand, ResponseModel<GetTripPhaseDto>>
 {
     #region Fileds
     private readonly IUnitOfWork _context;
@@ -58,6 +59,43 @@ public sealed class TripPhaseCommandsHandler :
             await _context.SaveChangesAsync(cancellationToken);
             GetTripPhaseDto tripPhaseDto = _mapper.Map<GetTripPhaseDto>(tripPhase);
             return ResponseResult.Success(tripPhaseDto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<GetTripPhaseDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region Delete TripPhase By PhaseId
+    public async Task<ResponseModel<GetTripPhaseDto>> Handle(DeleteTripPhaseByPhaseIdCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<TripPhase> asNoTrackingGetTripPhaseByIdSpec = _specificationsFactory.CreateTripPhaseSpecifications(typeof(AsNoTrackingGetTripPhaseByIdSpecification), request.PhaseId);
+            if (!await _context.TripPhases.AnyAsync(asNoTrackingGetTripPhaseByIdSpec, cancellationToken))
+                return ResponseResult.NotFound<GetTripPhaseDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+            await _context.TripPhases.ExecuteDeleteAsync(asNoTrackingGetTripPhaseByIdSpec, cancellationToken);
+            return ResponseResult.Success<GetTripPhaseDto>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<GetTripPhaseDto>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region Delete TripPhases By TripId
+    public async Task<ResponseModel<GetTripPhaseDto>> Handle(DeleteTripPhasesByTripIdCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<TripPhase> asNoTrackingGetTripPhaseByTripIdSpec = _specificationsFactory.CreateTripPhaseSpecifications(typeof(AsNoTrackingGetTripPhaseByTripIdSpecification), request.TripId);
+            if (!await _context.TripPhases.AnyAsync(asNoTrackingGetTripPhaseByTripIdSpec, cancellationToken))
+                return ResponseResult.NotFound<GetTripPhaseDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            await _context.TripPhases.ExecuteDeleteAsync(asNoTrackingGetTripPhaseByTripIdSpec, cancellationToken);
+            return ResponseResult.Success<GetTripPhaseDto>(message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {

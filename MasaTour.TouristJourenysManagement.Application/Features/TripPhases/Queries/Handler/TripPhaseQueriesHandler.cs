@@ -2,7 +2,7 @@
 
 namespace MasaTour.TouristTripsManagement.Application.Features.TripPhases.Queries.Handler;
 public class TripPhaseQueriesHandler :
-    IRequestHandler<GetAllTripPhasesGroupingByTripIdQuery, ResponseModel<IEnumerable<GetTripPhaseDto>>>
+    IRequestHandler<GetAllTripPhasesByTripIdQuery, ResponseModel<IEnumerable<GetTripPhaseDto>>>
 {
     #region Fileds
     private readonly IUnitOfWork _context;
@@ -25,16 +25,17 @@ public class TripPhaseQueriesHandler :
     }
     #endregion
 
-    #region Get All TripPhases Grouping By TripsId
-    public async Task<ResponseModel<IEnumerable<GetTripPhaseDto>>> Handle(GetAllTripPhasesGroupingByTripIdQuery request, CancellationToken cancellationToken)
+    #region Get All TripPhases By TripsId
+    public async Task<ResponseModel<IEnumerable<GetTripPhaseDto>>> Handle(GetAllTripPhasesByTripIdQuery request, CancellationToken cancellationToken)
     {
         try
         {
-            if (!await _context.TripPhases.AnyAsync(cancellationToken: cancellationToken))
+            ISpecification<TripPhase> asNoTrackingGetAllTripPhasesByTripIdSpec = _specificationsFactory.CreateTripPhaseSpecifications(typeof(AsNoTrackingGetAllTripPhasesByTripIdSpecification), request.TripId);
+
+            if (!await _context.TripPhases.AnyAsync(asNoTrackingGetAllTripPhasesByTripIdSpec, cancellationToken))
                 return ResponseResult.NotFound<IEnumerable<GetTripPhaseDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            ISpecification<TripPhase> asNoTrackingGetAllTripPhasesSpec = _specificationsFactory.CreateTripPhaseSpecifications(typeof(AsNoTrackingGetAllTripPhasesSpecification));
-            IEnumerable<GetTripPhaseDto> tripPhaseDtos = _mapper.Map<IEnumerable<GetTripPhaseDto>>(await _context.TripPhases.RetrieveAllAsync(asNoTrackingGetAllTripPhasesSpec, cancellationToken));
+            IEnumerable<GetTripPhaseDto> tripPhaseDtos = _mapper.Map<IEnumerable<GetTripPhaseDto>>(await _context.TripPhases.RetrieveAllAsync(asNoTrackingGetAllTripPhasesByTripIdSpec, cancellationToken));
             return ResponseResult.Success(tripPhaseDtos, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)

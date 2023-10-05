@@ -1,4 +1,5 @@
-﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Images;
+﻿using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Commands.Handler;
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Images;
 using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripImagesMappers;
 using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripPhases;
 
@@ -178,7 +179,8 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
     {
         return type.Name switch
         {
-            "AsNoTrackingGetAllTripPhasesSpecification" => new AsNoTrackingGetAllTripPhasesSpecification(),
+            "AsNoTrackingGetTripPhaseByTripIdSpecification" => new AsNoTrackingGetTripPhaseByTripIdSpecification(parameters[0]),
+            "AsNoTrackingGetAllTripPhasesByTripIdSpecification" => new AsNoTrackingGetAllTripPhasesByTripIdSpecification(parameters[0]),
             "AsNoTrackingGetTripPhaseByIdSpecification" => new AsNoTrackingGetTripPhaseByIdSpecification(parameters[0]),
             "AsTrackingGetTripPhaseSpecification" => new AsTrackingGetTripPhaseSpecification(parameters[0]),
             _ => throw new InvalidOperationException()

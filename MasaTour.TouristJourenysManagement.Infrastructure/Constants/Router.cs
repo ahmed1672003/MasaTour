@@ -106,6 +106,8 @@ public static class Router
     {
         private const string TripPhasePrefix = ApiPrefix + "tripphase/";
         public const string UpdateTripPhase = TripPhasePrefix + "update-trip-phase";
-        public const string GetAllTripPhasesGroupingByTripId = TripPhasePrefix + "get-all-trip-phases";
+        public const string GetAllTripPhasesByTripId = TripPhasePrefix + "get-all-trip-phases-by-trip-id";
+        public const string DeleteAllTripPhasesByTripId = TripPhasePrefix + "delete-trip-phases-by-trip-id";
+        public const string DeleteTripPhaseByPhaseId = TripPhasePrefix + "delete-trip-phases-by-phase-id";
     }
 }
