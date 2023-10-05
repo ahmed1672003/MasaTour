@@ -33,6 +33,7 @@ public class User : IdentityUser<string>, IDeleteableTracker, IUpdateableTracker
     [Required]
     public string Nationality { get; set; }
 
+    [Required]
     public Gender Gender { get; set; }
 
     [Required]
@@ -45,25 +46,22 @@ public class User : IdentityUser<string>, IDeleteableTracker, IUpdateableTracker
     [Required]
     public DateTime CreatedAt { get; set; }
 
-    [AllowNull]
     public DateTime? UpdatedAt { get; set; }
 
-    [AllowNull]
     public DateTime? DeletedAt { get; set; }
-
-    [AllowNull]
     public List<UserJWT> UserJWTs { get; set; }
 
-    [AllowNull]
-    [InverseProperty(nameof(UserRoleMapper.User))]
     public List<UserRoleMapper> UserRoles { get; set; }
+    public List<Comment> Comments { get; set; }
+
 
     public User()
     {
         Id = Guid.NewGuid().ToString();
         IsDeleted = false;
         CreatedAt = DateTime.Now;
-        UserJWTs = new List<UserJWT>();
-        UserRoles = new List<UserRoleMapper>();
+        UserJWTs = new(0);
+        UserRoles = new(0);
+        Comments = new(0);
     }
 }

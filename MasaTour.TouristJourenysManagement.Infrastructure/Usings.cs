@@ -1,10 +1,10 @@
 ﻿global using System.Linq.Expressions;
 global using System.Reflection;
 
+global using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Commands.Handler;
 global using MasaTour.TouristTripsManagement.Domain.Constants;
 global using MasaTour.TouristTripsManagement.Domain.Entities;
 global using MasaTour.TouristTripsManagement.Domain.Entities.Identity;
-global using MasaTour.TouristTripsManagement.Domain.Exceptions.Image;
 global using MasaTour.TouristTripsManagement.Infrastructure.Context;
 global using MasaTour.TouristTripsManagement.Infrastructure.Context.Interceptors;
 global using MasaTour.TouristTripsManagement.Infrastructure.Repositories;
@@ -16,15 +16,16 @@ global using MasaTour.TouristTripsManagement.Infrastructure.Settings;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Categories;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Contracts;
+global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Images;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.JWTs;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Mandatories;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Roles;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.SubCategories;
+global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripImagesMappers;
+global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripPhases;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Trips;
 global using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Users;
 
-global using Microsoft.AspNetCore.Hosting;
-global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;

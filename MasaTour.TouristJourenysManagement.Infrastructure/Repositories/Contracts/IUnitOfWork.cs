@@ -22,7 +22,7 @@ public interface IUnitOfWork : IAsyncDisposable
     IMandatoryRepository Mandatories { get; }
     IImageRepository Images { get; }
     ITripImageMapperRepository TripImageMappers { get; }
-
+    ICommentRepository Comments { get; }
     void UndoDeleted<T>(ref T entity) where T : IDeleteableTracker
     {
         entity.IsDeleted = false;

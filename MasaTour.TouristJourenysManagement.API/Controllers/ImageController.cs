@@ -79,7 +79,6 @@ public class ImageController : MasaTourController
     /// Delete Image From Gellary
     /// </summary>
     /// <param name="Id"></param>
-    /// <param name="Path"></param>
     /// <returns></returns>
     [HttpDelete(Router.Image.DeleteImage)]
     public async Task<IActionResult> DeleteImage([Required][MaxLength(36)][MinLength(36)] string Id) => MasaTourResponse(await Mediator.Send(new DeleteImageCommand(Id)));

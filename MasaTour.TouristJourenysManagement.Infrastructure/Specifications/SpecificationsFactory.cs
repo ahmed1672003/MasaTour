@@ -1,9 +1,4 @@
-﻿using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Commands.Handler;
-using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Images;
-using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripImagesMappers;
-using MasaTour.TouristTripsManagement.Infrastructure.Specifications.TripPhases;
-
-namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
+﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
 public sealed class SpecificationsFactory : ISpecificationsFactory
 {
@@ -187,5 +182,15 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
+
+    public ISpecification<Comment> CreateCommentsSpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+
+            _ => throw new InvalidOperationException()
+        };
+    }
+
 }
 

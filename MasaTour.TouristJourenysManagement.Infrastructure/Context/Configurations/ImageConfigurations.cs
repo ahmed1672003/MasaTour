@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Context.Configurations;
-public sealed class ImageConfiguration : IEntityTypeConfiguration<Image>
+public sealed class ImageConfigurations : IEntityTypeConfiguration<Image>
 {
     public void Configure(EntityTypeBuilder<Image> builder)
     {

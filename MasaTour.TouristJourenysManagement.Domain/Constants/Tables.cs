@@ -20,5 +20,5 @@ public static class Tables
     public const string TripMandatoryMappers = "TripMandatoryMappers";
     public const string Images = "Images";
     public const string TripImageMapper = "TripImageMappers";
-
+    public const string Comments = "Comments";
 }

@@ -60,6 +60,7 @@ public sealed class UnitOfWork : IUnitOfWork
     public ITripMandatoryMapperRepository TripsMandatoryMappers { get; }
     public IMandatoryRepository Mandatories { get; }
     public IImageRepository Images { get; }
+    public ICommentRepository Comments { get; }
     public ITripImageMapperRepository TripImageMappers { get; }
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default) =>
          await _context.Database.BeginTransactionAsync(cancellationToken);

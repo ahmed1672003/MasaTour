@@ -27,4 +27,5 @@ public class TouristTripsManagementDbContext
     public DbSet<Image> Images => Set<Image>();
     public DbSet<Mandatory> Mandatories => Set<Mandatory>();
     public DbSet<TripImageMapper> TripImageMapper => Set<TripImageMapper>();
+    public DbSet<Comment> Comments => Set<Comment>();
 }

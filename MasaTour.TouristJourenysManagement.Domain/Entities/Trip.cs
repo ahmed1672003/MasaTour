@@ -121,12 +121,13 @@ public class Trip : BaseEntity, IDeleteableTracker, IUpdateableTracker, ICreatea
     public List<TripImageMapper> TripImageMappers { get; set; }
     public List<TripMandatoryMapper> TripMandatoryMappers { get; set; }
     public List<TripPhase> TripPhases { get; set; }
-
+    public List<Comment> Comments { get; set; }
     public Trip()
     {
         IsDeleted = false;
         TripImageMappers = new(0);
         TripMandatoryMappers = new(0);
         TripPhases = new(0);
+        Comments = new(0);
     }
 }

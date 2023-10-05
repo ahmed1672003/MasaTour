@@ -20,6 +20,7 @@ public interface ITouristTripsManagementDbContext
     DbSet<Mandatory> Mandatories { get; }
     DbSet<Image> Images { get; }
     DbSet<TripImageMapper> TripImageMapper { get; }
+    DbSet<Comment> Comments { get; }
     ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     DatabaseFacade Database { get; }

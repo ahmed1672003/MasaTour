@@ -11,4 +11,5 @@ public interface ISpecificationsFactory
     ISpecification<Image> CreateImageSpecifications(Type type, params dynamic[] parameters);
     ISpecification<TripImageMapper> CreateTripImageMapperSpecifications(Type type, params dynamic[] parameters);
     ISpecification<TripPhase> CreateTripPhaseSpecifications(Type type, params dynamic[] parameters);
+    ISpecification<Comment> CreateCommentsSpecifications(Type type, params dynamic[] parameters);
 }
