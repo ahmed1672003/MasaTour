@@ -11,6 +11,8 @@ public class Comment : BaseEntity, ICreateableTracker, IDeleteableTracker, IUpda
     public DateTime? UpdatedAt { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime? DeletedAt { get; set; }
+
+    [Required]
     public DateTime CreatedAt { get; set; }
 
     [Required]
@@ -23,8 +25,10 @@ public class Comment : BaseEntity, ICreateableTracker, IDeleteableTracker, IUpda
     [MinLength(36)]
     public string TripId { get; set; }
 
+
     [ForeignKey(nameof(TripId))]
     public Trip Trip { get; set; }
+
 
     [ForeignKey(nameof(UserId))]
     public User User { get; set; }

@@ -111,4 +111,13 @@ public static class Router
         public const string DeleteAllTripPhasesByTripId = TripPhasePrefix + "delete-trip-phases-by-trip-id";
         public const string DeleteTripPhaseByPhaseId = TripPhasePrefix + "delete-trip-phases-by-phase-id";
     }
+
+    public static class Comment
+    {
+        private const string CommentPrefix = ApiPrefix + "comment/";
+        public const string AddComment = CommentPrefix + "add-comment";
+        public const string UpdateComment = CommentPrefix + "update-comment";
+        public const string DeleteCommentById = CommentPrefix + "delete-comment-by-id";
+        public const string UndoDeleteCommentById = CommentPrefix + "undo-delete-comment-by-id";
+    }
 }

@@ -1,5 +1,5 @@
 ﻿namespace MasaTour.TouristTripsManagement.API.Controllers;
-[Authorize(AuthenticationSchemes = "Bearer", Roles = nameof(Roles.Basic))]
+//[Authorize(AuthenticationSchemes = "Bearer", Roles = nameof(Roles.Basic))]
 [ApiController]
 public class UsersController : MasaTourController
 {
@@ -32,7 +32,7 @@ public class UsersController : MasaTourController
     [SwaggerOperation(OperationId = EndPoints.User.GetUserById.OperationId, Summary = EndPoints.User.GetUserById.Summary, Description = EndPoints.User.GetUserById.Description)]
     public async Task<IActionResult> GetUserById([Required] string userId) => MasaTourResponse(await Mediator.Send(new GetUserByIdQuery(userId)));
 
-    [Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.SuperAdmin)}")]
+    //[Authorize(Roles = $"{nameof(Roles.Admin)},{nameof(Roles.SuperAdmin)}")]
     [HttpGet(Router.User.GetAllUsers)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<IEnumerable<GetUserDto>>))]
     [SwaggerOperation(OperationId = EndPoints.User.GetAllUsers.OperationId, Summary = EndPoints.User.GetAllUsers.Summary, Description = EndPoints.User.GetAllUsers.Description)]

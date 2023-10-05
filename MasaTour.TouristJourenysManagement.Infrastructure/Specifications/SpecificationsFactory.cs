@@ -1,4 +1,6 @@
-﻿namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
+﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Comments;
+
+namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
 public sealed class SpecificationsFactory : ISpecificationsFactory
 {
@@ -187,7 +189,9 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
     {
         return type.Name switch
         {
-
+            "AsNoTrackingGetCommentByIdSpecification" => new AsNoTrackingGetCommentByIdSpecification(parameters[0]),
+            "AsTrackingGetCommentByIdSpecification" => new AsTrackingGetCommentByIdSpecification(parameters[0]),
+            "AsTrackingGetDeletedCommentByIdSpecification" => new AsTrackingGetDeletedCommentByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException()
         };
     }

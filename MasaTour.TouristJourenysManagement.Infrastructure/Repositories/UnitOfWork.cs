@@ -22,7 +22,8 @@ public sealed class UnitOfWork : IUnitOfWork
         IMandatoryRepository mandatories,
         IImageRepository images,
         ITripImageMapperRepository imagesImageMapper,
-        ITripPhaseRepository tripPhases)
+        ITripPhaseRepository tripPhases,
+        ICommentRepository comments)
     {
         _context = context;
         Identity = identity;
@@ -42,6 +43,7 @@ public sealed class UnitOfWork : IUnitOfWork
         Images = images;
         TripImageMappers = imagesImageMapper;
         TripPhases = tripPhases;
+        Comments = comments;
     }
 
     public IIdentityRepository Identity { get; }

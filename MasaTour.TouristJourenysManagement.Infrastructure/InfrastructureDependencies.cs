@@ -72,6 +72,7 @@ public static class InfrastructureDependencies
                 .AddScoped<IImageRepository, ImageRepository>()
                 .AddScoped<ITripImageMapperRepository, TripImageMapperRepository>()
                 .AddScoped<IMandatoryRepository, MandatoryRepository>()
+                .AddScoped<ICommentRepository, CommentRepository>()
                 .AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped(typeof(ISpecification<>), typeof(Specification<>));
         #endregion

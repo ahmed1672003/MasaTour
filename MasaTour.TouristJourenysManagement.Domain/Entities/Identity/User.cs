@@ -50,7 +50,6 @@ public class User : IdentityUser<string>, IDeleteableTracker, IUpdateableTracker
 
     public DateTime? DeletedAt { get; set; }
     public List<UserJWT> UserJWTs { get; set; }
-
     public List<UserRoleMapper> UserRoles { get; set; }
     public List<Comment> Comments { get; set; }
 
