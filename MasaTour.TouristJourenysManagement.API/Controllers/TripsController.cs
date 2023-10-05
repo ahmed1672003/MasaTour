@@ -81,10 +81,13 @@ public class TripsController : MasaTourController
         MasaTourResponse(await Mediator.Send(new GetAllDeletedTripsQuery()));
 
 
+
     [HttpGet(Router.Trip.GetAllUnDeletedTrips)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetTripDto>>))]
     public async Task<IActionResult> GetAllUnDeletedTrips() =>
         MasaTourResponse(await Mediator.Send(new GetAllUnDeletedTripsQuery()));
+
+
 
     [HttpGet(Router.Trip.PaginateDeletedTrips)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetTripDto>>))]
@@ -92,10 +95,16 @@ public class TripsController : MasaTourController
         MasaTourResponse(await Mediator.Send(new PaginateDeletedTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
 
 
+
     [HttpGet(Router.Trip.PaginateUnDeletedTrips)]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(PaginationResponseModel<IEnumerable<GetTripDto>>))]
     public async Task<IActionResult> PaginateUnDeletedTrips(int? pageNumber = 1, int? pageSize = 10, string keyWords = "", TripOrderBy orderBy = TripOrderBy.CreatedAt) =>
      MasaTourResponse(await Mediator.Send(new PaginateUnDeletedTripsQuery(pageNumber, pageSize, keyWords, orderBy)));
+
+
+    [HttpGet(Router.Trip.GetTripImagesByTripId)]
+    public async Task<IActionResult> GetTripImagesByTripId([Required][MaxLength(36)][MinLength(36)] string tipId) => MasaTourResponse(await Mediator.Send(new GetTripImagesByTripIdQuery(tipId)));
+
     #endregion
 
     #region Delete

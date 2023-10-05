@@ -73,6 +73,7 @@ public static class Router
         public const string PaginateUnDeletedTrips = TripPrefix + "paginate-all-un-deleted-trips";
         public const string PaginateDeletedTrips = TripPrefix + "paginate-all-deleted-trips";
         public const string DeleteImagesFromTrip = TripPrefix + "delete-images-from-trip";
+        public const string GetTripImagesByTripId = TripPrefix + "get-trip-images-by-trip-id";
     }
 
     public static class Mandatory

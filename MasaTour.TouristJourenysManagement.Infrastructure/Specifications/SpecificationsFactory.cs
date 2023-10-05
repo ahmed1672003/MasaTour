@@ -121,6 +121,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetTripByNameENSpecification" => new AsNoTrackingGetTripByNameENSpecification(parameters[0]),
             "AsNoTrackingGetTripByCodeSpecification" => new AsNoTrackingGetTripByCodeSpecification(parameters[0]),
             "AsNoTrackingGetTripById_Mandatories_Images_Specification" => new AsNoTrackingGetTripById_Mandatories_Images_Specification(parameters[0]),
+            "AsNoTrackingGetTripById_Images_Specification" => new AsNoTrackingGetTripById_Images_Specification(parameters[0]),
             "AsNoTrackingPaginateUnDeletedTripsSpecification" => new AsNoTrackingPaginateUnDeletedTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsNoTrackingPaginateDeletedTripsSpecification" => new AsNoTrackingPaginateDeletedTripsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetDeletedTripByIdSpecification" => new AsTrackingGetDeletedTripByIdSpecification(parameters[0]),

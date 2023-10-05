@@ -1,0 +1,2 @@
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Trips.Queries;
+public sealed record GetTripImagesByTripIdQuery([Required] string TripId) : IRequest<ResponseModel<IEnumerable<GetTripImagesDto>>>;

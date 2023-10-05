@@ -10,7 +10,8 @@ public sealed class TripQueriesHandler :
     IRequestHandler<PaginateUnDeletedTripsQuery, PaginationResponseModel<IEnumerable<GetTripDto>>>,
     IRequestHandler<PaginateDeletedTripsQuery, PaginationResponseModel<IEnumerable<GetTripDto>>>,
     IRequestHandler<GetTripByIdQuery, ResponseModel<GetTripDto>>,
-    IRequestHandler<GetTripById_Mandatories_Images_Query, ResponseModel<GetTrip_Mandatories_Images_Dto>>
+    IRequestHandler<GetTripById_Mandatories_Images_Query, ResponseModel<GetTrip_Mandatories_Images_Dto>>,
+    IRequestHandler<GetTripImagesByTripIdQuery, ResponseModel<IEnumerable<GetTripImagesDto>>>
 {
     #region Fields
     private readonly IUnitOfWork _context;
@@ -340,6 +341,30 @@ public sealed class TripQueriesHandler :
         {
 
             return PaginationResponseResult.InternalServerError<IEnumerable<GetTripDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message });
+        }
+    }
+    #endregion
+
+    #region Get Trip Images By TripId
+    public async Task<ResponseModel<IEnumerable<GetTripImagesDto>>> Handle(GetTripImagesByTripIdQuery request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            ISpecification<Trip> asNoTrackingGetTripByIdSpec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripByIdSpecification), request.TripId);
+            if (!await _context.Trips.AnyAsync(asNoTrackingGetTripByIdSpec, cancellationToken))
+                return ResponseResult.NotFound<IEnumerable<GetTripImagesDto>>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
+
+            ISpecification<Trip> asNoTrackingGetTripById_Images_Spec = _specificationsFactory.CreateTripSpecifications(typeof(AsNoTrackingGetTripById_Images_Specification), request.TripId);
+
+            Trip trip = await _context.Trips.RetrieveAsync(asNoTrackingGetTripById_Images_Spec, cancellationToken);
+
+            IEnumerable<GetTripImagesDto> tripImageDtos = _mapper.Map<IEnumerable<GetTripImagesDto>>(trip.TripImageMappers);
+
+            return ResponseResult.Success(tripImageDtos, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+        }
+        catch (Exception ex)
+        {
+            return ResponseResult.InternalServerError<IEnumerable<GetTripImagesDto>>(message: _stringLocalizer[ResourcesKeys.Shared.InternalServerError], errors: new string[] { ex.Message, ex.InnerException.Message });
         }
     }
     #endregion
