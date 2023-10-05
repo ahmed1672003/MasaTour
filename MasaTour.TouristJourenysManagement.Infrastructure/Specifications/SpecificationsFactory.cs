@@ -189,6 +189,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
     {
         return type.Name switch
         {
+            "AsNoTrackingGetAllCommentsByTripIdSpecification" => new AsNoTrackingGetAllCommentsByTripIdSpecification(parameters[0]),
             "AsNoTrackingGetCommentByIdSpecification" => new AsNoTrackingGetCommentByIdSpecification(parameters[0]),
             "AsTrackingGetCommentByIdSpecification" => new AsTrackingGetCommentByIdSpecification(parameters[0]),
             "AsTrackingGetDeletedCommentByIdSpecification" => new AsTrackingGetDeletedCommentByIdSpecification(parameters[0]),

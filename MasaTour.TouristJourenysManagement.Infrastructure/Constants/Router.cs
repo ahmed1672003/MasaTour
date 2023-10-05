@@ -119,5 +119,6 @@ public static class Router
         public const string UpdateComment = CommentPrefix + "update-comment";
         public const string DeleteCommentById = CommentPrefix + "delete-comment-by-id";
         public const string UndoDeleteCommentById = CommentPrefix + "undo-delete-comment-by-id";
+        public const string GetAllCommentByTripId = CommentPrefix + "get-all-comments-by-trip-id";
     }
 }

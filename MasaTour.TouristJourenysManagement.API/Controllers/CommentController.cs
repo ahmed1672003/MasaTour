@@ -1,5 +1,6 @@
 ﻿using MasaTour.TouristTripsManagement.Application.Features.Comments.Commands;
 using MasaTour.TouristTripsManagement.Application.Features.Comments.Dtos;
+using MasaTour.TouristTripsManagement.Application.Features.Comments.Queries;
 
 namespace MasaTour.TouristTripsManagement.API.Controllers;
 
@@ -28,10 +29,8 @@ public class CommentController : MasaTourController
     public async Task<IActionResult> UndoDeleteCommentById([Required][MaxLength(36)][MinLength(36)] string commentId) => MasaTourResponse(await Mediator.Send(new UndoDeleteCommentByIdCommand(commentId)));
     #endregion
 
-
     #region Get
-
-
+    [HttpGet(Router.Comment.GetAllCommentByTripId)]
+    public async Task<IActionResult> GetAllCommentByTripId([Required][MaxLength(36)][MinLength(36)] string tripId) => MasaTourResponse(await Mediator.Send(new GetAllCommentByTripIdQuery(tripId)));
     #endregion
-
 }
