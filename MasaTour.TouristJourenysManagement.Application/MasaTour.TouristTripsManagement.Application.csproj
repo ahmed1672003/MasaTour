@@ -12,6 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\TransportationClasses\Commands\Handler\" />
+    <Folder Include="Features\TransportationClasses\Queries\Handler\" />
+    <Folder Include="Features\Transportation\Commands\Handler\" />
+    <Folder Include="Features\Transportation\Dtos\" />
+    <Folder Include="Features\Transportation\Mappers\" />
+    <Folder Include="Features\Transportation\Queries\Handler\" />
     <Folder Include="Features\Users\Validators\" />
   </ItemGroup>
 

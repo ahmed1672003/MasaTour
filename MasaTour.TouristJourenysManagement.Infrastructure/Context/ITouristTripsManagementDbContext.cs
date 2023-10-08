@@ -21,6 +21,9 @@ public interface ITouristTripsManagementDbContext
     DbSet<Image> Images { get; }
     DbSet<TripImageMapper> TripImageMapper { get; }
     DbSet<Comment> Comments { get; }
+    DbSet<Transporation> Transporations { get; }
+    DbSet<TransporationClass> TransporationClasses { get; }
+
     ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     DatabaseFacade Database { get; }

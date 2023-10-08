@@ -28,4 +28,6 @@ public class TouristTripsManagementDbContext
     public DbSet<Mandatory> Mandatories => Set<Mandatory>();
     public DbSet<TripImageMapper> TripImageMapper => Set<TripImageMapper>();
     public DbSet<Comment> Comments => Set<Comment>();
+    public DbSet<Transporation> Transporations => Set<Transporation>();
+    public DbSet<TransporationClass> TransporationClasses => Set<TransporationClass>();
 }

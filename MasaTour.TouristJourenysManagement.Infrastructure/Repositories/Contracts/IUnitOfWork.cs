@@ -23,6 +23,9 @@ public interface IUnitOfWork : IAsyncDisposable
     IImageRepository Images { get; }
     ITripImageMapperRepository TripImageMappers { get; }
     ICommentRepository Comments { get; }
+    ITransporationClassRepository TransporationClasses { get; }
+    ITransporationRepository Transporations { get; }
+
     void UndoDeleted<T>(ref T entity) where T : IDeleteableTracker
     {
         entity.IsDeleted = false;

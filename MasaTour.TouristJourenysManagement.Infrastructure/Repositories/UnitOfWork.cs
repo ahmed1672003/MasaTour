@@ -23,7 +23,9 @@ public sealed class UnitOfWork : IUnitOfWork
         IImageRepository images,
         ITripImageMapperRepository imagesImageMapper,
         ITripPhaseRepository tripPhases,
-        ICommentRepository comments)
+        ICommentRepository comments,
+        ITransporationClassRepository transporationClasses,
+        ITransporationRepository transporations)
     {
         _context = context;
         Identity = identity;
@@ -44,6 +46,8 @@ public sealed class UnitOfWork : IUnitOfWork
         TripImageMappers = imagesImageMapper;
         TripPhases = tripPhases;
         Comments = comments;
+        TransporationClasses = transporationClasses;
+        Transporations = transporations;
     }
 
     public IIdentityRepository Identity { get; }
@@ -64,6 +68,8 @@ public sealed class UnitOfWork : IUnitOfWork
     public IImageRepository Images { get; }
     public ICommentRepository Comments { get; }
     public ITripImageMapperRepository TripImageMappers { get; }
+    public ITransporationClassRepository TransporationClasses { get; }
+    public ITransporationRepository Transporations { get; }
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default) =>
          await _context.Database.BeginTransactionAsync(cancellationToken);
 
