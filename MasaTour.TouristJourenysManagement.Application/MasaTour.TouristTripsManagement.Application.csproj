@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Users\Validators\**" />
+    <EmbeddedResource Remove="Features\Users\Validators\**" />
+    <None Remove="Features\Users\Validators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="MediatR" Version="12.1.1" />
   </ItemGroup>
@@ -17,7 +23,6 @@
     <Folder Include="Features\Transportation\Dtos\" />
     <Folder Include="Features\Transportation\Mappers\" />
     <Folder Include="Features\Transportation\Queries\Handler\" />
-    <Folder Include="Features\Users\Validators\" />
   </ItemGroup>
 
   <ItemGroup>
