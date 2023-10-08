@@ -1,9 +1,15 @@
 ﻿using System.Reflection;
 
 namespace MasaTour.TouristTripsManagement.API;
-
+/// <summary>
+/// 
+/// </summary>
 public static class Startup
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="app"></param>
     public static void Build(WebApplication app)
     {
         app.UseSwagger()
@@ -27,7 +33,12 @@ public static class Startup
 
         app.Run();
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
     public static async Task<IServiceCollection> AddAPIDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddApplicationDependencies()
