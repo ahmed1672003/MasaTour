@@ -9,9 +9,9 @@ public class GetTransportationClassDto
     public decimal PriceEURPerKilometer { get; set; }
     public decimal PriceUSDPerKilometer { get; set; }
     public decimal PriceGbpPerKilometer { get; set; }
-    public string? DesceiptionAR { get; set; }
-    public string? DesceiptionEN { get; set; }
-    public string? DesceiptionDE { get; set; }
+    public string? DescriptionAR { get; set; }
+    public string? DescriptionEN { get; set; }
+    public string? DescriptionDE { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? DeletedAt { get; set; }

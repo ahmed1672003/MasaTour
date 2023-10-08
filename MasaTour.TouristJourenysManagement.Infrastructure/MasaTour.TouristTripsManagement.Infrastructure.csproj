@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Specifications\TransportationClasses\" />
     <Folder Include="Specifications\Transportations\" />
   </ItemGroup>
 

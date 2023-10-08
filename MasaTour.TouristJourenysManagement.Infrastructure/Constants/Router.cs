@@ -121,4 +121,13 @@ public static class Router
         public const string UndoDeleteCommentById = CommentPrefix + "undo-delete-comment-by-id";
         public const string GetAllCommentByTripId = CommentPrefix + "get-all-comments-by-trip-id";
     }
+
+    public static class TransportationClass
+    {
+        private const string TransportationClassPrefix = ApiPrefix + "transportation-class/";
+        public const string AddTransportationClass = TransportationClassPrefix + "add-transportation-class";
+        public const string UpdateTransportationClass = TransportationClassPrefix + "update-transportation-class";
+        public const string DeleteTransportationClassById = TransportationClassPrefix + "delete-transportation-class-by-id";
+        public const string UndoDeleteTransportationClassById = TransportationClassPrefix + "undo-delete-transportation-class-by-id";
+    }
 }

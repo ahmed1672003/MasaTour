@@ -1,4 +1,4 @@
-﻿using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Comments;
+﻿
 
 namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
@@ -184,7 +184,6 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
-
     public ISpecification<Comment> CreateCommentsSpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
@@ -196,6 +195,30 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
-
+    public ISpecification<TransporationClass> CreateTransporationClassesSpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            "AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameARSpecification" => new AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameARSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameDESpecification" => new AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameDESpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameENSpecification" => new AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameENSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedTransportationClassByNameARSpecification" => new AsNoTrackingCheckDuplicatedTransportationClassByNameARSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedTransportationClassByNameDESpecification" => new AsNoTrackingCheckDuplicatedTransportationClassByNameDESpecification(parameters[0], parameters[1]),
+            "AsNoTrackingCheckDuplicatedTransportationClassByNameENSpecification" => new AsNoTrackingCheckDuplicatedTransportationClassByNameENSpecification(parameters[0], parameters[1]),
+            "AsNoTrackingGetDeletedTransportationClassByIdSpecification" => new AsNoTrackingGetDeletedTransportationClassByIdSpecification(parameters[0]),
+            "AsNoTrackingGetDeletedTransportationClassByNameARSpecification" => new AsNoTrackingGetDeletedTransportationClassByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetDeletedTransportationClassByNameDESpecification" => new AsNoTrackingGetDeletedTransportationClassByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetDeletedTransportationClassByNameENSpecification" => new AsNoTrackingGetDeletedTransportationClassByNameENSpecification(parameters[0]),
+            "AsNoTrackingGetTransportationByIdSpecification" => new AsNoTrackingGetTransportationByIdSpecification(parameters[0]),
+            "AsNoTrackingGetTransportationClassByNameARSpecification" => new AsNoTrackingGetTransportationClassByNameARSpecification(parameters[0]),
+            "AsNoTrackingGetTransportationClassByNameENSpecification" => new AsNoTrackingGetTransportationClassByNameENSpecification(parameters[0]),
+            "AsNoTrackingGetTransportationClassByNameDESpecification" => new AsNoTrackingGetTransportationClassByNameDESpecification(parameters[0]),
+            "AsNoTrackingGetAllTranspotationClassesSpecification" => new AsNoTrackingGetAllTranspotationClassesSpecification(),
+            "AsNoTrackingPaginateDeletedTransportationClassesSpecification" => new AsNoTrackingPaginateDeletedTransportationClassesSpecification(parameters[0], parameters[2], parameters[1], parameters[3]),
+            "AsNoTrackingPaginateUnDeletedTransportationClassesSpecification" => new AsNoTrackingPaginateUnDeletedTransportationClassesSpecification(parameters[0], parameters[2], parameters[1], parameters[3]),
+            "AsTrackingGetTransportationClassByIdSpecification" => new AsTrackingGetTransportationClassByIdSpecification(parameters[0]),
+            _ => throw new InvalidOperationException(),
+        };
+    }
 }
 
