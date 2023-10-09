@@ -19,6 +19,10 @@
     <NoWarn>1701;1702;1597</NoWarn>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json~RF125ee827.TMP" />
+  </ItemGroup>
 	
 
 
