@@ -29,5 +29,5 @@ public class TouristTripsManagementDbContext
     public DbSet<TripImageMapper> TripImageMapper => Set<TripImageMapper>();
     public DbSet<Comment> Comments => Set<Comment>();
     public DbSet<Transporation> Transporations => Set<Transporation>();
-    public DbSet<TransporationClass> TransporationClasses => Set<TransporationClass>();
+    public DbSet<TransportationClass> TransporationClasses => Set<TransportationClass>();
 }

@@ -80,6 +80,31 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TransportationClasses",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    NameAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NameDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    PriceEGPPerKilometer = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceGbpPerKilometer = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceEURPerKilometer = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    PriceUSDPerKilometer = table.Column<decimal>(type: "decimal(18,5)", nullable: false),
+                    DescriptionAR = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
+                    DescriptionEN = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
+                    DescriptionDE = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransportationClasses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -163,6 +188,35 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         column: x => x.RoleId1,
                         principalTable: "Roles",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transporations",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    ModelAR = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ModelEN = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ModelDE = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NumberOfSeats = table.Column<int>(type: "int", nullable: false),
+                    DesceiptionAR = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
+                    DesceiptionEN = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
+                    DesceiptionDE = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TransporationClassId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transporations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transporations_TransportationClasses_TransporationClassId",
+                        column: x => x.TransporationClassId,
+                        principalTable: "TransportationClasses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -335,6 +389,36 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    TripId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Trips_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trips",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TripImageMappers",
                 columns: table => new
                 {
@@ -439,6 +523,16 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_TripId",
+                table: "Comments",
+                column: "TripId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Mandatories_NameAR",
                 table: "Mandatories",
                 column: "NameAR",
@@ -493,6 +587,29 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_SubCategories_NameEN",
                 table: "SubCategories",
+                column: "NameEN",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transporations_TransporationClassId",
+                table: "Transporations",
+                column: "TransporationClassId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TransportationClasses_NameAR",
+                table: "TransportationClasses",
+                column: "NameAR",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TransportationClasses_NameDE",
+                table: "TransportationClasses",
+                column: "NameDE",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TransportationClasses_NameEN",
+                table: "TransportationClasses",
                 column: "NameEN",
                 unique: true);
 
@@ -599,7 +716,13 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "RoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "Transporations");
 
             migrationBuilder.DropTable(
                 name: "TripImageMappers");
@@ -624,6 +747,9 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
+
+            migrationBuilder.DropTable(
+                name: "TransportationClasses");
 
             migrationBuilder.DropTable(
                 name: "Images");

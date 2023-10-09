@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristTripsManagementDbContext))]
-    [Migration("20231002004819_InitialCreate")]
+    [Migration("20231009002432_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -70,6 +70,47 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TripId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TripId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Identity.Role", b =>
@@ -528,6 +569,137 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.ToTable("SubCategories", (string)null);
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Transporation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DesceiptionAR")
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<string>("DesceiptionDE")
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<string>("DesceiptionEN")
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModelAR")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ModelDE")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ModelEN")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("NumberOfSeats")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TransporationClassId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TransporationClassId");
+
+                    b.ToTable("Transporations", (string)null);
+                });
+
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TransportationClass", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DescriptionAR")
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<string>("DescriptionDE")
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<string>("DescriptionEN")
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NameAR")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("NameDE")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("NameEN")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<decimal>("PriceEGPPerKilometer")
+                        .HasColumnType("decimal(18,5)");
+
+                    b.Property<decimal>("PriceEURPerKilometer")
+                        .HasColumnType("decimal(18,5)");
+
+                    b.Property<decimal>("PriceGbpPerKilometer")
+                        .HasColumnType("decimal(18,5)");
+
+                    b.Property<decimal>("PriceUSDPerKilometer")
+                        .HasColumnType("decimal(18,5)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NameAR")
+                        .IsUnique();
+
+                    b.HasIndex("NameDE")
+                        .IsUnique();
+
+                    b.HasIndex("NameEN")
+                        .IsUnique();
+
+                    b.ToTable("TransportationClasses", (string)null);
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
                 {
                     b.Property<string>("Id")
@@ -801,6 +973,25 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.ToTable("TripPhases", (string)null);
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Trip", "Trip")
+                        .WithMany("Comments")
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Identity.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trip");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Identity.RoleClaim", b =>
                 {
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.Identity.Role", null)
@@ -892,6 +1083,17 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Transporation", b =>
+                {
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.TransportationClass", "TransporationClass")
+                        .WithMany("Transporations")
+                        .HasForeignKey("TransporationClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TransporationClass");
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
                 {
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.SubCategory", "SubCategory")
@@ -966,6 +1168,8 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Identity.User", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("UserJWTs");
 
                     b.Navigation("UserRoles");
@@ -986,8 +1190,15 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("Trips");
                 });
 
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TransportationClass", b =>
+                {
+                    b.Navigation("Transporations");
+                });
+
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("TripImageMappers");
 
                     b.Navigation("TripMandatoryMappers");

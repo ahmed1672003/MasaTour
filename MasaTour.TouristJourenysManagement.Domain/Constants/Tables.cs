@@ -22,5 +22,5 @@ public static class Tables
     public const string TripImageMapper = "TripImageMappers";
     public const string Comments = "Comments";
     public const string Transporations = "Transporations";
-    public const string TransporationClasses = "TransporationClasses";
+    public const string TransportationClasses = "TransportationClasses";
 }

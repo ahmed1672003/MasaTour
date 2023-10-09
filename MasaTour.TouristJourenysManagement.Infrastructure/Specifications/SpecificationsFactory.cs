@@ -195,7 +195,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException()
         };
     }
-    public ISpecification<TransporationClass> CreateTransporationClassesSpecifications(Type type, params dynamic[] parameters)
+    public ISpecification<TransportationClass> CreateTransporationClassesSpecifications(Type type, params dynamic[] parameters)
     {
         return type.Name switch
         {
@@ -214,9 +214,11 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetTransportationClassByNameENSpecification" => new AsNoTrackingGetTransportationClassByNameENSpecification(parameters[0]),
             "AsNoTrackingGetTransportationClassByNameDESpecification" => new AsNoTrackingGetTransportationClassByNameDESpecification(parameters[0]),
             "AsNoTrackingGetAllTranspotationClassesSpecification" => new AsNoTrackingGetAllTranspotationClassesSpecification(),
-            "AsNoTrackingPaginateDeletedTransportationClassesSpecification" => new AsNoTrackingPaginateDeletedTransportationClassesSpecification(parameters[0], parameters[2], parameters[1], parameters[3]),
-            "AsNoTrackingPaginateUnDeletedTransportationClassesSpecification" => new AsNoTrackingPaginateUnDeletedTransportationClassesSpecification(parameters[0], parameters[2], parameters[1], parameters[3]),
+            "AsNoTrackingGetAllDeletedTranspotationClassesSpecification" => new AsNoTrackingGetAllDeletedTranspotationClassesSpecification(),
+            "AsNoTrackingPaginateDeletedTransportationClassesSpecification" => new AsNoTrackingPaginateDeletedTransportationClassesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateUnDeletedTransportationClassesSpecification" => new AsNoTrackingPaginateUnDeletedTransportationClassesSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
             "AsTrackingGetTransportationClassByIdSpecification" => new AsTrackingGetTransportationClassByIdSpecification(parameters[0]),
+            "AsTrackingGetDeletedTransportationClassByIdSpecification" => new AsTrackingGetDeletedTransportationClassByIdSpecification(parameters[0]),
             _ => throw new InvalidOperationException(),
         };
     }

@@ -129,5 +129,11 @@ public static class Router
         public const string UpdateTransportationClass = TransportationClassPrefix + "update-transportation-class";
         public const string DeleteTransportationClassById = TransportationClassPrefix + "delete-transportation-class-by-id";
         public const string UndoDeleteTransportationClassById = TransportationClassPrefix + "undo-delete-transportation-class-by-id";
+        public const string GetTransportationClassById = TransportationClassPrefix + "get-transportation-class-by-id";
+        public const string GetAllTransportationClasses = TransportationClassPrefix + "get-all-transportation-classes";
+        public const string GetAllDeletedTransportationClasses = TransportationClassPrefix + "get-all-deleted-transportation-classes";
+        public const string GetAllUnDeletedTransportationClasses = TransportationClassPrefix + "get-all-un-deleted-transportation-classes";
+        public const string PaginateDeletedTransportationClasses = TransportationClassPrefix + "paginate-deleted-transportation-classes";
+        public const string PaginateUnDeletedTransportationClasses = TransportationClassPrefix + "paginate-un-deleted-transportation-classes";
     }
 }

@@ -9,6 +9,6 @@ public sealed class AsNoTrackingPaginateUnDeletedCategoriesSpecification : Speci
         category.NameDE.ToLower().Contains(keyWords.ToLower()))
     {
         ApplyPaging((pageNumber, pageSize));
-        AddOrderBy(orderBy = category => category.CreatedAt);
+        AddOrderBy(orderBy);
     }
 }

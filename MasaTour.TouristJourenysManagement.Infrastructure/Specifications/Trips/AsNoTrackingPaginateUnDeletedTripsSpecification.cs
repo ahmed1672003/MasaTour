@@ -26,6 +26,6 @@ public sealed class AsNoTrackingPaginateUnDeletedTripsSpecification : Specificat
     {
         StopTracking();
         ApplyPaging((pageNumber.Value, pageSize.Value));
-        AddOrderBy(orderBy => orderBy.CreatedAt);
+        AddOrderBy(orderBy);
     }
 }

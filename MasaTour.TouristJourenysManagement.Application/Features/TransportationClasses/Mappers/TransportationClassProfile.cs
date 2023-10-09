@@ -7,8 +7,8 @@ public sealed class TransportationClassProfile : Profile
     }
     void Map()
     {
-        CreateMap<AddTransportationClassDto, TransporationClass>();
-        CreateMap<TransporationClass, GetTransportationClassDto>()
+        CreateMap<AddTransportationClassDto, TransportationClass>();
+        CreateMap<TransportationClass, GetTransportationClassDto>()
             .ForMember(dist => dist.TrasportationClassId, cfg => cfg.MapFrom(src => src.Id))
             .ForMember(dist => dist.CreatedAt, cfg => cfg.MapFrom(src => src.CreatedAt.ToLocalTime()))
             .ForMember(dist => dist.UpdatedAt, cfg => cfg.MapFrom(src => src.UpdatedAt.Value.ToLocalTime()))

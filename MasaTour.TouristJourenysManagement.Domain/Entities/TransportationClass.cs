@@ -6,7 +6,7 @@ namespace MasaTour.TouristTripsManagement.Domain.Entities;
 [Index(nameof(NameAR), IsUnique = true)]
 [Index(nameof(NameDE), IsUnique = true)]
 [Index(nameof(NameEN), IsUnique = true)]
-public class TransporationClass : BaseEntity, ICreateableTracker, IDeleteableTracker, IUpdateableTracker
+public class TransportationClass : BaseEntity, ICreateableTracker, IDeleteableTracker, IUpdateableTracker
 {
 
     [Required]
@@ -57,7 +57,7 @@ public class TransporationClass : BaseEntity, ICreateableTracker, IDeleteableTra
     public List<Transporation> Transporations { get; set; }
 
 
-    public TransporationClass()
+    public TransportationClass()
     {
         IsDeleted = false;
         Transporations = new(0);

@@ -12,6 +12,6 @@ public sealed class AsNoTrackingPaginateDeletedCategoriesSpecification : Specifi
     {
         IgnorQueryFilter();
         ApplyPaging((pageNumber, pageSize));
-        AddOrderBy(orderBy = category => category.CreatedAt);
+        AddOrderBy(orderBy);
     }
 }

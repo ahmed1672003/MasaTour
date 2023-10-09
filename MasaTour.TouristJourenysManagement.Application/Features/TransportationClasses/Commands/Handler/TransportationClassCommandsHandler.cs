@@ -31,32 +31,32 @@ public sealed class TransportationClassCommandsHandler :
     {
         try
         {
-            ISpecification<TransporationClass> asNoTrackingGetTransportationClassByNameARSpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetTransportationClassByNameARSpecification), request.Dto.NameAR);
+            ISpecification<TransportationClass> asNoTrackingGetTransportationClassByNameARSpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetTransportationClassByNameARSpecification), request.Dto.NameAR);
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingGetTransportationClassByNameARSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            ISpecification<TransporationClass> asNoTrackingGetTransportationClassByNameENSpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetTransportationClassByNameENSpecification), request.Dto.NameEN);
+            ISpecification<TransportationClass> asNoTrackingGetTransportationClassByNameENSpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetTransportationClassByNameENSpecification), request.Dto.NameEN);
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingGetTransportationClassByNameENSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            ISpecification<TransporationClass> asNoTrackingGetTransportationClassByNameDESpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetTransportationClassByNameDESpecification), request.Dto.NameDE);
+            ISpecification<TransportationClass> asNoTrackingGetTransportationClassByNameDESpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetTransportationClassByNameDESpecification), request.Dto.NameDE);
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingGetTransportationClassByNameDESpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            ISpecification<TransporationClass> asNoTrackingGetDeletedTransportationClassByNameARSpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetDeletedTransportationClassByNameARSpecification), request.Dto.NameAR);
+            ISpecification<TransportationClass> asNoTrackingGetDeletedTransportationClassByNameARSpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetDeletedTransportationClassByNameARSpecification), request.Dto.NameAR);
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingGetDeletedTransportationClassByNameARSpec, cancellationToken))
                 return ResponseResult.Conflict<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
 
-            ISpecification<TransporationClass> asNoTrackingGetDeletedTransportationClassByNameENSpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetDeletedTransportationClassByNameENSpecification), request.Dto.NameEN);
+            ISpecification<TransportationClass> asNoTrackingGetDeletedTransportationClassByNameENSpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetDeletedTransportationClassByNameENSpecification), request.Dto.NameEN);
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingGetDeletedTransportationClassByNameENSpec, cancellationToken))
                 return ResponseResult.Conflict<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
 
-            ISpecification<TransporationClass> asNoTrackingGetDeletedTransportationClassByNameDESpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetDeletedTransportationClassByNameDESpecification), request.Dto.NameDE);
+            ISpecification<TransportationClass> asNoTrackingGetDeletedTransportationClassByNameDESpec = _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsNoTrackingGetDeletedTransportationClassByNameDESpecification), request.Dto.NameDE);
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingGetDeletedTransportationClassByNameDESpec, cancellationToken))
                 return ResponseResult.Conflict<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
 
 
-            TransporationClass transporationClass = _mapper.Map<TransporationClass>(request.Dto);
+            TransportationClass transporationClass = _mapper.Map<TransportationClass>(request.Dto);
 
             await _context.TransporationClasses.CreateAsync(transporationClass, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
@@ -76,7 +76,7 @@ public sealed class TransportationClassCommandsHandler :
     {
         try
         {
-            ISpecification<TransporationClass> asNoTrackingGetTransportationByIdSpec =
+            ISpecification<TransportationClass> asNoTrackingGetTransportationByIdSpec =
                 _specificationsFactory.CreateTransporationClassesSpecifications(
                     typeof(AsNoTrackingGetTransportationByIdSpecification),
                         request.Dto.TransportationClassId);
@@ -84,7 +84,7 @@ public sealed class TransportationClassCommandsHandler :
             if (!await _context.TransporationClasses.AnyAsync(asNoTrackingGetTransportationByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            ISpecification<TransporationClass> asNoTrackingCheckDuplicatedTransportationClassByNameARSpec =
+            ISpecification<TransportationClass> asNoTrackingCheckDuplicatedTransportationClassByNameARSpec =
                 _specificationsFactory
                 .CreateTransporationClassesSpecifications(
                     typeof(AsNoTrackingCheckDuplicatedTransportationClassByNameARSpecification),
@@ -93,7 +93,7 @@ public sealed class TransportationClassCommandsHandler :
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingCheckDuplicatedTransportationClassByNameARSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            ISpecification<TransporationClass> asNoTrackingCheckDuplicatedTransportationClassByNameENSpec =
+            ISpecification<TransportationClass> asNoTrackingCheckDuplicatedTransportationClassByNameENSpec =
                 _specificationsFactory
                 .CreateTransporationClassesSpecifications(
                     typeof(AsNoTrackingCheckDuplicatedTransportationClassByNameENSpecification),
@@ -102,7 +102,7 @@ public sealed class TransportationClassCommandsHandler :
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingCheckDuplicatedTransportationClassByNameENSpec, cancellationToken))
                 return ResponseResult.BadRequest<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
-            ISpecification<TransporationClass> asNoTrackingCheckDuplicatedTransportationClassByNameDESpec =
+            ISpecification<TransportationClass> asNoTrackingCheckDuplicatedTransportationClassByNameDESpec =
                 _specificationsFactory
                 .CreateTransporationClassesSpecifications(
                     typeof(AsNoTrackingCheckDuplicatedTransportationClassByNameDESpecification),
@@ -112,7 +112,7 @@ public sealed class TransportationClassCommandsHandler :
                 return ResponseResult.BadRequest<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
 
-            ISpecification<TransporationClass> asNoTrackingCheckDuplicatedDeletedTransportationClassByNameARSpec =
+            ISpecification<TransportationClass> asNoTrackingCheckDuplicatedDeletedTransportationClassByNameARSpec =
                 _specificationsFactory.
                 CreateTransporationClassesSpecifications(
                     typeof(AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameARSpecification),
@@ -123,7 +123,7 @@ public sealed class TransportationClassCommandsHandler :
 
 
 
-            ISpecification<TransporationClass> asNoTrackingCheckDuplicatedDeletedTransportationClassByNameENSpec =
+            ISpecification<TransportationClass> asNoTrackingCheckDuplicatedDeletedTransportationClassByNameENSpec =
             _specificationsFactory.
                 CreateTransporationClassesSpecifications(
                     typeof(AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameENSpecification),
@@ -133,7 +133,7 @@ public sealed class TransportationClassCommandsHandler :
             if (await _context.TransporationClasses.AnyAsync(asNoTrackingCheckDuplicatedDeletedTransportationClassByNameENSpec, cancellationToken))
                 return ResponseResult.Conflict<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
 
-            ISpecification<TransporationClass> asNoTrackingCheckDuplicatedDeletedTransportationClassByNameDESpec =
+            ISpecification<TransportationClass> asNoTrackingCheckDuplicatedDeletedTransportationClassByNameDESpec =
                _specificationsFactory.
                    CreateTransporationClassesSpecifications(
                        typeof(AsNoTrackingCheckDuplicatedDeletedTransportationClassByNameDESpecification),
@@ -144,12 +144,12 @@ public sealed class TransportationClassCommandsHandler :
                 return ResponseResult.Conflict<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
 
 
-            ISpecification<TransporationClass> asTrackingGetTransportationClassByIdSpec =
+            ISpecification<TransportationClass> asTrackingGetTransportationClassByIdSpec =
                 _specificationsFactory.CreateTransporationClassesSpecifications(
                     typeof(AsTrackingGetTransportationClassByIdSpecification),
                         request.Dto.TransportationClassId);
 
-            TransporationClass transporationClass = await _context.TransporationClasses.RetrieveAsync(asTrackingGetTransportationClassByIdSpec, cancellationToken);
+            TransportationClass transporationClass = await _context.TransporationClasses.RetrieveAsync(asTrackingGetTransportationClassByIdSpec, cancellationToken);
 
             transporationClass.NameAR = request.Dto.NameAR;
             transporationClass.NameEN = request.Dto.NameEN;
@@ -162,7 +162,7 @@ public sealed class TransportationClassCommandsHandler :
             transporationClass.PriceUSDPerKilometer = request.Dto.PriceUSDPerKilometer;
             transporationClass.PriceGbpPerKilometer = request.Dto.PriceGbpPerKilometer;
 
-            await _context.TransporationClasses.UpdateAsync(transporationClass, cancellationToken);
+            //  await _context.TransporationClasses.UpdateAsync(transporationClass, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
             GetTransportationClassDto transportationClassDto = _mapper.Map<GetTransportationClassDto>(transporationClass);
@@ -180,7 +180,7 @@ public sealed class TransportationClassCommandsHandler :
     {
         try
         {
-            ISpecification<TransporationClass> asNoTrackingGetTransportationByIdSpec =
+            ISpecification<TransportationClass> asNoTrackingGetTransportationByIdSpec =
                     _specificationsFactory.CreateTransporationClassesSpecifications(
                         typeof(AsNoTrackingGetTransportationByIdSpecification),
                             request.ClassId);
@@ -188,7 +188,7 @@ public sealed class TransportationClassCommandsHandler :
             if (!await _context.TransporationClasses.AnyAsync(asNoTrackingGetTransportationByIdSpec, cancellationToken))
                 return ResponseResult.NotFound<GetTransportationClassDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            TransporationClass transporationClass = await _context.TransporationClasses.RetrieveAsync(asNoTrackingGetTransportationByIdSpec, cancellationToken);
+            TransportationClass transporationClass = await _context.TransporationClasses.RetrieveAsync(asNoTrackingGetTransportationByIdSpec, cancellationToken);
             await _context.TransporationClasses.DeleteAsync(transporationClass, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
@@ -207,7 +207,7 @@ public sealed class TransportationClassCommandsHandler :
     {
         try
         {
-            ISpecification<TransporationClass> asNoTrackingGetDeletedTransportationClassByIdSpec =
+            ISpecification<TransportationClass> asNoTrackingGetDeletedTransportationClassByIdSpec =
                     _specificationsFactory.CreateTransporationClassesSpecifications(
                         typeof(AsNoTrackingGetDeletedTransportationClassByIdSpecification),
                             request.ClassId);
@@ -217,13 +217,13 @@ public sealed class TransportationClassCommandsHandler :
 
 
 
-            ISpecification<TransporationClass> asTrackingGetTransportationClassByIdSpec =
-                _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsTrackingGetTransportationClassByIdSpecification),
+            ISpecification<TransportationClass> asTrackingGetDeletedTransportationClassByIdSpec =
+                _specificationsFactory.CreateTransporationClassesSpecifications(typeof(AsTrackingGetDeletedTransportationClassByIdSpecification),
                     request.ClassId);
-            TransporationClass transporationClass = await _context.TransporationClasses.RetrieveAsync(asNoTrackingGetDeletedTransportationClassByIdSpec, cancellationToken);
+            TransportationClass transporationClass = await _context.TransporationClasses.RetrieveAsync(asTrackingGetDeletedTransportationClassByIdSpec, cancellationToken);
 
             _context.UndoDeleted(ref transporationClass);
-            await _context.TransporationClasses.UpdateAsync(transporationClass, cancellationToken);
+            //  await _context.TransporationClasses.UpdateAsync(transporationClass, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
             GetTransportationClassDto transportationClassDto = _mapper.Map<GetTransportationClassDto>(transporationClass);

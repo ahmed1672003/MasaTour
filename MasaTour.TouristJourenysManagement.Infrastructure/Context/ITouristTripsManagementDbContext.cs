@@ -22,7 +22,7 @@ public interface ITouristTripsManagementDbContext
     DbSet<TripImageMapper> TripImageMapper { get; }
     DbSet<Comment> Comments { get; }
     DbSet<Transporation> Transporations { get; }
-    DbSet<TransporationClass> TransporationClasses { get; }
+    DbSet<TransportationClass> TransporationClasses { get; }
 
     ValueTask DisposeAsync();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

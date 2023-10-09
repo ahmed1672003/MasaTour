@@ -45,7 +45,7 @@ public class Transporation : BaseEntity, ICreateableTracker, IDeleteableTracker,
     public string TransporationClassId { get; set; }
 
     [ForeignKey(nameof(TransporationClassId))]
-    public TransporationClass TransporationClass { get; set; }
+    public TransportationClass TransporationClass { get; set; }
 
     public Transporation() => IsDeleted = false;
 }

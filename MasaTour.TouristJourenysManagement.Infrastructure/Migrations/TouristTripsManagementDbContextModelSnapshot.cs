@@ -626,7 +626,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.ToTable("Transporations", (string)null);
                 });
 
-            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TransporationClass", b =>
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TransportationClass", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -694,7 +694,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.HasIndex("NameEN")
                         .IsUnique();
 
-                    b.ToTable("TransporationClasses", (string)null);
+                    b.ToTable("TransportationClasses", (string)null);
                 });
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Trip", b =>
@@ -1082,7 +1082,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Transporation", b =>
                 {
-                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.TransporationClass", "TransporationClass")
+                    b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.TransportationClass", "TransporationClass")
                         .WithMany("Transporations")
                         .HasForeignKey("TransporationClassId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1187,7 +1187,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("Trips");
                 });
 
-            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TransporationClass", b =>
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TransportationClass", b =>
                 {
                     b.Navigation("Transporations");
                 });
