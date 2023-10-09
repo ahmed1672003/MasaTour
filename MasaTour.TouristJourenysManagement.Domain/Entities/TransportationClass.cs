@@ -8,7 +8,6 @@ namespace MasaTour.TouristTripsManagement.Domain.Entities;
 [Index(nameof(NameEN), IsUnique = true)]
 public class TransportationClass : BaseEntity, ICreateableTracker, IDeleteableTracker, IUpdateableTracker
 {
-
     [Required]
     [MaxLength(255)]
     public string NameAR { get; set; }
@@ -54,8 +53,7 @@ public class TransportationClass : BaseEntity, ICreateableTracker, IDeleteableTr
     public DateTime? DeletedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
-    public List<Transporation> Transporations { get; set; }
-
+    public List<Transportation> Transporations { get; set; }
 
     public TransportationClass()
     {

@@ -2,34 +2,26 @@
 
 namespace MasaTour.TouristTripsManagement.Domain.Entities;
 [PrimaryKey(nameof(Id))]
-public class Transporation : BaseEntity, ICreateableTracker, IDeleteableTracker, IUpdateableTracker
+public class Transportation : BaseEntity, ICreateableTracker, IDeleteableTracker, IUpdateableTracker
 {
     [Required]
     [MaxLength(255)]
-    public string ModelAR { get; set; }
-
-    [Required]
-    [MaxLength(255)]
-    public string ModelEN { get; set; }
-
-    [Required]
-    [MaxLength(255)]
-    public string ModelDE { get; set; }
+    public string Model { get; set; }
 
     [Required]
     public int NumberOfSeats { get; set; }
 
     [AllowNull]
     [MaxLength(1500)]
-    public string? DesceiptionAR { get; set; }
+    public string? DescriptionAR { get; set; }
 
     [AllowNull]
     [MaxLength(1500)]
-    public string? DesceiptionEN { get; set; }
+    public string? DescriptionEN { get; set; }
 
     [AllowNull]
     [MaxLength(1500)]
-    public string? DesceiptionDE { get; set; }
+    public string? DescriptionDE { get; set; }
 
     [Required]
     public DateTime CreatedAt { get; set; }
@@ -46,6 +38,5 @@ public class Transporation : BaseEntity, ICreateableTracker, IDeleteableTracker,
 
     [ForeignKey(nameof(TransporationClassId))]
     public TransportationClass TransporationClass { get; set; }
-
-    public Transporation() => IsDeleted = false;
+    public Transportation() => IsDeleted = false;
 }

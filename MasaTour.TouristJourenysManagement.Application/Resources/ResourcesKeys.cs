@@ -106,4 +106,5 @@ public static class ResourcesKeys
         public const string FiledLengthIsSmallerThanMinLength = "FiledLengthIsSmallerThanMinLength";
         public const string FiledCanNotBeEmpty = "FiledCanNotBeEmpty";
     }
+
 }

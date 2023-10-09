@@ -21,7 +21,7 @@ public interface ITouristTripsManagementDbContext
     DbSet<Image> Images { get; }
     DbSet<TripImageMapper> TripImageMapper { get; }
     DbSet<Comment> Comments { get; }
-    DbSet<Transporation> Transporations { get; }
+    DbSet<Transportation> Transporations { get; }
     DbSet<TransportationClass> TransporationClasses { get; }
 
     ValueTask DisposeAsync();

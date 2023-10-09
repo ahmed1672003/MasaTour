@@ -4,6 +4,7 @@ using MasaTour.TouristTripsManagement.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TouristTripsManagementDbContext))]
-    partial class TouristTripsManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231009123801_Alter")]
+    partial class Alter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -566,7 +569,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.ToTable("SubCategories", (string)null);
                 });
 
-            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Transportation", b =>
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Transporation", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -578,15 +581,15 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DescriptionAR")
+                    b.Property<string>("DesceiptionAR")
                         .HasMaxLength(1500)
                         .HasColumnType("nvarchar(1500)");
 
-                    b.Property<string>("DescriptionDE")
+                    b.Property<string>("DesceiptionDE")
                         .HasMaxLength(1500)
                         .HasColumnType("nvarchar(1500)");
 
-                    b.Property<string>("DescriptionEN")
+                    b.Property<string>("DesceiptionEN")
                         .HasMaxLength(1500)
                         .HasColumnType("nvarchar(1500)");
 
@@ -613,7 +616,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
 
                     b.HasIndex("TransporationClassId");
 
-                    b.ToTable("Transportations", (string)null);
+                    b.ToTable("Transporations", (string)null);
                 });
 
             modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.TransportationClass", b =>
@@ -1070,7 +1073,7 @@ namespace MasaTour.TouristTripsManagement.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Transportation", b =>
+            modelBuilder.Entity("MasaTour.TouristTripsManagement.Domain.Entities.Transporation", b =>
                 {
                     b.HasOne("MasaTour.TouristTripsManagement.Domain.Entities.TransportationClass", "TransporationClass")
                         .WithMany("Transporations")
