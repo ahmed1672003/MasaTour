@@ -1,5 +1,7 @@
 ﻿
 
+using MasaTour.TouristTripsManagement.Infrastructure.Specifications.Transportations;
+
 namespace MasaTour.TouristTripsManagement.Infrastructure.Specifications;
 
 public sealed class SpecificationsFactory : ISpecificationsFactory
@@ -209,7 +211,7 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             "AsNoTrackingGetDeletedTransportationClassByNameARSpecification" => new AsNoTrackingGetDeletedTransportationClassByNameARSpecification(parameters[0]),
             "AsNoTrackingGetDeletedTransportationClassByNameDESpecification" => new AsNoTrackingGetDeletedTransportationClassByNameDESpecification(parameters[0]),
             "AsNoTrackingGetDeletedTransportationClassByNameENSpecification" => new AsNoTrackingGetDeletedTransportationClassByNameENSpecification(parameters[0]),
-            "AsNoTrackingGetTransportationByIdSpecification" => new AsNoTrackingGetTransportationByIdSpecification(parameters[0]),
+            "AsNoTrackingGetTransportationClassByIdSpecification" => new AsNoTrackingGetTransportationClassByIdSpecification(parameters[0]),
             "AsNoTrackingGetTransportationClassByNameARSpecification" => new AsNoTrackingGetTransportationClassByNameARSpecification(parameters[0]),
             "AsNoTrackingGetTransportationClassByNameENSpecification" => new AsNoTrackingGetTransportationClassByNameENSpecification(parameters[0]),
             "AsNoTrackingGetTransportationClassByNameDESpecification" => new AsNoTrackingGetTransportationClassByNameDESpecification(parameters[0]),
@@ -222,5 +224,21 @@ public sealed class SpecificationsFactory : ISpecificationsFactory
             _ => throw new InvalidOperationException(),
         };
     }
+    public ISpecification<Transportation> CreateTransporationsSpecifications(Type type, params dynamic[] parameters)
+    {
+        return type.Name switch
+        {
+            "AsNoTrackingGetAllDeletedTransportationsSpecification" => new AsNoTrackingGetAllDeletedTransportationsSpecification(),
+            "AsNoTrackingGetAllTransportationsSpecification" => new AsNoTrackingGetAllTransportationsSpecification(),
+            "AsNoTrackingGetDeletedTransportationByIdSpecification" => new AsNoTrackingGetDeletedTransportationByIdSpecification(parameters[0]),
+            "AsNoTrackingGetTransportationByIdSpecification" => new AsNoTrackingGetTransportationByIdSpecification(parameters[0]),
+            "AsNoTrackingPaginateDeletedTransportationsSpecification" => new AsNoTrackingPaginateDeletedTransportationsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsNoTrackingPaginateUnDeletedTransportationsSpecification" => new AsNoTrackingPaginateUnDeletedTransportationsSpecification(parameters[0], parameters[1], parameters[2], parameters[3]),
+            "AsTrackingGetDeletedTransportationByIdSpecification" => new AsTrackingGetDeletedTransportationByIdSpecification(parameters[0]),
+            "AsTrackingGetTransportationByIdSpecification" => new AsTrackingGetTransportationByIdSpecification(parameters[0]),
+            _ => throw new InvalidOperationException()
+        };
+    }
+
 }
 

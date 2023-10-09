@@ -18,11 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Transportations\Commands\Handler\" />
-    <Folder Include="Features\Transportations\Queries\Handler\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MasaTour.TouristJourenysManagement.Services\MasaTour.TouristTripsManagement.Services.csproj" />
   </ItemGroup>
 

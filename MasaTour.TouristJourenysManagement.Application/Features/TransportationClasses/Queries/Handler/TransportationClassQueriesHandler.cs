@@ -36,7 +36,7 @@ public sealed class TransportationClassQueriesHandler :
         {
             ISpecification<TransportationClass> asNoTrackingGetTransportationByIdSpec =
                 _specificationsFactory.CreateTransporationClassesSpecifications(
-                    typeof(AsNoTrackingGetTransportationByIdSpecification),
+                    typeof(AsNoTrackingGetTransportationClassByIdSpecification),
                         request.ClassId);
 
             if (!await _context.TransporationClasses.AnyAsync(asNoTrackingGetTransportationByIdSpec, cancellationToken))

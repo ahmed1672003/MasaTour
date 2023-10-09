@@ -16,8 +16,4 @@
     <ProjectReference Include="..\MasaTour.TouristJourenysManagement.Domain\MasaTour.TouristTripsManagement.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Specifications\Transportations\" />
-  </ItemGroup>
-
 </Project>

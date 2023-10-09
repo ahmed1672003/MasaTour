@@ -11,6 +11,7 @@ global using MasaTour.TouristTripsManagement.Application.Features.Enums;
 global using MasaTour.TouristTripsManagement.Application.Features.Images.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.TransportationClasses.Dtos;
+global using MasaTour.TouristTripsManagement.Application.Features.Transportations.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.Trips.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Resources;

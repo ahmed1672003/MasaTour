@@ -14,6 +14,8 @@ global using MasaTour.TouristTripsManagement.Application.Features.Enums;
 global using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Commands;
 global using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.SubCategories.Queries;
+global using MasaTour.TouristTripsManagement.Application.Features.Transportations.Commands;
+global using MasaTour.TouristTripsManagement.Application.Features.Transportations.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Dtos;
 global using MasaTour.TouristTripsManagement.Application.Features.TripPhases.Queries;
 global using MasaTour.TouristTripsManagement.Application.Features.Users.Commands;

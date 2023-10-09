@@ -1,7 +1,4 @@
-﻿
-using MasaTour.TouristTripsManagement.Application.Features.Transportations.Dtos;
-
-namespace MasaTour.TouristTripsManagement.Application.Features.Transportations.Mappers;
+﻿namespace MasaTour.TouristTripsManagement.Application.Features.Transportations.Mappers;
 public sealed class TransportationProfile : Profile
 {
     public TransportationProfile()

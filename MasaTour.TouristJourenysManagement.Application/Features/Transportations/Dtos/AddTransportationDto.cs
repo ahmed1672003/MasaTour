@@ -1,6 +1,12 @@
 ﻿namespace MasaTour.TouristTripsManagement.Application.Features.Transportations.Dtos;
 public class AddTransportationDto
 {
+
+    [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Transportation.FiledCanNotBeNull)]
+    [MaxLength(36, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Transportation.FiledLengthIsBiggerThanMaxLength)]
+    [MinLength(36, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Transportation.FiledLengthIsSmallerThanMinLength)]
+    public string TransportationClassId { get; set; }
+
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Transportation.FiledCanNotBeNull)]
     [MaxLength(255, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Transportation.FiledLengthIsBiggerThanMaxLength)]
     public string Model { get; set; } = "BMW";
@@ -9,11 +15,11 @@ public class AddTransportationDto
     public int NumberOfSeats { get; set; } = 5;
 
     [MaxLength(1500, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Transportation.FiledLengthIsBiggerThanMaxLength)]
-    public string DesceiptionAR { get; set; } = "DesceiptionAr....";
+    public string? DescriptionAR { get; set; } = "DesceiptionAr....";
 
     [MaxLength(1500, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Transportation.FiledLengthIsBiggerThanMaxLength)]
-    public string DesceiptionEN { get; set; } = "DesceiptionEn....";
+    public string? DescriptionEN { get; set; } = "DesceiptionEn....";
 
     [MaxLength(1500, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.Transportation.FiledLengthIsBiggerThanMaxLength)]
-    public string DesceiptionDE { get; set; } = "DesceiptionDe....";
+    public string? DescriptionDE { get; set; } = "DesceiptionDe....";
 }

@@ -136,4 +136,18 @@ public static class Router
         public const string PaginateDeletedTransportationClasses = TransportationClassPrefix + "paginate-deleted-transportation-classes";
         public const string PaginateUnDeletedTransportationClasses = TransportationClassPrefix + "paginate-un-deleted-transportation-classes";
     }
+    public static class Transportation
+    {
+        private const string TransportationPrefix = ApiPrefix + "transportation-/";
+        public const string AddTransportation = TransportationPrefix + "add-transportation";
+        public const string UpdateTransportation = TransportationPrefix + "update-transportation";
+        public const string DeleteTransportationById = TransportationPrefix + "delete-transportation-by-id";
+        public const string UndoDeleteTransportationById = TransportationPrefix + "undo-delete-transportation-by-id";
+        public const string GetTransportationById = TransportationPrefix + "get-transportation-by-id";
+        public const string GetAllTransportations = TransportationPrefix + "get-all-transportations";
+        public const string GetAllDeletedTransportations = TransportationPrefix + "get-all-deleted-transportations";
+        public const string GetAllUnDeletedTransportations = TransportationPrefix + "get-all-un-deleted-transportations";
+        public const string PaginateDeletedTransportations = TransportationPrefix + "paginate-deleted-transportations";
+        public const string PaginateUnDeletedTransportations = TransportationPrefix + "paginate-un-deleted-transportations";
+    }
 }

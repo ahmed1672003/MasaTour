@@ -78,7 +78,7 @@ public sealed class TransportationClassCommandsHandler :
         {
             ISpecification<TransportationClass> asNoTrackingGetTransportationByIdSpec =
                 _specificationsFactory.CreateTransporationClassesSpecifications(
-                    typeof(AsNoTrackingGetTransportationByIdSpecification),
+                    typeof(AsNoTrackingGetTransportationClassByIdSpecification),
                         request.Dto.TransportationClassId);
 
             if (!await _context.TransporationClasses.AnyAsync(asNoTrackingGetTransportationByIdSpec, cancellationToken))
@@ -182,7 +182,7 @@ public sealed class TransportationClassCommandsHandler :
         {
             ISpecification<TransportationClass> asNoTrackingGetTransportationByIdSpec =
                     _specificationsFactory.CreateTransporationClassesSpecifications(
-                        typeof(AsNoTrackingGetTransportationByIdSpecification),
+                        typeof(AsNoTrackingGetTransportationClassByIdSpecification),
                             request.ClassId);
 
             if (!await _context.TransporationClasses.AnyAsync(asNoTrackingGetTransportationByIdSpec, cancellationToken))

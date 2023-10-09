@@ -13,4 +13,5 @@ public interface ISpecificationsFactory
     ISpecification<TripPhase> CreateTripPhaseSpecifications(Type type, params dynamic[] parameters);
     ISpecification<Comment> CreateCommentsSpecifications(Type type, params dynamic[] parameters);
     ISpecification<TransportationClass> CreateTransporationClassesSpecifications(Type type, params dynamic[] parameters);
+    ISpecification<Transportation> CreateTransporationsSpecifications(Type type, params dynamic[] parameters);
 }

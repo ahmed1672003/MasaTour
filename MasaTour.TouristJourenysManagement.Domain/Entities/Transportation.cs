@@ -34,9 +34,9 @@ public class Transportation : BaseEntity, ICreateableTracker, IDeleteableTracker
     [Required]
     [MaxLength(36)]
     [MinLength(36)]
-    public string TransporationClassId { get; set; }
+    public string TransportationClassId { get; set; }
 
-    [ForeignKey(nameof(TransporationClassId))]
+    [ForeignKey(nameof(TransportationClassId))]
     public TransportationClass TransporationClass { get; set; }
     public Transportation() => IsDeleted = false;
 }
