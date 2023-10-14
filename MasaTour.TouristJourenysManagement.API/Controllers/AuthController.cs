@@ -9,12 +9,16 @@ public class AuthController : MasaTourController
     public AuthController(IMediator mediator) : base(mediator) { }
 
     #region Post
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
     [HttpPost(Router.Auth.AddUser)]
     [AllowAnonymous]
     [Produces(ContentTypes.ApplicationOverJson, Type = typeof(ResponseModel<AuthModel>))]
     [SwaggerOperation(OperationId = EndPoints.Auth.AddUser.OperationId, Summary = EndPoints.Auth.AddUser.Summary, Description = EndPoints.Auth.AddUser.Description)]
-    public async Task<IActionResult> AddUser([FromBody] AddUserDto dto) => MasaTourResponse(await Mediator.Send(new AddUserCommand(dto)));
+    public async Task<IActionResult> AddUser([FromForm] AddUserDto dto) => MasaTourResponse(await Mediator.Send(new AddUserCommand(dto)));
     #endregion
 
     #region Put

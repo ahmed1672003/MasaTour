@@ -13,6 +13,7 @@ public sealed class AuthCommandsHandler :
     private readonly IHttpContextAccessor _contextAccessor;
     private readonly IMapper _mapper;
     private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+    private readonly IFileService _fileService;
     #endregion
 
     #region Ctor
@@ -22,7 +23,8 @@ public sealed class AuthCommandsHandler :
         IMapper mapper,
         IUnitOfServices services,
         ISpecificationsFactory specificationsFactory,
-        IHttpContextAccessor contextAccessor)
+        IHttpContextAccessor contextAccessor,
+        IFileService fileService)
     {
         _context = context;
         _stringLocalizer = stringLocalizer;
@@ -30,6 +32,7 @@ public sealed class AuthCommandsHandler :
         _services = services;
         _specificationsFactory = specificationsFactory;
         _contextAccessor = contextAccessor;
+        _fileService = fileService;
     }
     #endregion
 
@@ -45,10 +48,28 @@ public sealed class AuthCommandsHandler :
 
             // add user
             var user = _mapper.Map<User>(request.dto);
+
+            // add image
+            if (request.dto.Img is not null)
+            {
+                _fileService.EnsureFileExctension(request.dto.Img);
+                _fileService.EnsureFileSize(request.dto.Img);
+
+                UploadFileResultDto uploadFile = await _fileService.UploadFileAsync(request.dto.Img, "UsersImages");
+
+                if (!uploadFile.Success)
+                    return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.User.EmailIsExist]);
+
+                user.FileName = uploadFile.FileName;
+                user.FilePath = uploadFile.FilePath;
+            }
+
+
             var createUserResult = await _context.Identity.UserManager.CreateAsync(user, request.dto.Password);
 
             if (!createUserResult.Succeeded)
-                return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+                return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
+
 
             // generate confirme email token
             string token = await _context.Identity.UserManager.GenerateEmailConfirmationTokenAsync(user);
@@ -71,19 +92,19 @@ public sealed class AuthCommandsHandler :
             SendEmailDto sendEmailDto = await _services.EmailService.SendEmailAsync(user.Email, "Confirm Your Email", url.ToString());
 
             if (!sendEmailDto.IsSendSuccess)
-                return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+                return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
             // add user to role
             var assignUserToRoleResult = await _context.Identity.UserManager.AddToRoleAsync(user, Roles.Basic.ToString());
 
             if (!assignUserToRoleResult.Succeeded)
-                return ResponseResult.Conflict<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.Conflict]);
+                return ResponseResult.BadRequest<AuthModel>(message: _stringLocalizer[ResourcesKeys.Shared.BadRequest]);
 
             // generate jwt
             var authModel = await _services.AuthService.GetJWTAsync(user);
 
             if (authModel is null)
-                return ResponseResult.Conflict<AuthModel>();
+                return ResponseResult.BadRequest<AuthModel>();
 
             await _services.CookiesService.SaveAuthInformationsAsync(authModel);
 

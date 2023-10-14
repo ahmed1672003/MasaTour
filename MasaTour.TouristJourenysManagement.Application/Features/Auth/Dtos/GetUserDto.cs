@@ -11,9 +11,12 @@ public class GetUserDto
     public string PhoneNumber { get; set; }
     public string Nationality { get; set; }
     public Gender Gender { get; set; }
-    public string ImgSrc { get; set; }
+
+    public string? FileName { get; set; }
+
+    public string? FilePath { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
-    public DateTime DeletedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+    public DateTime? DeletedAt { get; set; }
 }

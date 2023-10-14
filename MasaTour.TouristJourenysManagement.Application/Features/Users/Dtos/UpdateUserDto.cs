@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-using MasaTour.TouristTripsManagement.Domain.Enums;
+﻿using MasaTour.TouristTripsManagement.Domain.Enums;
 
 namespace MasaTour.TouristTripsManagement.Application.Features.Users.Dtos;
 public class UpdateUserDto
@@ -42,7 +40,5 @@ public class UpdateUserDto
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]
     public Gender Gender { get; set; }
 
-    [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]
-    [MaxLength(1500, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledLengthIsBiggerThanMaxLength)]
-    public string ImgSrc { get; set; }
+    public IFormFile? Img { get; set; }
 }

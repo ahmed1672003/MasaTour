@@ -24,7 +24,6 @@ public class Specification<TEntity> : ISpecification<TEntity> where TEntity : cl
     protected virtual void AddOrderBy(Expression<Func<TEntity, object>> orderBy) => OrderBy = orderBy;
     protected virtual void AddOrderByDescending(Expression<Func<TEntity, object>> orderByDescending) => OrderByDescending = orderByDescending;
     protected virtual void AddExecuteUpdateValue(object executeUpdateValue) => ExecuteUpdateValue = executeUpdateValue;
-    protected virtual void ApplyGroupBy(Expression<Func<TEntity, object>> groupBy) => GroupBy = groupBy;
     protected virtual void StopTracking() => IsTrackingOf = true;
     protected virtual void StopTrackingWithIdentityResolution() => IsTrackingWithIdentityResolutionOf = true;
     protected virtual void IgnorQueryFilter() => IsQueryFilterIgnored = true;

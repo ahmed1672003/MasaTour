@@ -52,7 +52,10 @@ public sealed class FileService : IFileService
             };
         }
     }
-
+    public Task<bool> IsFileExistAsync(string storage, string fileName)
+    {
+        return Task.FromResult(File.Exists($"{_webHostEnvironment.WebRootPath}/{storage}/{fileName}"));
+    }
     public Task<bool> DeleteFileAsync(string storage, string fileName)
     {
         try

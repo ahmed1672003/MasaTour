@@ -1,4 +1,6 @@
-﻿namespace MasaTour.TouristTripsManagement.Application.Features.Users.Queries.Handlers;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace MasaTour.TouristTripsManagement.Application.Features.Users.Queries.Handlers;
 public sealed class UserQueriesHandler :
     IRequestHandler<GetUserByIdQuery, ResponseModel<GetUserDto>>,
     IRequestHandler<GetAllUsersQuery, ResponseModel<IEnumerable<GetUserDto>>>
@@ -37,8 +39,27 @@ public sealed class UserQueriesHandler :
             if (!await _context.Users.AnyAsync(userByIdSpec))
                 return ResponseResult.NotFound<GetUserDto>(message: _stringLocalizer[ResourcesKeys.Shared.NotFound]);
 
-            GetUserDto dto = _mapper.Map<GetUserDto>(await _context.Users.RetrieveAsync(userByIdSpec));
-            return ResponseResult.Success(dto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
+            IQueryable<User> query = await _context.Users.RetrieveAllAsync(userByIdSpec, cancellationToken);
+
+            GetUserDto Dto = await query.Select(user => new GetUserDto
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                FileName = user.FileName,
+                FilePath = user.FilePath,
+                Gender = user.Gender,
+                Nationality = user.Nationality,
+                CreatedAt = user.CreatedAt,
+                DeletedAt = user.DeletedAt,
+                IsDeleted = user.IsDeleted,
+                UpdatedAt = user.UpdatedAt,
+            }).FirstOrDefaultAsync();
+
+            return ResponseResult.Success(Dto, message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {
@@ -54,9 +75,25 @@ public sealed class UserQueriesHandler :
             return ResponseResult.NotFound<IEnumerable<GetUserDto>>();
         try
         {
-            var users = await _context.Users.RetrieveAllAsync(cancellationToken: cancellationToken);
-            var dtos = _mapper.Map<IEnumerable<GetUserDto>>(users);
-            return ResponseResult.Success(dtos);
+            IQueryable<User> query = await _context.Users.RetrieveAllAsync(cancellationToken: cancellationToken);
+            IQueryable<GetUserDto> Dtos = query.Select(user => new GetUserDto
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                FileName = user.FileName,
+                FilePath = user.FilePath,
+                Gender = user.Gender,
+                Nationality = user.Nationality,
+                CreatedAt = user.CreatedAt,
+                DeletedAt = user.DeletedAt,
+                IsDeleted = user.IsDeleted,
+                UpdatedAt = user.UpdatedAt,
+            });
+            return ResponseResult.Success(Dtos.AsEnumerable(), message: _stringLocalizer[ResourcesKeys.Shared.Success]);
         }
         catch (Exception ex)
         {

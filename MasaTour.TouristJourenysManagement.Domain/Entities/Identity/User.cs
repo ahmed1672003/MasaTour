@@ -37,11 +37,13 @@ public class User : IdentityUser<string>, IDeleteableTracker, IUpdateableTracker
     public Gender Gender { get; set; }
 
     [Required]
-    [MaxLength(1500)]
-    public string ImgSrc { get; set; }
-
-    [Required]
     public bool IsDeleted { get; set; }
+
+    [MaxLength(1500)]
+    public string? FileName { get; set; }
+
+    [MaxLength(3000)]
+    public string? FilePath { get; set; }
 
     [Required]
     public DateTime CreatedAt { get; set; }

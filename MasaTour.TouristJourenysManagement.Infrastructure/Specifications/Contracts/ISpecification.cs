@@ -14,4 +14,14 @@ public interface ISpecification<TEntity> where TEntity : class
     bool IsTrackingOf { get; }
     bool IsTrackingWithIdentityResolutionOf { get; }
     bool IsQueryFilterIgnored { get; }
+
+    public static class SelectEvaluator<TResult>
+    {
+        public static Expression<Func<TEntity, TResult>> Select { get; private set; }
+
+        public static void AddSelect(Expression<Func<TEntity, TResult>> select)
+        {
+            Select = select;
+        }
+    }
 }

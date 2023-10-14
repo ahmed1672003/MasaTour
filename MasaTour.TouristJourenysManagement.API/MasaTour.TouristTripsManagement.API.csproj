@@ -47,7 +47,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Gellary\" />
-    <Folder Include="wwwroot\UserProfileImages\" />
+    <Folder Include="wwwroot\UsersImages\" />
   </ItemGroup>
 
 </Project>

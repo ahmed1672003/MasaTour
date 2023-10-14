@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-using MasaTour.TouristTripsManagement.Domain.Enums;
+﻿using MasaTour.TouristTripsManagement.Domain.Enums;
 
 namespace MasaTour.TouristTripsManagement.Application.Features.Auth.Dtos;
 public class AddUserDto
@@ -34,10 +32,6 @@ public class AddUserDto
     public Gender Gender { get; set; }
 
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]
-    [MaxLength(1500, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledLengthIsBiggerThanMaxLength)]
-    public string ImgSrc { get; set; }
-
-    [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledCanNotBeNull)]
     [MaxLength(255, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledLengthIsBiggerThanMaxLength)]
     [MinLength(3, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledLengthIsSmallerThanMinLength)]
     public string Password { get; set; }
@@ -47,4 +41,6 @@ public class AddUserDto
     [MinLength(3, ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.FiledLengthIsSmallerThanMinLength)]
     [Compare(nameof(Password), ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = ResourcesKeys.User.PasswordDoesNotMatchedWithConfilremdPassword)]
     public string ConfirmedPassword { get; set; }
+
+    public IFormFile? Img { get; set; }
 }

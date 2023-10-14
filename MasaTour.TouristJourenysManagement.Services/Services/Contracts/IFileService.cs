@@ -26,11 +26,11 @@ public interface IFileService
         return true;
     }
 
-
     public bool EnsureFileExctension(IFormFile file) =>
         !allowedExtension.Contains(Path.GetExtension(file.FileName).ToLower()) ?
             throw new InvalidImageSizeException("Invalid Image Extension !") : true;
 
     Task<UploadFileResultDto> UploadFileAsync(IFormFile file, string storage);
     Task<bool> DeleteFileAsync(string storage, string fileName);
+    Task<bool> IsFileExistAsync(string storage, string fileName);
 }

@@ -11,6 +11,7 @@ public sealed class UserComandsHandler :
     private readonly ISpecificationsFactory _specificationsFactory;
     private readonly IStringLocalizer<SharedResources> _stringLocalizer;
     private readonly IMapper _mapper;
+    private readonly IFileService _fileService;
     #endregion
 
     #region Ctor
@@ -20,13 +21,15 @@ public sealed class UserComandsHandler :
         IUnitOfWork context,
         IStringLocalizer<SharedResources> stringLocalizer,
         IMapper mapper,
-        ISpecificationsFactory specificationsFactory)
+        ISpecificationsFactory specificationsFactory,
+        IFileService fileService)
     {
         _services = services;
         _context = context;
         _stringLocalizer = stringLocalizer;
         _mapper = mapper;
         _specificationsFactory = specificationsFactory;
+        _fileService = fileService;
     }
 
 
@@ -59,7 +62,26 @@ public sealed class UserComandsHandler :
 
             // select user
             ISpecification<User> getUserByIdSpec = _specificationsFactory.CreateUserSpecifications(typeof(AsTrackingGetUserByIdSpecification), request.dto.Id);
+
             User user = await _context.Users.RetrieveAsync(getUserByIdSpec, cancellationToken);
+
+            if (request.dto.Img is not null)
+            {
+                if (user.FileName is not null)
+                    await _fileService.DeleteFileAsync("UsersImages", user.FileName);
+
+                _fileService.EnsureFileExctension(request.dto.Img);
+                _fileService.EnsureFileSize(request.dto.Img);
+
+                UploadFileResultDto uploadFile = await _fileService.UploadFileAsync(request.dto.Img, "UsersImages");
+                if (!uploadFile.Success)
+                    return ResponseResult.BadRequest<GetUserDto>(message: _stringLocalizer[ResourcesKeys.User.PhoneNumberIsDuplicated]);
+
+                user.FileName = uploadFile.FileName;
+                user.FilePath = uploadFile.FilePath;
+            }
+
+
             user.UserName = request.dto.UserName;
             user.NormalizedUserName = request.dto.UserName.ToUpper();
             // user.Email = request.dto.Email;
@@ -68,7 +90,7 @@ public sealed class UserComandsHandler :
             user.LastName = request.dto.LastName;
             user.Nationality = request.dto.Nationality;
             // user.PhoneNumber = request.dto.PhoneNumber;
-            user.ImgSrc = request.dto.ImgSrc;
+            //user.ImgSrc = request.dto.ImgSrc;
 
             // update user
             await _context.SaveChangesAsync();

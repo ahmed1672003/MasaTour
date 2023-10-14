@@ -39,6 +39,17 @@ public class SpecificationEvaluator
             var pageSize = specification.PaginationRequirments.pageSize;
             query = query.Skip((specification.PaginationRequirments.pageNumber - 1) * pageSize).Take(pageSize);
         }
+
+        return query;
+    }
+    public static IQueryable<TResult> AddSelect<TEntity, TResult>(IQueryable<TEntity> queryable) where TEntity : class
+    {
+        IQueryable<TResult> query = null;
+
+        if (ISpecification<TEntity>.SelectEvaluator<TResult>.Select is not null)
+        {
+            query = queryable.Select(ISpecification<TEntity>.SelectEvaluator<TResult>.Select);
+        }
         return query;
     }
 }
